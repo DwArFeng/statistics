@@ -4,6 +4,8 @@
 
 #### 功能构建
 
+- 完成 node 模块，打包测试及启动测试通过。
+
 - 定义实体及其维护服务，并通过单元测试。
   - com.dwarfeng.statistics.stack.service.DriverInfoMaintainService。
   - com.dwarfeng.statistics.stack.service.DriverSupportMaintainService。
