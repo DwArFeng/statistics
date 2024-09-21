@@ -1,20 +1,27 @@
 package com.dwarfeng.statistics.impl.service;
 
+import com.dwarfeng.statistics.impl.handler.MapperSupporter;
 import com.dwarfeng.statistics.stack.bean.entity.MapperSupport;
 import com.dwarfeng.statistics.stack.service.MapperSupportMaintainService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
+import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionHelper;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.exception.ServiceExceptionMapper;
+import com.dwarfeng.subgrade.stack.log.LogLevel;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class MapperSupportMaintainServiceImpl implements MapperSupportMaintainService {
@@ -23,14 +30,22 @@ public class MapperSupportMaintainServiceImpl implements MapperSupportMaintainSe
     private final DaoOnlyEntireLookupService<MapperSupport> entireLookupService;
     private final DaoOnlyPresetLookupService<MapperSupport> presetLookupService;
 
+    private final List<MapperSupporter> mapperSupporters;
+
+    private final ServiceExceptionMapper sem;
+
     public MapperSupportMaintainServiceImpl(
             GeneralBatchCrudService<StringIdKey, MapperSupport> crudService,
             DaoOnlyEntireLookupService<MapperSupport> entireLookupService,
-            DaoOnlyPresetLookupService<MapperSupport> presetLookupService
+            DaoOnlyPresetLookupService<MapperSupport> presetLookupService,
+            List<MapperSupporter> mapperSupporters,
+            ServiceExceptionMapper sem
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;
         this.presetLookupService = presetLookupService;
+        this.mapperSupporters = Optional.ofNullable(mapperSupporters).orElse(Collections.emptyList());
+        this.sem = sem;
     }
 
     @Override
@@ -288,5 +303,24 @@ public class MapperSupportMaintainServiceImpl implements MapperSupportMaintainSe
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
     public int lookupCount(String preset, Object[] objs) throws ServiceException {
         return presetLookupService.lookupCount(preset, objs);
+    }
+
+    @Override
+    @BehaviorAnalyse
+    public void reset() throws ServiceException {
+        try {
+            List<StringIdKey> mapperKeys = entireLookupService.lookupAsList().stream()
+                    .map(MapperSupport::getKey).collect(Collectors.toList());
+            crudService.batchDelete(mapperKeys);
+            List<MapperSupport> mapperSupports = mapperSupporters.stream().map(supporter -> new MapperSupport(
+                    new StringIdKey(supporter.provideType()),
+                    supporter.provideLabel(),
+                    supporter.provideDescription(),
+                    supporter.provideExampleParam()
+            )).collect(Collectors.toList());
+            crudService.batchInsert(mapperSupports);
+        } catch (Exception e) {
+            throw ServiceExceptionHelper.logParse("重置映射器支持时发生异常", LogLevel.WARN, e, sem);
+        }
     }
 }

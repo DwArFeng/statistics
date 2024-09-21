@@ -4,6 +4,12 @@
 
 #### 功能构建
 
+- 为支持维护服务提供重置方法。
+  - com.dwarfeng.statistics.stack.service.DriverSupportMaintainService。
+  - com.dwarfeng.statistics.stack.service.FilterSupportMaintainService。
+  - com.dwarfeng.statistics.stack.service.MapperSupportMaintainService。
+  - com.dwarfeng.statistics.stack.service.ProviderSupportMaintainService。
+
 - 完成 node 模块，打包测试及启动测试通过。
 
 - 定义实体及其维护服务，并通过单元测试。
