@@ -4,6 +4,10 @@
 
 #### 功能构建
 
+- 实现运维指令。
+  - com.dwarfeng.statistics.impl.service.telqos.DriveCommand。
+  - com.dwarfeng.statistics.impl.service.telqos.DriveLocalCacheCommand。
+
 - 实现核心机制。
   - 驱动机制。
 
