@@ -23,6 +23,12 @@ public class FilterInfoPresetCriteriaMaker implements PresetCriteriaMaker {
             case FilterInfoMaintainService.CHILD_FOR_STATISTICS_SETTING_INDEX_ASC:
                 childForStatisticsSettingIndexAsc(criteria, objs);
                 break;
+            case FilterInfoMaintainService.CHILD_FOR_STATISTICS_SETTING_ENABLED:
+                childForStatisticsSettingEnabled(criteria, objs);
+                break;
+            case FilterInfoMaintainService.CHILD_FOR_STATISTICS_SETTING_ENABLED_INDEX_ASC:
+                childForStatisticsSettingEnabledIndexAsc(criteria, objs);
+                break;
             default:
                 throw new IllegalArgumentException("无法识别的预设: " + preset);
         }
@@ -50,6 +56,36 @@ public class FilterInfoPresetCriteriaMaker implements PresetCriteriaMaker {
                 LongIdKey longIdKey = (LongIdKey) objs[0];
                 criteria.add(Restrictions.eqOrIsNull("statisticsSettingLongId", longIdKey.getLongId()));
             }
+            criteria.addOrder(Order.asc("index"));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objs));
+        }
+    }
+
+    @SuppressWarnings("DuplicatedCode")
+    private void childForStatisticsSettingEnabled(DetachedCriteria criteria, Object[] objs) {
+        try {
+            if (Objects.isNull(objs[0])) {
+                criteria.add(Restrictions.isNull("statisticsSettingLongId"));
+            } else {
+                LongIdKey longIdKey = (LongIdKey) objs[0];
+                criteria.add(Restrictions.eqOrIsNull("statisticsSettingLongId", longIdKey.getLongId()));
+            }
+            criteria.add(Restrictions.eq("enabled", true));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objs));
+        }
+    }
+
+    private void childForStatisticsSettingEnabledIndexAsc(DetachedCriteria criteria, Object[] objs) {
+        try {
+            if (Objects.isNull(objs[0])) {
+                criteria.add(Restrictions.isNull("statisticsSettingLongId"));
+            } else {
+                LongIdKey longIdKey = (LongIdKey) objs[0];
+                criteria.add(Restrictions.eqOrIsNull("statisticsSettingLongId", longIdKey.getLongId()));
+            }
+            criteria.add(Restrictions.eq("enabled", true));
             criteria.addOrder(Order.asc("index"));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objs));

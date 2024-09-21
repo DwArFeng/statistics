@@ -4,6 +4,11 @@
 
 #### 功能构建
 
+- 定义预设服务。
+  - com.dwarfeng.statistics.impl.service.EnabledDriverInfoLookupServiceImpl。
+  - com.dwarfeng.statistics.impl.service.EnabledFilterInfoLookupServiceImpl。
+  - com.dwarfeng.statistics.impl.service.EnabledProviderInfoLookupServiceImpl。
+
 - 为支持维护服务提供重置方法。
   - com.dwarfeng.statistics.stack.service.DriverSupportMaintainService。
   - com.dwarfeng.statistics.stack.service.FilterSupportMaintainService。

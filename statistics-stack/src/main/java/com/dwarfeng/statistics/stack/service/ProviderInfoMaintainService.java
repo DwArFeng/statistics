@@ -16,4 +16,5 @@ public interface ProviderInfoMaintainService extends BatchCrudService<LongIdKey,
         EntireLookupService<ProviderInfo>, PresetLookupService<ProviderInfo> {
 
     String CHILD_FOR_STATISTICS_SETTING = "child_for_statistics_setting";
+    String CHILD_FOR_STATISTICS_SETTING_ENABLED = "child_for_statistics_setting_enabled";
 }

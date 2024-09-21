@@ -17,4 +17,6 @@ public interface FilterInfoMaintainService extends BatchCrudService<LongIdKey, F
 
     String CHILD_FOR_STATISTICS_SETTING = "child_for_statistics_setting";
     String CHILD_FOR_STATISTICS_SETTING_INDEX_ASC = "child_for_statistics_setting_index_asc";
+    String CHILD_FOR_STATISTICS_SETTING_ENABLED = "child_for_statistics_setting_enabled";
+    String CHILD_FOR_STATISTICS_SETTING_ENABLED_INDEX_ASC = "child_for_statistics_setting_enabled_index_asc";
 }

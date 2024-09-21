@@ -7,6 +7,7 @@ import com.dwarfeng.statistics.stack.bean.entity.*;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
+import com.dwarfeng.subgrade.impl.cache.RedisKeyListCache;
 import com.dwarfeng.subgrade.sdk.redis.formatter.LongIdStringKeyFormatter;
 import com.dwarfeng.subgrade.sdk.redis.formatter.StringIdStringKeyFormatter;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
@@ -49,6 +50,13 @@ public class CacheConfiguration {
     private String historyTaskPrefix;
     @Value("${cache.prefix.entity.history_task_event}")
     private String historyTaskEventPrefix;
+
+    @Value("${cache.prefix.list.enabled_driver_info}")
+    private String enabledDriverInfoPrefix;
+    @Value("${cache.prefix.list.enabled_provider_info}")
+    private String enabledProviderInfoPrefix;
+    @Value("${cache.prefix.list.enabled_filter_info}")
+    private String enabledFilterInfoPrefix;
 
     public CacheConfiguration(RedisTemplate<String, ?> template) {
         this.template = template;
@@ -205,6 +213,36 @@ public class CacheConfiguration {
                 new MapStructBeanTransformer<>(
                         HistoryTaskEvent.class, FastJsonHistoryTaskEvent.class, FastJsonMapper.class
                 )
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisKeyListCache<LongIdKey, DriverInfo, FastJsonDriverInfo> driverInfoEnabledRedisKeyListCache() {
+        return new RedisKeyListCache<>(
+                (RedisTemplate<String, FastJsonDriverInfo>) template,
+                new LongIdStringKeyFormatter(enabledDriverInfoPrefix),
+                new MapStructBeanTransformer<>(DriverInfo.class, FastJsonDriverInfo.class, FastJsonMapper.class)
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisKeyListCache<LongIdKey, ProviderInfo, FastJsonProviderInfo> providerInfoEnabledRedisKeyListCache() {
+        return new RedisKeyListCache<>(
+                (RedisTemplate<String, FastJsonProviderInfo>) template,
+                new LongIdStringKeyFormatter(enabledProviderInfoPrefix),
+                new MapStructBeanTransformer<>(ProviderInfo.class, FastJsonProviderInfo.class, FastJsonMapper.class)
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisKeyListCache<LongIdKey, FilterInfo, FastJsonFilterInfo> filterInfoEnabledRedisKeyListCache() {
+        return new RedisKeyListCache<>(
+                (RedisTemplate<String, FastJsonFilterInfo>) template,
+                new LongIdStringKeyFormatter(enabledFilterInfoPrefix),
+                new MapStructBeanTransformer<>(FilterInfo.class, FastJsonFilterInfo.class, FastJsonMapper.class)
         );
     }
 }
