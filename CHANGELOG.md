@@ -4,6 +4,16 @@
 
 #### 功能构建
 
+- 实现预设驱动器。
+  - com.dwarfeng.statistics.impl.handler.driver.CronDriverProvider。
+  - com.dwarfeng.statistics.impl.handler.driver.CronDriverSupporter。
+  - com.dwarfeng.statistics.impl.handler.driver.DctiKafkaDriverProvider。
+  - com.dwarfeng.statistics.impl.handler.driver.DctiKafkaDriverSupporter。
+  - com.dwarfeng.statistics.impl.handler.driver.FixedDelayDriverProvider。
+  - com.dwarfeng.statistics.impl.handler.driver.FixedDelayDriverSupporter。
+  - com.dwarfeng.statistics.impl.handler.driver.FixedRateDriverProvider。
+  - com.dwarfeng.statistics.impl.handler.driver.FixedRateDriverSupporter。
+
 - 实现运维指令。
   - com.dwarfeng.statistics.impl.service.telqos.DriveCommand。
   - com.dwarfeng.statistics.impl.service.telqos.DriveLocalCacheCommand。
