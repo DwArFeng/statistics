@@ -16,6 +16,9 @@ public class LauncherSettingHandler implements Handler {
     @Value("${launcher.reset_mapper_support}")
     private boolean resetMapperSupport;
 
+    @Value("${launcher.start_receive_delay}")
+    private long startReceiveDelay;
+
     @Value("${launcher.online_supervise_delay}")
     private long onlineSuperviseDelay;
     @Value("${launcher.enable_supervise_delay}")
@@ -37,6 +40,10 @@ public class LauncherSettingHandler implements Handler {
         return resetMapperSupport;
     }
 
+    public long getStartReceiveDelay() {
+        return startReceiveDelay;
+    }
+
     public long getOnlineSuperviseDelay() {
         return onlineSuperviseDelay;
     }
@@ -52,6 +59,7 @@ public class LauncherSettingHandler implements Handler {
                 ", resetProviderSupport=" + resetProviderSupport +
                 ", resetFilterSupport=" + resetFilterSupport +
                 ", resetMapperSupport=" + resetMapperSupport +
+                ", startReceiveDelay=" + startReceiveDelay +
                 ", onlineSuperviseDelay=" + onlineSuperviseDelay +
                 ", enableSuperviseDelay=" + enableSuperviseDelay +
                 '}';
