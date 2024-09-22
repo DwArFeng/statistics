@@ -26,6 +26,8 @@
   - com.dwarfeng.statistics.impl.service.telqos.DispatchCommand。
   - com.dwarfeng.statistics.impl.service.telqos.DispatcherCommand。
   - com.dwarfeng.statistics.impl.service.telqos.SuperviseCommand。
+  - com.dwarfeng.statistics.impl.service.telqos.ReceiverCommand。
+  - com.dwarfeng.statistics.impl.service.telqos.ReceiveCommand。
 
 - 实现核心机制。
   - 驱动机制。
