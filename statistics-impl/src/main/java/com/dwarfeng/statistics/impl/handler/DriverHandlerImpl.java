@@ -20,11 +20,17 @@ public class DriverHandlerImpl implements DriverHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DriverHandlerImpl.class);
 
+    private final DispatcherHandlerImpl dispatcherHandler;
+
     private final List<DriverProvider> driverProviders;
 
     private final InternalDriverContext driverContext = new InternalDriverContext();
 
-    public DriverHandlerImpl(List<DriverProvider> driverProviders) {
+    public DriverHandlerImpl(
+            DispatcherHandlerImpl dispatcherHandler,
+            List<DriverProvider> driverProviders
+    ) {
+        this.dispatcherHandler = dispatcherHandler;
         this.driverProviders = Optional.ofNullable(driverProviders).orElse(Collections.emptyList());
     }
 
@@ -40,17 +46,12 @@ public class DriverHandlerImpl implements DriverHandler {
                 .findAny().orElseThrow(() -> new UnsupportedDriverTypeException(type));
     }
 
-    // 该类实现后，不能作为静态类，因此忽略掉相关警告。
-    @SuppressWarnings("InnerClassMayBeStatic")
     private class InternalDriverContext implements Driver.Context {
 
         @Override
         public void execute(LongIdKey statisticsSettingKey) throws DriverException {
             try {
-                // TODO 待实现。
-                throw new DriverException("未实现");
-            } catch (DriverException e) {
-                throw e;
+                dispatcherHandler.current().dispatch(statisticsSettingKey);
             } catch (Exception e) {
                 throw new DriverException(e);
             }

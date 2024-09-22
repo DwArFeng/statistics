@@ -16,6 +16,12 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(0), "driver failed");
     public static final ServiceException.Code DRIVER_TYPE_UNSUPPORTED =
             new ServiceException.Code(offset(1), "driver type unsupported");
+    public static final ServiceException.Code DISPATCHER_FAILED =
+            new ServiceException.Code(offset(10), "dispatcher failed");
+    public static final ServiceException.Code DISPATCHER_NOT_START =
+            new ServiceException.Code(offset(11), "dispatcher not start");
+    public static final ServiceException.Code DISPATCHER_EXECUTION_FAILED =
+            new ServiceException.Code(offset(12), "dispatcher execution failed");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -42,6 +48,9 @@ public final class ServiceExceptionCodes {
         // 以新的 EXCEPTION_CODE_OFFSET 为基准，更新异常代码的值。
         DRIVER_FAILED.setCode(offset(0));
         DRIVER_TYPE_UNSUPPORTED.setCode(offset(1));
+        DISPATCHER_FAILED.setCode(offset(10));
+        DISPATCHER_NOT_START.setCode(offset(11));
+        DISPATCHER_EXECUTION_FAILED.setCode(offset(12));
     }
 
     private ServiceExceptionCodes() {
