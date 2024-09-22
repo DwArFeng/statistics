@@ -1,5 +1,7 @@
 package com.dwarfeng.statistics.sdk.util;
 
+import com.dwarfeng.subgrade.stack.exception.ServiceException;
+
 /**
  * 服务异常代码。
  *
@@ -9,6 +11,15 @@ package com.dwarfeng.statistics.sdk.util;
 public final class ServiceExceptionCodes {
 
     private static int EXCEPTION_CODE_OFFSET = 40000;
+
+    public static final ServiceException.Code DRIVER_FAILED =
+            new ServiceException.Code(offset(0), "driver failed");
+    public static final ServiceException.Code DRIVER_TYPE_UNSUPPORTED =
+            new ServiceException.Code(offset(1), "driver type unsupported");
+
+    private static int offset(int i) {
+        return EXCEPTION_CODE_OFFSET + i;
+    }
 
     /**
      * 获取异常代号的偏移量。
@@ -27,6 +38,10 @@ public final class ServiceExceptionCodes {
     public static void setExceptionCodeOffset(int exceptionCodeOffset) {
         // 设置 EXCEPTION_CODE_OFFSET 的值。
         EXCEPTION_CODE_OFFSET = exceptionCodeOffset;
+
+        // 以新的 EXCEPTION_CODE_OFFSET 为基准，更新异常代码的值。
+        DRIVER_FAILED.setCode(offset(0));
+        DRIVER_TYPE_UNSUPPORTED.setCode(offset(1));
     }
 
     private ServiceExceptionCodes() {

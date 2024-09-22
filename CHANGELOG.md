@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 实现核心机制。
+  - 驱动机制。
+
 - 定义预设服务。
   - com.dwarfeng.statistics.impl.service.EnabledDriverInfoLookupServiceImpl。
   - com.dwarfeng.statistics.impl.service.EnabledFilterInfoLookupServiceImpl。
