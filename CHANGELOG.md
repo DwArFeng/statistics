@@ -22,6 +22,7 @@
   - com.dwarfeng.statistics.impl.service.telqos.DriveLocalCacheCommand。
   - com.dwarfeng.statistics.impl.service.telqos.DispatchCommand。
   - com.dwarfeng.statistics.impl.service.telqos.DispatcherCommand。
+  - com.dwarfeng.statistics.impl.service.telqos.SuperviseCommand。
 
 - 实现核心机制。
   - 驱动机制。
