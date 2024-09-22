@@ -16,6 +16,11 @@ public class LauncherSettingHandler implements Handler {
     @Value("${launcher.reset_mapper_support}")
     private boolean resetMapperSupport;
 
+    @Value("${launcher.online_supervise_delay}")
+    private long onlineSuperviseDelay;
+    @Value("${launcher.enable_supervise_delay}")
+    private long enableSuperviseDelay;
+
     public boolean isResetDriverSupport() {
         return resetDriverSupport;
     }
@@ -32,6 +37,14 @@ public class LauncherSettingHandler implements Handler {
         return resetMapperSupport;
     }
 
+    public long getOnlineSuperviseDelay() {
+        return onlineSuperviseDelay;
+    }
+
+    public long getEnableSuperviseDelay() {
+        return enableSuperviseDelay;
+    }
+
     @Override
     public String toString() {
         return "LauncherSettingHandler{" +
@@ -39,6 +52,8 @@ public class LauncherSettingHandler implements Handler {
                 ", resetProviderSupport=" + resetProviderSupport +
                 ", resetFilterSupport=" + resetFilterSupport +
                 ", resetMapperSupport=" + resetMapperSupport +
+                ", onlineSuperviseDelay=" + onlineSuperviseDelay +
+                ", enableSuperviseDelay=" + enableSuperviseDelay +
                 '}';
     }
 }

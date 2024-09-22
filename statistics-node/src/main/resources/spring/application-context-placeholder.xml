@@ -12,7 +12,7 @@
     <!-- 设置配置文件的路径 -->
     <context:property-placeholder
             location="classpath:database/*.properties,classpath:dubbo/*.properties,classpath:statistics/*.properties,
-            classpath:redis/*.properties,classpath:telqos/*.properties"
+            classpath:redis/*.properties,classpath:curator/*.properties,classpath:telqos/*.properties"
             local-override="true"
             properties-ref="refProperties"
     />
@@ -29,6 +29,8 @@
                 <value>file:conf/redis/*.properties</value>
                 <!--suppress SpringXmlModelInspection -->
                 <value>file:conf/statistics/*.properties</value>
+                <!--suppress SpringXmlModelInspection -->
+                <value>file:conf/curator/*.properties</value>
                 <!--suppress SpringXmlModelInspection -->
                 <value>file:conf/telqos/*.properties</value>
                 <!--suppress SpringXmlModelInspection -->
