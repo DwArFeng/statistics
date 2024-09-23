@@ -20,5 +20,12 @@
                 type="assignable" expression="com.dwarfeng.statistics.impl.handler.receiver.DoNothingReceiver"
         />
         -->
+
+        <!-- 加载 InjvmReceiver -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.receiver.InjvmReceiver"
+        />
+        -->
     </context:component-scan>
 </beans>

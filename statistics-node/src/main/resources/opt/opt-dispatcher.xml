@@ -20,5 +20,12 @@
                 type="assignable" expression="com.dwarfeng.statistics.impl.handler.dispatcher.DrainDispatcher"
         />
         -->
+
+        <!-- 加载 InjvmDispatcher -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.dispatcher.InjvmDispatcher"
+        />
+        -->
     </context:component-scan>
 </beans>

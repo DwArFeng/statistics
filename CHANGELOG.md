@@ -6,9 +6,11 @@
 
 - 实现预设接收器。
   - com.dwarfeng.statistics.impl.handler.receiver.DoNothingReceiver。
+  - com.dwarfeng.statistics.impl.handler.receiver.InjvmReceiver。
 
 - 实现预设调度器。
   - com.dwarfeng.statistics.impl.handler.dispatcher.DrainDispatcher。
+  - com.dwarfeng.statistics.impl.handler.dispatcher.InjvmDispatcher。
 
 - 实现预设驱动器。
   - com.dwarfeng.statistics.impl.handler.driver.CronDriverProvider。
