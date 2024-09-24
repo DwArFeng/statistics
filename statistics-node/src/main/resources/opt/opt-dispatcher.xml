@@ -27,5 +27,12 @@
                 type="assignable" expression="com.dwarfeng.statistics.impl.handler.dispatcher.InjvmDispatcher"
         />
         -->
+
+        <!-- 加载 KafkaDispatcher -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.dispatcher.KafkaDispatcher"
+        />
+        -->
     </context:component-scan>
 </beans>

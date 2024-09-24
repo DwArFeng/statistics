@@ -27,5 +27,12 @@
                 type="assignable" expression="com.dwarfeng.statistics.impl.handler.receiver.InjvmReceiver"
         />
         -->
+
+        <!-- 加载 KafkaReceiver -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.receiver.KafkaReceiver"
+        />
+        -->
     </context:component-scan>
 </beans>
