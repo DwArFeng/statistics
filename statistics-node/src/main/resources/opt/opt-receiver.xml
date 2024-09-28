@@ -34,5 +34,12 @@
                 type="assignable" expression="com.dwarfeng.statistics.impl.handler.receiver.KafkaReceiver"
         />
         -->
+
+        <!-- 加载 DubboReceiver -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.receiver.DubboReceiver"
+        />
+        -->
     </context:component-scan>
 </beans>

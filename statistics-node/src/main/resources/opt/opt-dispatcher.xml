@@ -34,5 +34,12 @@
                 type="assignable" expression="com.dwarfeng.statistics.impl.handler.dispatcher.KafkaDispatcher"
         />
         -->
+
+        <!-- 加载 DubboDispatcher -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.dispatcher.DubboDispatcher"
+        />
+        -->
     </context:component-scan>
 </beans>
