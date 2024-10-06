@@ -56,6 +56,14 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(72), "lookup exception");
     public static final ServiceException.Code NATIVE_QUERY_EXCEPTION =
             new ServiceException.Code(offset(73), "native query exception");
+    public static final ServiceException.Code STATISTICS_SETTING_NOT_EXISTS =
+            new ServiceException.Code(offset(80), "statistics setting not exists");
+    public static final ServiceException.Code TASK_NOT_EXISTS =
+            new ServiceException.Code(offset(90), "task not exists");
+    public static final ServiceException.Code INVALID_TASK_STATUS =
+            new ServiceException.Code(offset(100), "invalid task status");
+    public static final ServiceException.Code TASK_STATUS_MISMATCH =
+            new ServiceException.Code(offset(110), "task status mismatch");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -102,6 +110,10 @@ public final class ServiceExceptionCodes {
         RECORD_EXCEPTION.setCode(offset(71));
         LOOKUP_EXCEPTION.setCode(offset(72));
         NATIVE_QUERY_EXCEPTION.setCode(offset(73));
+        STATISTICS_SETTING_NOT_EXISTS.setCode(offset(80));
+        TASK_NOT_EXISTS.setCode(offset(90));
+        INVALID_TASK_STATUS.setCode(offset(100));
+        TASK_STATUS_MISMATCH.setCode(offset(110));
     }
 
     private ServiceExceptionCodes() {

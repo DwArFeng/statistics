@@ -38,6 +38,10 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(RecordException.class, ServiceExceptionCodes.RECORD_EXCEPTION);
         destination.put(LookupException.class, ServiceExceptionCodes.LOOKUP_EXCEPTION);
         destination.put(NativeQueryException.class, ServiceExceptionCodes.NATIVE_QUERY_EXCEPTION);
+        destination.put(StatisticsSettingNotExistsException.class, ServiceExceptionCodes.STATISTICS_SETTING_NOT_EXISTS);
+        destination.put(TaskNotExistsException.class, ServiceExceptionCodes.TASK_NOT_EXISTS);
+        destination.put(InvalidTaskStatusException.class, ServiceExceptionCodes.INVALID_TASK_STATUS);
+        destination.put(TaskStatusMismatchException.class, ServiceExceptionCodes.TASK_STATUS_MISMATCH);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }
