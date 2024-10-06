@@ -24,6 +24,20 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(ReceiverException.class, ServiceExceptionCodes.RECEIVER_FAILED);
         destination.put(ReceiverNotStartException.class, ServiceExceptionCodes.RECEIVER_NOT_START);
         destination.put(ReceiverExecutionException.class, ServiceExceptionCodes.RECEIVER_EXECUTION_FAILED);
+        destination.put(FunctionNotSupportedException.class, ServiceExceptionCodes.FUNCTION_NOT_SUPPORTED);
+        destination.put(LatestNotSupportedException.class, ServiceExceptionCodes.LATEST_NOT_SUPPORTED);
+        destination.put(LookupNotSupportedException.class, ServiceExceptionCodes.LOOKUP_NOT_SUPPORTED);
+        destination.put(QueryNotSupportedException.class, ServiceExceptionCodes.QUERY_NOT_SUPPORTED);
+        destination.put(NativeQueryNotSupportedException.class, ServiceExceptionCodes.NATIVE_QUERY_NOT_SUPPORTED);
+        destination.put(KeeperNotSupportedException.class, ServiceExceptionCodes.KEEPER_NOT_SUPPORTED);
+        destination.put(PersisterNotSupportedException.class, ServiceExceptionCodes.PERSISTER_NOT_SUPPORTED);
+        destination.put(KeepException.class, ServiceExceptionCodes.KEEP_EXCEPTION);
+        destination.put(LatestException.class, ServiceExceptionCodes.LATEST_EXCEPTION);
+        destination.put(UpdateException.class, ServiceExceptionCodes.UPDATE_EXCEPTION);
+        destination.put(PersistException.class, ServiceExceptionCodes.PERSIST_EXCEPTION);
+        destination.put(RecordException.class, ServiceExceptionCodes.RECORD_EXCEPTION);
+        destination.put(LookupException.class, ServiceExceptionCodes.LOOKUP_EXCEPTION);
+        destination.put(NativeQueryException.class, ServiceExceptionCodes.NATIVE_QUERY_EXCEPTION);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }

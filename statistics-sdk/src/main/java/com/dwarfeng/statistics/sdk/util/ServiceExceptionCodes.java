@@ -28,6 +28,34 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(22), "receiver not start");
     public static final ServiceException.Code RECEIVER_EXECUTION_FAILED =
             new ServiceException.Code(offset(23), "receiver execution failed");
+    public static final ServiceException.Code FUNCTION_NOT_SUPPORTED =
+            new ServiceException.Code(offset(30), "function not supported");
+    public static final ServiceException.Code LATEST_NOT_SUPPORTED =
+            new ServiceException.Code(offset(31), "latest not supported");
+    public static final ServiceException.Code LOOKUP_NOT_SUPPORTED =
+            new ServiceException.Code(offset(32), "lookup not supported");
+    public static final ServiceException.Code QUERY_NOT_SUPPORTED =
+            new ServiceException.Code(offset(33), "query not supported");
+    public static final ServiceException.Code NATIVE_QUERY_NOT_SUPPORTED =
+            new ServiceException.Code(offset(34), "native query not supported");
+    public static final ServiceException.Code KEEPER_NOT_SUPPORTED =
+            new ServiceException.Code(offset(40), "keeper not supported");
+    public static final ServiceException.Code PERSISTER_NOT_SUPPORTED =
+            new ServiceException.Code(offset(50), "persister not supported");
+    public static final ServiceException.Code KEEP_EXCEPTION =
+            new ServiceException.Code(offset(60), "keep exception");
+    public static final ServiceException.Code LATEST_EXCEPTION =
+            new ServiceException.Code(offset(61), "latest exception");
+    public static final ServiceException.Code UPDATE_EXCEPTION =
+            new ServiceException.Code(offset(62), "update exception");
+    public static final ServiceException.Code PERSIST_EXCEPTION =
+            new ServiceException.Code(offset(70), "persist exception");
+    public static final ServiceException.Code RECORD_EXCEPTION =
+            new ServiceException.Code(offset(71), "record exception");
+    public static final ServiceException.Code LOOKUP_EXCEPTION =
+            new ServiceException.Code(offset(72), "lookup exception");
+    public static final ServiceException.Code NATIVE_QUERY_EXCEPTION =
+            new ServiceException.Code(offset(73), "native query exception");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -60,6 +88,20 @@ public final class ServiceExceptionCodes {
         RECEIVER_FAILED.setCode(offset(21));
         RECEIVER_NOT_START.setCode(offset(22));
         RECEIVER_EXECUTION_FAILED.setCode(offset(23));
+        FUNCTION_NOT_SUPPORTED.setCode(offset(30));
+        LATEST_NOT_SUPPORTED.setCode(offset(31));
+        LOOKUP_NOT_SUPPORTED.setCode(offset(32));
+        QUERY_NOT_SUPPORTED.setCode(offset(33));
+        NATIVE_QUERY_NOT_SUPPORTED.setCode(offset(34));
+        KEEPER_NOT_SUPPORTED.setCode(offset(40));
+        PERSISTER_NOT_SUPPORTED.setCode(offset(50));
+        KEEP_EXCEPTION.setCode(offset(60));
+        LATEST_EXCEPTION.setCode(offset(61));
+        UPDATE_EXCEPTION.setCode(offset(62));
+        PERSIST_EXCEPTION.setCode(offset(70));
+        RECORD_EXCEPTION.setCode(offset(71));
+        LOOKUP_EXCEPTION.setCode(offset(72));
+        NATIVE_QUERY_EXCEPTION.setCode(offset(73));
     }
 
     private ServiceExceptionCodes() {

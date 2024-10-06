@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 实现预设桥接器。
+  - com.dwarfeng.statistics.impl.handler.bridge.drain.DrainBridge。
+
 - 实现预设接收器。
   - com.dwarfeng.statistics.impl.handler.receiver.DoNothingReceiver。
   - com.dwarfeng.statistics.impl.handler.receiver.InjvmReceiver。
@@ -40,6 +43,7 @@
   - 调度机制。
   - 主管机制。
   - 接收机制。
+  - 桥接机制。
 
 - 定义预设服务。
   - com.dwarfeng.statistics.impl.service.EnabledDriverInfoLookupServiceImpl。
