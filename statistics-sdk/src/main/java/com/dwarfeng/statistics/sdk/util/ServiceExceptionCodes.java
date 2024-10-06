@@ -64,6 +64,22 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(100), "invalid task status");
     public static final ServiceException.Code TASK_STATUS_MISMATCH =
             new ServiceException.Code(offset(110), "task status mismatch");
+    public static final ServiceException.Code PROVIDER_FAILED =
+            new ServiceException.Code(offset(120), "provider failed");
+    public static final ServiceException.Code PROVIDER_MAKE_FAILED =
+            new ServiceException.Code(offset(121), "provider make failed");
+    public static final ServiceException.Code PROVIDER_EXECUTION_FAILED =
+            new ServiceException.Code(offset(122), "provider execution failed");
+    public static final ServiceException.Code PROVIDER_TYPE_UNSUPPORTED =
+            new ServiceException.Code(offset(123), "provider type unsupported");
+    public static final ServiceException.Code FILTER_FAILED =
+            new ServiceException.Code(offset(130), "filter failed");
+    public static final ServiceException.Code FILTER_MAKE_FAILED =
+            new ServiceException.Code(offset(131), "filter make failed");
+    public static final ServiceException.Code FILTER_EXECUTION_FAILED =
+            new ServiceException.Code(offset(132), "filter execution failed");
+    public static final ServiceException.Code FILTER_TYPE_UNSUPPORTED =
+            new ServiceException.Code(offset(133), "filter type unsupported");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -114,6 +130,14 @@ public final class ServiceExceptionCodes {
         TASK_NOT_EXISTS.setCode(offset(90));
         INVALID_TASK_STATUS.setCode(offset(100));
         TASK_STATUS_MISMATCH.setCode(offset(110));
+        PROVIDER_FAILED.setCode(offset(120));
+        PROVIDER_MAKE_FAILED.setCode(offset(121));
+        PROVIDER_EXECUTION_FAILED.setCode(offset(122));
+        PROVIDER_TYPE_UNSUPPORTED.setCode(offset(123));
+        FILTER_FAILED.setCode(offset(130));
+        FILTER_MAKE_FAILED.setCode(offset(131));
+        FILTER_EXECUTION_FAILED.setCode(offset(132));
+        FILTER_TYPE_UNSUPPORTED.setCode(offset(133));
     }
 
     private ServiceExceptionCodes() {

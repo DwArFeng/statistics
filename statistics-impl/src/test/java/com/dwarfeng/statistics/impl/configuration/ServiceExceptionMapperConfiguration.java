@@ -42,6 +42,13 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(TaskNotExistsException.class, ServiceExceptionCodes.TASK_NOT_EXISTS);
         destination.put(InvalidTaskStatusException.class, ServiceExceptionCodes.INVALID_TASK_STATUS);
         destination.put(TaskStatusMismatchException.class, ServiceExceptionCodes.TASK_STATUS_MISMATCH);
+        destination.put(ProviderException.class, ServiceExceptionCodes.PROVIDER_FAILED);
+        destination.put(ProviderMakeException.class, ServiceExceptionCodes.PROVIDER_MAKE_FAILED);
+        destination.put(ProviderExecutionException.class, ServiceExceptionCodes.PROVIDER_EXECUTION_FAILED);
+        destination.put(UnsupportedProviderTypeException.class, ServiceExceptionCodes.PROVIDER_TYPE_UNSUPPORTED);
+        destination.put(FilterException.class, ServiceExceptionCodes.FILTER_FAILED);
+        destination.put(FilterMakeException.class, ServiceExceptionCodes.FILTER_MAKE_FAILED);
+        destination.put(FilterExecutionException.class, ServiceExceptionCodes.FILTER_EXECUTION_FAILED);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }
