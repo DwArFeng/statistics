@@ -49,6 +49,9 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(FilterException.class, ServiceExceptionCodes.FILTER_FAILED);
         destination.put(FilterMakeException.class, ServiceExceptionCodes.FILTER_MAKE_FAILED);
         destination.put(FilterExecutionException.class, ServiceExceptionCodes.FILTER_EXECUTION_FAILED);
+        destination.put(InvalidVariableValueTypeException.class, ServiceExceptionCodes.INVALID_VARIABLE_VALUE_TYPE);
+        destination.put(VariableNotExistsException.class, ServiceExceptionCodes.VARIABLE_NOT_EXISTS);
+        destination.put(VariableValueTypeMismatchException.class, ServiceExceptionCodes.VARIABLE_VALUE_TYPE_MISMATCH);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }

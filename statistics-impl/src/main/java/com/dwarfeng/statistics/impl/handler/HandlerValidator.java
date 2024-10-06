@@ -1,17 +1,19 @@
 package com.dwarfeng.statistics.impl.handler;
 
+import com.dwarfeng.dutil.basic.cls.ClassUtil;
 import com.dwarfeng.statistics.sdk.util.Constants;
 import com.dwarfeng.statistics.stack.bean.entity.Task;
-import com.dwarfeng.statistics.stack.exception.StatisticsSettingNotExistsException;
-import com.dwarfeng.statistics.stack.exception.TaskNotExistsException;
-import com.dwarfeng.statistics.stack.exception.TaskStatusMismatchException;
+import com.dwarfeng.statistics.stack.bean.key.VariableKey;
+import com.dwarfeng.statistics.stack.exception.*;
 import com.dwarfeng.statistics.stack.service.StatisticsSettingMaintainService;
 import com.dwarfeng.statistics.stack.service.TaskMaintainService;
+import com.dwarfeng.statistics.stack.service.VariableMaintainService;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,13 +31,16 @@ public class HandlerValidator {
 
     private final StatisticsSettingMaintainService statisticsSettingMaintainService;
     private final TaskMaintainService taskMaintainService;
+    private final VariableMaintainService variableMaintainService;
 
     public HandlerValidator(
             StatisticsSettingMaintainService statisticsSettingMaintainService,
-            TaskMaintainService taskMaintainService
+            TaskMaintainService taskMaintainService,
+            VariableMaintainService variableMaintainService
     ) {
         this.statisticsSettingMaintainService = statisticsSettingMaintainService;
         this.taskMaintainService = taskMaintainService;
+        this.variableMaintainService = variableMaintainService;
     }
 
     public void makeSureStatisticsSettingExists(LongIdKey statisticsSettingKey) throws HandlerException {
@@ -74,6 +79,52 @@ public class HandlerValidator {
             }
         } catch (ServiceException e) {
             throw new HandlerException(e);
+        }
+    }
+
+    public void makeSureVariableExists(VariableKey variableKey) throws HandlerException {
+        try {
+            if (!variableMaintainService.exists(variableKey)) {
+                throw new VariableNotExistsException(variableKey);
+            }
+        } catch (ServiceException e) {
+            throw new HandlerException(e);
+        }
+    }
+
+    public void makeSureVariableTypeValid(int valueType, Object value) throws HandlerException {
+        if (!Constants.variableValueTypeSpace().contains(valueType)) {
+            throw new InvalidVariableValueTypeException(valueType);
+        }
+        if (Objects.isNull(value)) {
+            return;
+        }
+        Class<?> expectedValueClazz;
+        // 由于在上文中已经验证了 valueType 的合法性，因此可以保证 valueType 的合法性。
+        switch (valueType) {
+            case Constants.VARIABLE_VALUE_TYPE_STRING:
+                expectedValueClazz = String.class;
+                break;
+            case Constants.VARIABLE_VALUE_TYPE_LONG:
+                expectedValueClazz = Long.class;
+                break;
+            case Constants.VARIABLE_VALUE_TYPE_DOUBLE:
+                expectedValueClazz = Double.class;
+                break;
+            case Constants.VARIABLE_VALUE_TYPE_BOOLEAN:
+                expectedValueClazz = Boolean.class;
+                break;
+            case Constants.VARIABLE_VALUE_TYPE_DATE:
+                expectedValueClazz = Date.class;
+                break;
+            default:
+                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
+        }
+        // 获取 value 的实际类型，特别地，如果 actualValueClazz 是基本类型，则转换为对应的包装类型。
+        Class<?> actualValueClazz = ClassUtil.getPackedClass(value.getClass());
+        // 如果 actualValueClazz 不是 expectedValueClazz 或 expectedValueClazz 的子类，则抛出异常。
+        if (!expectedValueClazz.isAssignableFrom(actualValueClazz)) {
+            throw new VariableValueTypeMismatchException(valueType, expectedValueClazz, actualValueClazz);
         }
     }
 }

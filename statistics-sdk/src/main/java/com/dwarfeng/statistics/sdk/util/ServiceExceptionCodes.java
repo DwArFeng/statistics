@@ -80,6 +80,12 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(132), "filter execution failed");
     public static final ServiceException.Code FILTER_TYPE_UNSUPPORTED =
             new ServiceException.Code(offset(133), "filter type unsupported");
+    public static final ServiceException.Code INVALID_VARIABLE_VALUE_TYPE =
+            new ServiceException.Code(offset(140), "invalid variable value type");
+    public static final ServiceException.Code VARIABLE_NOT_EXISTS =
+            new ServiceException.Code(offset(150), "variable not exists");
+    public static final ServiceException.Code VARIABLE_VALUE_TYPE_MISMATCH =
+            new ServiceException.Code(offset(160), "variable value type mismatch");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -138,6 +144,9 @@ public final class ServiceExceptionCodes {
         FILTER_MAKE_FAILED.setCode(offset(131));
         FILTER_EXECUTION_FAILED.setCode(offset(132));
         FILTER_TYPE_UNSUPPORTED.setCode(offset(133));
+        INVALID_VARIABLE_VALUE_TYPE.setCode(offset(140));
+        VARIABLE_NOT_EXISTS.setCode(offset(150));
+        VARIABLE_VALUE_TYPE_MISMATCH.setCode(offset(160));
     }
 
     private ServiceExceptionCodes() {

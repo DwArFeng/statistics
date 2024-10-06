@@ -34,9 +34,21 @@ public final class Constants {
     @TaskStatusItem
     public static final int TASK_STATUS_DIED = 5;
 
+    @VariableValueTypeItem
+    public static final int VARIABLE_VALUE_TYPE_STRING = 0;
+    @VariableValueTypeItem
+    public static final int VARIABLE_VALUE_TYPE_LONG = 1;
+    @VariableValueTypeItem
+    public static final int VARIABLE_VALUE_TYPE_DOUBLE = 2;
+    @VariableValueTypeItem
+    public static final int VARIABLE_VALUE_TYPE_BOOLEAN = 3;
+    @VariableValueTypeItem
+    public static final int VARIABLE_VALUE_TYPE_DATE = 4;
+
     private static final Lock LOCK = new ReentrantLock();
 
     private static List<Integer> taskStatusSpace = null;
+    private static List<Integer> variableValueTypeSpace = null;
 
     /**
      * 任务状态空间。
@@ -78,6 +90,48 @@ public final class Constants {
         }
 
         taskStatusSpace = Collections.unmodifiableList(result);
+    }
+
+    /**
+     * 变量值类型空间。
+     *
+     * @return 变量值类型空间。
+     */
+    public static List<Integer> variableValueTypeSpace() {
+        if (Objects.nonNull(variableValueTypeSpace)) {
+            return variableValueTypeSpace;
+        }
+        // 基于线程安全的懒加载初始化结果列表。
+        LOCK.lock();
+        try {
+            if (Objects.nonNull(variableValueTypeSpace)) {
+                return variableValueTypeSpace;
+            }
+            initVariableValueTypeSpace();
+            return variableValueTypeSpace;
+        } finally {
+            LOCK.unlock();
+        }
+    }
+
+    private static void initVariableValueTypeSpace() {
+        List<Integer> result = new ArrayList<>();
+
+        Field[] declaredFields = Constants.class.getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+            if (!declaredField.isAnnotationPresent(VariableValueTypeItem.class)) {
+                continue;
+            }
+            Integer value;
+            try {
+                value = (Integer) declaredField.get(null);
+                result.add(value);
+            } catch (Exception e) {
+                LOGGER.error("初始化异常, 请检查代码, 信息如下: ", e);
+            }
+        }
+
+        variableValueTypeSpace = Collections.unmodifiableList(result);
     }
 
     private Constants() {
