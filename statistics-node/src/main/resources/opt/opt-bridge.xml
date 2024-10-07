@@ -14,4 +14,29 @@
     <!--
     <context:component-scan base-package="com.dwarfeng.statistics.impl.handler.bridge.drain"/>
     -->
+
+    <!-- 加载 MockBridge -->
+    <!--
+    <context:component-scan base-package="com.dwarfeng.statistics.impl.handler.bridge.mock"/>
+    -->
+
+    <!-- 加载 HibernateBridge -->
+    <!--
+    <context:component-scan base-package="com.dwarfeng.statistics.impl.handler.bridge.hibernate"/>
+    -->
+
+    <!-- 加载 RedisBridge -->
+    <!--
+    <context:component-scan base-package="com.dwarfeng.statistics.impl.handler.bridge.redis"/>
+    -->
+
+    <!-- 加载 InfluxdbBridge -->
+    <!--
+    <context:component-scan base-package="com.dwarfeng.statistics.impl.handler.bridge.influxdb"/>
+    -->
+
+    <!-- 加载 MultiBridge -->
+    <!--
+    <context:component-scan base-package="com.dwarfeng.statistics.impl.handler.bridge.multi"/>
+    -->
 </beans>

@@ -6,6 +6,11 @@
 
 - 实现预设桥接器。
   - com.dwarfeng.statistics.impl.handler.bridge.drain.DrainBridge。
+  - com.dwarfeng.statistics.impl.handler.bridge.hibernate.HibernateBridge。
+  - com.dwarfeng.statistics.impl.handler.bridge.influxdb.InfluxdbBridge。
+  - com.dwarfeng.statistics.impl.handler.bridge.mock.MockBridge。
+  - com.dwarfeng.statistics.impl.handler.bridge.multi.MultiBridge。
+  - com.dwarfeng.statistics.impl.handler.bridge.redis.RedisBridge。
 
 - 实现预设接收器。
   - com.dwarfeng.statistics.impl.handler.receiver.DoNothingReceiver。

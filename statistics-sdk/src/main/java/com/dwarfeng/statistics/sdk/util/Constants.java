@@ -4,10 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -44,6 +41,29 @@ public final class Constants {
     public static final int VARIABLE_VALUE_TYPE_BOOLEAN = 3;
     @VariableValueTypeItem
     public static final int VARIABLE_VALUE_TYPE_DATE = 4;
+
+    /**
+     * 观察操作：缺省起始日期。
+     */
+    public static final Date WATCH_DEFAULT_START_DATE = new Date(0);
+
+    /**
+     * 观察操作：缺省结束日期。
+     *
+     * <p>
+     * 该日期为 4423-01-01 00:00:00.000。
+     */
+    public static final Date WATCH_DEFAULT_END_DATE = new Date(77409216000000L);
+
+    /**
+     * 观察操作：缺省页码。
+     */
+    public static final int WATCH_DEFAULT_PAGE = 0;
+
+    /**
+     * 观察操作：缺省每页的最大行数。
+     */
+    public static final int WATCH_DEFAULT_ROWS = Integer.MAX_VALUE;
 
     private static final Lock LOCK = new ReentrantLock();
 
