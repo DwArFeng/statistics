@@ -4,6 +4,32 @@
 
 #### 功能构建
 
+- 实现预设映射器。
+  - com.dwarfeng.statistics.impl.handler.mapper.WindowMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.HighPassCounterMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.OneToManyMapper。
+  - com.dwarfeng.statistics.impl.handler.mapper.LowPassMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.HighPassMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.TrimMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.MergeMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.AlignMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.FirstMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.IdentityMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.GroovyMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.TimeWeightedAgvMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.LastMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.CountMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.AvgMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.LowPassExistenceMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.ToBooleanMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.LowPassCounterMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.HighPassExistenceMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.ToDoubleMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.OneToOneMapper。
+  - com.dwarfeng.statistics.impl.handler.mapper.AggregateMapper。
+  - com.dwarfeng.statistics.impl.handler.mapper.SortMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.EnableRatioMapperRegistry。
+
 - 实现预设桥接器。
   - com.dwarfeng.statistics.impl.handler.bridge.drain.DrainBridge。
   - com.dwarfeng.statistics.impl.handler.bridge.hibernate.HibernateBridge。

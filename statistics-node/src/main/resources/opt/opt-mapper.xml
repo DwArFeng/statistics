@@ -14,5 +14,151 @@
     <context:component-scan
             base-package="com.dwarfeng.statistics.impl.handler.mapper" use-default-filters="false"
     >
+        <!-- 加载 AlignMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.AlignMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 AvgMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.AvgMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 CountMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.CountMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 FirstMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.FirstMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 GroovyMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.GroovyMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 IdentityMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.IdentityMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 LastMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.LastMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 SortMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.SortMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 TimeWeightedAgvMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.TimeWeightedAgvMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 ToDoubleMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.ToDoubleMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 WindowMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.WindowMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 MergeMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.MergeMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 TrimMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.TrimMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 ToBooleanMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.ToBooleanMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 EnableRatioMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.EnableRatioMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 HighPassMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.HighPassMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 LowPassMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.LowPassMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 HighPassCounterMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.HighPassCounterMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 LowPassCounterMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.LowPassCounterMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 HighPassExistenceMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.HighPassExistenceMapperRegistry"
+        />
+        -->
+
+        <!-- 加载 LowPassExistenceMapper -->
+        <!--
+        <context:include-filter
+                type="assignable" expression="com.dwarfeng.statistics.impl.handler.mapper.LowPassExistenceMapperRegistry"
+        />
+        -->
     </context:component-scan>
 </beans>
