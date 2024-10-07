@@ -52,6 +52,7 @@ public class ServiceExceptionMapperConfiguration {
         destination.put(InvalidVariableValueTypeException.class, ServiceExceptionCodes.INVALID_VARIABLE_VALUE_TYPE);
         destination.put(VariableNotExistsException.class, ServiceExceptionCodes.VARIABLE_NOT_EXISTS);
         destination.put(VariableValueTypeMismatchException.class, ServiceExceptionCodes.VARIABLE_VALUE_TYPE_MISMATCH);
+        destination.put(ProviderDataExceededException.class, ServiceExceptionCodes.PROVIDER_DATA_EXCEEDED);
         return new MapServiceExceptionMapper(destination, com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.UNDEFINED);
     }
 }
