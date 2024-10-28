@@ -73,6 +73,7 @@
   - com.dwarfeng.statistics.impl.service.telqos.ReceiveCommand。
   - com.dwarfeng.statistics.impl.service.telqos.ExecuteLocalCacheCommand。
   - com.dwarfeng.statistics.impl.service.telqos.MapLocalCacheCommand。
+  - com.dwarfeng.statistics.impl.service.telqos.ViewCommand。
 
 - 实现核心机制。
   - 驱动机制。
