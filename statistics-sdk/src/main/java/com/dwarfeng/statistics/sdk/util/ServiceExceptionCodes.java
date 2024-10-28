@@ -88,6 +88,8 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(160), "variable value type mismatch");
     public static final ServiceException.Code PROVIDER_DATA_EXCEEDED =
             new ServiceException.Code(offset(170), "provider data exceeded");
+    public static final ServiceException.Code QUERY_FAILED =
+            new ServiceException.Code(offset(180), "query failed");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -150,6 +152,7 @@ public final class ServiceExceptionCodes {
         VARIABLE_NOT_EXISTS.setCode(offset(150));
         VARIABLE_VALUE_TYPE_MISMATCH.setCode(offset(160));
         PROVIDER_DATA_EXCEEDED.setCode(offset(170));
+        QUERY_FAILED.setCode(offset(180));
     }
 
     private ServiceExceptionCodes() {
