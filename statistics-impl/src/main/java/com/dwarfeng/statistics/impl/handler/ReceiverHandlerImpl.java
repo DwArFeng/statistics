@@ -1,6 +1,10 @@
 package com.dwarfeng.statistics.impl.handler;
 
+import com.dwarfeng.statistics.stack.bean.dto.TaskCreateInfo;
+import com.dwarfeng.statistics.stack.bean.dto.TaskCreateResult;
+import com.dwarfeng.statistics.stack.bean.dto.TaskExecuteInfo;
 import com.dwarfeng.statistics.stack.exception.ReceiverException;
+import com.dwarfeng.statistics.stack.handler.ExecuteHandler;
 import com.dwarfeng.statistics.stack.handler.Receiver;
 import com.dwarfeng.statistics.stack.handler.ReceiverHandler;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
@@ -16,6 +20,8 @@ import java.util.Optional;
 @Component
 public class ReceiverHandlerImpl implements ReceiverHandler {
 
+    private final ExecuteHandler executeHandler;
+
     private final List<Receiver> receivers;
 
     @Value("${receiver.type}")
@@ -25,7 +31,11 @@ public class ReceiverHandlerImpl implements ReceiverHandler {
 
     private final InternalReceiverContext receiverContext = new InternalReceiverContext();
 
-    public ReceiverHandlerImpl(List<Receiver> receivers) {
+    public ReceiverHandlerImpl(
+            ExecuteHandler executeHandler,
+            List<Receiver> receivers
+    ) {
+        this.executeHandler = executeHandler;
         this.receivers = Optional.ofNullable(receivers).orElse(Collections.emptyList());
     }
 
@@ -47,14 +57,26 @@ public class ReceiverHandlerImpl implements ReceiverHandler {
         return receivers;
     }
 
-    // 该类实现后，不能作为静态类，因此忽略掉相关警告。
-    @SuppressWarnings("InnerClassMayBeStatic")
     private class InternalReceiverContext implements Receiver.Context {
 
         @Override
         public void execute(LongIdKey statisticsSettingKey) throws ReceiverException {
-            // TODO 未实现。
-            throw new ReceiverException("未实现");
+            try {
+                TaskCreateInfo taskCreateInfo = new TaskCreateInfo(statisticsSettingKey);
+                TaskCreateResult taskCreateResult = executeHandler.create(taskCreateInfo);
+                LongIdKey taskKey = taskCreateResult.getTaskKey();
+                TaskExecuteInfo taskExecuteInfo = new TaskExecuteInfo(taskKey);
+                executeHandler.execute(taskExecuteInfo);
+            } catch (ReceiverException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new ReceiverException(e);
+            }
+        }
+
+        @Override
+        public String toString() {
+            return "InternalReceiverContext{}";
         }
     }
 }
