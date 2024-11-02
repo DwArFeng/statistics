@@ -199,6 +199,7 @@ public class DctiKafkaDriverProvider implements DriverProvider {
         @Value("${driver.kafka.dcti.max_poll_interval_ms}")
         private int maxPollIntervalMs;
 
+        @SuppressWarnings("DuplicatedCode")
         @Bean("dctiKafkaDriver.consumerProperties")
         public Map<String, Object> consumerProperties() {
             LOGGER.debug("配置 Kafka 消费者属性...");
@@ -219,6 +220,7 @@ public class DctiKafkaDriverProvider implements DriverProvider {
             return props;
         }
 
+        @SuppressWarnings("DuplicatedCode")
         @Bean("dctiKafkaDriver.consumerFactory")
         public ConsumerFactory<String, String> consumerFactory() {
             LOGGER.debug("配置 Kafka 消费者工厂...");
@@ -230,6 +232,7 @@ public class DctiKafkaDriverProvider implements DriverProvider {
             return factory;
         }
 
+        @SuppressWarnings("DuplicatedCode")
         @Bean("dctiKafkaDriver.kafkaListenerContainerFactory")
         public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>>
         kafkaListenerContainerFactory() {

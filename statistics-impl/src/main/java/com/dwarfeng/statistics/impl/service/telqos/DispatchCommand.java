@@ -47,7 +47,7 @@ public class DispatchCommand extends CliCommand {
         return list;
     }
 
-    @SuppressWarnings("SwitchStatementWithTooFewBranches")
+    @SuppressWarnings({"SwitchStatementWithTooFewBranches", "DuplicatedCode"})
     @Override
     protected void executeWithCmd(Context context, CommandLine cmd) throws TelqosException {
         try {

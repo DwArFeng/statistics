@@ -40,7 +40,6 @@ public class DaoConfiguration {
     private final HistoryTaskPresetCriteriaMaker historyTaskPresetCriteriaMaker;
     private final HistoryTaskEventPresetCriteriaMaker historyTaskEventPresetCriteriaMaker;
 
-
     @Value("${hibernate.jdbc.batch_size}")
     private int batchSize;
 

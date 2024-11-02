@@ -176,6 +176,7 @@ public class InfluxdbBridgePersister extends FullPersister {
         return nativeQuerySingle(queryInfo);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected List<QueryResult> doNativeQuery(List<NativeQueryInfo> queryInfos) throws Exception {
         // 构造查看结果，并初始化。
@@ -216,6 +217,7 @@ public class InfluxdbBridgePersister extends FullPersister {
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private QueryResult nativeQuerySingle(NativeQueryInfo queryInfo) throws HandlerException {
         // 展开参数。
         String preset = queryInfo.getPreset();

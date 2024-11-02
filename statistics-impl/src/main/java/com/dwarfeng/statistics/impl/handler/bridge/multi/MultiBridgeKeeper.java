@@ -41,7 +41,6 @@ public class MultiBridgeKeeper extends AbstractKeeper implements InitializingBea
     @Value("${bridge.multi.delegates.keep}")
     private String delegateConfig;
 
-
     public MultiBridgeKeeper(ApplicationContext ctx, ThreadPoolTaskExecutor executor) {
         this.ctx = ctx;
         this.executor = executor;

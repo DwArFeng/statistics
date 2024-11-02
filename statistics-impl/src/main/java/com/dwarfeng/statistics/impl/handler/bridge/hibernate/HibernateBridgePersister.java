@@ -176,7 +176,6 @@ public class HibernateBridgePersister extends FullPersister {
         );
     }
 
-
     @Override
     protected QueryResult doNativeQuery(NativeQueryInfo queryInfo) throws IllegalArgumentException {
         String preset = queryInfo.getPreset();

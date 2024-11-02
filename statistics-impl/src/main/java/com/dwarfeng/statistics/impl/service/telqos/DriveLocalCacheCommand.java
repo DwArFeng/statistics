@@ -64,6 +64,7 @@ public class DriveLocalCacheCommand extends CliCommand {
         return list;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     @Override
     protected void executeWithCmd(Context context, CommandLine cmd) throws TelqosException {
         try {
@@ -87,6 +88,7 @@ public class DriveLocalCacheCommand extends CliCommand {
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void handleLookup(Context context, CommandLine cmd) throws Exception {
         long statisticsSettingId;
         try {
