@@ -5,6 +5,7 @@ import com.dwarfeng.statistics.stack.bean.entity.ProviderSupport;
 import com.dwarfeng.statistics.stack.cache.ProviderSupportCache;
 import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
+import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
 import org.springframework.stereotype.Repository;
@@ -59,35 +60,36 @@ public class ProviderSupportCacheImpl implements ProviderSupportCache {
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public boolean allExists(List<StringIdKey> keys) throws CacheException {
+    public boolean allExists(@SkipRecord List<StringIdKey> keys) throws CacheException {
         return batchBaseCache.allExists(keys);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public boolean nonExists(List<StringIdKey> keys) throws CacheException {
+    public boolean nonExists(@SkipRecord List<StringIdKey> keys) throws CacheException {
         return batchBaseCache.nonExists(keys);
     }
 
     @Override
     @BehaviorAnalyse
+    @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
-    public List<ProviderSupport> batchGet(List<StringIdKey> keys) throws CacheException {
+    public List<ProviderSupport> batchGet(@SkipRecord List<StringIdKey> keys) throws CacheException {
         return batchBaseCache.batchGet(keys);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void batchPush(List<ProviderSupport> entities, long timeout) throws CacheException {
+    public void batchPush(@SkipRecord List<ProviderSupport> entities, long timeout) throws CacheException {
         batchBaseCache.batchPush(entities, timeout);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void batchDelete(List<StringIdKey> keys) throws CacheException {
+    public void batchDelete(@SkipRecord List<StringIdKey> keys) throws CacheException {
         batchBaseCache.batchDelete(keys);
     }
 }

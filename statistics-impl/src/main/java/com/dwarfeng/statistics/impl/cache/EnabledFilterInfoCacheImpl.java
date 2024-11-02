@@ -5,6 +5,7 @@ import com.dwarfeng.statistics.stack.bean.entity.FilterInfo;
 import com.dwarfeng.statistics.stack.cache.EnabledFilterInfoCache;
 import com.dwarfeng.subgrade.impl.cache.RedisKeyListCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
+import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
@@ -41,6 +42,7 @@ public class EnabledFilterInfoCacheImpl implements EnabledFilterInfoCache {
 
     @Override
     @BehaviorAnalyse
+    @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
     public List<FilterInfo> get(LongIdKey key) throws CacheException {
         return listCache.get(key);
@@ -48,6 +50,7 @@ public class EnabledFilterInfoCacheImpl implements EnabledFilterInfoCache {
 
     @Override
     @BehaviorAnalyse
+    @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
     public List<FilterInfo> get(LongIdKey key, int beginIndex, int maxEntity) throws CacheException {
         return listCache.get(key, beginIndex, maxEntity);
@@ -55,6 +58,7 @@ public class EnabledFilterInfoCacheImpl implements EnabledFilterInfoCache {
 
     @Override
     @BehaviorAnalyse
+    @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
     public List<FilterInfo> get(LongIdKey key, PagingInfo pagingInfo) throws CacheException {
         return listCache.get(key, pagingInfo);
@@ -63,21 +67,21 @@ public class EnabledFilterInfoCacheImpl implements EnabledFilterInfoCache {
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void set(LongIdKey key, Collection<FilterInfo> entities, long timeout) throws CacheException {
+    public void set(LongIdKey key, @SkipRecord Collection<FilterInfo> entities, long timeout) throws CacheException {
         listCache.set(key, entities, timeout);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void leftPush(LongIdKey key, Collection<FilterInfo> entities, long timeout) throws CacheException {
+    public void leftPush(LongIdKey key, @SkipRecord Collection<FilterInfo> entities, long timeout) throws CacheException {
         listCache.leftPush(key, entities, timeout);
     }
 
     @Override
     @BehaviorAnalyse
     @Transactional(transactionManager = "hibernateTransactionManager", rollbackFor = Exception.class)
-    public void rightPush(LongIdKey key, Collection<FilterInfo> entities, long timeout) throws CacheException {
+    public void rightPush(LongIdKey key, @SkipRecord Collection<FilterInfo> entities, long timeout) throws CacheException {
         listCache.rightPush(key, entities, timeout);
     }
 

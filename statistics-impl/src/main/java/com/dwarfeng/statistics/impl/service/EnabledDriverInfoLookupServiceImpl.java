@@ -6,6 +6,7 @@ import com.dwarfeng.statistics.stack.dao.DriverInfoDao;
 import com.dwarfeng.statistics.stack.service.EnabledDriverInfoLookupService;
 import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionHelper;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
+import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import com.dwarfeng.subgrade.stack.exception.ServiceExceptionMapper;
@@ -38,6 +39,7 @@ public class EnabledDriverInfoLookupServiceImpl implements EnabledDriverInfoLook
 
     @Override
     @BehaviorAnalyse
+    @SkipRecord
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
     public List<DriverInfo> getEnabledDriverInfos(LongIdKey statisticsSettingKey) throws ServiceException {
         try {
