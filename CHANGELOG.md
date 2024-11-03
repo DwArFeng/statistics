@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 依赖升级。
+  - 升级 `protobuf` 依赖版本为 `3.25.5` 以规避漏洞。
+
 - 实现预设推送器。
   - com.dwarfeng.statistics.impl.handler.pusher.DrainPusher。
   - com.dwarfeng.statistics.impl.handler.pusher.LogPusher。
