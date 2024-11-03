@@ -6,6 +6,7 @@
 
 - 实现运维指令。
   - com.dwarfeng.statistics.impl.service.telqos.ResetCommand。
+  - com.dwarfeng.statistics.impl.service.telqos.TaskCheckCommand。
 
 - 实现核心机制。
   - 重置机制。
