@@ -32,6 +32,7 @@ public class HibernateBridgeBridgeDataPresetCriteriaMaker implements PresetCrite
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void lookupDefaultCloseClose(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             long statisticsSettingLongId = (long) objects[0];
@@ -48,6 +49,7 @@ public class HibernateBridgeBridgeDataPresetCriteriaMaker implements PresetCrite
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void lookupDefaultCloseOpen(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             long statisticsSettingLongId = (long) objects[0];
@@ -64,6 +66,7 @@ public class HibernateBridgeBridgeDataPresetCriteriaMaker implements PresetCrite
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void lookupDefaultOpenClose(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             long statisticsSettingLongId = (long) objects[0];
@@ -80,6 +83,7 @@ public class HibernateBridgeBridgeDataPresetCriteriaMaker implements PresetCrite
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private void lookupDefaultOpenOpen(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             long statisticsSettingLongId = (long) objects[0];

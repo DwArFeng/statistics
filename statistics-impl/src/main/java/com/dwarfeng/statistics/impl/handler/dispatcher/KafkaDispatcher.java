@@ -239,6 +239,7 @@ public class KafkaDispatcher extends AbstractDispatcher {
         @Value("${dispatcher.kafka.transaction_prefix}")
         private String transactionPrefix;
 
+        @SuppressWarnings("DuplicatedCode")
         @Bean("kafkaDispatcher.producerProperties")
         public Map<String, Object> producerProperties() {
             LOGGER.info("配置Kafka生产者属性...");
@@ -253,6 +254,7 @@ public class KafkaDispatcher extends AbstractDispatcher {
             return props;
         }
 
+        @SuppressWarnings("DuplicatedCode")
         @Bean("kafkaDispatcher.producerFactory")
         public ProducerFactory<String, String> producerFactory() {
             LOGGER.info("配置Kafka生产者工厂...");

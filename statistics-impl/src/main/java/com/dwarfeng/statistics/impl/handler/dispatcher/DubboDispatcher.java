@@ -45,7 +45,7 @@ public class DubboDispatcher extends AbstractDispatcher {
     }
 
     @Override
-    protected void doStart() throws Exception {
+    protected void doStart() {
         lock.lock();
         try {
             // 日志记录。
@@ -67,7 +67,7 @@ public class DubboDispatcher extends AbstractDispatcher {
     }
 
     @Override
-    protected void doStop() throws Exception {
+    protected void doStop() {
         lock.lock();
         try {
             // 日志记录。

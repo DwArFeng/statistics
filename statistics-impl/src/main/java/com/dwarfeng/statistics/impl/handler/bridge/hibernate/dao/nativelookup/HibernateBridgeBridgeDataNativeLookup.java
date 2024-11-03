@@ -63,6 +63,7 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private List<HibernateBridgeBridgeData> lookupDefaultCloseClose(
             Connection connection, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
@@ -103,6 +104,7 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
             Date startDate, Date endDate, int offset, int limit
     ) throws SQLException;
 
+    @SuppressWarnings("DuplicatedCode")
     private List<HibernateBridgeBridgeData> lookupDefaultCloseOpen(
             Connection connection, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
@@ -143,6 +145,7 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
             Date startDate, Date endDate, int offset, int limit
     ) throws SQLException;
 
+    @SuppressWarnings("DuplicatedCode")
     private List<HibernateBridgeBridgeData> lookupDefaultOpenClose(
             Connection connection, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
@@ -183,6 +186,7 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
             Date startDate, Date endDate, int offset, int limit
     ) throws SQLException;
 
+    @SuppressWarnings("DuplicatedCode")
     private List<HibernateBridgeBridgeData> lookupDefaultOpenOpen(
             Connection connection, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
