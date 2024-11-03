@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.stack.service;
 
 import com.dwarfeng.statistics.stack.bean.dto.*;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import com.dwarfeng.subgrade.stack.service.Service;
 
@@ -20,29 +20,29 @@ import java.util.concurrent.CompletableFuture;
 public interface ViewService extends Service {
 
     /**
-     * 查询统计设置的最新桥接器数据。
+     * 查询最新数据。
      *
      * <p>
-     * 如果统计设置主键对应的桥接器数据不存在，则返回的查询结果为 null。
+     * 如果桥接器数据主键对应的数据不存在，则返回的查询结果为 <code>null</code>。
      *
-     * @param statisticsSettingKey 指定的统计设置对应的主键。
-     * @return 指定的统计设置的最新桥接器数据。
+     * @param bridgeDataKey 指定的桥接器数据对应的主键。
+     * @return 指定的桥接器数据的最新数据。
      * @throws ServiceException 服务异常。
      */
-    BridgeData latest(LongIdKey statisticsSettingKey) throws ServiceException;
+    BridgeData latest(BridgeDataKey bridgeDataKey) throws ServiceException;
 
     /**
-     * 查询统计设置的最新桥接器数据。
+     * 查询最新数据。
      *
      * <p>
-     * 如果统计设置主键组成的列表中的某个索引处的统计设置主键对应的桥接器数据不存在，
-     * 则返回的查询结果组成的列表该处索引对应的查询结果为 null。
+     * 如果桥接器数据主键组成的列表中的某个索引处的桥接器数据主键对应的数据不存在，
+     * 则返回的查询结果组成的列表该处索引对应的查询结果为 <code>null</code>。
      *
-     * @param statisticsSettingKeys 指定的统计设置对应的主键组成的列表。
-     * @return 指定的统计设置的最新桥接器数据组成的列表。
+     * @param bridgeDataKeys 指定的桥接器数据对应的主键组成的列表。
+     * @return 指定的桥接器数据的最新数据组成的列表。
      * @throws ServiceException 服务异常。
      */
-    List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws ServiceException;
+    List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws ServiceException;
 
     /**
      * 查看。
@@ -99,22 +99,22 @@ public interface ViewService extends Service {
     List<QueryResult> query(List<QueryInfo> queryInfos) throws ServiceException;
 
     /**
-     * 异步查询统计设置的最新桥接器数据。
+     * 异步查询最新数据。
      *
-     * @param statisticsSettingKey 指定的统计设置对应的主键。
-     * @return 指定的统计设置的最新桥接器数据。
+     * @param bridgeDataKey 指定的桥接器数据对应的主键。
+     * @return 指定的桥接器数据的最新数据。
      * @throws ServiceException 服务异常。
      */
-    CompletableFuture<BridgeData> latestAsync(LongIdKey statisticsSettingKey) throws ServiceException;
+    CompletableFuture<BridgeData> latestAsync(BridgeDataKey bridgeDataKey) throws ServiceException;
 
     /**
-     * 异步查询统计设置的最新桥接器数据。
+     * 异步查询最新数据。
      *
-     * @param statisticsSettingKeys 指定的统计设置对应的主键组成的列表。
-     * @return 指定的统计设置的最新桥接器数据组成的列表。
+     * @param bridgeDataKeys 指定的桥接器数据对应的主键组成的列表。
+     * @return 指定的桥接器数据的最新数据组成的列表。
      * @throws ServiceException 服务异常。
      */
-    CompletableFuture<List<BridgeData>> latestAsync(List<LongIdKey> statisticsSettingKeys) throws ServiceException;
+    CompletableFuture<List<BridgeData>> latestAsync(List<BridgeDataKey> bridgeDataKeys) throws ServiceException;
 
     /**
      * 异步查看。

@@ -83,6 +83,7 @@ public class MockExecutor extends AbstractExecutor {
         String lastProvidedDateVariableId = config.getLastProvidedDateVariableId();
         int dataSize = config.getDataSize();
         String dataType = config.getDataType();
+        String tag = config.getTag();
         // 查看最后提供数据的日期变量。
         LongIdKey statisticsSettingKey = context.getStatisticsSettingKey();
         VariableInspectInfo variableInspectInfo = new VariableInspectInfo(
@@ -116,7 +117,7 @@ public class MockExecutor extends AbstractExecutor {
             // 生成数据。
             Object value = nextValue(dataType);
             // 构造数据。
-            ProviderData data = new ProviderData(value, new Date(timestamp));
+            ProviderData data = new ProviderData(tag, value, new Date(timestamp));
             // 添加数据。
             datas.add(data);
         }

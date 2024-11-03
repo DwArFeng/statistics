@@ -92,7 +92,7 @@ public class TrimMapperRegistry extends AbstractMapperRegistry {
             }
 
             // 返回新的序列
-            return new Sequence(sequence.getStatisticsSettingKey(), datas, startDate, endDate);
+            return new Sequence(sequence.getBridgeDataKey(), datas, startDate, endDate);
         }
 
         @Override
@@ -105,7 +105,7 @@ public class TrimMapperRegistry extends AbstractMapperRegistry {
     public static class Config implements Bean {
 
         private static final long serialVersionUID = 2929546893944238328L;
-        
+
         @JSONField(name = "#only_trim_start", ordinal = 1, deserialize = false)
         private String onlyTrimStartRem =
                 "当 onlyTrimStart 为 true 时只剪裁序列的起始时间，false 裁剪序列的起始时间和结束时间";

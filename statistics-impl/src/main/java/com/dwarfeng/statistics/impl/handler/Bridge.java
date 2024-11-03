@@ -1,11 +1,11 @@
 package com.dwarfeng.statistics.impl.handler;
 
 import com.dwarfeng.statistics.stack.bean.dto.*;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.KeeperNotSupportedException;
 import com.dwarfeng.statistics.stack.exception.PersisterNotSupportedException;
 import com.dwarfeng.statistics.stack.handler.KeepHandler;
 import com.dwarfeng.statistics.stack.handler.PersistHandler;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 
 import java.util.List;
@@ -84,28 +84,28 @@ public interface Bridge {
          * 查询桥接器数据。
          *
          * <p>
-         * 如果统计设置主键对应的桥接器数据不存在，则返回的查询结果为 null。
+         * 如果桥接器数据主键对应的桥接器数据不存在，则返回的查询结果为 <code>null</code>。
          *
-         * @param statisticsSettingKey 统计设置主键。
+         * @param bridgeDataKey 指定的桥接器数据主键。
          * @return 查询结果。
          * @throws HandlerException 处理器异常。
-         * @see KeepHandler#latest(LongIdKey)
+         * @see KeepHandler#latest(BridgeDataKey)
          */
-        BridgeData latest(LongIdKey statisticsSettingKey) throws HandlerException;
+        BridgeData latest(BridgeDataKey bridgeDataKey) throws HandlerException;
 
         /**
          * 查询桥接器数据。
          *
          * <p>
-         * 如果统计设置主键组成的列表中的某个索引处的统计设置主键对应的桥接器数据不存在，
-         * 则返回的查询结果组成的列表该处索引对应的查询结果为 null。
+         * 如果桥接器数据主键组成的列表中的某个索引处的桥接器数据主键对应的桥接器数据不存在，
+         * 则返回的查询结果组成的列表该处索引对应的查询结果为 <code>null</code>。
          *
-         * @param statisticsSettingKeys 统计设置主键组成的列表。
+         * @param bridgeDataKeys 指定的桥接器数据主键组成的列表。
          * @return 查询结果。
          * @throws HandlerException 处理器异常。
          * @see KeepHandler#latest(List)
          */
-        List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws HandlerException;
+        List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws HandlerException;
     }
 
     /**

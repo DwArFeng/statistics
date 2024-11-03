@@ -98,13 +98,15 @@ public class LowPassMapperRegistry extends AbstractMapperRegistry {
 
             // 返回结果。
             return new Sequence(
-                    sequence.getStatisticsSettingKey(), datas, sequence.getStartDate(), sequence.getEndDate()
+                    sequence.getBridgeDataKey(), datas, sequence.getStartDate(), sequence.getEndDate()
             );
         }
 
         // 为了保证代码的可读性，此处代码不做简化。
         @SuppressWarnings({"ConstantValue", "DuplicatedCode"})
-        private static List<BridgeData> doFilter(Sequence sequence, double threshold, boolean canEqual, boolean invert) {
+        private static List<BridgeData> doFilter(
+                Sequence sequence, double threshold, boolean canEqual, boolean invert
+        ) {
             List<BridgeData> datas;
             if (invert && canEqual) {
                 datas = sequence.getDatas().stream().filter(

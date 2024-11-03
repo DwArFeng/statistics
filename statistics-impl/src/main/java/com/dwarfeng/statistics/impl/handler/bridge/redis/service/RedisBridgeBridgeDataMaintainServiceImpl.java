@@ -1,10 +1,10 @@
 package com.dwarfeng.statistics.impl.handler.bridge.redis.service;
 
 import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeData;
+import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeDataKey;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import org.springframework.stereotype.Service;
 
@@ -13,29 +13,29 @@ import java.util.List;
 @Service
 public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBridgeDataMaintainService {
 
-    private final DaoOnlyBatchCrudService<LongIdKey, RedisBridgeBridgeData> batchCrudService;
+    private final DaoOnlyBatchCrudService<RedisBridgeBridgeDataKey, RedisBridgeBridgeData> batchCrudService;
 
     public RedisBridgeBridgeDataMaintainServiceImpl(
-            DaoOnlyBatchCrudService<LongIdKey, RedisBridgeBridgeData> batchCrudService
+            DaoOnlyBatchCrudService<RedisBridgeBridgeDataKey, RedisBridgeBridgeData> batchCrudService
     ) {
         this.batchCrudService = batchCrudService;
     }
 
     @Override
     @BehaviorAnalyse
-    public boolean exists(LongIdKey key) throws ServiceException {
+    public boolean exists(RedisBridgeBridgeDataKey key) throws ServiceException {
         return batchCrudService.exists(key);
     }
 
     @Override
     @BehaviorAnalyse
-    public RedisBridgeBridgeData get(LongIdKey key) throws ServiceException {
+    public RedisBridgeBridgeData get(RedisBridgeBridgeDataKey key) throws ServiceException {
         return batchCrudService.get(key);
     }
 
     @Override
     @BehaviorAnalyse
-    public LongIdKey insert(RedisBridgeBridgeData element) throws ServiceException {
+    public RedisBridgeBridgeDataKey insert(RedisBridgeBridgeData element) throws ServiceException {
         return batchCrudService.insert(element);
     }
 
@@ -47,19 +47,19 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
 
     @Override
     @BehaviorAnalyse
-    public void delete(LongIdKey key) throws ServiceException {
+    public void delete(RedisBridgeBridgeDataKey key) throws ServiceException {
         batchCrudService.delete(key);
     }
 
     @Override
     @BehaviorAnalyse
-    public RedisBridgeBridgeData getIfExists(LongIdKey key) throws ServiceException {
+    public RedisBridgeBridgeData getIfExists(RedisBridgeBridgeDataKey key) throws ServiceException {
         return batchCrudService.getIfExists(key);
     }
 
     @Override
     @BehaviorAnalyse
-    public LongIdKey insertIfNotExists(RedisBridgeBridgeData element) throws ServiceException {
+    public RedisBridgeBridgeDataKey insertIfNotExists(RedisBridgeBridgeData element) throws ServiceException {
         return batchCrudService.insertIfNotExists(element);
     }
 
@@ -71,25 +71,25 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
 
     @Override
     @BehaviorAnalyse
-    public void deleteIfExists(LongIdKey key) throws ServiceException {
+    public void deleteIfExists(RedisBridgeBridgeDataKey key) throws ServiceException {
         batchCrudService.deleteIfExists(key);
     }
 
     @Override
     @BehaviorAnalyse
-    public LongIdKey insertOrUpdate(RedisBridgeBridgeData element) throws ServiceException {
+    public RedisBridgeBridgeDataKey insertOrUpdate(RedisBridgeBridgeData element) throws ServiceException {
         return batchCrudService.insertOrUpdate(element);
     }
 
     @Override
     @BehaviorAnalyse
-    public boolean allExists(@SkipRecord List<LongIdKey> keys) throws ServiceException {
+    public boolean allExists(@SkipRecord List<RedisBridgeBridgeDataKey> keys) throws ServiceException {
         return batchCrudService.allExists(keys);
     }
 
     @Override
     @BehaviorAnalyse
-    public boolean nonExists(@SkipRecord List<LongIdKey> keys) throws ServiceException {
+    public boolean nonExists(@SkipRecord List<RedisBridgeBridgeDataKey> keys) throws ServiceException {
         return batchCrudService.nonExists(keys);
     }
 
@@ -97,7 +97,7 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
     @BehaviorAnalyse
     @SkipRecord
     public List<RedisBridgeBridgeData> batchGet(
-            @SkipRecord List<LongIdKey> keys
+            @SkipRecord List<RedisBridgeBridgeDataKey> keys
     ) throws ServiceException {
         return batchCrudService.batchGet(keys);
     }
@@ -105,7 +105,7 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
     @Override
     @BehaviorAnalyse
     @SkipRecord
-    public List<LongIdKey> batchInsert(
+    public List<RedisBridgeBridgeDataKey> batchInsert(
             @SkipRecord List<RedisBridgeBridgeData> elements
     ) throws ServiceException {
         return batchCrudService.batchInsert(elements);
@@ -119,7 +119,7 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
 
     @Override
     @BehaviorAnalyse
-    public void batchDelete(@SkipRecord List<LongIdKey> keys) throws ServiceException {
+    public void batchDelete(@SkipRecord List<RedisBridgeBridgeDataKey> keys) throws ServiceException {
         batchCrudService.batchDelete(keys);
     }
 
@@ -127,7 +127,7 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
     @BehaviorAnalyse
     @SkipRecord
     public List<RedisBridgeBridgeData> batchGetIfExists(
-            @SkipRecord List<LongIdKey> keys
+            @SkipRecord List<RedisBridgeBridgeDataKey> keys
     ) throws ServiceException {
         return batchCrudService.batchGetIfExists(keys);
     }
@@ -136,7 +136,7 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
     @Override
     @BehaviorAnalyse
     @SkipRecord
-    public List<LongIdKey> batchInsertIfExists(
+    public List<RedisBridgeBridgeDataKey> batchInsertIfExists(
             @SkipRecord List<RedisBridgeBridgeData> elements
     ) throws ServiceException {
         return batchCrudService.batchInsertIfExists(elements);
@@ -145,7 +145,7 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
     @Override
     @BehaviorAnalyse
     @SkipRecord
-    public List<LongIdKey> batchInsertIfNotExists(
+    public List<RedisBridgeBridgeDataKey> batchInsertIfNotExists(
             @SkipRecord List<RedisBridgeBridgeData> elements
     ) throws ServiceException {
         return batchCrudService.batchInsertIfNotExists(elements);
@@ -159,14 +159,14 @@ public class RedisBridgeBridgeDataMaintainServiceImpl implements RedisBridgeBrid
 
     @Override
     @BehaviorAnalyse
-    public void batchDeleteIfExists(@SkipRecord List<LongIdKey> keys) throws ServiceException {
+    public void batchDeleteIfExists(@SkipRecord List<RedisBridgeBridgeDataKey> keys) throws ServiceException {
         batchCrudService.batchDeleteIfExists(keys);
     }
 
     @Override
     @BehaviorAnalyse
     @SkipRecord
-    public List<LongIdKey> batchInsertOrUpdate(
+    public List<RedisBridgeBridgeDataKey> batchInsertOrUpdate(
             @SkipRecord List<RedisBridgeBridgeData> elements
     ) throws ServiceException {
         return batchCrudService.batchInsertOrUpdate(elements);

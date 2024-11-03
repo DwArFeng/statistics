@@ -38,6 +38,11 @@ public final class Constraints {
      */
     public static final int LENGTH_MESSAGE = 200;
 
+    /**
+     * 标签的长度约束。
+     */
+    public static final int LENGTH_TAG = 100;
+
     private Constraints() {
         throw new IllegalStateException("禁止实例化");
     }

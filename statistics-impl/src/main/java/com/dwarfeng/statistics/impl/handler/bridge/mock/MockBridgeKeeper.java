@@ -2,7 +2,7 @@ package com.dwarfeng.statistics.impl.handler.bridge.mock;
 
 import com.dwarfeng.statistics.impl.handler.bridge.FullKeeper;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -95,7 +95,7 @@ public class MockBridgeKeeper extends FullKeeper {
 
     @SuppressWarnings("DuplicatedCode")
     @Override
-    protected BridgeData doLatest(LongIdKey statisticsSettingKey) throws Exception {
+    protected BridgeData doLatest(BridgeDataKey bridgeDataKey) throws Exception {
         long startTimestamp = System.currentTimeMillis();
         long anchorTimestamp = System.currentTimeMillis();
 
@@ -108,8 +108,8 @@ public class MockBridgeKeeper extends FullKeeper {
             ThreadUtil.sleepUntil(anchorTimestamp);
         }
 
-        Object value = dataValueGenerator.nextValue(statisticsSettingKey);
-        BridgeData result = new BridgeData(statisticsSettingKey, value, new Date());
+        Object value = dataValueGenerator.nextValue(bridgeDataKey);
+        BridgeData result = new BridgeData(bridgeDataKey, value, new Date());
 
         if (latestDelay > 0) {
             anchorTimestamp += latestDelay;
@@ -130,7 +130,7 @@ public class MockBridgeKeeper extends FullKeeper {
 
     @SuppressWarnings("DuplicatedCode")
     @Override
-    protected List<BridgeData> doLatest(List<LongIdKey> statisticsSettingKeys) throws Exception {
+    protected List<BridgeData> doLatest(List<BridgeDataKey> bridgeDataKeys) throws Exception {
         long startTimestamp = System.currentTimeMillis();
         long anchorTimestamp = System.currentTimeMillis();
 
@@ -144,12 +144,12 @@ public class MockBridgeKeeper extends FullKeeper {
         }
 
         List<BridgeData> result = new ArrayList<>();
-        for (LongIdKey statisticsSettingKey : statisticsSettingKeys) {
-            Object value = dataValueGenerator.nextValue(statisticsSettingKey);
-            result.add(new BridgeData(statisticsSettingKey, value, new Date()));
+        for (BridgeDataKey bridgeDataKey : bridgeDataKeys) {
+            Object value = dataValueGenerator.nextValue(bridgeDataKey);
+            result.add(new BridgeData(bridgeDataKey, value, new Date()));
         }
         if (latestDelay > 0) {
-            anchorTimestamp += latestDelay * statisticsSettingKeys.size();
+            anchorTimestamp += latestDelay * bridgeDataKeys.size();
             ThreadUtil.sleepUntil(anchorTimestamp);
         }
 

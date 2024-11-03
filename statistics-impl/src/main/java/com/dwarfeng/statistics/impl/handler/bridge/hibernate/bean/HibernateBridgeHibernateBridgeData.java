@@ -1,5 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.bridge.hibernate.bean;
 
+import com.dwarfeng.statistics.sdk.util.Constraints;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
 
@@ -11,13 +12,13 @@ import java.util.Optional;
 @IdClass(HibernateLongIdKey.class)
 @Table(name = "tbl_bridge_data", indexes = {
         @Index(
-                name = "idx_statistics_setting_id_happened_date",
-                columnList = "statistics_setting_id, happened_date ASC"
+                name = "idx_statistics_setting_long_id_tag_happened_date",
+                columnList = "statistics_setting_long_id, tag, happened_date ASC"
         ),
 })
 public class HibernateBridgeHibernateBridgeData implements Bean {
 
-    private static final long serialVersionUID = -1168607501051727415L;
+    private static final long serialVersionUID = 6369999460813878770L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -25,8 +26,11 @@ public class HibernateBridgeHibernateBridgeData implements Bean {
     private Long longId;
 
     // -----------------------------------------------------------主属性字段-----------------------------------------------------------
-    @Column(name = "statistics_setting_id", nullable = false)
+    @Column(name = "statistics_setting_long_id", nullable = false)
     private Long statisticsSettingLongId;
+
+    @Column(name = "tag", nullable = false, length = Constraints.LENGTH_TAG)
+    private String tag;
 
     @Column(name = "value", columnDefinition = "TEXT", nullable = false)
     private String value;
@@ -41,14 +45,6 @@ public class HibernateBridgeHibernateBridgeData implements Bean {
 
     public void setKey(HibernateLongIdKey idKey) {
         this.longId = Optional.ofNullable(idKey).map(HibernateLongIdKey::getLongId).orElse(null);
-    }
-
-    public HibernateLongIdKey getStatisticsSettingKey() {
-        return Optional.ofNullable(statisticsSettingLongId).map(HibernateLongIdKey::new).orElse(null);
-    }
-
-    public void setStatisticsSettingKey(HibernateLongIdKey idKey) {
-        this.statisticsSettingLongId = Optional.ofNullable(idKey).map(HibernateLongIdKey::getLongId).orElse(null);
     }
 
     // -----------------------------------------------------------常规属性区-----------------------------------------------------------
@@ -66,6 +62,14 @@ public class HibernateBridgeHibernateBridgeData implements Bean {
 
     public void setStatisticsSettingLongId(Long statisticsSettingLongId) {
         this.statisticsSettingLongId = statisticsSettingLongId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getValue() {
@@ -89,6 +93,7 @@ public class HibernateBridgeHibernateBridgeData implements Bean {
         return getClass().getSimpleName() + "(" +
                 "longId = " + longId + ", " +
                 "statisticsSettingLongId = " + statisticsSettingLongId + ", " +
+                "tag = " + tag + ", " +
                 "value = " + value + ", " +
                 "happenedDate = " + happenedDate + ")";
     }

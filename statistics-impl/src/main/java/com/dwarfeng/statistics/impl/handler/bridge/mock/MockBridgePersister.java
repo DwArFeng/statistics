@@ -3,7 +3,7 @@ package com.dwarfeng.statistics.impl.handler.bridge.mock;
 import com.dwarfeng.statistics.impl.handler.bridge.FullPersister;
 import com.dwarfeng.statistics.sdk.util.ViewUtil;
 import com.dwarfeng.statistics.stack.bean.dto.*;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -122,7 +122,7 @@ public class MockBridgePersister extends FullPersister {
         }
 
         return mockLookup(
-                lookupInfo.getStatisticsSettingKey(),
+                lookupInfo.getBridgeDataKey(),
                 lookupStartTimestamp, lookupEndTimestamp,
                 lookupInfo.isIncludeStartDate(), lookupInfo.isIncludeEndDate(),
                 page, rows
@@ -130,7 +130,7 @@ public class MockBridgePersister extends FullPersister {
     }
 
     private LookupResult mockLookup(
-            LongIdKey statisticsSettingKey, long lookupStartTimestamp, long lookupEndTimestamp,
+            BridgeDataKey bridgeDataKey, long lookupStartTimestamp, long lookupEndTimestamp,
             boolean includeStartDate, boolean includeEndDate, int page, int rows
     ) throws Exception {
         long startTimestamp = System.currentTimeMillis();
@@ -166,14 +166,14 @@ public class MockBridgePersister extends FullPersister {
         // 根据发生日期的顺序生成返回的数据。
         List<BridgeData> datas = new ArrayList<>(actualLimit);
         for (int i = 0; i < actualLimit; i++) {
-            Object value = dataValueGenerator.nextValue(statisticsSettingKey);
+            Object value = dataValueGenerator.nextValue(bridgeDataKey);
             datas.add(new BridgeData(
-                    statisticsSettingKey,
+                    bridgeDataKey,
                     value,
                     new Date(dataStartTimestamp + (actualOffset + i) * lookupDataInterval)
             ));
         }
-        LookupResult lookupResult = new LookupResult(statisticsSettingKey, datas, page, totalPage, rows, dataCount);
+        LookupResult lookupResult = new LookupResult(bridgeDataKey, datas, page, totalPage, rows, dataCount);
 
         if (lookupOffsetDelay > 0) {
             anchorTimestamp += lookupOffsetDelay * actualOffset;
@@ -227,7 +227,7 @@ public class MockBridgePersister extends FullPersister {
         long offset = Long.parseLong(params[1]);
 
         return mockNativeQuery(
-                queryInfo.getStatisticsSettingKeys(),
+                queryInfo.getBridgeDataKeys(),
                 queryStartTimestamp, queryEndTimestamp,
                 queryInfo.isIncludeStartDate(), queryInfo.isIncludeEndDate(),
                 period, offset
@@ -235,8 +235,8 @@ public class MockBridgePersister extends FullPersister {
     }
 
     private QueryResult mockNativeQuery(
-            List<LongIdKey> statisticsSettingKeys, long queryStartTimestamp, long queryEndTimestamp, boolean includeStartDate,
-            boolean includeEndDate, long period, long offset
+            List<BridgeDataKey> bridgeDataKeys, long queryStartTimestamp, long queryEndTimestamp,
+            boolean includeStartDate, boolean includeEndDate, long period, long offset
     ) throws Exception {
         // 获取当前时间戳，用于模拟延迟。
         long anchorTimestamp = System.currentTimeMillis();
@@ -259,25 +259,25 @@ public class MockBridgePersister extends FullPersister {
         // 数据的第一个起始时间应该大于等于 actualQueryStartTimestamp，且减去 offset 后应该是 period 的整数倍。
         long cursor = actualQueryStartTimestamp + (actualQueryStartTimestamp - offset) % period;
         // 在 cursor 小于等于 actualQueryEndTimestamp 之前，生成数据，随后 cursor 自增 period。
-        List<List<BridgeData>> datasList = new ArrayList<>(statisticsSettingKeys.size());
-        for (int i = 0; i < statisticsSettingKeys.size(); i++) {
+        List<List<BridgeData>> datasList = new ArrayList<>(bridgeDataKeys.size());
+        for (int i = 0; i < bridgeDataKeys.size(); i++) {
             datasList.add(new ArrayList<>());
         }
         while (cursor <= actualQueryEndTimestamp) {
-            for (int i = 0; i < statisticsSettingKeys.size(); i++) {
-                LongIdKey statisticsSettingKey = statisticsSettingKeys.get(i);
-                Object value = dataValueGenerator.nextValue(statisticsSettingKey);
-                datasList.get(i).add(new BridgeData(statisticsSettingKey, value, new Date(cursor)));
+            for (int i = 0; i < bridgeDataKeys.size(); i++) {
+                BridgeDataKey bridgeDataKey = bridgeDataKeys.get(i);
+                Object value = dataValueGenerator.nextValue(bridgeDataKey);
+                datasList.get(i).add(new BridgeData(bridgeDataKey, value, new Date(cursor)));
             }
             cursor += period;
         }
-        List<QueryResult.Sequence> sequences = new ArrayList<>(statisticsSettingKeys.size());
-        for (int i = 0; i < statisticsSettingKeys.size(); i++) {
-            LongIdKey statisticsSettingKey = statisticsSettingKeys.get(i);
+        List<QueryResult.Sequence> sequences = new ArrayList<>(bridgeDataKeys.size());
+        for (int i = 0; i < bridgeDataKeys.size(); i++) {
+            BridgeDataKey bridgeDataKey = bridgeDataKeys.get(i);
             List<BridgeData> items = datasList.get(i);
             Date startDate = new Date(queryStartTimestamp);
             Date endDate = new Date(queryEndTimestamp);
-            sequences.add(new QueryResult.Sequence(statisticsSettingKey, items, startDate, endDate));
+            sequences.add(new QueryResult.Sequence(bridgeDataKey, items, startDate, endDate));
         }
 
         // 模拟延迟，延迟时间为(查询的时间范围 / 1000 + 1) * nativeQueryDelayPerSecond。

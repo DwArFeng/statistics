@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.stack.handler;
 
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.MapperException;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
 import javax.annotation.Nonnull;
 import java.util.Date;
@@ -88,7 +88,7 @@ public interface Mapper {
     final class Sequence {
 
         @Nonnull
-        private final LongIdKey statisticsSettingKey;
+        private final BridgeDataKey bridgeDataKey;
         @Nonnull
         private final List<BridgeData> datas;
         @Nonnull
@@ -97,20 +97,18 @@ public interface Mapper {
         private final Date endDate;
 
         public Sequence(
-                @Nonnull LongIdKey statisticsSettingKey,
-                @Nonnull List<BridgeData> datas,
-                @Nonnull Date startDate,
-                @Nonnull Date endDate
+                @Nonnull BridgeDataKey bridgeDataKey,
+                @Nonnull List<BridgeData> datas, @Nonnull Date startDate, @Nonnull Date endDate
         ) {
-            this.statisticsSettingKey = statisticsSettingKey;
+            this.bridgeDataKey = bridgeDataKey;
             this.datas = datas;
             this.startDate = startDate;
             this.endDate = endDate;
         }
 
         @Nonnull
-        public LongIdKey getStatisticsSettingKey() {
-            return statisticsSettingKey;
+        public BridgeDataKey getBridgeDataKey() {
+            return bridgeDataKey;
         }
 
         @Nonnull
@@ -131,7 +129,7 @@ public interface Mapper {
         @Override
         public String toString() {
             return "Sequence{" +
-                    "statisticsSettingKey=" + statisticsSettingKey +
+                    "bridgeDataKey=" + bridgeDataKey +
                     ", datas=" + datas +
                     ", startDate=" + startDate +
                     ", endDate=" + endDate +

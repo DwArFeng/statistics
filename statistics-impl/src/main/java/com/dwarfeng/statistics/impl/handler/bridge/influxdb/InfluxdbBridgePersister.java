@@ -7,10 +7,11 @@ import com.dwarfeng.statistics.impl.handler.bridge.influxdb.util.Constants;
 import com.dwarfeng.statistics.impl.handler.bridge.influxdb.util.DateUtil;
 import com.dwarfeng.statistics.sdk.util.ViewUtil;
 import com.dwarfeng.statistics.stack.bean.dto.*;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
@@ -58,10 +59,18 @@ public class InfluxdbBridgePersister extends FullPersister {
     }
 
     private Point dataToPoint(BridgeData data) {
-        Point point = new Point(Long.toString(data.getStatisticsSettingKey().getLongId()));
+        String tag = data.getKey().getTag();
+
+        // Influxdb 的 tag 不能为空，否则会导致查询问题。
+        if (StringUtils.isEmpty(tag)) {
+            throw new IllegalArgumentException("tag 不能为空");
+        }
+
+        Point point = new Point(Long.toString(data.getKey().getStatisticsSettingLongId()));
+        point.addTag(Constants.DATA_WRITE_TAG_NAME_TAG, tag);
         Map<String, Object> fieldMap = new HashMap<>();
         if (Objects.nonNull(data.getValue())) {
-            fieldMap.put(Constants.FIELD_NAME_VALUE, data.getValue());
+            fieldMap.put(Constants.DATA_WRITE_FIELD_NAME_VALUE, data.getValue());
         }
         point.addFields(fieldMap);
         point.time(DateUtil.date2Instant(data.getHappenedDate()), WritePrecision.MS);
@@ -118,7 +127,7 @@ public class InfluxdbBridgePersister extends FullPersister {
         // 展开参数。
         String preset = lookupInfo.getPreset();
         String[] params = lookupInfo.getParams();
-        LongIdKey statisticsSettingKey = lookupInfo.getStatisticsSettingKey();
+        BridgeDataKey bridgeDataKey = lookupInfo.getBridgeDataKey();
         Date startDate = ViewUtil.validStartDate(lookupInfo.getStartDate());
         Date endDate = ViewUtil.validEndDate(lookupInfo.getEndDate());
         boolean includeStartDate = lookupInfo.isIncludeStartDate();
@@ -127,13 +136,13 @@ public class InfluxdbBridgePersister extends FullPersister {
         int rows = ViewUtil.validRows(lookupInfo.getRows());
 
         // 构造查看信息。
-        String measurement = Long.toString(statisticsSettingKey.getLongId());
+        InfluxdbBridgeDataGroup dataGroup = bridgeDataKeyToInfluxdbBridgeDataGroup(bridgeDataKey);
         long startOffset = includeStartDate ? 0 : 1;
         long stopOffset = includeEndDate ? 1 : 0;
         Date rangeStart = DateUtil.offsetDate(startDate, startOffset);
         Date rangeStop = DateUtil.offsetDate(endDate, stopOffset);
         InfluxdbBridgeLookupInfo queryInfo = new InfluxdbBridgeLookupInfo(
-                measurement, rangeStart, rangeStop, page, rows, params
+                dataGroup, rangeStart, rangeStop, page, rows, params
         );
 
         // 根据 preset 分类处理。
@@ -156,19 +165,14 @@ public class InfluxdbBridgePersister extends FullPersister {
         for (int i = 0; i < rows && i < items.size(); i++) {
             datas.add(itemToData(items.get(i)));
         }
-        return new LookupResult(statisticsSettingKey, datas, page, totalPages, rows, count);
+        return new LookupResult(bridgeDataKey, datas, page, totalPages, rows, count);
     }
 
     private BridgeData itemToData(InfluxdbBridgeLookupResult.Item item) {
-        LongIdKey statisticsSettingKey = new LongIdKey(Long.parseLong(item.getMeasurement()));
-        Object value = null;
-        Map<String, Object> valueMap = item.getValueMap();
-        Object filedValue;
-        if (Objects.nonNull((filedValue = valueMap.get(Constants.FIELD_NAME_VALUE)))) {
-            value = filedValue;
-        }
+        BridgeDataKey bridgeDataKey = influxdbBridgeDataGroupToBridgeDataKey(item.getDataGroup());
+        Object value = item.getValue();
         Date happenedDate = DateUtil.instant2Date(item.getHappenedInstant());
-        return new BridgeData(statisticsSettingKey, value, happenedDate);
+        return new BridgeData(bridgeDataKey, value, happenedDate);
     }
 
     @Override
@@ -222,17 +226,13 @@ public class InfluxdbBridgePersister extends FullPersister {
         // 展开参数。
         String preset = queryInfo.getPreset();
         String[] params = queryInfo.getParams();
-        List<LongIdKey> statisticsSettingKeys = queryInfo.getStatisticsSettingKeys();
+        List<BridgeDataKey> bridgeDataKeys = queryInfo.getBridgeDataKeys();
         Date startDate = ViewUtil.validStartDate(queryInfo.getStartDate());
         Date endDate = ViewUtil.validEndDate(queryInfo.getEndDate());
         boolean includeStartDate = queryInfo.isIncludeStartDate();
         boolean includeEndDate = queryInfo.isIncludeEndDate();
 
         // 构造查看信息。
-        List<String> measurements = new ArrayList<>(statisticsSettingKeys.size());
-        for (LongIdKey statisticsSettingKey : statisticsSettingKeys) {
-            measurements.add(Long.toString(statisticsSettingKey.getLongId()));
-        }
         long startOffset = includeStartDate ? 0 : 1;
         long stopOffset = includeEndDate ? 1 : 0;
         Date rangeStart = DateUtil.offsetDate(startDate, startOffset);
@@ -244,12 +244,12 @@ public class InfluxdbBridgePersister extends FullPersister {
             case NATIVE_QUERY_PRESET_DEFAULT:
             case NATIVE_QUERY_PRESET_AGGREGATE_WINDOW:
                 queryResult = handler.defaultQuery(
-                        resolveDefaultQueryInfo(measurements, rangeStart, rangeStop, params)
+                        parseDefaultQueryInfo(bridgeDataKeys, rangeStart, rangeStop, params)
                 );
                 break;
             case NATIVE_QUERY_PRESET_CUSTOM:
                 queryResult = handler.customQuery(
-                        resolveCustomQueryInfo(measurements, rangeStart, rangeStop, params)
+                        parseCustomQueryInfo(bridgeDataKeys, rangeStart, rangeStop, params)
                 );
                 break;
             default:
@@ -260,7 +260,7 @@ public class InfluxdbBridgePersister extends FullPersister {
         List<InfluxdbBridgeQueryResult.InfluxdbBridgeSequence> influxdbBridgeSequences = queryResult.getSequences();
         List<QueryResult.Sequence> sequences = new ArrayList<>(influxdbBridgeSequences.size());
         for (InfluxdbBridgeQueryResult.InfluxdbBridgeSequence influxdbBridgeSequence : influxdbBridgeSequences) {
-            LongIdKey statisticsSettingKey = new LongIdKey(Long.parseLong(influxdbBridgeSequence.getMeasurement()));
+            BridgeDataKey bridgeDataKey = influxdbBridgeDataGroupToBridgeDataKey(influxdbBridgeSequence.getDataGroup());
             startDate = DateUtil.instant2Date(influxdbBridgeSequence.getStartInstant());
             endDate = DateUtil.instant2Date(influxdbBridgeSequence.getEndInstant());
 
@@ -269,17 +269,22 @@ public class InfluxdbBridgePersister extends FullPersister {
             List<BridgeData> items = new ArrayList<>(influxdbBridgeItems.size());
             for (InfluxdbBridgeQueryResult.InfluxdbBridgeItem influxdbBridgeItem : influxdbBridgeItems) {
                 Date happenedDate = DateUtil.instant2Date(influxdbBridgeItem.getHappenedInstant());
-                items.add(new BridgeData(statisticsSettingKey, influxdbBridgeItem.getValue(), happenedDate));
+                items.add(new BridgeData(bridgeDataKey, influxdbBridgeItem.getValue(), happenedDate));
             }
 
-            sequences.add(new QueryResult.Sequence(statisticsSettingKey, items, startDate, endDate));
+            sequences.add(new QueryResult.Sequence(bridgeDataKey, items, startDate, endDate));
         }
         return new QueryResult(sequences);
     }
 
-    private InfluxdbBridgeDefaultQueryInfo resolveDefaultQueryInfo(
-            List<String> measurements, Date rangeStart, Date rangeStop, String[] params
+    private InfluxdbBridgeDefaultQueryInfo parseDefaultQueryInfo(
+            List<BridgeDataKey> bridgeDataKeys, Date rangeStart, Date rangeStop, String[] params
     ) {
+        // 构造 dataGroups。
+        List<InfluxdbBridgeDataGroup> dataGroups = bridgeDataKeys.stream()
+                .map(this::bridgeDataKeyToInfluxdbBridgeDataGroup)
+                .collect(Collectors.toList());
+
         // params 的第 0 个元素是 aggregateWindowEvery。
         long aggregateWindowEvery = Long.parseLong(params[0]);
         // params 的第 1 个元素是 aggregateWindowOffset。
@@ -289,18 +294,33 @@ public class InfluxdbBridgePersister extends FullPersister {
 
         // 返回结果。
         return new InfluxdbBridgeDefaultQueryInfo(
-                measurements, rangeStart, rangeStop, aggregateWindowEvery, aggregateWindowOffset, aggregateWindowFn
+                dataGroups, rangeStart, rangeStop, aggregateWindowEvery, aggregateWindowOffset, aggregateWindowFn
         );
     }
 
-    private InfluxdbBridgeCustomQueryInfo resolveCustomQueryInfo(
-            List<String> measurements, Date rangeStart, Date rangeStop, String[] params
+    private InfluxdbBridgeCustomQueryInfo parseCustomQueryInfo(
+            List<BridgeDataKey> bridgeDataKeys, Date rangeStart, Date rangeStop, String[] params
     ) {
+        // 构造 dataGroups。
+        List<InfluxdbBridgeDataGroup> dataGroups = bridgeDataKeys.stream()
+                .map(this::bridgeDataKeyToInfluxdbBridgeDataGroup)
+                .collect(Collectors.toList());
+
         // params 的第 0 个元素是 fluxFragment。
         String fluxFragment = params[0];
 
         // 返回结果。
-        return new InfluxdbBridgeCustomQueryInfo(measurements, rangeStart, rangeStop, fluxFragment);
+        return new InfluxdbBridgeCustomQueryInfo(dataGroups, rangeStart, rangeStop, fluxFragment);
+    }
+
+    private InfluxdbBridgeDataGroup bridgeDataKeyToInfluxdbBridgeDataGroup(BridgeDataKey bridgeDataKey) {
+        return new InfluxdbBridgeDataGroup(
+                Long.toString(bridgeDataKey.getStatisticsSettingLongId()), bridgeDataKey.getTag()
+        );
+    }
+
+    private BridgeDataKey influxdbBridgeDataGroupToBridgeDataKey(InfluxdbBridgeDataGroup dataGroup) {
+        return new BridgeDataKey(Long.parseLong(dataGroup.getMeasurement()), dataGroup.getTag());
     }
 
     @Override

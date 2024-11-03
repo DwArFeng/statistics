@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class InfluxdbBridgeDefaultQueryInfo implements Dto {
 
-    private static final long serialVersionUID = 7536593546171703366L;
+    private static final long serialVersionUID = 500213167959435195L;
 
-    private List<String> measurements;
+    private List<InfluxdbBridgeDataGroup> dataGroups;
     private Date rangeStart;
     private Date rangeStop;
     private long aggregateWindowEvery;
@@ -26,10 +26,10 @@ public class InfluxdbBridgeDefaultQueryInfo implements Dto {
     }
 
     public InfluxdbBridgeDefaultQueryInfo(
-            List<String> measurements, Date rangeStart, Date rangeStop, long aggregateWindowEvery,
+            List<InfluxdbBridgeDataGroup> dataGroups, Date rangeStart, Date rangeStop, long aggregateWindowEvery,
             long aggregateWindowOffset, String aggregateWindowFn
     ) {
-        this.measurements = measurements;
+        this.dataGroups = dataGroups;
         this.rangeStart = rangeStart;
         this.rangeStop = rangeStop;
         this.aggregateWindowEvery = aggregateWindowEvery;
@@ -37,12 +37,12 @@ public class InfluxdbBridgeDefaultQueryInfo implements Dto {
         this.aggregateWindowFn = aggregateWindowFn;
     }
 
-    public List<String> getMeasurements() {
-        return measurements;
+    public List<InfluxdbBridgeDataGroup> getDataGroups() {
+        return dataGroups;
     }
 
-    public void setMeasurements(List<String> measurements) {
-        this.measurements = measurements;
+    public void setDataGroups(List<InfluxdbBridgeDataGroup> dataGroups) {
+        this.dataGroups = dataGroups;
     }
 
     public Date getRangeStart() {
@@ -88,7 +88,7 @@ public class InfluxdbBridgeDefaultQueryInfo implements Dto {
     @Override
     public String toString() {
         return "InfluxdbBridgeDefaultQueryInfo{" +
-                "measurements=" + measurements +
+                "dataGroups=" + dataGroups +
                 ", rangeStart=" + rangeStart +
                 ", rangeStop=" + rangeStop +
                 ", aggregateWindowEvery=" + aggregateWindowEvery +

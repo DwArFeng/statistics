@@ -3,7 +3,9 @@ package com.dwarfeng.statistics.impl.handler.bridge.redis.configuration;
 import com.dwarfeng.sfds.api.integration.subgrade.SnowflakeLongIdKeyGenerator;
 import com.dwarfeng.sfds.stack.service.GenerateService;
 import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeData;
+import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeDataKey;
 import com.dwarfeng.statistics.impl.handler.bridge.redis.dao.RedisBridgeBridgeDataDao;
+import com.dwarfeng.subgrade.impl.generation.ExceptionKeyGenerator;
 import com.dwarfeng.subgrade.impl.service.DaoOnlyBatchCrudService;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceExceptionMapper;
@@ -37,12 +39,13 @@ public class RedisBridgeServiceConfiguration {
     }
 
     @Bean
-    public DaoOnlyBatchCrudService<LongIdKey, RedisBridgeBridgeData> redisBridgeBridgeDataDaoOnlyBatchCrudService() {
+    public DaoOnlyBatchCrudService<RedisBridgeBridgeDataKey, RedisBridgeBridgeData>
+    redisBridgeBridgeDataDaoOnlyBatchCrudService() {
         return new DaoOnlyBatchCrudService<>(
                 sem,
                 LogLevel.WARN,
                 redisBridgeBridgeDataDao,
-                snowflakeLongIdKeyGenerator()
+                new ExceptionKeyGenerator<>()
         );
     }
 }

@@ -1,10 +1,10 @@
 package com.dwarfeng.statistics.impl.handler.mapper;
 
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.MapperException;
 import com.dwarfeng.statistics.stack.exception.MapperMakeException;
 import com.dwarfeng.statistics.stack.handler.Mapper;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -41,7 +41,7 @@ public class MergeMapperRegistry extends AbstractMapperRegistry {
 
     @Override
     public String provideDescription() {
-        return "将 Sequence.getPointKey() 相同的序列进行合并。\n" +
+        return "将 Sequence.getBridgeDataKey() 相同的序列进行合并。\n" +
                 "合并后的序列起始时间与结束时间分别为合并序列中最早的起始时间与最晚的结束时间。";
     }
 
@@ -73,17 +73,17 @@ public class MergeMapperRegistry extends AbstractMapperRegistry {
         @Override
         protected List<Sequence> doMap(MapParam mapParam, List<Sequence> sequences) {
             // 构造合并信息映射。
-            Map<LongIdKey, MergeInfo> mergeInfoMap = new HashMap<>();
+            Map<BridgeDataKey, MergeInfo> mergeInfoMap = new HashMap<>();
 
             // 遍历序列列表，将序列中的数据条目添加到合并信息映射中。
             for (Sequence sequence : sequences) {
-                LongIdKey statisticsSettingKey = sequence.getStatisticsSettingKey();
+                BridgeDataKey bridgeDataKey = sequence.getBridgeDataKey();
                 Date startDate = sequence.getStartDate();
                 Date endDate = sequence.getEndDate();
                 List<BridgeData> datas = sequence.getDatas();
 
-                if (mergeInfoMap.containsKey(statisticsSettingKey)) {
-                    MergeInfo mergeInfo = mergeInfoMap.get(statisticsSettingKey);
+                if (mergeInfoMap.containsKey(bridgeDataKey)) {
+                    MergeInfo mergeInfo = mergeInfoMap.get(bridgeDataKey);
                     if (mergeInfo.getStartDate().compareTo(startDate) > 0) {
                         mergeInfo.setStartDate(startDate);
                     }
@@ -92,13 +92,13 @@ public class MergeMapperRegistry extends AbstractMapperRegistry {
                     }
                     mergeInfo.getDatas().addAll(datas);
                 } else {
-                    mergeInfoMap.put(statisticsSettingKey, new MergeInfo(statisticsSettingKey, startDate, endDate, datas));
+                    mergeInfoMap.put(bridgeDataKey, new MergeInfo(bridgeDataKey, startDate, endDate, datas));
                 }
             }
 
             // 根据合并信息映射构造序列列表，并返回。
             return mergeInfoMap.values().stream().map(mergeInfo -> new Sequence(
-                    mergeInfo.getPointKey(),
+                    mergeInfo.getBridgeDataKey(),
                     mergeInfo.getDatas(),
                     mergeInfo.getStartDate(),
                     mergeInfo.getEndDate()
@@ -113,24 +113,24 @@ public class MergeMapperRegistry extends AbstractMapperRegistry {
 
     private static final class MergeInfo {
 
-        private LongIdKey pointKey;
+        private BridgeDataKey bridgeDataKey;
         private Date startDate;
         private Date endDate;
         private List<BridgeData> datas;
 
-        public MergeInfo(LongIdKey pointKey, Date startDate, Date endDate, List<BridgeData> datas) {
-            this.pointKey = pointKey;
+        public MergeInfo(BridgeDataKey bridgeDataKey, Date startDate, Date endDate, List<BridgeData> datas) {
+            this.bridgeDataKey = bridgeDataKey;
             this.startDate = startDate;
             this.endDate = endDate;
             this.datas = datas;
         }
 
-        public LongIdKey getPointKey() {
-            return pointKey;
+        public BridgeDataKey getBridgeDataKey() {
+            return bridgeDataKey;
         }
 
-        public void setPointKey(LongIdKey pointKey) {
-            this.pointKey = pointKey;
+        public void setBridgeDataKey(BridgeDataKey bridgeDataKey) {
+            this.bridgeDataKey = bridgeDataKey;
         }
 
         public Date getStartDate() {
@@ -160,7 +160,7 @@ public class MergeMapperRegistry extends AbstractMapperRegistry {
         @Override
         public String toString() {
             return "MergeInfo{" +
-                    "pointKey=" + pointKey +
+                    "bridgeDataKey=" + bridgeDataKey +
                     ", startDate=" + startDate +
                     ", endDate=" + endDate +
                     ", datas=" + datas +

@@ -91,7 +91,7 @@ public class ToBooleanMapperRegistry extends AbstractMapperRegistry {
 
             // 返回映射后的序列。
             return new Sequence(
-                    sequence.getStatisticsSettingKey(), datas, sequence.getStartDate(), sequence.getEndDate()
+                    sequence.getBridgeDataKey(), datas, sequence.getStartDate(), sequence.getEndDate()
             );
         }
 
@@ -146,7 +146,7 @@ public class ToBooleanMapperRegistry extends AbstractMapperRegistry {
                 itemValue = (Boolean) data.getValue();
             }
 
-            return new BridgeData(data.getStatisticsSettingKey(), itemValue, data.getHappenedDate());
+            return new BridgeData(data.getKey(), itemValue, data.getHappenedDate());
         }
 
         @Override

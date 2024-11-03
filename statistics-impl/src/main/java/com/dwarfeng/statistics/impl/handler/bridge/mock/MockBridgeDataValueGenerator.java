@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.impl.handler.bridge.mock;
 
 import com.alibaba.fastjson.JSON;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class MockBridgeDataValueGenerator {
     @Value("${bridge.mock.data_config}")
     private String dataConfig;
 
-    private Map<LongIdKey, MockBridgeDataConfigItem> dataConfigItemMap = null;
+    private Map<BridgeDataKey, MockBridgeDataConfigItem> dataConfigItemMap = null;
     private Map<String, Method> methodMap = null;
 
     public MockBridgeDataValueGenerator(MockBridgeRandomGenerator randomGenerator) {
@@ -39,9 +39,10 @@ public class MockBridgeDataValueGenerator {
     public void init() {
         // 将 dataConfig 转换为 RealtimeMockSourceDataConfigItem 的列表。
         List<MockBridgeDataConfigItem> dataConfigItems = JSON.parseArray(dataConfig, MockBridgeDataConfigItem.class);
-        dataConfigItemMap = dataConfigItems.stream().collect(
-                Collectors.toMap((item) -> new LongIdKey(item.getStatisticsSettingId()), Function.identity())
-        );
+        dataConfigItemMap = dataConfigItems.stream().collect(Collectors.toMap(
+                (item) -> new BridgeDataKey(item.getStatisticsSettingLongId(), item.getTag()),
+                Function.identity()
+        ));
         // 构造 methodMap。
         methodMap = new HashMap<>();
         // 扫描 MockBridgeRandomGenerator 的所有带有 RequiredStatisticsSettingType 注解的方法，将其放入 methodMap。
@@ -56,11 +57,11 @@ public class MockBridgeDataValueGenerator {
         }
     }
 
-    public Object nextValue(LongIdKey statisticsSettingKey) throws Exception {
-        if (!dataConfigItemMap.containsKey(statisticsSettingKey)) {
-            throw new HandlerException("未知的统计设置键: " + statisticsSettingKey);
+    public Object nextValue(BridgeDataKey bridgeDataKey) throws Exception {
+        if (!dataConfigItemMap.containsKey(bridgeDataKey)) {
+            throw new HandlerException("未知的统计设置键: " + bridgeDataKey);
         }
-        MockBridgeDataConfigItem dataConfigItem = dataConfigItemMap.get(statisticsSettingKey);
+        MockBridgeDataConfigItem dataConfigItem = dataConfigItemMap.get(bridgeDataKey);
         Method method = methodMap.get(dataConfigItem.getStatisticsSettingType());
         if (method == null) {
             throw new HandlerException("未知的统计设置键类型: " + dataConfigItem.getStatisticsSettingType());

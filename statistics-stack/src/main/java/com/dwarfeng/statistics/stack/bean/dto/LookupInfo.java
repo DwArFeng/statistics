@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.stack.bean.dto;
 
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -21,11 +21,16 @@ import java.util.Date;
  */
 public class LookupInfo implements Dto {
 
-    private static final long serialVersionUID = 2312866457369082844L;
+    private static final long serialVersionUID = -6043573280384973464L;
 
     private String preset;
     private String[] params;
-    private LongIdKey statisticsSettingKey;
+
+    /**
+     * @since 1.1.0
+     */
+    private BridgeDataKey bridgeDataKey;
+
     private Date startDate;
     private Date endDate;
     private boolean includeStartDate;
@@ -37,12 +42,12 @@ public class LookupInfo implements Dto {
     }
 
     public LookupInfo(
-            String preset, String[] params, LongIdKey statisticsSettingKey, Date startDate, Date endDate,
+            String preset, String[] params, BridgeDataKey bridgeDataKey, Date startDate, Date endDate,
             boolean includeStartDate, boolean includeEndDate, Integer page, Integer rows
     ) {
         this.preset = preset;
         this.params = params;
-        this.statisticsSettingKey = statisticsSettingKey;
+        this.bridgeDataKey = bridgeDataKey;
         this.startDate = startDate;
         this.endDate = endDate;
         this.includeStartDate = includeStartDate;
@@ -67,12 +72,12 @@ public class LookupInfo implements Dto {
         this.params = params;
     }
 
-    public LongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public BridgeDataKey getBridgeDataKey() {
+        return bridgeDataKey;
     }
 
-    public void setStatisticsSettingKey(LongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setBridgeDataKey(BridgeDataKey bridgeDataKey) {
+        this.bridgeDataKey = bridgeDataKey;
     }
 
     public Date getStartDate() {
@@ -128,7 +133,7 @@ public class LookupInfo implements Dto {
         return "LookupInfo{" +
                 "preset='" + preset + '\'' +
                 ", params=" + Arrays.toString(params) +
-                ", statisticsSettingKey=" + statisticsSettingKey +
+                ", bridgeDataKey=" + bridgeDataKey +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", includeStartDate=" + includeStartDate +

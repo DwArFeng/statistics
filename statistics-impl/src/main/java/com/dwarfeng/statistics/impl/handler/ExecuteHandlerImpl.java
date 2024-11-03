@@ -3,6 +3,7 @@ package com.dwarfeng.statistics.impl.handler;
 import com.dwarfeng.statistics.sdk.util.Constants;
 import com.dwarfeng.statistics.stack.bean.dto.*;
 import com.dwarfeng.statistics.stack.bean.entity.Task;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.ProviderDataExceededException;
 import com.dwarfeng.statistics.stack.handler.*;
 import com.dwarfeng.statistics.stack.service.TaskMaintainService;
@@ -189,10 +190,23 @@ public class ExecuteHandlerImpl implements ExecuteHandler {
             providerDatas = filterProviderDatas(
                     statisticsSettingKey, taskKey, executeInfo.getFilterChainKeys(), filterExecutorMap, providerDatas
             );
+
             // 将提供器数据转换为桥接器数据，并按发生日期排序。
-            bridgeDatas = providerDatas.stream().map(
-                    pd -> new BridgeData(statisticsSettingKey, pd.getValue(), pd.getHappenedDate())
-            ).sorted(Comparator.comparing(BridgeData::getHappenedDate)).collect(Collectors.toList());
+            bridgeDatas = providerDatas.stream().map(pd -> new BridgeData(
+                    new BridgeDataKey(statisticsSettingKey.getLongId(), pd.getTag()),
+                    pd.getValue(), pd.getHappenedDate()
+            )).sorted(Comparator.comparing(BridgeData::getHappenedDate)).collect(Collectors.toList());
+
+            // 计算不同的 BridgeDataKey 对应的最新数据。
+            Map<BridgeDataKey, BridgeData> latestBridgeDataMap = new HashMap<>();
+            // 由于 bridgeDatas 已经按照 happenedDate 正序排序，因此倒序遍历即可。
+            for (int i = bridgeDatas.size() - 1; i >= 0; i--) {
+                BridgeData bridgeData = bridgeDatas.get(i);
+                BridgeDataKey bridgeDataKey = bridgeData.getKey();
+                if (!latestBridgeDataMap.containsKey(bridgeDataKey)) {
+                    latestBridgeDataMap.put(bridgeDataKey, bridgeData);
+                }
+            }
 
             // 记录日志。
             LOGGER.debug("任务 {} 过滤器执行完成, 共获取桥接器数据 {} 条", taskKey, bridgeDatas.size());
@@ -214,8 +228,7 @@ public class ExecuteHandlerImpl implements ExecuteHandler {
             // 如果 bridgeDatas 不为空，则处理数据。
             if (!bridgeDatas.isEmpty()) {
                 // 取最新的数据，使用保持处理器更新数据。
-                BridgeData latestBridgeData = bridgeDatas.get(bridgeDatas.size() - 1);
-                keepHandler.update(latestBridgeData);
+                keepHandler.update(new ArrayList<>(latestBridgeDataMap.values()));
                 // 使用持久化处理器持久化数据。
                 persistHandler.record(bridgeDatas);
             }

@@ -4,7 +4,6 @@ import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Influxdb 桥接器查询结果。
@@ -14,29 +13,27 @@ import java.util.Map;
  */
 public class InfluxdbBridgeLookupResult implements Dto {
 
-    private static final long serialVersionUID = -5703434419075168238L;
+    private static final long serialVersionUID = 862018297816424402L;
 
-    private String measurement;
-
+    private InfluxdbBridgeDataGroup dataGroup;
     private List<Item> items;
-
     private long count;
 
     public InfluxdbBridgeLookupResult() {
     }
 
-    public InfluxdbBridgeLookupResult(String measurement, List<Item> items, long count) {
-        this.measurement = measurement;
+    public InfluxdbBridgeLookupResult(InfluxdbBridgeDataGroup dataGroup, List<Item> items, long count) {
+        this.dataGroup = dataGroup;
         this.items = items;
         this.count = count;
     }
 
-    public String getMeasurement() {
-        return measurement;
+    public InfluxdbBridgeDataGroup getDataGroup() {
+        return dataGroup;
     }
 
-    public void setMeasurement(String measurement) {
-        this.measurement = measurement;
+    public void setDataGroup(InfluxdbBridgeDataGroup dataGroup) {
+        this.dataGroup = dataGroup;
     }
 
     public List<Item> getItems() {
@@ -55,44 +52,35 @@ public class InfluxdbBridgeLookupResult implements Dto {
         this.count = count;
     }
 
-    @Override
-    public String toString() {
-        return "InfluxdbBridgeLookupResult{" +
-                "measurement='" + measurement + '\'' +
-                ", items=" + items +
-                ", count=" + count +
-                '}';
-    }
-
     public static class Item {
 
-        private String measurement;
-        private Map<String, Object> valueMap;
+        private InfluxdbBridgeDataGroup dataGroup;
+        private Object value;
         private Instant happenedInstant;
 
         public Item() {
         }
 
-        public Item(String measurement, Map<String, Object> valueMap, Instant happenedInstant) {
-            this.measurement = measurement;
-            this.valueMap = valueMap;
+        public Item(InfluxdbBridgeDataGroup dataGroup, Object value, Instant happenedInstant) {
+            this.dataGroup = dataGroup;
+            this.value = value;
             this.happenedInstant = happenedInstant;
         }
 
-        public String getMeasurement() {
-            return measurement;
+        public InfluxdbBridgeDataGroup getDataGroup() {
+            return dataGroup;
         }
 
-        public void setMeasurement(String measurement) {
-            this.measurement = measurement;
+        public void setDataGroup(InfluxdbBridgeDataGroup dataGroup) {
+            this.dataGroup = dataGroup;
         }
 
-        public Map<String, Object> getValueMap() {
-            return valueMap;
+        public Object getValue() {
+            return value;
         }
 
-        public void setValueMap(Map<String, Object> valueMap) {
-            this.valueMap = valueMap;
+        public void setValue(Object value) {
+            this.value = value;
         }
 
         public Instant getHappenedInstant() {
@@ -106,8 +94,8 @@ public class InfluxdbBridgeLookupResult implements Dto {
         @Override
         public String toString() {
             return "Item{" +
-                    "measurement='" + measurement + '\'' +
-                    ", valueMap=" + valueMap +
+                    "dataGroup=" + dataGroup +
+                    ", value=" + value +
                     ", happenedInstant=" + happenedInstant +
                     '}';
         }

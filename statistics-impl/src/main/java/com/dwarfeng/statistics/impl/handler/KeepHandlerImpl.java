@@ -1,10 +1,10 @@
 package com.dwarfeng.statistics.impl.handler;
 
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.LatestException;
 import com.dwarfeng.statistics.stack.exception.UpdateException;
 import com.dwarfeng.statistics.stack.handler.KeepHandler;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -60,24 +60,24 @@ public class KeepHandlerImpl implements KeepHandler {
     }
 
     @Override
-    public BridgeData latest(LongIdKey statisticsSettingKey) throws HandlerException {
+    public BridgeData latest(BridgeDataKey bridgeDataKey) throws HandlerException {
         try {
-            return keeper.latest(statisticsSettingKey);
+            return keeper.latest(bridgeDataKey);
         } catch (LatestException e) {
             throw e;
         } catch (Exception e) {
-            throw new LatestException(e, Collections.singletonList(statisticsSettingKey));
+            throw new LatestException(e, Collections.singletonList(bridgeDataKey));
         }
     }
 
     @Override
-    public List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws HandlerException {
+    public List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws HandlerException {
         try {
-            return keeper.latest(statisticsSettingKeys);
+            return keeper.latest(bridgeDataKeys);
         } catch (LatestException e) {
             throw e;
         } catch (Exception e) {
-            throw new LatestException(e, statisticsSettingKeys);
+            throw new LatestException(e, bridgeDataKeys);
         }
     }
 

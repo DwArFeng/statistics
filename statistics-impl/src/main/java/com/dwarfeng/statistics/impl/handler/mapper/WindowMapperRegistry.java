@@ -148,7 +148,7 @@ public class WindowMapperRegistry extends AbstractMapperRegistry {
                 }
 
                 // 将当前窗口的数据条目添加到结果中。
-                result.add(new Sequence(sequence.getStatisticsSettingKey(), subItems, new Date(start), new Date(end)));
+                result.add(new Sequence(sequence.getBridgeDataKey(), subItems, new Date(start), new Date(end)));
 
                 // 将 timestamp 增加 duration，进入下一个窗口。
                 timestamp += duration;
@@ -174,7 +174,7 @@ public class WindowMapperRegistry extends AbstractMapperRegistry {
     public static class Config implements Bean {
 
         private static final long serialVersionUID = -1009603562955825840L;
-        
+
         @JSONField(name = "duration", ordinal = 1)
         private long duration;
 

@@ -11,10 +11,10 @@ import com.dwarfeng.springtelqos.stack.exception.TelqosException;
 import com.dwarfeng.statistics.sdk.bean.dto.WebInputLookupInfo;
 import com.dwarfeng.statistics.sdk.bean.dto.WebInputNativeQueryInfo;
 import com.dwarfeng.statistics.sdk.bean.dto.WebInputQueryInfo;
+import com.dwarfeng.statistics.sdk.bean.key.WebInputBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.*;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.service.ViewQosService;
-import com.dwarfeng.subgrade.sdk.bean.key.WebInputLongIdKey;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.lang3.tuple.Pair;
@@ -132,15 +132,15 @@ public class ViewCommand extends CliCommand {
 
     @SuppressWarnings("DuplicatedCode")
     private void handleLatest(Context context, CommandLine cmd) throws Exception {
-        List<LongIdKey> statisticsSettingKeys;
+        List<BridgeDataKey> bridgeDataKeys;
 
-        // 如果有 -json 选项，则从选项中获取 JSON，转化为 statisticsSettingKeys。
+        // 如果有 -json 选项，则从选项中获取 JSON，转化为 bridgeDataKeys。
         if (cmd.hasOption(COMMAND_OPTION_JSON)) {
             String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
-            statisticsSettingKeys = JSON.parseArray(json, WebInputLongIdKey.class).stream()
-                    .map(WebInputLongIdKey::toStackBean).collect(Collectors.toList());
+            bridgeDataKeys = JSON.parseArray(json, WebInputBridgeDataKey.class).stream()
+                    .map(WebInputBridgeDataKey::toStackBean).collect(Collectors.toList());
         }
-        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 statisticsSettingKeys。
+        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 bridgeDataKeys。
         else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
             File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
             try (
@@ -150,8 +150,8 @@ public class ViewCommand extends CliCommand {
                 IOUtil.trans(in, out, 4096);
                 out.flush();
                 String json = out.toString();
-                statisticsSettingKeys = JSON.parseArray(json, WebInputLongIdKey.class).stream()
-                        .map(WebInputLongIdKey::toStackBean).collect(Collectors.toList());
+                bridgeDataKeys = JSON.parseArray(json, WebInputBridgeDataKey.class).stream()
+                        .map(WebInputBridgeDataKey::toStackBean).collect(Collectors.toList());
             }
         } else {
             // 暂时未实现。
@@ -161,7 +161,7 @@ public class ViewCommand extends CliCommand {
         // 查询数据，并计时。
         TimeMeasurer tm = new TimeMeasurer();
         tm.start();
-        List<BridgeData> bridgeDatas = viewQosService.latest(statisticsSettingKeys);
+        List<BridgeData> bridgeDatas = viewQosService.latest(bridgeDataKeys);
         tm.stop();
 
         // 输出执行时间。
@@ -313,8 +313,12 @@ public class ViewCommand extends CliCommand {
             context.sendMessage("  null");
         } else {
             context.sendMessage(String.format(
-                    "  statisticsSettingId: %s",
-                    bridgeData.getStatisticsSettingKey().getLongId()
+                    "  statisticsSettingLongId: %s",
+                    bridgeData.getKey().getStatisticsSettingLongId()
+            ));
+            context.sendMessage(String.format(
+                    "  tag: %s",
+                    bridgeData.getKey().getTag()
             ));
             context.sendMessage(String.format(
                     "  valueClass: %s",
@@ -366,11 +370,14 @@ public class ViewCommand extends CliCommand {
 
             context.sendMessage("");
             context.sendMessage("序列信息: ");
-            String sequenceFormat = "statisticsSettingId: %1$s    " +
-                    "startDate: %2$tY-%2$tm-%2$td %2$tH:%2$tM:%2$tS.%2$tL    " +
-                    "endDate: %3$tY-%3$tm-%3$td %3$tH:%3$tM:%3$tS.%3$tL";
+            String sequenceFormat = "statisticsSettingLongId: %1$s    " +
+                    "tag: %2$s    " +
+                    "startDate: %3$tY-%3$tm-%3$td %3$tH:%3$tM:%3$tS.%3$tL    " +
+                    "endDate: %4$tY-%4$tm-%4$td %4$tH:%4$tM:%4$tS.%4$tL";
             context.sendMessage(String.format(
-                    sequenceFormat, sequence.getStatisticsSettingKey().getLongId(),
+                    sequenceFormat,
+                    sequence.getBridgeDataKey().getStatisticsSettingLongId(),
+                    sequence.getBridgeDataKey().getTag(),
                     sequence.getStartDate(),
                     sequence.getEndDate()
             ));

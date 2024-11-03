@@ -12,7 +12,17 @@ import java.util.Date;
  */
 public class ProviderData implements Dto {
 
-    private static final long serialVersionUID = -7562649311250980791L;
+    private static final long serialVersionUID = 5389525436981426176L;
+
+    /**
+     * 统计数据的标签。
+     *
+     * <p>
+     * 该值不能为 <code>null</code>。
+     *
+     * @since 1.1.0
+     */
+    private String tag;
 
     private Object value;
     private Date happenedDate;
@@ -20,9 +30,18 @@ public class ProviderData implements Dto {
     public ProviderData() {
     }
 
-    public ProviderData(Object value, Date happenedDate) {
+    public ProviderData(String tag, Object value, Date happenedDate) {
+        this.tag = tag;
         this.value = value;
         this.happenedDate = happenedDate;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public Object getValue() {
@@ -44,7 +63,8 @@ public class ProviderData implements Dto {
     @Override
     public String toString() {
         return "ProviderData{" +
-                "value=" + value +
+                "tag='" + tag + '\'' +
+                ", value=" + value +
                 ", happenedDate=" + happenedDate +
                 '}';
     }

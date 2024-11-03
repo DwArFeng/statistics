@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.FastJsonBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.util.Date;
@@ -16,22 +16,22 @@ import java.util.Objects;
  */
 public class FastJsonBridgeData implements Dto {
 
-    private static final long serialVersionUID = -8789023333673672621L;
+    private static final long serialVersionUID = 3176404747682609827L;
 
     public static FastJsonBridgeData of(BridgeData bridgeData) {
         if (Objects.isNull(bridgeData)) {
             return null;
         } else {
             return new FastJsonBridgeData(
-                    FastJsonLongIdKey.of(bridgeData.getStatisticsSettingKey()),
+                    FastJsonBridgeDataKey.of(bridgeData.getKey()),
                     bridgeData.getValue(),
                     bridgeData.getHappenedDate()
             );
         }
     }
 
-    @JSONField(name = "statistics_setting_key", ordinal = 1)
-    private FastJsonLongIdKey statisticsSettingKey;
+    @JSONField(name = "key", ordinal = 1)
+    private FastJsonBridgeDataKey key;
 
     @JSONField(name = "value", ordinal = 2)
     private Object value;
@@ -42,18 +42,18 @@ public class FastJsonBridgeData implements Dto {
     public FastJsonBridgeData() {
     }
 
-    public FastJsonBridgeData(FastJsonLongIdKey statisticsSettingKey, Object value, Date happenedDate) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public FastJsonBridgeData(FastJsonBridgeDataKey key, Object value, Date happenedDate) {
+        this.key = key;
         this.value = value;
         this.happenedDate = happenedDate;
     }
 
-    public FastJsonLongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public FastJsonBridgeDataKey getKey() {
+        return key;
     }
 
-    public void setStatisticsSettingKey(FastJsonLongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setKey(FastJsonBridgeDataKey key) {
+        this.key = key;
     }
 
     public Object getValue() {
@@ -75,7 +75,7 @@ public class FastJsonBridgeData implements Dto {
     @Override
     public String toString() {
         return "FastJsonBridgeData{" +
-                "statisticsSettingKey=" + statisticsSettingKey +
+                "key=" + key +
                 ", value=" + value +
                 ", happenedDate=" + happenedDate +
                 '}';

@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.stack.bean.dto;
 
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
 import java.util.List;
 
@@ -19,9 +19,15 @@ import java.util.List;
  */
 public class LookupResult implements Dto {
 
-    private static final long serialVersionUID = -5363946465028798306L;
+    private static final long serialVersionUID = -8881363046278987198L;
 
-    private LongIdKey statisticsSettingKey;
+    /**
+     * 统计设置的主键。
+     *
+     * @since 1.1.0
+     */
+    private BridgeDataKey bridgeDataKey;
+
     private List<BridgeData> bridgeDatas;
 
     /**
@@ -52,10 +58,10 @@ public class LookupResult implements Dto {
     }
 
     public LookupResult(
-            LongIdKey statisticsSettingKey, List<BridgeData> bridgeDatas, int currentPage, int totalPages, int rows,
+            BridgeDataKey bridgeDataKey, List<BridgeData> bridgeDatas, int currentPage, int totalPages, int rows,
             long count
     ) {
-        this.statisticsSettingKey = statisticsSettingKey;
+        this.bridgeDataKey = bridgeDataKey;
         this.bridgeDatas = bridgeDatas;
         this.currentPage = currentPage;
         this.totalPages = totalPages;
@@ -63,12 +69,12 @@ public class LookupResult implements Dto {
         this.count = count;
     }
 
-    public LongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public BridgeDataKey getBridgeDataKey() {
+        return bridgeDataKey;
     }
 
-    public void setStatisticsSettingKey(LongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setBridgeDataKey(BridgeDataKey bridgeDataKey) {
+        this.bridgeDataKey = bridgeDataKey;
     }
 
     public List<BridgeData> getBridgeDatas() {
@@ -114,7 +120,7 @@ public class LookupResult implements Dto {
     @Override
     public String toString() {
         return "LookupResult{" +
-                "statisticsSettingKey=" + statisticsSettingKey +
+                "bridgeDataKey=" + bridgeDataKey +
                 ", bridgeDatas=" + bridgeDatas +
                 ", currentPage=" + currentPage +
                 ", totalPages=" + totalPages +

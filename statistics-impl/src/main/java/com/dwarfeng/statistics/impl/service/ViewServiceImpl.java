@@ -1,10 +1,10 @@
 package com.dwarfeng.statistics.impl.service;
 
 import com.dwarfeng.statistics.stack.bean.dto.*;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.handler.ViewHandler;
 import com.dwarfeng.statistics.stack.service.ViewService;
 import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionHelper;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import com.dwarfeng.subgrade.stack.exception.ServiceExceptionMapper;
 import com.dwarfeng.subgrade.stack.log.LogLevel;
@@ -26,20 +26,20 @@ public class ViewServiceImpl implements ViewService {
     }
 
     @Override
-    public BridgeData latest(LongIdKey statisticsSettingKey) throws ServiceException {
+    public BridgeData latest(BridgeDataKey bridgeDataKey) throws ServiceException {
         try {
-            return viewHandler.latest(statisticsSettingKey);
+            return viewHandler.latest(bridgeDataKey);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logParse("查询统计设置的最新数据时发生异常", LogLevel.WARN, e, sem);
+            throw ServiceExceptionHelper.logParse("查询最新数据时发生异常", LogLevel.WARN, e, sem);
         }
     }
 
     @Override
-    public List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws ServiceException {
+    public List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws ServiceException {
         try {
-            return viewHandler.latest(statisticsSettingKeys);
+            return viewHandler.latest(bridgeDataKeys);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logParse("查询统计设置的最新数据时发生异常", LogLevel.WARN, e, sem);
+            throw ServiceExceptionHelper.logParse("查询最新数据时发生异常", LogLevel.WARN, e, sem);
         }
     }
 
@@ -98,21 +98,21 @@ public class ViewServiceImpl implements ViewService {
     }
 
     @Override
-    public CompletableFuture<BridgeData> latestAsync(LongIdKey statisticsSettingKey) throws ServiceException {
+    public CompletableFuture<BridgeData> latestAsync(BridgeDataKey bridgeDataKey) throws ServiceException {
         try {
-            return viewHandler.latestAsync(statisticsSettingKey);
+            return viewHandler.latestAsync(bridgeDataKey);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logParse("查询统计设置的最新数据时发生异常", LogLevel.WARN, e, sem);
+            throw ServiceExceptionHelper.logParse("查询最新数据时发生异常", LogLevel.WARN, e, sem);
         }
     }
 
     @Override
-    public CompletableFuture<List<BridgeData>> latestAsync(List<LongIdKey> statisticsSettingKeys)
+    public CompletableFuture<List<BridgeData>> latestAsync(List<BridgeDataKey> bridgeDataKeys)
             throws ServiceException {
         try {
-            return viewHandler.latestAsync(statisticsSettingKeys);
+            return viewHandler.latestAsync(bridgeDataKeys);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logParse("查询统计设置的最新数据时发生异常", LogLevel.WARN, e, sem);
+            throw ServiceExceptionHelper.logParse("查询最新数据时发生异常", LogLevel.WARN, e, sem);
         }
     }
 

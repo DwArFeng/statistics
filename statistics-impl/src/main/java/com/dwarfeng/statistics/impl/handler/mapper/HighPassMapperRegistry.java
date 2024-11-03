@@ -97,7 +97,7 @@ public class HighPassMapperRegistry extends AbstractMapperRegistry {
 
             // 返回结果。
             return new Sequence(
-                    sequence.getStatisticsSettingKey(), datas, sequence.getStartDate(), sequence.getEndDate()
+                    sequence.getBridgeDataKey(), datas, sequence.getStartDate(), sequence.getEndDate()
             );
         }
 

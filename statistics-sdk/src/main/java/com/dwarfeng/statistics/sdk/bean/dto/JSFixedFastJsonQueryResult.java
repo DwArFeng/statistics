@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.JSFixedFastJsonBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.QueryResult;
-import com.dwarfeng.subgrade.sdk.bean.key.JSFixedFastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.util.Date;
@@ -66,14 +66,14 @@ public class JSFixedFastJsonQueryResult implements Dto {
      */
     public static class JSFixedFastJsonSequence implements Dto {
 
-        private static final long serialVersionUID = -5964680980663723267L;
+        private static final long serialVersionUID = 2030510616896402785L;
 
         public static JSFixedFastJsonSequence of(QueryResult.Sequence sequence) {
             if (Objects.isNull(sequence)) {
                 return null;
             } else {
                 return new JSFixedFastJsonSequence(
-                        JSFixedFastJsonLongIdKey.of(sequence.getStatisticsSettingKey()),
+                        JSFixedFastJsonBridgeDataKey.of(sequence.getBridgeDataKey()),
                         Optional.ofNullable(sequence.getBridgeDatas()).map(
                                 f -> f.stream().map(JSFixedFastJsonBridgeData::of).collect(Collectors.toList())
                         ).orElse(null),
@@ -83,8 +83,8 @@ public class JSFixedFastJsonQueryResult implements Dto {
             }
         }
 
-        @JSONField(name = "statistics_setting_key", ordinal = 1)
-        private JSFixedFastJsonLongIdKey statisticsSettingKey;
+        @JSONField(name = "bridge_data_key", ordinal = 1)
+        private JSFixedFastJsonBridgeDataKey bridgeDataKey;
 
         @JSONField(name = "bridge_datas", ordinal = 2)
         private List<JSFixedFastJsonBridgeData> bridgeDatas;
@@ -99,21 +99,21 @@ public class JSFixedFastJsonQueryResult implements Dto {
         }
 
         public JSFixedFastJsonSequence(
-                JSFixedFastJsonLongIdKey statisticsSettingKey, List<JSFixedFastJsonBridgeData> bridgeDatas,
+                JSFixedFastJsonBridgeDataKey bridgeDataKey, List<JSFixedFastJsonBridgeData> bridgeDatas,
                 Date startDate, Date endDate
         ) {
-            this.statisticsSettingKey = statisticsSettingKey;
+            this.bridgeDataKey = bridgeDataKey;
             this.bridgeDatas = bridgeDatas;
             this.startDate = startDate;
             this.endDate = endDate;
         }
 
-        public JSFixedFastJsonLongIdKey getStatisticsSettingKey() {
-            return statisticsSettingKey;
+        public JSFixedFastJsonBridgeDataKey getBridgeDataKey() {
+            return bridgeDataKey;
         }
 
-        public void setStatisticsSettingKey(JSFixedFastJsonLongIdKey statisticsSettingKey) {
-            this.statisticsSettingKey = statisticsSettingKey;
+        public void setBridgeDataKey(JSFixedFastJsonBridgeDataKey bridgeDataKey) {
+            this.bridgeDataKey = bridgeDataKey;
         }
 
         public List<JSFixedFastJsonBridgeData> getBridgeDatas() {
@@ -143,7 +143,7 @@ public class JSFixedFastJsonQueryResult implements Dto {
         @Override
         public String toString() {
             return "JSFixedFastJsonSequence{" +
-                    "statisticsSettingKey=" + statisticsSettingKey +
+                    "bridgeDataKey=" + bridgeDataKey +
                     ", bridgeDatas=" + bridgeDatas +
                     ", startDate=" + startDate +
                     ", endDate=" + endDate +

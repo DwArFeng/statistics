@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.impl.handler.bridge.redis.dao;
 
 import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeData;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeDataKey;
 import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
 
 /**
@@ -10,5 +10,5 @@ import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
  * @author DwArFeng
  * @since 1.0.0
  */
-public interface RedisBridgeBridgeDataDao extends BatchBaseDao<LongIdKey, RedisBridgeBridgeData> {
+public interface RedisBridgeBridgeDataDao extends BatchBaseDao<RedisBridgeBridgeDataKey, RedisBridgeBridgeData> {
 }

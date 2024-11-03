@@ -1,11 +1,11 @@
 package com.dwarfeng.statistics.impl.handler;
 
 import com.dwarfeng.statistics.stack.bean.dto.*;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.handler.KeepHandler;
 import com.dwarfeng.statistics.stack.handler.PersistHandler;
 import com.dwarfeng.statistics.stack.handler.QueryHandler;
 import com.dwarfeng.statistics.stack.handler.ViewHandler;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
@@ -36,13 +36,13 @@ public class ViewHandlerImpl implements ViewHandler {
     }
 
     @Override
-    public BridgeData latest(LongIdKey statisticsSettingKey) throws HandlerException {
-        return keepHandler.latest(statisticsSettingKey);
+    public BridgeData latest(BridgeDataKey bridgeDataKey) throws HandlerException {
+        return keepHandler.latest(bridgeDataKey);
     }
 
     @Override
-    public List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws HandlerException {
-        return keepHandler.latest(statisticsSettingKeys);
+    public List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws HandlerException {
+        return keepHandler.latest(bridgeDataKeys);
     }
 
     @Override
@@ -76,26 +76,26 @@ public class ViewHandlerImpl implements ViewHandler {
     }
 
     @Override
-    public CompletableFuture<BridgeData> latestAsync(LongIdKey statisticsSettingKey) {
-        return CompletableFuture.supplyAsync(() -> wrappedLatest(statisticsSettingKey), executor);
+    public CompletableFuture<BridgeData> latestAsync(BridgeDataKey bridgeDataKey) {
+        return CompletableFuture.supplyAsync(() -> wrappedLatest(bridgeDataKey), executor);
     }
 
-    private BridgeData wrappedLatest(LongIdKey statisticsSettingKey) throws CompletionException {
+    private BridgeData wrappedLatest(BridgeDataKey bridgeDataKey) throws CompletionException {
         try {
-            return keepHandler.latest(statisticsSettingKey);
+            return keepHandler.latest(bridgeDataKey);
         } catch (HandlerException e) {
             throw new CompletionException(e);
         }
     }
 
     @Override
-    public CompletableFuture<List<BridgeData>> latestAsync(List<LongIdKey> statisticsSettingKeys) {
-        return CompletableFuture.supplyAsync(() -> wrappedLatest(statisticsSettingKeys), executor);
+    public CompletableFuture<List<BridgeData>> latestAsync(List<BridgeDataKey> bridgeDataKeys) {
+        return CompletableFuture.supplyAsync(() -> wrappedLatest(bridgeDataKeys), executor);
     }
 
-    private List<BridgeData> wrappedLatest(List<LongIdKey> statisticsSettingKeys) throws CompletionException {
+    private List<BridgeData> wrappedLatest(List<BridgeDataKey> bridgeDataKeys) throws CompletionException {
         try {
-            return keepHandler.latest(statisticsSettingKeys);
+            return keepHandler.latest(bridgeDataKeys);
         } catch (HandlerException e) {
             throw new CompletionException(e);
         }

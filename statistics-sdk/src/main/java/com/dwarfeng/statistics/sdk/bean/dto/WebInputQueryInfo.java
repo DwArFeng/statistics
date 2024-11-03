@@ -1,9 +1,9 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.WebInputBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.QueryInfo;
 import com.dwarfeng.statistics.stack.bean.dto.QueryInfo.MapInfo;
-import com.dwarfeng.subgrade.sdk.bean.key.WebInputLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  */
 public class WebInputQueryInfo implements Dto {
 
-    private static final long serialVersionUID = -1951968093510489137L;
+    private static final long serialVersionUID = 7313115831790636650L;
 
     public static QueryInfo toStackBean(WebInputQueryInfo webInput) {
         if (Objects.isNull(webInput)) {
@@ -29,8 +29,8 @@ public class WebInputQueryInfo implements Dto {
             return new QueryInfo(
                     webInput.getPreset(),
                     webInput.getParams(),
-                    Optional.ofNullable(webInput.getStatisticsSettingKeys()).map(
-                            f -> f.stream().map(WebInputLongIdKey::toStackBean).collect(Collectors.toList())
+                    Optional.ofNullable(webInput.getBridgeDataKeys()).map(
+                            f -> f.stream().map(WebInputBridgeDataKey::toStackBean).collect(Collectors.toList())
                     ).orElse(null),
                     webInput.getStartDate(),
                     webInput.getEndDate(),
@@ -52,10 +52,10 @@ public class WebInputQueryInfo implements Dto {
     @NotNull
     private String[] params;
 
-    @JSONField(name = "statistics_setting_keys")
+    @JSONField(name = "bridge_data_keys")
     @NotNull
     @Valid
-    private List<WebInputLongIdKey> statisticsSettingKeys;
+    private List<WebInputBridgeDataKey> bridgeDataKeys;
 
     @JSONField(name = "start_date")
     @NotNull
@@ -95,12 +95,12 @@ public class WebInputQueryInfo implements Dto {
         this.params = params;
     }
 
-    public List<WebInputLongIdKey> getStatisticsSettingKeys() {
-        return statisticsSettingKeys;
+    public List<WebInputBridgeDataKey> getBridgeDataKeys() {
+        return bridgeDataKeys;
     }
 
-    public void setStatisticsSettingKeys(List<WebInputLongIdKey> statisticsSettingKeys) {
-        this.statisticsSettingKeys = statisticsSettingKeys;
+    public void setBridgeDataKeys(List<WebInputBridgeDataKey> bridgeDataKeys) {
+        this.bridgeDataKeys = bridgeDataKeys;
     }
 
     public Date getStartDate() {
@@ -148,7 +148,7 @@ public class WebInputQueryInfo implements Dto {
         return "WebInputQueryInfo{" +
                 "preset='" + preset + '\'' +
                 ", params=" + Arrays.toString(params) +
-                ", statisticsSettingKeys=" + statisticsSettingKeys +
+                ", bridgeDataKeys=" + bridgeDataKeys +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", includeStartDate=" + includeStartDate +

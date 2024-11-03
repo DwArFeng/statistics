@@ -52,7 +52,7 @@ public abstract class AggregateMapper extends OneToOneMapper {
         } else {
             // 构造新的数据条目，其中的发生时间为序列开始时间和结束时间的中间值，统计设置主键为序列的统计设置主键。
             BridgeData data = new BridgeData(
-                    sequence.getStatisticsSettingKey(), value,
+                    sequence.getBridgeDataKey(), value,
                     new Date((startDate.getTime() + endDate.getTime()) / 2)
             );
 
@@ -62,7 +62,7 @@ public abstract class AggregateMapper extends OneToOneMapper {
         }
 
         // 返回新的序列。
-        return new Sequence(sequence.getStatisticsSettingKey(), datas, startDate, endDate);
+        return new Sequence(sequence.getBridgeDataKey(), datas, startDate, endDate);
     }
 
     /**

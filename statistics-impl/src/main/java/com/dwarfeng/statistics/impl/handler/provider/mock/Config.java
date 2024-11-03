@@ -11,7 +11,7 @@ import com.dwarfeng.subgrade.stack.bean.Bean;
  */
 public class Config implements Bean {
 
-    private static final long serialVersionUID = 2528171849055190965L;
+    private static final long serialVersionUID = 4130192225040252970L;
 
     @JSONField(name = "#random_seed", ordinal = 1, deserialize = false)
     private String randomSeedRem = "随机种子, 用于生成随机数据, 可以为 null。";
@@ -41,14 +41,21 @@ public class Config implements Bean {
     @JSONField(name = "last_provided_date_variable_id", ordinal = 8)
     private String lastProvidedDateVariableId;
 
+    @JSONField(name = "#tag", ordinal = 9, deserialize = false)
+    private String tagRem = "生成的数据的标签。";
+
+    @JSONField(name = "tag", ordinal = 10)
+    private String tag;
+
     public Config() {
     }
 
-    public Config(Long randomSeed, int dataSize, String dataType, String lastProvidedDateVariableId) {
+    public Config(Long randomSeed, int dataSize, String dataType, String lastProvidedDateVariableId, String tag) {
         this.randomSeed = randomSeed;
         this.dataSize = dataSize;
         this.dataType = dataType;
         this.lastProvidedDateVariableId = lastProvidedDateVariableId;
+        this.tag = tag;
     }
 
     public String getRandomSeedRem() {
@@ -115,6 +122,22 @@ public class Config implements Bean {
         this.lastProvidedDateVariableId = lastProvidedDateVariableId;
     }
 
+    public String getTagRem() {
+        return tagRem;
+    }
+
+    public void setTagRem(String tagRem) {
+        this.tagRem = tagRem;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public String toString() {
         return "Config{" +
@@ -126,6 +149,8 @@ public class Config implements Bean {
                 ", dataType='" + dataType + '\'' +
                 ", lastProvidedDateVariableIdRem='" + lastProvidedDateVariableIdRem + '\'' +
                 ", lastProvidedDateVariableId='" + lastProvidedDateVariableId + '\'' +
+                ", tagRem='" + tagRem + '\'' +
+                ", tag='" + tag + '\'' +
                 '}';
     }
 }

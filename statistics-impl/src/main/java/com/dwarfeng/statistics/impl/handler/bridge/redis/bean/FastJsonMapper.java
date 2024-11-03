@@ -1,7 +1,5 @@
 package com.dwarfeng.statistics.impl.handler.bridge.redis.bean;
 
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
@@ -14,10 +12,14 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface FastJsonMapper {
 
-    FastJsonLongIdKey longIdKeyToFastJson(LongIdKey longIdKey);
+    RedisBridgeFastJsonBridgeDataKey redisBridgeBridgeDataKeyToFastJson(
+            RedisBridgeBridgeDataKey redisBridgeBridgeDataKey
+    );
 
     @InheritInverseConfiguration
-    LongIdKey longIdKeyFromFastJson(FastJsonLongIdKey fastJsonLongIdKey);
+    RedisBridgeBridgeDataKey redisBridgeBridgeDataKeyFromFastJson(
+            RedisBridgeFastJsonBridgeDataKey redisBridgeFastJsonBridgeDataKey
+    );
 
     RedisBridgeFastJsonBridgeData redisBridgeBridgeDataToFastJson(
             RedisBridgeBridgeData redisBridgeBridgeData

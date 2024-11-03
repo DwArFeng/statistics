@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.JSFixedFastJsonBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.NativeQueryInfo;
-import com.dwarfeng.subgrade.sdk.bean.key.JSFixedFastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.util.*;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class JSFixedFastJsonNativeQueryInfo implements Dto {
 
-    private static final long serialVersionUID = -3705415835483720784L;
+    private static final long serialVersionUID = 7784072944310746392L;
 
     public static JSFixedFastJsonNativeQueryInfo of(NativeQueryInfo nativeQueryInfo) {
         if (Objects.isNull(nativeQueryInfo)) {
@@ -25,8 +25,8 @@ public class JSFixedFastJsonNativeQueryInfo implements Dto {
             return new JSFixedFastJsonNativeQueryInfo(
                     nativeQueryInfo.getPreset(),
                     nativeQueryInfo.getParams(),
-                    Optional.ofNullable(nativeQueryInfo.getStatisticsSettingKeys()).map(
-                            f -> f.stream().map(JSFixedFastJsonLongIdKey::of).collect(Collectors.toList())
+                    Optional.ofNullable(nativeQueryInfo.getBridgeDataKeys()).map(
+                            f -> f.stream().map(JSFixedFastJsonBridgeDataKey::of).collect(Collectors.toList())
                     ).orElse(null),
                     nativeQueryInfo.getStartDate(),
                     nativeQueryInfo.getEndDate(),
@@ -42,8 +42,8 @@ public class JSFixedFastJsonNativeQueryInfo implements Dto {
     @JSONField(name = "params", ordinal = 2)
     private String[] params;
 
-    @JSONField(name = "statistics_setting_keys", ordinal = 3)
-    private List<JSFixedFastJsonLongIdKey> statisticsSettingKeys;
+    @JSONField(name = "bridge_data_keys", ordinal = 3)
+    private List<JSFixedFastJsonBridgeDataKey> bridgeDataKeys;
 
     @JSONField(name = "start_date", ordinal = 4)
     private Date startDate;
@@ -61,12 +61,12 @@ public class JSFixedFastJsonNativeQueryInfo implements Dto {
     }
 
     public JSFixedFastJsonNativeQueryInfo(
-            String preset, String[] params, List<JSFixedFastJsonLongIdKey> statisticsSettingKeys, Date startDate,
+            String preset, String[] params, List<JSFixedFastJsonBridgeDataKey> bridgeDataKeys, Date startDate,
             Date endDate, boolean includeStartDate, boolean includeEndDate
     ) {
         this.preset = preset;
         this.params = params;
-        this.statisticsSettingKeys = statisticsSettingKeys;
+        this.bridgeDataKeys = bridgeDataKeys;
         this.startDate = startDate;
         this.endDate = endDate;
         this.includeStartDate = includeStartDate;
@@ -89,12 +89,12 @@ public class JSFixedFastJsonNativeQueryInfo implements Dto {
         this.params = params;
     }
 
-    public List<JSFixedFastJsonLongIdKey> getStatisticsSettingKeys() {
-        return statisticsSettingKeys;
+    public List<JSFixedFastJsonBridgeDataKey> getBridgeDataKeys() {
+        return bridgeDataKeys;
     }
 
-    public void setStatisticsSettingKeys(List<JSFixedFastJsonLongIdKey> statisticsSettingKeys) {
-        this.statisticsSettingKeys = statisticsSettingKeys;
+    public void setBridgeDataKeys(List<JSFixedFastJsonBridgeDataKey> bridgeDataKeys) {
+        this.bridgeDataKeys = bridgeDataKeys;
     }
 
     public Date getStartDate() {
@@ -134,7 +134,7 @@ public class JSFixedFastJsonNativeQueryInfo implements Dto {
         return "JSFixedFastJsonNativeQueryInfo{" +
                 "preset='" + preset + '\'' +
                 ", params=" + Arrays.toString(params) +
-                ", statisticsSettingKeys=" + statisticsSettingKeys +
+                ", bridgeDataKeys=" + bridgeDataKeys +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", includeStartDate=" + includeStartDate +

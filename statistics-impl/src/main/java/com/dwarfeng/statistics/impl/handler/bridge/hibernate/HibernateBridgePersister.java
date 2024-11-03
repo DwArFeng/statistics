@@ -6,9 +6,9 @@ import com.dwarfeng.statistics.impl.handler.bridge.hibernate.bean.HibernateBridg
 import com.dwarfeng.statistics.impl.handler.bridge.hibernate.service.HibernateBridgeBridgeDataMaintainService;
 import com.dwarfeng.statistics.sdk.util.ViewUtil;
 import com.dwarfeng.statistics.stack.bean.dto.*;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
@@ -64,7 +64,8 @@ public class HibernateBridgePersister extends FullPersister {
         String flatValue = valueCodingHandler.encode(data.getValue());
         return new HibernateBridgeBridgeData(
                 null,
-                data.getStatisticsSettingKey(),
+                data.getKey().getStatisticsSettingLongId(),
+                data.getKey().getTag(),
                 flatValue,
                 data.getHappenedDate()
         );
@@ -118,7 +119,9 @@ public class HibernateBridgePersister extends FullPersister {
 
     private LookupResult lookupSingle(LookupInfo lookupInfo) throws Exception {
         // 展开查询信息。
-        LongIdKey statisticsSettingKey = lookupInfo.getStatisticsSettingKey();
+        BridgeDataKey bridgeDataKey = lookupInfo.getBridgeDataKey();
+        Long statisticsSettingLongId = bridgeDataKey.getStatisticsSettingLongId();
+        String tag = bridgeDataKey.getTag();
         Date startDate = ViewUtil.validStartDate(lookupInfo.getStartDate());
         Date endDate = ViewUtil.validEndDate(lookupInfo.getEndDate());
         int page = ViewUtil.validPage(lookupInfo.getPage());
@@ -135,7 +138,9 @@ public class HibernateBridgePersister extends FullPersister {
         // 查询数据。
         String servicePreset = resolveServicePreset(includeStartDate, includeEndDate);
         PagedData<HibernateBridgeBridgeData> lookup = service.lookup(
-                servicePreset, new Object[]{statisticsSettingKey, startDate, endDate}, new PagingInfo(page, rows)
+                servicePreset,
+                new Object[]{statisticsSettingLongId, tag, startDate, endDate},
+                new PagingInfo(page, rows)
         );
 
         // 处理数据。
@@ -148,7 +153,7 @@ public class HibernateBridgePersister extends FullPersister {
 
         // 返回结果。
         return new LookupResult(
-                statisticsSettingKey, datas, lookup.getCurrentPage(), lookup.getTotalPages(), lookup.getRows(),
+                bridgeDataKey, datas, lookup.getCurrentPage(), lookup.getTotalPages(), lookup.getRows(),
                 lookup.getCount()
         );
     }
@@ -156,13 +161,13 @@ public class HibernateBridgePersister extends FullPersister {
     private String resolveServicePreset(boolean includeStartDate, boolean includeEndDate) {
         String servicePreset;
         if (includeStartDate && includeEndDate) {
-            servicePreset = HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_CLOSE;
+            servicePreset = HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_CLOSE_CLOSE;
         } else if (includeStartDate) {
-            servicePreset = HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_OPEN;
+            servicePreset = HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_CLOSE_OPEN;
         } else if (includeEndDate) {
-            servicePreset = HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_CLOSE;
+            servicePreset = HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_OPEN_CLOSE;
         } else {
-            servicePreset = HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_OPEN;
+            servicePreset = HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_OPEN_OPEN;
         }
         return servicePreset;
     }
@@ -170,7 +175,7 @@ public class HibernateBridgePersister extends FullPersister {
     private BridgeData reverseTransform(HibernateBridgeBridgeData t) throws Exception {
         Object value = valueCodingHandler.decode(t.getValue());
         return new BridgeData(
-                t.getStatisticsSettingKey(),
+                new BridgeDataKey(t.getStatisticsSettingLongId(), t.getTag()),
                 value,
                 t.getHappenedDate()
         );

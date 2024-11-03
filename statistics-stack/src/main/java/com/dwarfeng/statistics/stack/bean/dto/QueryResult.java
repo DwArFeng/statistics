@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.stack.bean.dto;
 
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
 import java.util.Date;
 import java.util.List;
@@ -63,9 +63,9 @@ public class QueryResult implements Dto {
      */
     public static class Sequence implements Dto {
 
-        private static final long serialVersionUID = -4131757749463045936L;
+        private static final long serialVersionUID = -4142412041522563979L;
 
-        private LongIdKey statisticsSettingKey;
+        private BridgeDataKey bridgeDataKey;
         private List<BridgeData> bridgeDatas;
         private Date startDate;
         private Date endDate;
@@ -73,19 +73,19 @@ public class QueryResult implements Dto {
         public Sequence() {
         }
 
-        public Sequence(LongIdKey statisticsSettingKey, List<BridgeData> bridgeDatas, Date startDate, Date endDate) {
-            this.statisticsSettingKey = statisticsSettingKey;
+        public Sequence(BridgeDataKey bridgeDataKey, List<BridgeData> bridgeDatas, Date startDate, Date endDate) {
+            this.bridgeDataKey = bridgeDataKey;
             this.bridgeDatas = bridgeDatas;
             this.startDate = startDate;
             this.endDate = endDate;
         }
 
-        public LongIdKey getStatisticsSettingKey() {
-            return statisticsSettingKey;
+        public BridgeDataKey getBridgeDataKey() {
+            return bridgeDataKey;
         }
 
-        public void setStatisticsSettingKey(LongIdKey statisticsSettingKey) {
-            this.statisticsSettingKey = statisticsSettingKey;
+        public void setBridgeDataKey(BridgeDataKey bridgeDataKey) {
+            this.bridgeDataKey = bridgeDataKey;
         }
 
         public List<BridgeData> getBridgeDatas() {
@@ -115,7 +115,7 @@ public class QueryResult implements Dto {
         @Override
         public String toString() {
             return "Sequence{" +
-                    "statisticsSettingKey=" + statisticsSettingKey +
+                    "bridgeDataKey=" + bridgeDataKey +
                     ", bridgeDatas=" + bridgeDatas +
                     ", startDate=" + startDate +
                     ", endDate=" + endDate +

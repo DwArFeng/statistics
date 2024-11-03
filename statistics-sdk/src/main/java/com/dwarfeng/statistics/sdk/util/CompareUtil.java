@@ -2,6 +2,7 @@ package com.dwarfeng.statistics.sdk.util;
 
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
 import com.dwarfeng.statistics.stack.bean.dto.ProviderData;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.handler.Mapper;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
@@ -44,10 +45,27 @@ public final class CompareUtil {
             DATE_ASC_COMPARATOR.reversed();
 
     /**
+     * 桥接器数据键比较器，按照桥接器数据键的默认顺序进行比较。
+     *
+     * @since 1.1.0
+     */
+    public static final Comparator<BridgeDataKey> BRIDGE_DATA_KEY_ASC_COMPARATOR =
+            Comparator.comparing(BridgeDataKey::getStatisticsSettingLongId)
+                    .thenComparing(BridgeDataKey::getTag);
+
+    /**
+     * 桥接器数据键比较器，按照桥接器数据键的默认顺序的降序进行比较。
+     *
+     * @since 1.1.0
+     */
+    public static final Comparator<BridgeDataKey> BRIDGE_DATA_KEY_DESC_COMPARATOR =
+            BRIDGE_DATA_KEY_ASC_COMPARATOR.reversed();
+
+    /**
      * 桥接器数据比较器，按照桥接器数据的默认顺序进行比较。
      */
     public static final Comparator<BridgeData> BRIDGE_DATA_DEFAULT_COMPARATOR =
-            Comparator.comparing(BridgeData::getStatisticsSettingKey, LONG_ID_KEY_ASC_COMPARATOR)
+            Comparator.comparing(BridgeData::getKey, BRIDGE_DATA_KEY_ASC_COMPARATOR)
                     .thenComparing(BridgeData::getHappenedDate, DATE_ASC_COMPARATOR);
 
     /**
@@ -84,16 +102,19 @@ public final class CompareUtil {
      * 序列比较器，按照序列的默认顺序进行比较。
      */
     public static final Comparator<Mapper.Sequence> SEQUENCE_DEFAULT_COMPARATOR =
-            Comparator.comparing(Mapper.Sequence::getStatisticsSettingKey, LONG_ID_KEY_ASC_COMPARATOR);
+            Comparator.comparing(Mapper.Sequence::getBridgeDataKey, BRIDGE_DATA_KEY_ASC_COMPARATOR);
 
     /**
-     * 序列比较器，按照序列的统计设置主键的升序进行比较。
+     * 序列比较器，按照序列的桥接器数据主键的升序进行比较。
      */
-    public static final Comparator<Mapper.Sequence> SEQUENCE_POINT_KEY_ASC_COMPARATOR =
-            Comparator.comparing(Mapper.Sequence::getStatisticsSettingKey, LONG_ID_KEY_ASC_COMPARATOR);
+    public static final Comparator<Mapper.Sequence> SEQUENCE_BRIDGE_DATA_KEY_ASC_COMPARATOR =
+            Comparator.comparing(Mapper.Sequence::getBridgeDataKey, BRIDGE_DATA_KEY_ASC_COMPARATOR);
 
-    public static final Comparator<Mapper.Sequence> SEQUENCE_POINT_KEY_DESC_COMPARATOR =
-            Comparator.comparing(Mapper.Sequence::getStatisticsSettingKey, LONG_ID_KEY_DESC_COMPARATOR);
+    /**
+     * 序列比较器，按照序列的桥接器数据主键的降序进行比较。
+     */
+    public static final Comparator<Mapper.Sequence> SEQUENCE_BRIDGE_DATA_KEY_DESC_COMPARATOR =
+            Comparator.comparing(Mapper.Sequence::getBridgeDataKey, BRIDGE_DATA_KEY_DESC_COMPARATOR);
 
     private CompareUtil() {
         throw new IllegalStateException("禁止外部实例化");

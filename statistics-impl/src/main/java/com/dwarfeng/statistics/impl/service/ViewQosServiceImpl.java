@@ -1,10 +1,10 @@
 package com.dwarfeng.statistics.impl.service;
 
 import com.dwarfeng.statistics.stack.bean.dto.*;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.handler.ViewHandler;
 import com.dwarfeng.statistics.stack.service.ViewQosService;
 import com.dwarfeng.subgrade.sdk.exception.ServiceExceptionHelper;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import com.dwarfeng.subgrade.stack.exception.ServiceExceptionMapper;
 import com.dwarfeng.subgrade.stack.log.LogLevel;
@@ -25,11 +25,11 @@ public class ViewQosServiceImpl implements ViewQosService {
     }
 
     @Override
-    public List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws ServiceException {
+    public List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws ServiceException {
         try {
-            return viewHandler.latest(statisticsSettingKeys);
+            return viewHandler.latest(bridgeDataKeys);
         } catch (Exception e) {
-            throw ServiceExceptionHelper.logParse("查询统计设置的最新数据时发生异常", LogLevel.WARN, e, sem);
+            throw ServiceExceptionHelper.logParse("查询最新数据时发生异常", LogLevel.WARN, e, sem);
         }
     }
 

@@ -98,14 +98,14 @@ public class TimeWeightedAgvMapperRegistry extends AbstractMapperRegistry {
             if ((oldData = datas.get(0)).getHappenedDate().compareTo(startDate) < 0) {
                 datas.set(
                         0,
-                        new BridgeData(oldData.getStatisticsSettingKey(), oldData.getValue(), startDate)
+                        new BridgeData(oldData.getKey(), oldData.getValue(), startDate)
                 );
             }
             // 如果最后一个数据条目的发生时间大于 endDate，则将其发生时间设置为 endDate。
             if ((oldData = datas.get(datas.size() - 1)).getHappenedDate().compareTo(endDate) > 0) {
                 datas.set(
                         datas.size() - 1,
-                        new BridgeData(oldData.getStatisticsSettingKey(), oldData.getValue(), endDate)
+                        new BridgeData(oldData.getKey(), oldData.getValue(), endDate)
                 );
             }
 

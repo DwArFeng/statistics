@@ -2,12 +2,12 @@ package com.dwarfeng.statistics.impl.handler;
 
 import com.dwarfeng.statistics.sdk.util.ViewUtil;
 import com.dwarfeng.statistics.stack.bean.dto.*;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.QueryException;
 import com.dwarfeng.statistics.stack.exception.UnsupportedMapperTypeException;
 import com.dwarfeng.statistics.stack.handler.MapLocalCacheHandler;
 import com.dwarfeng.statistics.stack.handler.Mapper;
 import com.dwarfeng.statistics.stack.handler.QueryHandler;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -120,7 +120,7 @@ public class QueryHandlerImpl implements QueryHandler {
         // 展开查询信息。
         String preset = queryInfo.getPreset();
         String[] params = queryInfo.getParams();
-        List<LongIdKey> statisticsSettingKeys = queryInfo.getStatisticsSettingKeys();
+        List<BridgeDataKey> bridgeDataKeys = queryInfo.getBridgeDataKeys();
         Date startDate = ViewUtil.validStartDate(queryInfo.getStartDate());
         Date endDate = ViewUtil.validEndDate(queryInfo.getEndDate());
         boolean includeStartDate = queryInfo.isIncludeStartDate();
@@ -129,7 +129,7 @@ public class QueryHandlerImpl implements QueryHandler {
 
         // 进行查询，构造 List<Mapper.Sequence>。
         List<Mapper.Sequence> sequences = lookupSequences(
-                maxPeriodSpan, maxPageSize, preset, params, statisticsSettingKeys, startDate, endDate, includeStartDate,
+                maxPeriodSpan, maxPageSize, preset, params, bridgeDataKeys, startDate, endDate, includeStartDate,
                 includeEndDate
         );
 
@@ -143,24 +143,24 @@ public class QueryHandlerImpl implements QueryHandler {
     }
 
     private List<Mapper.Sequence> lookupSequences(
-            long maxPeriodSpan, int maxPageSize, String preset, String[] params, List<LongIdKey> statisticsSettingKeys,
+            long maxPeriodSpan, int maxPageSize, String preset, String[] params, List<BridgeDataKey> bridgeDataKeys,
             Date startDate, Date endDate, boolean includeStartDate, boolean includeEndDate
     ) throws Exception {
         // 构造查询结果，并初始化。
-        List<Mapper.Sequence> sequences = new ArrayList<>(statisticsSettingKeys.size());
-        for (int i = 0; i < statisticsSettingKeys.size(); i++) {
+        List<Mapper.Sequence> sequences = new ArrayList<>(bridgeDataKeys.size());
+        for (int i = 0; i < bridgeDataKeys.size(); i++) {
             sequences.add(null);
         }
 
         // 遍历 statisticsSettingKeys，异步查询。
-        List<CompletableFuture<?>> futures = new ArrayList<>(statisticsSettingKeys.size());
-        for (int i = 0; i < statisticsSettingKeys.size(); i++) {
+        List<CompletableFuture<?>> futures = new ArrayList<>(bridgeDataKeys.size());
+        for (int i = 0; i < bridgeDataKeys.size(); i++) {
             final int index = i;
-            final LongIdKey statisticsSettingKey = statisticsSettingKeys.get(index);
+            final BridgeDataKey bridgeDataKey = bridgeDataKeys.get(index);
             CompletableFuture<Void> future = CompletableFuture.runAsync(
                     () -> {
                         Mapper.Sequence sequence = wrappedLookupSingleSequence(
-                                maxPeriodSpan, maxPageSize, preset, params, statisticsSettingKey, startDate, endDate,
+                                maxPeriodSpan, maxPageSize, preset, params, bridgeDataKey, startDate, endDate,
                                 includeStartDate, includeEndDate
                         );
                         sequences.set(index, sequence);
@@ -180,12 +180,12 @@ public class QueryHandlerImpl implements QueryHandler {
     }
 
     private Mapper.Sequence wrappedLookupSingleSequence(
-            long maxPeriodSpan, int maxPageSize, String preset, String[] params, LongIdKey statisticsSettingKey,
+            long maxPeriodSpan, int maxPageSize, String preset, String[] params, BridgeDataKey bridgeDataKey,
             Date startDate, Date endDate, boolean includeStartDate, boolean includeEndDate
     ) throws CompletionException {
         try {
             return lookupSingleSequence(
-                    maxPeriodSpan, maxPageSize, preset, params, statisticsSettingKey, startDate, endDate, includeStartDate,
+                    maxPeriodSpan, maxPageSize, preset, params, bridgeDataKey, startDate, endDate, includeStartDate,
                     includeEndDate
             );
         } catch (Exception e) {
@@ -194,7 +194,7 @@ public class QueryHandlerImpl implements QueryHandler {
     }
 
     private Mapper.Sequence lookupSingleSequence(
-            long maxPeriodSpan, int maxPageSize, String preset, String[] params, LongIdKey statisticsSettingKey,
+            long maxPeriodSpan, int maxPageSize, String preset, String[] params, BridgeDataKey bridgeDataKey,
             Date startDate, Date endDate, boolean includeStartDate, boolean includeEndDate
     ) throws Exception {
         // 定义中间变量。
@@ -211,14 +211,14 @@ public class QueryHandlerImpl implements QueryHandler {
         do {
             // 构造查询参数，查询第一页的内容。
             LookupInfo lookupInfo = new LookupInfo(
-                    preset, params, statisticsSettingKey, anchorStartDate, anchorEndDate, anchorIncludeStartDate,
+                    preset, params, bridgeDataKey, anchorStartDate, anchorEndDate, anchorIncludeStartDate,
                     anchorIncludeEndDate, 0, maxPageSize
             );
             LookupResult lookupResult = persister.lookup(lookupInfo);
             // 将查询结果转换为 BridgeData，添加到返回值中。
             for (BridgeData bridgeData : lookupResult.getBridgeDatas()) {
                 bridgeDatas.add(new BridgeData(
-                        bridgeData.getStatisticsSettingKey(), bridgeData.getValue(), bridgeData.getHappenedDate()
+                        bridgeData.getKey(), bridgeData.getValue(), bridgeData.getHappenedDate()
                 ));
             }
 
@@ -226,13 +226,13 @@ public class QueryHandlerImpl implements QueryHandler {
             if (lookupResult.getTotalPages() > 1) {
                 for (int i = 1; i < lookupResult.getTotalPages(); i++) {
                     lookupInfo = new LookupInfo(
-                            preset, params, statisticsSettingKey, anchorStartDate, anchorEndDate,
+                            preset, params, bridgeDataKey, anchorStartDate, anchorEndDate,
                             anchorIncludeStartDate, anchorIncludeEndDate, i, maxPageSize
                     );
                     lookupResult = persister.lookup(lookupInfo);
                     for (BridgeData bridgeData : lookupResult.getBridgeDatas()) {
                         bridgeDatas.add(new BridgeData(
-                                bridgeData.getStatisticsSettingKey(),
+                                bridgeData.getKey(),
                                 bridgeData.getValue(),
                                 bridgeData.getHappenedDate()
                         ));
@@ -254,7 +254,7 @@ public class QueryHandlerImpl implements QueryHandler {
         } while (notLastPeriodFlag);
 
         // 将查询结果添加到返回值中。
-        return new Mapper.Sequence(statisticsSettingKey, bridgeDatas, startDate, endDate);
+        return new Mapper.Sequence(bridgeDataKey, bridgeDatas, startDate, endDate);
     }
 
     private List<Mapper.Sequence> mapSingleSequence(QueryInfo.MapInfo mapInfo, List<Mapper.Sequence> sequences)
@@ -279,7 +279,7 @@ public class QueryHandlerImpl implements QueryHandler {
         for (Mapper.Sequence sequence : sequences) {
             List<BridgeData> bridgeDatas = new ArrayList<>(sequence.getDatas());
             resultSequences.add(new QueryResult.Sequence(
-                    sequence.getStatisticsSettingKey(), bridgeDatas, sequence.getStartDate(), sequence.getEndDate()
+                    sequence.getBridgeDataKey(), bridgeDatas, sequence.getStartDate(), sequence.getEndDate()
             ));
         }
         return new QueryResult(resultSequences);

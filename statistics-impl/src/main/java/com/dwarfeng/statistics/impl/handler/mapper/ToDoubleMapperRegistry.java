@@ -87,7 +87,7 @@ public class ToDoubleMapperRegistry extends AbstractMapperRegistry {
 
             // 返回映射后的序列。
             return new Sequence(
-                    sequence.getStatisticsSettingKey(), datas, sequence.getStartDate(), sequence.getEndDate()
+                    sequence.getBridgeDataKey(), datas, sequence.getStartDate(), sequence.getEndDate()
             );
         }
 
@@ -95,7 +95,7 @@ public class ToDoubleMapperRegistry extends AbstractMapperRegistry {
             // 如果数据条目的值的类型是 Number，那么获得其双精度浮点数值。
             if (data.getValue() instanceof Number) {
                 return new BridgeData(
-                        data.getStatisticsSettingKey(),
+                        data.getKey(),
                         ((Number) data.getValue()).doubleValue(), data.getHappenedDate()
                 );
             }
@@ -104,7 +104,7 @@ public class ToDoubleMapperRegistry extends AbstractMapperRegistry {
             if (data.getValue() instanceof String) {
                 try {
                     return new BridgeData(
-                            data.getStatisticsSettingKey(),
+                            data.getKey(),
                             Double.parseDouble((String) data.getValue()),
                             data.getHappenedDate()
                     );
@@ -116,7 +116,7 @@ public class ToDoubleMapperRegistry extends AbstractMapperRegistry {
             // 如果数据条目的值的类型是布尔值，那么根据配置对布尔值进行映射。
             if (data.getValue() instanceof Boolean) {
                 return new BridgeData(
-                        data.getStatisticsSettingKey(),
+                        data.getKey(),
                         (Boolean) data.getValue() ? config.getBooleanTrueValue() : config.getBooleanFalseValue(),
                         data.getHappenedDate()
                 );
@@ -126,11 +126,11 @@ public class ToDoubleMapperRegistry extends AbstractMapperRegistry {
             switch (config.getOtherTypeStrategy()) {
                 case 0:
                     return new BridgeData(
-                            data.getStatisticsSettingKey(), config.getOtherTypeDefaultValue(), data.getHappenedDate()
+                            data.getKey(), config.getOtherTypeDefaultValue(), data.getHappenedDate()
                     );
                 case 1:
                     return new BridgeData(
-                            data.getStatisticsSettingKey(), null, data.getHappenedDate()
+                            data.getKey(), null, data.getHappenedDate()
                     );
                 case 2:
                     return null;
@@ -148,7 +148,7 @@ public class ToDoubleMapperRegistry extends AbstractMapperRegistry {
     public static class Config implements Bean {
 
         private static final long serialVersionUID = -3636676076982394138L;
-        
+
         @JSONField(name = "boolean_true_value", ordinal = 1)
         private double booleanTrueValue;
 

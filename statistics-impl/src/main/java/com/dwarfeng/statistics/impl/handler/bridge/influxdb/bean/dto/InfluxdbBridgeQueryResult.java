@@ -41,9 +41,9 @@ public class InfluxdbBridgeQueryResult implements Dto {
 
     public static class InfluxdbBridgeSequence implements Dto {
 
-        private static final long serialVersionUID = 2877474944894422656L;
+        private static final long serialVersionUID = 5891289048475631914L;
 
-        private String measurement;
+        private InfluxdbBridgeDataGroup dataGroup;
         private List<InfluxdbBridgeItem> items;
         private Instant startInstant;
         private Instant endInstant;
@@ -52,20 +52,21 @@ public class InfluxdbBridgeQueryResult implements Dto {
         }
 
         public InfluxdbBridgeSequence(
-                String measurement, List<InfluxdbBridgeItem> items, Instant startInstant, Instant endInstant
+                InfluxdbBridgeDataGroup dataGroup, List<InfluxdbBridgeItem> items,
+                Instant startInstant, Instant endInstant
         ) {
-            this.measurement = measurement;
+            this.dataGroup = dataGroup;
             this.items = items;
             this.startInstant = startInstant;
             this.endInstant = endInstant;
         }
 
-        public String getMeasurement() {
-            return measurement;
+        public InfluxdbBridgeDataGroup getDataGroup() {
+            return dataGroup;
         }
 
-        public void setMeasurement(String measurement) {
-            this.measurement = measurement;
+        public void setDataGroup(InfluxdbBridgeDataGroup dataGroup) {
+            this.dataGroup = dataGroup;
         }
 
         public List<InfluxdbBridgeItem> getItems() {
@@ -95,7 +96,7 @@ public class InfluxdbBridgeQueryResult implements Dto {
         @Override
         public String toString() {
             return "InfluxdbBridgeSequence{" +
-                    "measurement='" + measurement + '\'' +
+                    "dataGroup=" + dataGroup +
                     ", items=" + items +
                     ", startInstant=" + startInstant +
                     ", endInstant=" + endInstant +
@@ -105,27 +106,27 @@ public class InfluxdbBridgeQueryResult implements Dto {
 
     public static class InfluxdbBridgeItem implements Dto {
 
-        private static final long serialVersionUID = -1314545461910883990L;
+        private static final long serialVersionUID = 2971345554027553544L;
 
-        private String measurement;
+        private InfluxdbBridgeDataGroup dataGroup;
         private Object value;
         private Instant happenedInstant;
 
         public InfluxdbBridgeItem() {
         }
 
-        public InfluxdbBridgeItem(String measurement, Object value, Instant happenedInstant) {
-            this.measurement = measurement;
+        public InfluxdbBridgeItem(InfluxdbBridgeDataGroup dataGroup, Object value, Instant happenedInstant) {
+            this.dataGroup = dataGroup;
             this.value = value;
             this.happenedInstant = happenedInstant;
         }
 
-        public String getMeasurement() {
-            return measurement;
+        public InfluxdbBridgeDataGroup getDataGroup() {
+            return dataGroup;
         }
 
-        public void setMeasurement(String measurement) {
-            this.measurement = measurement;
+        public void setDataGroup(InfluxdbBridgeDataGroup dataGroup) {
+            this.dataGroup = dataGroup;
         }
 
         public Object getValue() {
@@ -147,7 +148,7 @@ public class InfluxdbBridgeQueryResult implements Dto {
         @Override
         public String toString() {
             return "InfluxdbBridgeItem{" +
-                    "measurement='" + measurement + '\'' +
+                    "dataGroup=" + dataGroup +
                     ", value=" + value +
                     ", happenedInstant=" + happenedInstant +
                     '}';

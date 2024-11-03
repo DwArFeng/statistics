@@ -13,19 +13,23 @@ import java.util.Date;
  */
 public class HibernateBridgeBridgeData implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = 1013102787655189235L;
+    private static final long serialVersionUID = -6060752430501776506L;
 
     private LongIdKey key;
-    private LongIdKey statisticsSettingKey;
+    private Long statisticsSettingLongId;
+    private String tag;
     private String value;
     private Date happenedDate;
 
     public HibernateBridgeBridgeData() {
     }
 
-    public HibernateBridgeBridgeData(LongIdKey key, LongIdKey statisticsSettingKey, String value, Date happenedDate) {
+    public HibernateBridgeBridgeData(
+            LongIdKey key, Long statisticsSettingLongId, String tag, String value, Date happenedDate
+    ) {
         this.key = key;
-        this.statisticsSettingKey = statisticsSettingKey;
+        this.statisticsSettingLongId = statisticsSettingLongId;
+        this.tag = tag;
         this.value = value;
         this.happenedDate = happenedDate;
     }
@@ -40,12 +44,20 @@ public class HibernateBridgeBridgeData implements Entity<LongIdKey> {
         this.key = key;
     }
 
-    public LongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public Long getStatisticsSettingLongId() {
+        return statisticsSettingLongId;
     }
 
-    public void setStatisticsSettingKey(LongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setStatisticsSettingLongId(Long statisticsSettingLongId) {
+        this.statisticsSettingLongId = statisticsSettingLongId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getValue() {
@@ -66,9 +78,10 @@ public class HibernateBridgeBridgeData implements Entity<LongIdKey> {
 
     @Override
     public String toString() {
-        return "HibernateBridgeNormalData{" +
+        return "HibernateBridgeBridgeData{" +
                 "key=" + key +
-                ", statisticsSettingKey=" + statisticsSettingKey +
+                ", statisticsSettingLongId=" + statisticsSettingLongId +
+                ", tag='" + tag + '\'' +
                 ", value='" + value + '\'' +
                 ", happenedDate=" + happenedDate +
                 '}';

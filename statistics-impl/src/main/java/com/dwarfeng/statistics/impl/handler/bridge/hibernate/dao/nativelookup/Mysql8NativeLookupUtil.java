@@ -51,6 +51,7 @@ public final class Mysql8NativeLookupUtil {
         sqlBuilder.append(" AND");
     }
 
+    @SuppressWarnings("JavaExistingMethodCanBeUsed")
     public static void statisticsSettingLongIdEquals(
             StringBuilder sqlBuilder, String tableNameAlias, String statisticsSettingLongIdColumnName
     ) {
@@ -58,6 +59,16 @@ public final class Mysql8NativeLookupUtil {
         sqlBuilder.append(tableNameAlias);
         sqlBuilder.append(".");
         sqlBuilder.append(statisticsSettingLongIdColumnName);
+        sqlBuilder.append(" = ?");
+    }
+
+    public static void tagEquals(
+            StringBuilder sqlBuilder, String tableNameAlias, String tagColumnName
+    ) {
+        sqlBuilder.append(" ");
+        sqlBuilder.append(tableNameAlias);
+        sqlBuilder.append(".");
+        sqlBuilder.append(tagColumnName);
         sqlBuilder.append(" = ?");
     }
 

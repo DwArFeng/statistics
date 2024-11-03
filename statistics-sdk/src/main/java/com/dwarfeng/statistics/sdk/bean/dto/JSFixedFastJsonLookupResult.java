@@ -2,8 +2,8 @@ package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.serializer.ToStringSerializer;
+import com.dwarfeng.statistics.sdk.bean.key.JSFixedFastJsonBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.LookupResult;
-import com.dwarfeng.subgrade.sdk.bean.key.JSFixedFastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.util.List;
@@ -19,14 +19,14 @@ import java.util.stream.Collectors;
  */
 public class JSFixedFastJsonLookupResult implements Dto {
 
-    private static final long serialVersionUID = -4395618407176122269L;
+    private static final long serialVersionUID = 74715469130561524L;
 
     public static JSFixedFastJsonLookupResult of(LookupResult lookupResult) {
         if (Objects.isNull(lookupResult)) {
             return null;
         } else {
             return new JSFixedFastJsonLookupResult(
-                    JSFixedFastJsonLongIdKey.of(lookupResult.getStatisticsSettingKey()),
+                    JSFixedFastJsonBridgeDataKey.of(lookupResult.getBridgeDataKey()),
                     Optional.ofNullable(lookupResult.getBridgeDatas()).map(
                             f -> f.stream().map(JSFixedFastJsonBridgeData::of).collect(Collectors.toList())
                     ).orElse(null),
@@ -38,8 +38,8 @@ public class JSFixedFastJsonLookupResult implements Dto {
         }
     }
 
-    @JSONField(name = "statistics_setting_key", ordinal = 1)
-    private JSFixedFastJsonLongIdKey statisticsSettingKey;
+    @JSONField(name = "bridge_data_key", ordinal = 1)
+    private JSFixedFastJsonBridgeDataKey bridgeDataKey;
 
     @JSONField(name = "bridge_datas", ordinal = 2)
     private List<JSFixedFastJsonBridgeData> bridgeDatas;
@@ -60,10 +60,10 @@ public class JSFixedFastJsonLookupResult implements Dto {
     }
 
     public JSFixedFastJsonLookupResult(
-            JSFixedFastJsonLongIdKey statisticsSettingKey, List<JSFixedFastJsonBridgeData> bridgeDatas, int currentPage,
-            int totalPages, int rows, long count
+            JSFixedFastJsonBridgeDataKey bridgeDataKey, List<JSFixedFastJsonBridgeData> bridgeDatas,
+            int currentPage, int totalPages, int rows, long count
     ) {
-        this.statisticsSettingKey = statisticsSettingKey;
+        this.bridgeDataKey = bridgeDataKey;
         this.bridgeDatas = bridgeDatas;
         this.currentPage = currentPage;
         this.totalPages = totalPages;
@@ -71,12 +71,12 @@ public class JSFixedFastJsonLookupResult implements Dto {
         this.count = count;
     }
 
-    public JSFixedFastJsonLongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public JSFixedFastJsonBridgeDataKey getBridgeDataKey() {
+        return bridgeDataKey;
     }
 
-    public void setStatisticsSettingKey(JSFixedFastJsonLongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setBridgeDataKey(JSFixedFastJsonBridgeDataKey bridgeDataKey) {
+        this.bridgeDataKey = bridgeDataKey;
     }
 
     public List<JSFixedFastJsonBridgeData> getBridgeDatas() {
@@ -122,7 +122,7 @@ public class JSFixedFastJsonLookupResult implements Dto {
     @Override
     public String toString() {
         return "JSFixedFastJsonLookupResult{" +
-                "statisticsSettingKey=" + statisticsSettingKey +
+                "bridgeDataKey=" + bridgeDataKey +
                 ", bridgeDatas=" + bridgeDatas +
                 ", currentPage=" + currentPage +
                 ", totalPages=" + totalPages +

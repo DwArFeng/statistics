@@ -4,8 +4,8 @@ import com.dwarfeng.statistics.impl.handler.Bridge;
 import com.dwarfeng.statistics.impl.handler.Bridge.Keeper;
 import com.dwarfeng.statistics.impl.handler.bridge.AbstractKeeper;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,18 +140,18 @@ public class MultiBridgeKeeper extends AbstractKeeper implements InitializingBea
     }
 
     @Override
-    public BridgeData latest(LongIdKey statisticsSettingKey) throws HandlerException {
+    public BridgeData latest(BridgeDataKey bridgeDataKey) throws HandlerException {
         try {
-            return primaryKeeper.latest(statisticsSettingKey);
+            return primaryKeeper.latest(bridgeDataKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
     }
 
     @Override
-    public List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws HandlerException {
+    public List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws HandlerException {
         try {
-            return primaryKeeper.latest(statisticsSettingKeys);
+            return primaryKeeper.latest(bridgeDataKeys);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }

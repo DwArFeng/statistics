@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.stack.handler;
 
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.LatestNotSupportedException;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import com.dwarfeng.subgrade.stack.handler.Handler;
 
@@ -19,7 +19,7 @@ import java.util.List;
  *
  * <p>
  * 部分保持处理器可能只支持写入，不支持查询。<br>
- * 对于只写的保持处理器，其 {@link #latest(LongIdKey)} 和 {@link #latest(List)} 方法应该抛出
+ * 对于只写的保持处理器，其 {@link #latest(BridgeDataKey)} 和 {@link #latest(List)} 方法应该抛出
  * {@link LatestNotSupportedException} 异常。
  *
  * <p>
@@ -46,7 +46,7 @@ public interface KeepHandler extends Handler {
      * 更新桥接器数据。
      *
      * <p>
-     * 调用此方法时，需要保证参数列表中所有的桥接器数据的 {@link BridgeData#getStatisticsSettingKey()} 相互不同。<br>
+     * 调用此方法时，需要保证参数列表中所有的桥接器数据的 {@link BridgeData#getKey()} 相互不同。<br>
      * 该规约通常由记录处理器保证。
      *
      * <p>
@@ -61,27 +61,27 @@ public interface KeepHandler extends Handler {
     void update(List<BridgeData> bridgeDatas) throws HandlerException;
 
     /**
-     * 查询统计设置的最新桥接器数据。
+     * 查询最新桥接器数据。
      *
      * <p>
-     * 如果统计设置主键对应的桥接器数据不存在，则返回的查询结果为 null。
+     * 如果桥接器数据主键对应的桥接器数据不存在，则返回的查询结果为 <code>null</code>。
      *
-     * @param statisticsSettingKey 指定的统计设置对应的主键。
+     * @param bridgeDataKey 指定的桥接器数据主键。
      * @return 指定的统计设置的最新桥接器数据。
      * @throws HandlerException 处理器异常。
      */
-    BridgeData latest(LongIdKey statisticsSettingKey) throws HandlerException;
+    BridgeData latest(BridgeDataKey bridgeDataKey) throws HandlerException;
 
     /**
-     * 查询统计设置的最新桥接器数据。
+     * 查询最新桥接器数据。
      *
      * <p>
-     * 如果统计设置主键组成的列表中的某个索引处的统计设置主键对应的桥接器数据不存在，
+     * 如果桥接器数据主键组成的列表中的某个索引处的桥接器数据主键对应的桥接器数据不存在，
      * 则返回的查询结果组成的列表该处索引对应的查询结果为 <code>null</code>。
      *
-     * @param statisticsSettingKeys 指定的统计设置对应的主键组成的列表。
+     * @param bridgeDataKeys 指定的桥接器数据主键组成的列表。
      * @return 指定的统计设置的最新桥接器数据组成的列表。
      * @throws HandlerException 处理器异常。
      */
-    List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws HandlerException;
+    List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws HandlerException;
 }

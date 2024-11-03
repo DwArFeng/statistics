@@ -1,40 +1,39 @@
 package com.dwarfeng.statistics.impl.handler.bridge.redis.bean;
 
 import com.dwarfeng.subgrade.stack.bean.entity.Entity;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
 import java.util.Date;
 
 /**
- * Redis 桥接数据。
+ * Redis 桥接器桥接数据。
  *
  * @author DwArFeng
  * @since 1.0.0
  */
-public class RedisBridgeBridgeData implements Entity<LongIdKey> {
+public class RedisBridgeBridgeData implements Entity<RedisBridgeBridgeDataKey> {
 
-    private static final long serialVersionUID = -1066247773168086530L;
+    private static final long serialVersionUID = -8765287830542819017L;
 
-    private LongIdKey key;
+    private RedisBridgeBridgeDataKey key;
     private String value;
     private Date happenedDate;
 
     public RedisBridgeBridgeData() {
     }
 
-    public RedisBridgeBridgeData(LongIdKey key, String value, Date happenedDate) {
+    public RedisBridgeBridgeData(RedisBridgeBridgeDataKey key, String value, Date happenedDate) {
         this.key = key;
         this.value = value;
         this.happenedDate = happenedDate;
     }
 
     @Override
-    public LongIdKey getKey() {
+    public RedisBridgeBridgeDataKey getKey() {
         return key;
     }
 
     @Override
-    public void setKey(LongIdKey key) {
+    public void setKey(RedisBridgeBridgeDataKey key) {
         this.key = key;
     }
 

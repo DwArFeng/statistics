@@ -44,7 +44,7 @@ public class SortMapperRegistry extends AbstractMapperRegistry {
 
     @Override
     public String provideDescription() {
-        return "对序列列表按照 Sequence.getPointKey() 进行排序，同时对序列中的所有数据条目进行排序。\n" +
+        return "对序列列表按照 Sequence.getBridgeDataKey() 进行排序，同时对序列中的所有数据条目进行排序。\n" +
                 "排序方式由参数决定。";
     }
 
@@ -79,26 +79,29 @@ public class SortMapperRegistry extends AbstractMapperRegistry {
             // 解析配置。
             Config config = JSON.parseObject(mapParam.getParam(), Config.class);
 
+            // 复制 sequences。
+            sequences = new ArrayList<>(sequences);
+
             // 对 sequences 进行排序。
             Comparator<Sequence> sequenceComparator;
-            switch (config.getSequencePointKeyOrder()) {
+            switch (config.getSequenceBridgeDataKeyOrder()) {
                 case ORDER_ASC:
-                    sequenceComparator = CompareUtil.SEQUENCE_POINT_KEY_ASC_COMPARATOR;
+                    sequenceComparator = CompareUtil.SEQUENCE_BRIDGE_DATA_KEY_ASC_COMPARATOR;
                     break;
                 case ORDER_DESC:
-                    sequenceComparator = CompareUtil.SEQUENCE_POINT_KEY_DESC_COMPARATOR;
+                    sequenceComparator = CompareUtil.SEQUENCE_BRIDGE_DATA_KEY_DESC_COMPARATOR;
                     break;
                 default:
                     throw new IllegalArgumentException(
-                            "未知的 sequencePointKeyOrder: " + config.getSequencePointKeyOrder()
+                            "未知的 sequenceBridgeDataKeyOrder: " + config.getSequenceBridgeDataKeyOrder()
                     );
             }
             sequences.sort(sequenceComparator);
 
             // 遍历 sequences，对其中的数据条目进行排序。
-            for (Sequence sequence : sequences) {
-                List<BridgeData> datas = new ArrayList<>(sequence.getDatas());
-
+            for (int i = 0; i < sequences.size(); i++) {
+                // 获取 sequence。
+                Sequence sequence = sequences.get(i);
                 // 对 datas 进行排序。
                 Comparator<BridgeData> dataComparator;
                 switch (config.getItemHappenedDateOrder()) {
@@ -113,7 +116,8 @@ public class SortMapperRegistry extends AbstractMapperRegistry {
                                 "未知的 itemHappenedDateOrder: " + config.getItemHappenedDateOrder()
                         );
                 }
-                datas.sort(dataComparator);
+                sequence.getDatas().sort(dataComparator);
+                sequences.set(i, sequence);
             }
 
             // 返回排序之后的 sequences。
@@ -128,13 +132,13 @@ public class SortMapperRegistry extends AbstractMapperRegistry {
 
     public static class Config implements Bean {
 
-        private static final long serialVersionUID = -4198254590843148435L;
+        private static final long serialVersionUID = -5008314865829066948L;
 
-        @JSONField(name = "#sequence_point_key_order", ordinal = 1, deserialize = false)
-        private String sequencePointKeyOrderRem = String.format("%d: 升序, %d: 降序", ORDER_ASC, ORDER_DESC);
+        @JSONField(name = "#sequence_bridge_data_key_order", ordinal = 1, deserialize = false)
+        private String sequenceBridgeDataKeyOrderRem = String.format("%d: 升序, %d: 降序", ORDER_ASC, ORDER_DESC);
 
-        @JSONField(name = "sequence_point_key_order", ordinal = 2)
-        private int sequencePointKeyOrder;
+        @JSONField(name = "sequence_bridge_data_key_order", ordinal = 2)
+        private int sequenceBridgeDataKeyOrder;
 
         @JSONField(name = "#item_happened_date_order", ordinal = 3, deserialize = false)
         private String itemHappenedDateOrderRem = String.format("%d: 升序, %d: 降序", ORDER_ASC, ORDER_DESC);
@@ -145,25 +149,25 @@ public class SortMapperRegistry extends AbstractMapperRegistry {
         public Config() {
         }
 
-        public Config(int sequencePointKeyOrder, int itemHappenedDateOrder) {
-            this.sequencePointKeyOrder = sequencePointKeyOrder;
+        public Config(int sequenceBridgeDataKeyOrder, int itemHappenedDateOrder) {
+            this.sequenceBridgeDataKeyOrder = sequenceBridgeDataKeyOrder;
             this.itemHappenedDateOrder = itemHappenedDateOrder;
         }
 
-        public String getSequencePointKeyOrderRem() {
-            return sequencePointKeyOrderRem;
+        public String getSequenceBridgeDataKeyOrderRem() {
+            return sequenceBridgeDataKeyOrderRem;
         }
 
-        public void setSequencePointKeyOrderRem(String sequencePointKeyOrderRem) {
-            this.sequencePointKeyOrderRem = sequencePointKeyOrderRem;
+        public void setSequenceBridgeDataKeyOrderRem(String sequenceBridgeDataKeyOrderRem) {
+            this.sequenceBridgeDataKeyOrderRem = sequenceBridgeDataKeyOrderRem;
         }
 
-        public int getSequencePointKeyOrder() {
-            return sequencePointKeyOrder;
+        public int getSequenceBridgeDataKeyOrder() {
+            return sequenceBridgeDataKeyOrder;
         }
 
-        public void setSequencePointKeyOrder(int sequencePointKeyOrder) {
-            this.sequencePointKeyOrder = sequencePointKeyOrder;
+        public void setSequenceBridgeDataKeyOrder(int sequenceBridgeDataKeyOrder) {
+            this.sequenceBridgeDataKeyOrder = sequenceBridgeDataKeyOrder;
         }
 
         public String getItemHappenedDateOrderRem() {
@@ -185,8 +189,8 @@ public class SortMapperRegistry extends AbstractMapperRegistry {
         @Override
         public String toString() {
             return "Config{" +
-                    "sequencePointKeyOrderRem='" + sequencePointKeyOrderRem + '\'' +
-                    ", sequencePointKeyOrder=" + sequencePointKeyOrder +
+                    "sequenceBridgeDataKeyOrderRem='" + sequenceBridgeDataKeyOrderRem + '\'' +
+                    ", sequenceBridgeDataKeyOrder=" + sequenceBridgeDataKeyOrder +
                     ", itemHappenedDateOrderRem='" + itemHappenedDateOrderRem + '\'' +
                     ", itemHappenedDateOrder=" + itemHappenedDateOrder +
                     '}';

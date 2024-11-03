@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.JSFixedFastJsonBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
-import com.dwarfeng.subgrade.sdk.bean.key.JSFixedFastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.util.Date;
@@ -16,22 +16,22 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonBridgeData implements Dto {
 
-    private static final long serialVersionUID = -7235434929751966419L;
+    private static final long serialVersionUID = 8632517700135303087L;
 
     public static JSFixedFastJsonBridgeData of(BridgeData bridgeData) {
         if (Objects.isNull(bridgeData)) {
             return null;
         } else {
             return new JSFixedFastJsonBridgeData(
-                    JSFixedFastJsonLongIdKey.of(bridgeData.getStatisticsSettingKey()),
+                    JSFixedFastJsonBridgeDataKey.of(bridgeData.getKey()),
                     bridgeData.getValue(),
                     bridgeData.getHappenedDate()
             );
         }
     }
 
-    @JSONField(name = "statistics_setting_key", ordinal = 1)
-    private JSFixedFastJsonLongIdKey statisticsSettingKey;
+    @JSONField(name = "key", ordinal = 1)
+    private JSFixedFastJsonBridgeDataKey key;
 
     @JSONField(name = "value", ordinal = 2)
     private Object value;
@@ -42,18 +42,18 @@ public class JSFixedFastJsonBridgeData implements Dto {
     public JSFixedFastJsonBridgeData() {
     }
 
-    public JSFixedFastJsonBridgeData(JSFixedFastJsonLongIdKey statisticsSettingKey, Object value, Date happenedDate) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public JSFixedFastJsonBridgeData(JSFixedFastJsonBridgeDataKey key, Object value, Date happenedDate) {
+        this.key = key;
         this.value = value;
         this.happenedDate = happenedDate;
     }
 
-    public JSFixedFastJsonLongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public JSFixedFastJsonBridgeDataKey getKey() {
+        return key;
     }
 
-    public void setStatisticsSettingKey(JSFixedFastJsonLongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setKey(JSFixedFastJsonBridgeDataKey key) {
+        this.key = key;
     }
 
     public Object getValue() {
@@ -75,7 +75,7 @@ public class JSFixedFastJsonBridgeData implements Dto {
     @Override
     public String toString() {
         return "JSFixedFastJsonBridgeData{" +
-                "statisticsSettingKey=" + statisticsSettingKey +
+                "key=" + key +
                 ", value=" + value +
                 ", happenedDate=" + happenedDate +
                 '}';

@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.impl.handler.bridge;
 
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 
 import java.util.List;
@@ -41,26 +41,26 @@ public abstract class FullKeeper extends AbstractKeeper {
     protected abstract void doUpdate(List<BridgeData> bridgeDatas) throws Exception;
 
     @Override
-    public BridgeData latest(LongIdKey statisticsSettingKey) throws HandlerException {
+    public BridgeData latest(BridgeDataKey bridgeDataKey) throws HandlerException {
         try {
-            return doLatest(statisticsSettingKey);
+            return doLatest(bridgeDataKey);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
     }
 
-    protected abstract BridgeData doLatest(LongIdKey statisticsSettingKey) throws Exception;
+    protected abstract BridgeData doLatest(BridgeDataKey bridgeDataKey) throws Exception;
 
     @Override
-    public List<BridgeData> latest(List<LongIdKey> statisticsSettingKeys) throws HandlerException {
+    public List<BridgeData> latest(List<BridgeDataKey> bridgeDataKeys) throws HandlerException {
         try {
-            return doLatest(statisticsSettingKeys);
+            return doLatest(bridgeDataKeys);
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
     }
 
-    protected abstract List<BridgeData> doLatest(List<LongIdKey> statisticsSettingKeys) throws Exception;
+    protected abstract List<BridgeData> doLatest(List<BridgeDataKey> bridgeDataKeys) throws Exception;
 
     @Override
     public String toString() {

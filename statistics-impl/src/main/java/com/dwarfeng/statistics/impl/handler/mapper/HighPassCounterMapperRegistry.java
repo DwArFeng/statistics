@@ -3,11 +3,12 @@ package com.dwarfeng.statistics.impl.handler.mapper;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.MapperException;
 import com.dwarfeng.statistics.stack.exception.MapperMakeException;
 import com.dwarfeng.statistics.stack.handler.Mapper;
 import com.dwarfeng.subgrade.stack.bean.Bean;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -82,7 +83,9 @@ public class HighPassCounterMapperRegistry extends AbstractMapperRegistry {
 
         @Override
         protected Object doAggregate(MapParam mapParam, List<BridgeData> datas, Date startDate, Date endDate) {
-            Sequence s = highPass(mapParam, new Sequence(new LongIdKey(0L), datas, startDate, endDate));
+            Sequence s = highPass(
+                    mapParam, new Sequence(new BridgeDataKey(0L, StringUtils.EMPTY), datas, startDate, endDate)
+            );
             return s.getDatas().size();
         }
 
@@ -101,7 +104,7 @@ public class HighPassCounterMapperRegistry extends AbstractMapperRegistry {
 
             // 返回结果。
             return new Sequence(
-                    sequence.getStatisticsSettingKey(), datas, sequence.getStartDate(), sequence.getEndDate()
+                    sequence.getBridgeDataKey(), datas, sequence.getStartDate(), sequence.getEndDate()
             );
         }
 

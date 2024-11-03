@@ -1,12 +1,14 @@
 package com.dwarfeng.statistics.impl.handler.bridge.influxdb.handler;
 
 import com.dwarfeng.statistics.impl.handler.bridge.influxdb.bean.dto.*;
+import com.dwarfeng.statistics.impl.handler.bridge.influxdb.util.Constants;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import com.influxdb.client.QueryApi;
 import com.influxdb.client.WriteApi;
 import com.influxdb.client.write.Point;
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,9 @@ import java.util.List;
 
 @Component
 public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler {
+
+    private static final String FLUX_PATTERN_EMPTY_QUERY =
+            "r[\"_measurement\"] == \"-12450\" and r[\"_measurement\"] == \"-114514\"";
 
     private final WriteApi writeApi;
     private final QueryApi queryApi;
@@ -60,9 +65,8 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
             // 构造数据查询语句模板。
             String dataFluxFormat = "from(bucket: \"%1$s\")\n" +
                     " |> range(start: %2$s, stop: %3$s)\n" +
-                    " |> filter(fn: (r) => r[\"_measurement\"] == \"%4$s\")\n" +
-                    " |> limit(n: %5$d, offset: %6$d)" +
-                    " |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+                    " |> filter(fn: (r) => %4$s)\n" +
+                    " |> limit(n: %5$d, offset: %6$d)";
 
             // 根据 page 和 rows 确定 limitNumber 和 limitOffset。
             int limitNumber = lookupInfo.getRows();
@@ -74,7 +78,7 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
                     bucket,
                     dataSsimpleDateFormat.format(lookupInfo.getRangeStart()),
                     dataSsimpleDateFormat.format(lookupInfo.getRangeStop()),
-                    lookupInfo.getMeasurement(),
+                    parseFluxPattern(lookupInfo.getDataGroup()),
                     limitNumber,
                     limitOffset
             );
@@ -87,10 +91,9 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
             List<InfluxdbBridgeLookupResult.Item> items = new ArrayList<>();
             if (!dataFluxTables.isEmpty()) {
                 for (FluxRecord record : dataFluxTables.get(0).getRecords()) {
+                    Object value = record.getValues().get(Constants.DATA_READ_VALUE_KEY_VALUE);
                     items.add(new InfluxdbBridgeLookupResult.Item(
-                            lookupInfo.getMeasurement(),
-                            record.getValues(),
-                            record.getTime()
+                            lookupInfo.getDataGroup(), value, record.getTime()
                     ));
                 }
             }
@@ -98,7 +101,7 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
             // 构造总数查询语句模板。
             String countFluxFormat = "from(bucket: \"%1$s\")\n" +
                     " |> range(start: %2$s, stop: %3$s)\n" +
-                    " |> filter(fn: (r) => r[\"_measurement\"] == \"%4$s\")\n" +
+                    " |> filter(fn: (r) => %4$s)\n" +
                     " |> count()";
 
             // 格式化查询语句。
@@ -107,7 +110,7 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
                     bucket,
                     countSimpleDateFormat.format(lookupInfo.getRangeStart()),
                     countSimpleDateFormat.format(lookupInfo.getRangeStop()),
-                    lookupInfo.getMeasurement()
+                    parseFluxPattern(lookupInfo.getDataGroup())
             );
 
             // 查询总数。
@@ -119,12 +122,13 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
             if (!countFluxTables.isEmpty()) {
                 // 通过 flux 语法可以保证返回的 countFluxTables 中只有一条记录，且 _value 类型为 long。
                 @SuppressWarnings("DataFlowIssue")
-                long totalDejaVu = (long) countFluxTables.get(0).getRecords().get(0).getValueByKey("_value");
+                long totalDejaVu = (long) countFluxTables.get(0).getRecords().get(0)
+                        .getValueByKey(Constants.DATA_READ_VALUE_KEY_VALUE);
                 total = totalDejaVu;
             }
 
             // 返回结果。
-            return new InfluxdbBridgeLookupResult(lookupInfo.getMeasurement(), items, total);
+            return new InfluxdbBridgeLookupResult(lookupInfo.getDataGroup(), items, total);
         } catch (Exception e) {
             throw new HandlerException(e);
         }
@@ -141,13 +145,12 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
                     " |> aggregateWindow(every: %5$dms, offset: %6$dms, fn:%7$s)";
 
             // 格式化查询语句。
-            String measurementPattern = generateMeasurementPattern(queryInfo.getMeasurements());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
             String flux = String.format(fluxFormat,
                     bucket,
                     simpleDateFormat.format(queryInfo.getRangeStart()),
                     simpleDateFormat.format(queryInfo.getRangeStop()),
-                    measurementPattern,
+                    parseFluxPattern(queryInfo.getDataGroups()),
                     queryInfo.getAggregateWindowEvery(),
                     queryInfo.getAggregateWindowOffset(),
                     queryInfo.getAggregateWindowFn()
@@ -174,13 +177,12 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
                     "%5$s";
 
             // 格式化查询语句。
-            String measurementPattern = generateMeasurementPattern(queryInfo.getMeasurements());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
             String flux = String.format(fluxFormat,
                     bucket,
                     simpleDateFormat.format(queryInfo.getRangeStart()),
                     simpleDateFormat.format(queryInfo.getRangeStop()),
-                    measurementPattern,
+                    parseFluxPattern(queryInfo.getDataGroups()),
                     queryInfo.getFluxFragment()
             );
 
@@ -192,20 +194,6 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
         } catch (Exception e) {
             throw new HandlerException(e);
         }
-    }
-
-    private String generateMeasurementPattern(List<String> measurements) {
-        // 特殊情况：如果 measurements 为空，返回预设的查询模式文本，以便于快速返回空结果。
-        if (measurements.isEmpty()) {
-            return "r[\"_measurement\"] == \"-12450\" and r[\"_measurement\"] == \"-114514\"";
-        }
-
-        String singlePatternFormat = "r[\"_measurement\"] == \"%s\"";
-        List<String> patterns = new ArrayList<>(measurements.size());
-        for (String measurement : measurements) {
-            patterns.add(String.format(singlePatternFormat, measurement));
-        }
-        return String.join(" or ", patterns);
     }
 
     private InfluxdbBridgeQueryResult fluxTable2QueryResult(List<FluxTable> fluxTables) {
@@ -220,18 +208,44 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
             }
             FluxRecord firstRecord = records.get(0);
             String measurement = firstRecord.getMeasurement();
+            String tag = (String) firstRecord.getValues().get(Constants.DATA_READ_VALUE_KEY_TAG);
+            InfluxdbBridgeDataGroup dataGroup = new InfluxdbBridgeDataGroup(measurement, tag);
             Instant start = firstRecord.getStart();
             Instant stop = firstRecord.getStop();
 
             for (FluxRecord record : records) {
-                Object value = record.getValue();
+                Object value = record.getValues().get(Constants.DATA_READ_VALUE_KEY_VALUE);
                 items.add(new InfluxdbBridgeQueryResult.InfluxdbBridgeItem(
-                        record.getMeasurement(), value, record.getTime()
+                        dataGroup, value, record.getTime()
                 ));
             }
-            sequences.add(new InfluxdbBridgeQueryResult.InfluxdbBridgeSequence(measurement, items, start, stop));
+            sequences.add(new InfluxdbBridgeQueryResult.InfluxdbBridgeSequence(dataGroup, items, start, stop));
         }
         return new InfluxdbBridgeQueryResult(sequences);
+    }
+
+    private String parseFluxPattern(InfluxdbBridgeDataGroup dataGroup) {
+        // 展开参数。
+        String measurement = dataGroup.getMeasurement();
+        String tag = dataGroup.getTag();
+
+        // 构造查询语句模板。
+        String fluxPatternFormat = "(r[\"_measurement\"] == \"%1$s\" and r[\"tag\"] == \"%2$s\")";
+        return String.format(fluxPatternFormat, measurement, tag);
+    }
+
+    private String parseFluxPattern(List<InfluxdbBridgeDataGroup> dataGroups) {
+        // 特殊情况：如果 dataGroups 为空，返回预设的查询文本，以便于快速返回空结果。
+        if (dataGroups.isEmpty()) {
+            return FLUX_PATTERN_EMPTY_QUERY;
+        }
+        // 为每个 dataGroup 生成查询片段。
+        List<String> patterns = new ArrayList<>(dataGroups.size());
+        for (InfluxdbBridgeDataGroup dataGroup : dataGroups) {
+            patterns.add(parseFluxPattern(dataGroup));
+        }
+        // 使用 "or" 连接所有查询片段。
+        return StringUtils.join(patterns, " or ");
     }
 
     @Override

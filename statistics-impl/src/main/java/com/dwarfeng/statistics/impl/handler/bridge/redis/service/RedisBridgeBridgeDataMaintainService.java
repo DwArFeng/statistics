@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.impl.handler.bridge.redis.service;
 
 import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeData;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeDataKey;
 import com.dwarfeng.subgrade.stack.service.BatchCrudService;
 
 /**
@@ -10,5 +10,6 @@ import com.dwarfeng.subgrade.stack.service.BatchCrudService;
  * @author DwArFeng
  * @since 1.0.0
  */
-public interface RedisBridgeBridgeDataMaintainService extends BatchCrudService<LongIdKey, RedisBridgeBridgeData> {
+public interface RedisBridgeBridgeDataMaintainService extends
+        BatchCrudService<RedisBridgeBridgeDataKey, RedisBridgeBridgeData> {
 }

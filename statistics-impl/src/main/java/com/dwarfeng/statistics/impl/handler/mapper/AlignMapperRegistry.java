@@ -41,7 +41,7 @@ public class AlignMapperRegistry extends AbstractMapperRegistry {
         return "对序列中的所有数据条目进行对齐操作，修改序列中数据条目的发生时间，" +
                 "使其对齐到序列的起始时间与结束时间之间的某个时间。\n" +
                 "该映射器的参数是一个介于 0 与 1 之间的浮点数，表示对齐的位置。\n" +
-                "0 代表对齐到序列的起始时间；1代表对齐到序列的结束时间。";
+                "0 代表对齐到序列的起始时间；1 代表对齐到序列的结束时间。";
     }
 
     @Override
@@ -99,12 +99,12 @@ public class AlignMapperRegistry extends AbstractMapperRegistry {
             List<BridgeData> datas;
             // 对序列中的每个数据条目进行映射，修改其发生时间。
             datas = sequence.getDatas().stream().map(
-                    item -> new BridgeData(item.getStatisticsSettingKey(), item.getValue(), alignDate)
+                    item -> new BridgeData(item.getKey(), item.getValue(), alignDate)
             ).collect(Collectors.toList());
 
             // 返回新的序列。
             return new Sequence(
-                    sequence.getStatisticsSettingKey(), datas, sequence.getStartDate(), sequence.getEndDate()
+                    sequence.getBridgeDataKey(), datas, sequence.getStartDate(), sequence.getEndDate()
             );
         }
 

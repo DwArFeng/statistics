@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class InfluxdbBridgeCustomQueryInfo implements Dto {
 
-    private static final long serialVersionUID = 9185226162755069975L;
+    private static final long serialVersionUID = 8291762583684592180L;
 
-    private List<String> measurements;
+    private List<InfluxdbBridgeDataGroup> dataGroups;
     private Date rangeStart;
     private Date rangeStop;
     private String fluxFragment;
@@ -24,20 +24,20 @@ public class InfluxdbBridgeCustomQueryInfo implements Dto {
     }
 
     public InfluxdbBridgeCustomQueryInfo(
-            List<String> measurements, Date rangeStart, Date rangeStop, String fluxFragment
+            List<InfluxdbBridgeDataGroup> dataGroups, Date rangeStart, Date rangeStop, String fluxFragment
     ) {
-        this.measurements = measurements;
+        this.dataGroups = dataGroups;
         this.rangeStart = rangeStart;
         this.rangeStop = rangeStop;
         this.fluxFragment = fluxFragment;
     }
 
-    public List<String> getMeasurements() {
-        return measurements;
+    public List<InfluxdbBridgeDataGroup> getDataGroups() {
+        return dataGroups;
     }
 
-    public void setMeasurements(List<String> measurements) {
-        this.measurements = measurements;
+    public void setDataGroups(List<InfluxdbBridgeDataGroup> dataGroups) {
+        this.dataGroups = dataGroups;
     }
 
     public Date getRangeStart() {
@@ -67,7 +67,7 @@ public class InfluxdbBridgeCustomQueryInfo implements Dto {
     @Override
     public String toString() {
         return "InfluxdbBridgeCustomQueryInfo{" +
-                "measurements=" + measurements +
+                "dataGroups=" + dataGroups +
                 ", rangeStart=" + rangeStart +
                 ", rangeStop=" + rangeStop +
                 ", fluxFragment='" + fluxFragment + '\'' +

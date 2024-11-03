@@ -11,10 +11,13 @@ import com.dwarfeng.subgrade.stack.bean.Bean;
  */
 public class MockBridgeDataConfigItem implements Bean {
 
-    private static final long serialVersionUID = 8510224495947819357L;
+    private static final long serialVersionUID = -5555700695528814012L;
 
-    @JSONField(name = "statistics_setting_id")
-    private Long statisticsSettingId;
+    @JSONField(name = "statistics_setting_long_id")
+    private Long statisticsSettingLongId;
+
+    @JSONField(name = "tag")
+    private String tag;
 
     @JSONField(name = "statistics_setting_type")
     private String statisticsSettingType;
@@ -22,17 +25,26 @@ public class MockBridgeDataConfigItem implements Bean {
     public MockBridgeDataConfigItem() {
     }
 
-    public MockBridgeDataConfigItem(Long statisticsSettingId, String statisticsSettingType) {
-        this.statisticsSettingId = statisticsSettingId;
+    public MockBridgeDataConfigItem(Long statisticsSettingLongId, String tag, String statisticsSettingType) {
+        this.statisticsSettingLongId = statisticsSettingLongId;
+        this.tag = tag;
         this.statisticsSettingType = statisticsSettingType;
     }
 
-    public Long getStatisticsSettingId() {
-        return statisticsSettingId;
+    public Long getStatisticsSettingLongId() {
+        return statisticsSettingLongId;
     }
 
-    public void setStatisticsSettingId(Long statisticsSettingId) {
-        this.statisticsSettingId = statisticsSettingId;
+    public void setStatisticsSettingLongId(Long statisticsSettingLongId) {
+        this.statisticsSettingLongId = statisticsSettingLongId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getStatisticsSettingType() {
@@ -45,8 +57,9 @@ public class MockBridgeDataConfigItem implements Bean {
 
     @Override
     public String toString() {
-        return "RealtimeMockSourceDataConfigItem{" +
-                "statisticsSettingId=" + statisticsSettingId +
+        return "MockBridgeDataConfigItem{" +
+                "statisticsSettingLongId=" + statisticsSettingLongId +
+                ", tag='" + tag + '\'' +
                 ", statisticsSettingType='" + statisticsSettingType + '\'' +
                 '}';
     }

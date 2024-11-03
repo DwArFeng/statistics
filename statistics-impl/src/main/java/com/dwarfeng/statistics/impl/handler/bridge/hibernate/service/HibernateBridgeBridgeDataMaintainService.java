@@ -19,22 +19,58 @@ public interface HibernateBridgeBridgeDataMaintainService extends
         BatchWriteService<HibernateBridgeBridgeData> {
 
     /**
-     * 统计设置键为指定值，且发生时间在起始时间和结束时间之间，起始时间闭合，结束时间闭合。
+     * 查看功能的默认预设。
+     *
+     * <p>
+     * 该预设包含如下约束：
+     * <ul>
+     *     <li>statisticsSettingLongId 为指定值。</li>
+     *     <li>tag 为指定值。</li>
+     *     <li>起始时间闭合。</li>
+     *     <li>结束时间闭合。</li>
+     * </ul>
      */
-    String CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_CLOSE = "child_for_statistics_setting_between_close_close";
+    String LOOKUP_DEFAULT_CLOSE_CLOSE = "lookup_default_close_close";
 
     /**
-     * 统计设置键为指定值，且发生时间在起始时间和结束时间之间，起始时间闭合，结束时间开放。
+     * 查看功能的默认预设。
+     *
+     * <p>
+     * 该预设包含如下约束：
+     * <ul>
+     *     <li>statisticsSettingLongId 为指定值。</li>
+     *     <li>tag 为指定值。</li>
+     *     <li>起始时间闭合。</li>
+     *     <li>结束时间开放。</li>
+     * </ul>
      */
-    String CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_OPEN = "child_for_statistics_setting_between_close_open";
+    String LOOKUP_DEFAULT_CLOSE_OPEN = "lookup_default_close_open";
 
     /**
-     * 统计设置键为指定值，且发生时间在起始时间和结束时间之间，起始时间开放，结束时间闭合。
+     * 查看功能的默认预设。
+     *
+     * <p>
+     * 该预设包含如下约束：
+     * <ul>
+     *     <li>statisticsSettingLongId 为指定值。</li>
+     *     <li>tag 为指定值。</li>
+     *     <li>起始时间开放。</li>
+     *     <li>结束时间闭合。</li>
+     * </ul>
      */
-    String CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_CLOSE = "child_for_statistics_setting_between_open_close";
+    String LOOKUP_DEFAULT_OPEN_CLOSE = "lookup_default_open_close";
 
     /**
-     * 统计设置键为指定值，且发生时间在起始时间和结束时间之间，起始时间开放，结束时间开放。
+     * 查看功能的默认预设。
+     *
+     * <p>
+     * 该预设包含如下约束：
+     * <ul>
+     *     <li>statisticsSettingLongId 为指定值。</li>
+     *     <li>tag 为指定值。</li>
+     *     <li>起始时间开放。</li>
+     *     <li>结束时间开放。</li>
+     * </ul>
      */
-    String CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_OPEN = "child_for_statistics_setting_between_open_open";
+    String LOOKUP_DEFAULT_OPEN_OPEN = "lookup_default_open_open";
 }

@@ -38,7 +38,7 @@ class ExampleMapperProcessor implements GroovyMapperRegistry.Processor {
 
         // 返回新的序列。
         return new Mapper.Sequence(
-                sequence.getStatisticsSettingKey(), Collections.unmodifiableList(datas),
+                sequence.getBridgeDataKey(), Collections.unmodifiableList(datas),
                 sequence.getStartDate(), sequence.getEndDate()
         )
     }

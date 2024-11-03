@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.WebInputBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.LookupInfo;
-import com.dwarfeng.subgrade.sdk.bean.key.WebInputLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import javax.validation.Valid;
@@ -21,7 +21,7 @@ import java.util.Objects;
  */
 public class WebInputLookupInfo implements Dto {
 
-    private static final long serialVersionUID = -5801428563027333858L;
+    private static final long serialVersionUID = -7391074361391559318L;
 
     public static LookupInfo toStackBean(WebInputLookupInfo webInput) {
         if (Objects.isNull(webInput)) {
@@ -30,7 +30,7 @@ public class WebInputLookupInfo implements Dto {
             return new LookupInfo(
                     webInput.getPreset(),
                     webInput.getParams(),
-                    WebInputLongIdKey.toStackBean(webInput.getStatisticsSettingKey()),
+                    WebInputBridgeDataKey.toStackBean(webInput.getBridgeDataKey()),
                     webInput.getStartDate(),
                     webInput.getEndDate(),
                     webInput.isIncludeStartDate(),
@@ -50,10 +50,10 @@ public class WebInputLookupInfo implements Dto {
     @NotNull
     private String[] params;
 
-    @JSONField(name = "statistics_setting_key")
+    @JSONField(name = "bridge_data_key")
     @NotNull
     @Valid
-    private WebInputLongIdKey statisticsSettingKey;
+    private WebInputBridgeDataKey bridgeDataKey;
 
     @JSONField(name = "start_date")
     @NotNull
@@ -96,12 +96,12 @@ public class WebInputLookupInfo implements Dto {
         this.params = params;
     }
 
-    public WebInputLongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public WebInputBridgeDataKey getBridgeDataKey() {
+        return bridgeDataKey;
     }
 
-    public void setStatisticsSettingKey(WebInputLongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setBridgeDataKey(WebInputBridgeDataKey bridgeDataKey) {
+        this.bridgeDataKey = bridgeDataKey;
     }
 
     public Date getStartDate() {
@@ -157,7 +157,7 @@ public class WebInputLookupInfo implements Dto {
         return "WebInputLookupInfo{" +
                 "preset='" + preset + '\'' +
                 ", params=" + Arrays.toString(params) +
-                ", statisticsSettingKey=" + statisticsSettingKey +
+                ", bridgeDataKey=" + bridgeDataKey +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", includeStartDate=" + includeStartDate +

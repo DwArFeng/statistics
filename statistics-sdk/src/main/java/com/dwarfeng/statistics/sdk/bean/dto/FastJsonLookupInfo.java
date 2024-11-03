@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.FastJsonBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.LookupInfo;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class FastJsonLookupInfo implements Dto {
 
-    private static final long serialVersionUID = 7379777411565038091L;
+    private static final long serialVersionUID = -266524889455711464L;
 
     public static FastJsonLookupInfo of(LookupInfo lookupInfo) {
         if (Objects.isNull(lookupInfo)) {
@@ -26,7 +26,7 @@ public class FastJsonLookupInfo implements Dto {
             return new FastJsonLookupInfo(
                     lookupInfo.getPreset(),
                     lookupInfo.getParams(),
-                    FastJsonLongIdKey.of(lookupInfo.getStatisticsSettingKey()),
+                    FastJsonBridgeDataKey.of(lookupInfo.getBridgeDataKey()),
                     lookupInfo.getStartDate(),
                     lookupInfo.getEndDate(),
                     lookupInfo.isIncludeStartDate(),
@@ -43,8 +43,8 @@ public class FastJsonLookupInfo implements Dto {
     @JSONField(name = "params", ordinal = 2)
     private String[] params;
 
-    @JSONField(name = "statistics_setting_key", ordinal = 3)
-    private FastJsonLongIdKey statisticsSettingKey;
+    @JSONField(name = "bridge_data_key", ordinal = 3)
+    private FastJsonBridgeDataKey bridgeDataKey;
 
     @JSONField(name = "start_date", ordinal = 4)
     private Date startDate;
@@ -68,12 +68,12 @@ public class FastJsonLookupInfo implements Dto {
     }
 
     public FastJsonLookupInfo(
-            String preset, String[] params, FastJsonLongIdKey statisticsSettingKey, Date startDate, Date endDate,
+            String preset, String[] params, FastJsonBridgeDataKey bridgeDataKey, Date startDate, Date endDate,
             boolean includeStartDate, boolean includeEndDate, Integer page, Integer rows
     ) {
         this.preset = preset;
         this.params = params;
-        this.statisticsSettingKey = statisticsSettingKey;
+        this.bridgeDataKey = bridgeDataKey;
         this.startDate = startDate;
         this.endDate = endDate;
         this.includeStartDate = includeStartDate;
@@ -98,12 +98,12 @@ public class FastJsonLookupInfo implements Dto {
         this.params = params;
     }
 
-    public FastJsonLongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public FastJsonBridgeDataKey getBridgeDataKey() {
+        return bridgeDataKey;
     }
 
-    public void setStatisticsSettingKey(FastJsonLongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setBridgeDataKey(FastJsonBridgeDataKey bridgeDataKey) {
+        this.bridgeDataKey = bridgeDataKey;
     }
 
     public Date getStartDate() {
@@ -159,7 +159,7 @@ public class FastJsonLookupInfo implements Dto {
         return "FastJsonLookupInfo{" +
                 "preset='" + preset + '\'' +
                 ", params=" + Arrays.toString(params) +
-                ", statisticsSettingKey=" + statisticsSettingKey +
+                ", bridgeDataKey=" + bridgeDataKey +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", includeStartDate=" + includeStartDate +

@@ -4,7 +4,6 @@ import com.dwarfeng.statistics.impl.handler.bridge.hibernate.bean.HibernateBridg
 import com.dwarfeng.statistics.impl.handler.bridge.hibernate.service.HibernateBridgeBridgeDataMaintainService;
 import com.dwarfeng.subgrade.sdk.hibernate.nativelookup.AbstractDialectNativeLookup;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -36,10 +35,10 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
     @Override
     public boolean supportPreset(String preset) {
         switch (preset) {
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_CLOSE:
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_OPEN:
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_CLOSE:
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_OPEN:
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_CLOSE_CLOSE:
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_CLOSE_OPEN:
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_OPEN_CLOSE:
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_OPEN_OPEN:
                 return true;
             default:
                 return false;
@@ -51,32 +50,33 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
             Connection connection, String preset, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
         switch (preset) {
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_CLOSE:
-                return childForStatisticsSettingBetweenCloseClose(connection, args, pagingInfo);
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_OPEN:
-                return childForStatisticsSettingBetweenCloseOpen(connection, args, pagingInfo);
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_CLOSE:
-                return childForStatisticsSettingBetweenOpenClose(connection, args, pagingInfo);
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_OPEN:
-                return childForStatisticsSettingBetweenOpenOpen(connection, args, pagingInfo);
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_CLOSE_CLOSE:
+                return lookupDefaultCloseClose(connection, args, pagingInfo);
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_CLOSE_OPEN:
+                return lookupDefaultCloseOpen(connection, args, pagingInfo);
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_OPEN_CLOSE:
+                return lookupDefaultOpenClose(connection, args, pagingInfo);
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_OPEN_OPEN:
+                return lookupDefaultOpenOpen(connection, args, pagingInfo);
             default:
                 throw new IllegalArgumentException("无法识别的预设: " + preset);
         }
     }
 
-    private List<HibernateBridgeBridgeData> childForStatisticsSettingBetweenCloseClose(
+    private List<HibernateBridgeBridgeData> lookupDefaultCloseClose(
             Connection connection, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
         // 展开参数。
-        long statisticsSettingLongId = ((LongIdKey) args[0]).getLongId();
-        Date startDate = (Date) args[1];
-        Date endDate = (Date) args[2];
+        long statisticsSettingLongId = (Long) args[0];
+        String tag = (String) args[1];
+        Date startDate = (Date) args[2];
+        Date endDate = (Date) args[3];
         int offset = pagingInfo.getPage() * pagingInfo.getRows();
         int limit = pagingInfo.getRows();
 
         // 查询数据。
-        return lookupChildForStatisticsSettingBetweenCloseClose(
-                connection, statisticsSettingLongId, startDate, endDate, offset, limit
+        return lookupLookupDefaultCloseClose(
+                connection, statisticsSettingLongId, tag, startDate, endDate, offset, limit
         );
     }
 
@@ -98,23 +98,25 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
      * @return 查询得到的数据。
      * @throws SQLException SQL 异常。
      */
-    protected abstract List<HibernateBridgeBridgeData> lookupChildForStatisticsSettingBetweenCloseClose(
-            Connection connection, long statisticsSettingLongId, Date startDate, Date endDate, int offset, int limit
+    protected abstract List<HibernateBridgeBridgeData> lookupLookupDefaultCloseClose(
+            Connection connection, long statisticsSettingLongId, String tag,
+            Date startDate, Date endDate, int offset, int limit
     ) throws SQLException;
 
-    private List<HibernateBridgeBridgeData> childForStatisticsSettingBetweenCloseOpen(
+    private List<HibernateBridgeBridgeData> lookupDefaultCloseOpen(
             Connection connection, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
         // 展开参数。
-        long statisticsSettingLongId = ((LongIdKey) args[0]).getLongId();
-        Date startDate = (Date) args[1];
-        Date endDate = (Date) args[2];
+        long statisticsSettingLongId = (Long) args[0];
+        String tag = (String) args[1];
+        Date startDate = (Date) args[2];
+        Date endDate = (Date) args[3];
         int offset = pagingInfo.getPage() * pagingInfo.getRows();
         int limit = pagingInfo.getRows();
 
         // 查询数据。
-        return lookupChildForStatisticsSettingBetweenCloseOpen(
-                connection, statisticsSettingLongId, startDate, endDate, offset, limit
+        return lookupLookupDefaultCloseOpen(
+                connection, statisticsSettingLongId, tag, startDate, endDate, offset, limit
         );
     }
 
@@ -136,23 +138,25 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
      * @return 查询得到的数据。
      * @throws SQLException SQL 异常。
      */
-    protected abstract List<HibernateBridgeBridgeData> lookupChildForStatisticsSettingBetweenCloseOpen(
-            Connection connection, long statisticsSettingLongId, Date startDate, Date endDate, int offset, int limit
+    protected abstract List<HibernateBridgeBridgeData> lookupLookupDefaultCloseOpen(
+            Connection connection, long statisticsSettingLongId, String tag,
+            Date startDate, Date endDate, int offset, int limit
     ) throws SQLException;
 
-    private List<HibernateBridgeBridgeData> childForStatisticsSettingBetweenOpenClose(
+    private List<HibernateBridgeBridgeData> lookupDefaultOpenClose(
             Connection connection, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
         // 展开参数。
-        long statisticsSettingLongId = ((LongIdKey) args[0]).getLongId();
-        Date startDate = (Date) args[1];
-        Date endDate = (Date) args[2];
+        long statisticsSettingLongId = (Long) args[0];
+        String tag = (String) args[1];
+        Date startDate = (Date) args[2];
+        Date endDate = (Date) args[3];
         int offset = pagingInfo.getPage() * pagingInfo.getRows();
         int limit = pagingInfo.getRows();
 
         // 查询数据。
-        return lookupChildForStatisticsSettingBetweenOpenClose(
-                connection, statisticsSettingLongId, startDate, endDate, offset, limit
+        return lookupLookupDefaultOpenClose(
+                connection, statisticsSettingLongId, tag, startDate, endDate, offset, limit
         );
     }
 
@@ -174,23 +178,25 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
      * @return 查询得到的数据。
      * @throws SQLException SQL 异常。
      */
-    protected abstract List<HibernateBridgeBridgeData> lookupChildForStatisticsSettingBetweenOpenClose(
-            Connection connection, long statisticsSettingLongId, Date startDate, Date endDate, int offset, int limit
+    protected abstract List<HibernateBridgeBridgeData> lookupLookupDefaultOpenClose(
+            Connection connection, long statisticsSettingLongId, String tag,
+            Date startDate, Date endDate, int offset, int limit
     ) throws SQLException;
 
-    private List<HibernateBridgeBridgeData> childForStatisticsSettingBetweenOpenOpen(
+    private List<HibernateBridgeBridgeData> lookupDefaultOpenOpen(
             Connection connection, Object[] args, PagingInfo pagingInfo
     ) throws SQLException {
         // 展开参数。
-        long statisticsSettingLongId = ((LongIdKey) args[0]).getLongId();
-        Date startDate = (Date) args[1];
-        Date endDate = (Date) args[2];
+        long statisticsSettingLongId = (Long) args[0];
+        String tag = (String) args[1];
+        Date startDate = (Date) args[2];
+        Date endDate = (Date) args[3];
         int offset = pagingInfo.getPage() * pagingInfo.getRows();
         int limit = pagingInfo.getRows();
 
         // 查询数据。
-        return lookupChildForStatisticsSettingBetweenOpenOpen(
-                connection, statisticsSettingLongId, startDate, endDate, offset, limit
+        return lookupLookupDefaultOpenOpen(
+                connection, statisticsSettingLongId, tag, startDate, endDate, offset, limit
         );
     }
 
@@ -212,36 +218,38 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
      * @return 查询得到的数据。
      * @throws SQLException SQL 异常。
      */
-    protected abstract List<HibernateBridgeBridgeData> lookupChildForStatisticsSettingBetweenOpenOpen(
-            Connection connection, long statisticsSettingLongId, Date startDate, Date endDate, int offset, int limit
+    protected abstract List<HibernateBridgeBridgeData> lookupLookupDefaultOpenOpen(
+            Connection connection, long statisticsSettingLongId, String tag,
+            Date startDate, Date endDate, int offset, int limit
     ) throws SQLException;
 
     @Override
     public int lookupCount(Connection connection, String preset, Object[] args) throws SQLException {
         switch (preset) {
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_CLOSE:
-                return childForStatisticsSettingBetweenCloseCloseCount(connection, args);
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_CLOSE_OPEN:
-                return childForStatisticsSettingBetweenCloseOpenCount(connection, args);
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_CLOSE:
-                return childForStatisticsSettingBetweenOpenCloseCount(connection, args);
-            case HibernateBridgeBridgeDataMaintainService.CHILD_FOR_STATISTICS_SETTING_BETWEEN_OPEN_OPEN:
-                return childForStatisticsSettingBetweenOpenOpenCount(connection, args);
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_CLOSE_CLOSE:
+                return lookupDefaultCloseCloseCount(connection, args);
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_CLOSE_OPEN:
+                return lookupDefaultCloseOpenCount(connection, args);
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_OPEN_CLOSE:
+                return lookupDefaultOpenCloseCount(connection, args);
+            case HibernateBridgeBridgeDataMaintainService.LOOKUP_DEFAULT_OPEN_OPEN:
+                return lookupDefaultOpenOpenCount(connection, args);
             default:
                 throw new IllegalArgumentException("无法识别的预设: " + preset);
         }
     }
 
-    private int childForStatisticsSettingBetweenCloseCloseCount(Connection connection, Object[] args)
+    private int lookupDefaultCloseCloseCount(Connection connection, Object[] args)
             throws SQLException {
         // 展开参数。
-        long statisticsSettingLongId = ((LongIdKey) args[0]).getLongId();
-        Date startDate = (Date) args[1];
-        Date endDate = (Date) args[2];
+        long statisticsSettingLongId = (Long) args[0];
+        String tag = (String) args[1];
+        Date startDate = (Date) args[2];
+        Date endDate = (Date) args[3];
 
         // 查询数据。
-        return lookupChildForStatisticsSettingBetweenCloseCloseCount(
-                connection, statisticsSettingLongId, startDate, endDate
+        return lookupLookupDefaultCloseCloseCount(
+                connection, statisticsSettingLongId, tag, startDate, endDate
         );
     }
 
@@ -258,20 +266,21 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
      * @return 查询得到的数据数量。
      * @throws SQLException SQL 异常。
      */
-    protected abstract int lookupChildForStatisticsSettingBetweenCloseCloseCount(
-            Connection connection, long statisticsSettingLongId, Date startDate, Date endDate
+    protected abstract int lookupLookupDefaultCloseCloseCount(
+            Connection connection, long statisticsSettingLongId, String tag, Date startDate, Date endDate
     ) throws SQLException;
 
-    private int childForStatisticsSettingBetweenCloseOpenCount(Connection connection, Object[] args)
+    private int lookupDefaultCloseOpenCount(Connection connection, Object[] args)
             throws SQLException {
         // 展开参数。
-        long statisticsSettingLongId = ((LongIdKey) args[0]).getLongId();
-        Date startDate = (Date) args[1];
-        Date endDate = (Date) args[2];
+        long statisticsSettingLongId = (Long) args[0];
+        String tag = (String) args[1];
+        Date startDate = (Date) args[2];
+        Date endDate = (Date) args[3];
 
         // 查询数据。
-        return lookupChildForStatisticsSettingBetweenCloseOpenCount(
-                connection, statisticsSettingLongId, startDate, endDate
+        return lookupLookupDefaultCloseOpenCount(
+                connection, statisticsSettingLongId, tag, startDate, endDate
         );
     }
 
@@ -288,20 +297,21 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
      * @return 查询得到的数据数量。
      * @throws SQLException SQL 异常。
      */
-    protected abstract int lookupChildForStatisticsSettingBetweenCloseOpenCount(
-            Connection connection, long statisticsSettingLongId, Date startDate, Date endDate
+    protected abstract int lookupLookupDefaultCloseOpenCount(
+            Connection connection, long statisticsSettingLongId, String tag, Date startDate, Date endDate
     ) throws SQLException;
 
-    private int childForStatisticsSettingBetweenOpenCloseCount(Connection connection, Object[] args)
+    private int lookupDefaultOpenCloseCount(Connection connection, Object[] args)
             throws SQLException {
         // 展开参数。
-        long statisticsSettingLongId = ((LongIdKey) args[0]).getLongId();
-        Date startDate = (Date) args[1];
-        Date endDate = (Date) args[2];
+        long statisticsSettingLongId = (Long) args[0];
+        String tag = (String) args[1];
+        Date startDate = (Date) args[2];
+        Date endDate = (Date) args[3];
 
         // 查询数据。
-        return lookupChildForStatisticsSettingBetweenOpenCloseCount(
-                connection, statisticsSettingLongId, startDate, endDate
+        return lookupLookupDefaultOpenCloseCount(
+                connection, statisticsSettingLongId, tag, startDate, endDate
         );
     }
 
@@ -318,20 +328,21 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
      * @return 查询得到的数据数量。
      * @throws SQLException SQL 异常。
      */
-    protected abstract int lookupChildForStatisticsSettingBetweenOpenCloseCount(
-            Connection connection, long statisticsSettingLongId, Date startDate, Date endDate
+    protected abstract int lookupLookupDefaultOpenCloseCount(
+            Connection connection, long statisticsSettingLongId, String tag, Date startDate, Date endDate
     ) throws SQLException;
 
-    private int childForStatisticsSettingBetweenOpenOpenCount(Connection connection, Object[] args)
+    private int lookupDefaultOpenOpenCount(Connection connection, Object[] args)
             throws SQLException {
         // 展开参数。
-        long statisticsSettingLongId = ((LongIdKey) args[0]).getLongId();
-        Date startDate = (Date) args[1];
-        Date endDate = (Date) args[2];
+        long statisticsSettingLongId = (Long) args[0];
+        String tag = (String) args[1];
+        Date startDate = (Date) args[2];
+        Date endDate = (Date) args[3];
 
         // 查询数据。
-        return lookupChildForStatisticsSettingBetweenOpenOpenCount(
-                connection, statisticsSettingLongId, startDate, endDate
+        return lookupLookupDefaultOpenOpenCount(
+                connection, statisticsSettingLongId, tag, startDate, endDate
         );
     }
 
@@ -348,8 +359,8 @@ public abstract class HibernateBridgeBridgeDataNativeLookup extends
      * @return 查询得到的数据数量。
      * @throws SQLException SQL 异常。
      */
-    protected abstract int lookupChildForStatisticsSettingBetweenOpenOpenCount(
-            Connection connection, long statisticsSettingLongId, Date startDate, Date endDate
+    protected abstract int lookupLookupDefaultOpenOpenCount(
+            Connection connection, long statisticsSettingLongId, String tag, Date startDate, Date endDate
     ) throws SQLException;
 
     @Override

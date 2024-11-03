@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.stack.bean.dto;
 
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
 import java.util.Date;
 
@@ -13,27 +13,30 @@ import java.util.Date;
  */
 public class BridgeData implements Dto {
 
-    private static final long serialVersionUID = 5625081273188456236L;
+    private static final long serialVersionUID = -5743363583632129139L;
 
-    private LongIdKey statisticsSettingKey;
+    /**
+     * @since 1.1.0
+     */
+    private BridgeDataKey key;
     private Object value;
     private Date happenedDate;
 
     public BridgeData() {
     }
 
-    public BridgeData(LongIdKey statisticsSettingKey, Object value, Date happenedDate) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public BridgeData(BridgeDataKey key, Object value, Date happenedDate) {
+        this.key = key;
         this.value = value;
         this.happenedDate = happenedDate;
     }
 
-    public LongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public BridgeDataKey getKey() {
+        return key;
     }
 
-    public void setStatisticsSettingKey(LongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setKey(BridgeDataKey key) {
+        this.key = key;
     }
 
     public Object getValue() {
@@ -55,7 +58,7 @@ public class BridgeData implements Dto {
     @Override
     public String toString() {
         return "BridgeData{" +
-                "statisticsSettingKey=" + statisticsSettingKey +
+                "key=" + key +
                 ", value=" + value +
                 ", happenedDate=" + happenedDate +
                 '}';

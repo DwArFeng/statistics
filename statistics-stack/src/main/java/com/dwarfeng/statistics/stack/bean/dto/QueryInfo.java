@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.stack.bean.dto;
 
+import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
-import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -21,11 +21,16 @@ import java.util.List;
  */
 public class QueryInfo implements Dto {
 
-    private static final long serialVersionUID = -3506582783928067332L;
+    private static final long serialVersionUID = 6414545103577681499L;
 
     private String preset;
     private String[] params;
-    private List<LongIdKey> statisticsSettingKeys;
+
+    /**
+     * @since 1.1.0
+     */
+    private List<BridgeDataKey> bridgeDataKeys;
+
     private Date startDate;
     private Date endDate;
     private boolean includeStartDate;
@@ -36,12 +41,12 @@ public class QueryInfo implements Dto {
     }
 
     public QueryInfo(
-            String preset, String[] params, List<LongIdKey> statisticsSettingKeys, Date startDate, Date endDate,
+            String preset, String[] params, List<BridgeDataKey> bridgeDataKeys, Date startDate, Date endDate,
             boolean includeStartDate, boolean includeEndDate, List<MapInfo> mapInfos
     ) {
         this.preset = preset;
         this.params = params;
-        this.statisticsSettingKeys = statisticsSettingKeys;
+        this.bridgeDataKeys = bridgeDataKeys;
         this.startDate = startDate;
         this.endDate = endDate;
         this.includeStartDate = includeStartDate;
@@ -65,12 +70,12 @@ public class QueryInfo implements Dto {
         this.params = params;
     }
 
-    public List<LongIdKey> getStatisticsSettingKeys() {
-        return statisticsSettingKeys;
+    public List<BridgeDataKey> getBridgeDataKeys() {
+        return bridgeDataKeys;
     }
 
-    public void setStatisticsSettingKeys(List<LongIdKey> statisticsSettingKeys) {
-        this.statisticsSettingKeys = statisticsSettingKeys;
+    public void setBridgeDataKeys(List<BridgeDataKey> bridgeDataKeys) {
+        this.bridgeDataKeys = bridgeDataKeys;
     }
 
     public Date getStartDate() {
@@ -118,7 +123,7 @@ public class QueryInfo implements Dto {
         return "QueryInfo{" +
                 "preset='" + preset + '\'' +
                 ", params=" + Arrays.toString(params) +
-                ", statisticsSettingKeys=" + statisticsSettingKeys +
+                ", bridgeDataKeys=" + bridgeDataKeys +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", includeStartDate=" + includeStartDate +

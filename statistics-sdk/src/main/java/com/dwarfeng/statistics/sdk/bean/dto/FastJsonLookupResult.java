@@ -1,8 +1,8 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.FastJsonBridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.dto.LookupResult;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
 import java.util.List;
@@ -18,14 +18,14 @@ import java.util.stream.Collectors;
  */
 public class FastJsonLookupResult implements Dto {
 
-    private static final long serialVersionUID = -1917395936215972491L;
+    private static final long serialVersionUID = -2166317137354256812L;
 
     public static FastJsonLookupResult of(LookupResult lookupResult) {
         if (Objects.isNull(lookupResult)) {
             return null;
         } else {
             return new FastJsonLookupResult(
-                    FastJsonLongIdKey.of(lookupResult.getStatisticsSettingKey()),
+                    FastJsonBridgeDataKey.of(lookupResult.getBridgeDataKey()),
                     Optional.ofNullable(lookupResult.getBridgeDatas()).map(
                             f -> f.stream().map(FastJsonBridgeData::of).collect(Collectors.toList())
                     ).orElse(null),
@@ -37,8 +37,8 @@ public class FastJsonLookupResult implements Dto {
         }
     }
 
-    @JSONField(name = "statistics_setting_key", ordinal = 1)
-    private FastJsonLongIdKey statisticsSettingKey;
+    @JSONField(name = "bridge_data_key", ordinal = 1)
+    private FastJsonBridgeDataKey bridgeDataKey;
 
     @JSONField(name = "bridge_datas", ordinal = 2)
     private List<FastJsonBridgeData> bridgeDatas;
@@ -59,10 +59,10 @@ public class FastJsonLookupResult implements Dto {
     }
 
     public FastJsonLookupResult(
-            FastJsonLongIdKey statisticsSettingKey, List<FastJsonBridgeData> bridgeDatas, int currentPage,
+            FastJsonBridgeDataKey bridgeDataKey, List<FastJsonBridgeData> bridgeDatas, int currentPage,
             int totalPages, int rows, long count
     ) {
-        this.statisticsSettingKey = statisticsSettingKey;
+        this.bridgeDataKey = bridgeDataKey;
         this.bridgeDatas = bridgeDatas;
         this.currentPage = currentPage;
         this.totalPages = totalPages;
@@ -70,12 +70,12 @@ public class FastJsonLookupResult implements Dto {
         this.count = count;
     }
 
-    public FastJsonLongIdKey getStatisticsSettingKey() {
-        return statisticsSettingKey;
+    public FastJsonBridgeDataKey getBridgeDataKey() {
+        return bridgeDataKey;
     }
 
-    public void setStatisticsSettingKey(FastJsonLongIdKey statisticsSettingKey) {
-        this.statisticsSettingKey = statisticsSettingKey;
+    public void setBridgeDataKey(FastJsonBridgeDataKey bridgeDataKey) {
+        this.bridgeDataKey = bridgeDataKey;
     }
 
     public List<FastJsonBridgeData> getBridgeDatas() {
@@ -121,7 +121,7 @@ public class FastJsonLookupResult implements Dto {
     @Override
     public String toString() {
         return "FastJsonLookupResult{" +
-                "statisticsSettingKey=" + statisticsSettingKey +
+                "bridgeDataKey=" + bridgeDataKey +
                 ", bridgeDatas=" + bridgeDatas +
                 ", currentPage=" + currentPage +
                 ", totalPages=" + totalPages +

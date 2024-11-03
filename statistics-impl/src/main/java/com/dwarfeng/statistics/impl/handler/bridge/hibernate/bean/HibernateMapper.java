@@ -21,7 +21,6 @@ public interface HibernateMapper {
     LongIdKey longIdKeyFromHibernate(HibernateLongIdKey hibernateLongIdKey);
 
     @Mapping(target = "longId", ignore = true)
-    @Mapping(target = "statisticsSettingLongId", ignore = true)
     HibernateBridgeHibernateBridgeData hibernateBridgeNormalDataToHibernate(
             HibernateBridgeBridgeData hibernateBridgeNormalData
     );

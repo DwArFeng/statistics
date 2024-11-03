@@ -13,9 +13,9 @@ import java.util.Date;
  */
 public class InfluxdbBridgeLookupInfo implements Dto {
 
-    private static final long serialVersionUID = 4347181345446316239L;
+    private static final long serialVersionUID = 4311073616735557682L;
 
-    private String measurement;
+    private InfluxdbBridgeDataGroup dataGroup;
     private Date rangeStart;
     private Date rangeStop;
     private int page;
@@ -26,9 +26,9 @@ public class InfluxdbBridgeLookupInfo implements Dto {
     }
 
     public InfluxdbBridgeLookupInfo(
-            String measurement, Date rangeStart, Date rangeStop, int page, int rows, String[] params
+            InfluxdbBridgeDataGroup dataGroup, Date rangeStart, Date rangeStop, int page, int rows, String[] params
     ) {
-        this.measurement = measurement;
+        this.dataGroup = dataGroup;
         this.rangeStart = rangeStart;
         this.rangeStop = rangeStop;
         this.page = page;
@@ -36,12 +36,12 @@ public class InfluxdbBridgeLookupInfo implements Dto {
         this.params = params;
     }
 
-    public String getMeasurement() {
-        return measurement;
+    public InfluxdbBridgeDataGroup getDataGroup() {
+        return dataGroup;
     }
 
-    public void setMeasurement(String measurement) {
-        this.measurement = measurement;
+    public void setDataGroup(InfluxdbBridgeDataGroup dataGroup) {
+        this.dataGroup = dataGroup;
     }
 
     public Date getRangeStart() {
@@ -87,7 +87,7 @@ public class InfluxdbBridgeLookupInfo implements Dto {
     @Override
     public String toString() {
         return "InfluxdbBridgeLookupInfo{" +
-                "measurement='" + measurement + '\'' +
+                "dataGroup=" + dataGroup +
                 ", rangeStart=" + rangeStart +
                 ", rangeStop=" + rangeStop +
                 ", page=" + page +
