@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 实现运维指令。
+  - com.dwarfeng.statistics.impl.service.telqos.ResetCommand。
+
 - 实现核心机制。
   - 重置机制。
 
