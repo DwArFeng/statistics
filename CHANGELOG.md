@@ -9,6 +9,7 @@
 
 - 实现核心机制。
   - 重置机制。
+  - 任务检查机制。
 
 - 实现预设过滤器。
   - com.dwarfeng.statistics.impl.handler.filter.identity.IdentityFilterRegistry。

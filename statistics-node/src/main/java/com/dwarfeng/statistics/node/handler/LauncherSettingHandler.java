@@ -27,6 +27,11 @@ public class LauncherSettingHandler implements Handler {
     @Value("${launcher.start_reset_delay}")
     private long startResetDelay;
 
+    @Value("${launcher.online_task_check_delay}")
+    private long onlineTaskCheckDelay;
+    @Value("${launcher.enable_task_check_delay}")
+    private long enableTaskCheckDelay;
+
     public boolean isResetDriverSupport() {
         return resetDriverSupport;
     }
@@ -59,6 +64,14 @@ public class LauncherSettingHandler implements Handler {
         return startResetDelay;
     }
 
+    public long getOnlineTaskCheckDelay() {
+        return onlineTaskCheckDelay;
+    }
+
+    public long getEnableTaskCheckDelay() {
+        return enableTaskCheckDelay;
+    }
+
     @Override
     public String toString() {
         return "LauncherSettingHandler{" +
@@ -70,6 +83,8 @@ public class LauncherSettingHandler implements Handler {
                 ", onlineSuperviseDelay=" + onlineSuperviseDelay +
                 ", enableSuperviseDelay=" + enableSuperviseDelay +
                 ", startResetDelay=" + startResetDelay +
+                ", onlineTaskCheckDelay=" + onlineTaskCheckDelay +
+                ", enableTaskCheckDelay=" + enableTaskCheckDelay +
                 '}';
     }
 }
