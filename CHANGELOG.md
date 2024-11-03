@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 实现预设过滤器。
+  - com.dwarfeng.statistics.impl.handler.filter.identity.IdentityFilterRegistry。
+
 - 优化统计功能。
   - 增加统计数据的标签功能。
 
