@@ -4,6 +4,12 @@
 
 #### 功能构建
 
+- 实现预设推送器。
+  - com.dwarfeng.statistics.impl.handler.pusher.DrainPusher。
+  - com.dwarfeng.statistics.impl.handler.pusher.LogPusher。
+  - com.dwarfeng.statistics.impl.handler.pusher.MultiPusher。
+  - com.dwarfeng.statistics.impl.handler.pusher.NativeKafkaPusher。
+
 - 实现运维指令。
   - com.dwarfeng.statistics.impl.service.telqos.ResetCommand。
   - com.dwarfeng.statistics.impl.service.telqos.TaskCheckCommand。
@@ -11,6 +17,7 @@
 - 实现核心机制。
   - 重置机制。
   - 任务检查机制。
+  - 推送机制。
 
 - 实现预设过滤器。
   - com.dwarfeng.statistics.impl.handler.filter.identity.IdentityFilterRegistry。

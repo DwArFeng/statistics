@@ -2,19 +2,16 @@ package com.dwarfeng.statistics.impl.handler;
 
 import com.dwarfeng.statistics.sdk.util.Constants;
 import com.dwarfeng.statistics.stack.bean.dto.*;
-import com.dwarfeng.statistics.stack.bean.entity.HistoryTask;
-import com.dwarfeng.statistics.stack.bean.entity.HistoryTaskEvent;
-import com.dwarfeng.statistics.stack.bean.entity.Task;
-import com.dwarfeng.statistics.stack.bean.entity.TaskEvent;
+import com.dwarfeng.statistics.stack.bean.entity.*;
+import com.dwarfeng.statistics.stack.handler.PushHandler;
 import com.dwarfeng.statistics.stack.handler.TaskOperateHandler;
-import com.dwarfeng.statistics.stack.service.HistoryTaskEventMaintainService;
-import com.dwarfeng.statistics.stack.service.HistoryTaskMaintainService;
-import com.dwarfeng.statistics.stack.service.TaskEventMaintainService;
-import com.dwarfeng.statistics.stack.service.TaskMaintainService;
+import com.dwarfeng.statistics.stack.service.*;
 import com.dwarfeng.subgrade.sdk.exception.HandlerExceptionHelper;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import com.dwarfeng.subgrade.stack.generation.KeyGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -24,6 +21,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class TaskOperateHandlerImpl implements TaskOperateHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskOperateHandlerImpl.class);
 
     private static final Set<Integer> VALID_TASK_STATUS_SET_START;
     private static final Set<Integer> VALID_TASK_STATUS_SET_FINISH;
@@ -70,6 +69,9 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
     private final HistoryTaskMaintainService historyTaskMaintainService;
     private final TaskEventMaintainService taskEventMaintainService;
     private final HistoryTaskEventMaintainService historyTaskEventMaintainService;
+    private final StatisticsSettingMaintainService statisticsSettingMaintainService;
+
+    private final PushHandler pushHandler;
 
     private final KeyGenerator<LongIdKey> keyGenerator;
 
@@ -87,6 +89,8 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
             HistoryTaskMaintainService historyTaskMaintainService,
             TaskEventMaintainService taskEventMaintainService,
             HistoryTaskEventMaintainService historyTaskEventMaintainService,
+            StatisticsSettingMaintainService statisticsSettingMaintainService,
+            PushHandler pushHandler,
             @Qualifier("snowflakeLongIdKeyGenerator") KeyGenerator<LongIdKey> keyGenerator,
             HandlerValidator handlerValidator
     ) {
@@ -94,6 +98,8 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
         this.historyTaskMaintainService = historyTaskMaintainService;
         this.taskEventMaintainService = taskEventMaintainService;
         this.historyTaskEventMaintainService = historyTaskEventMaintainService;
+        this.statisticsSettingMaintainService = statisticsSettingMaintainService;
+        this.pushHandler = pushHandler;
         this.keyGenerator = keyGenerator;
         this.handlerValidator = handlerValidator;
     }
@@ -201,6 +207,16 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
 
             // 删除任务。
             taskMaintainService.delete(taskKey);
+
+            // 消息推送。
+            try {
+                StatisticsSetting statisticsSetting = statisticsSettingMaintainService.get(
+                        task.getStatisticsSettingKey()
+                );
+                pushHandler.taskFinished(statisticsSetting);
+            } catch (Exception e) {
+                LOGGER.warn("推送任务完成消息时发生异常, 本次消息将不会被推送, 异常信息如下: ", e);
+            }
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -247,6 +263,16 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
 
             // 删除任务。
             taskMaintainService.delete(taskKey);
+
+            // 消息推送。
+            try {
+                StatisticsSetting statisticsSetting = statisticsSettingMaintainService.get(
+                        task.getStatisticsSettingKey()
+                );
+                pushHandler.taskFailed(statisticsSetting);
+            } catch (Exception e) {
+                LOGGER.warn("推送任务失败消息时发生异常, 本次消息将不会被推送, 异常信息如下: ", e);
+            }
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -293,6 +319,16 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
 
             // 删除任务。
             taskMaintainService.delete(taskKey);
+
+            // 消息推送。
+            try {
+                StatisticsSetting statisticsSetting = statisticsSettingMaintainService.get(
+                        task.getStatisticsSettingKey()
+                );
+                pushHandler.taskExpired(statisticsSetting);
+            } catch (Exception e) {
+                LOGGER.warn("推送任务过期消息时发生异常, 本次消息将不会被推送, 异常信息如下: ", e);
+            }
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
@@ -339,6 +375,16 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
 
             // 删除任务。
             taskMaintainService.delete(taskKey);
+
+            // 消息推送。
+            try {
+                StatisticsSetting statisticsSetting = statisticsSettingMaintainService.get(
+                        task.getStatisticsSettingKey()
+                );
+                pushHandler.taskExpired(statisticsSetting);
+            } catch (Exception e) {
+                LOGGER.warn("推送任务死亡消息时发生异常, 本次消息将不会被推送, 异常信息如下: ", e);
+            }
         } catch (Exception e) {
             throw HandlerExceptionHelper.parse(e);
         }
