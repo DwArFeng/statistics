@@ -24,6 +24,9 @@ public class LauncherSettingHandler implements Handler {
     @Value("${launcher.enable_supervise_delay}")
     private long enableSuperviseDelay;
 
+    @Value("${launcher.start_reset_delay}")
+    private long startResetDelay;
+
     public boolean isResetDriverSupport() {
         return resetDriverSupport;
     }
@@ -52,6 +55,10 @@ public class LauncherSettingHandler implements Handler {
         return enableSuperviseDelay;
     }
 
+    public long getStartResetDelay() {
+        return startResetDelay;
+    }
+
     @Override
     public String toString() {
         return "LauncherSettingHandler{" +
@@ -62,6 +69,7 @@ public class LauncherSettingHandler implements Handler {
                 ", startReceiveDelay=" + startReceiveDelay +
                 ", onlineSuperviseDelay=" + onlineSuperviseDelay +
                 ", enableSuperviseDelay=" + enableSuperviseDelay +
+                ", startResetDelay=" + startResetDelay +
                 '}';
     }
 }
