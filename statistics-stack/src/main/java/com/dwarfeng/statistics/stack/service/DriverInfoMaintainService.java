@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.service.PresetLookupService;
  * 驱动器信息维护服务。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface DriverInfoMaintainService extends BatchCrudService<LongIdKey, DriverInfo>,
         EntireLookupService<DriverInfo>, PresetLookupService<DriverInfo> {

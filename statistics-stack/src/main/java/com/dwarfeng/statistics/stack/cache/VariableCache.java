@@ -8,7 +8,7 @@ import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
  * 变量缓存。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface VariableCache extends BatchBaseCache<VariableKey, Variable> {
 }

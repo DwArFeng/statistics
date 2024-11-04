@@ -8,7 +8,7 @@ import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
  * 统计执行简报缓存。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface StatisticsExecutionProfileCache extends BatchBaseCache<LongIdKey, StatisticsExecutionProfile> {
 }

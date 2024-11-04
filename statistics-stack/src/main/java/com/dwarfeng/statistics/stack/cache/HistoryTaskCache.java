@@ -8,7 +8,7 @@ import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
  * 历史任务缓存。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface HistoryTaskCache extends BatchBaseCache<LongIdKey, HistoryTask> {
 }

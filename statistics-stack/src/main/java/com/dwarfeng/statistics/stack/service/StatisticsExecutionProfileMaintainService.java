@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.service.PresetLookupService;
  * 统计执行简报维护服务。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface StatisticsExecutionProfileMaintainService extends BatchCrudService<LongIdKey, StatisticsExecutionProfile>,
         EntireLookupService<StatisticsExecutionProfile>, PresetLookupService<StatisticsExecutionProfile> {

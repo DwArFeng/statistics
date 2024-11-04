@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.service.PresetLookupService;
  * 任务维护服务。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface TaskMaintainService extends BatchCrudService<LongIdKey, Task>,
         EntireLookupService<Task>, PresetLookupService<Task> {

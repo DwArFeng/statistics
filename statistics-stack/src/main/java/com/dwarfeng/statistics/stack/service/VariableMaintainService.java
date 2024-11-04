@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.service.PresetLookupService;
  * 变量维护服务。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface VariableMaintainService extends BatchCrudService<VariableKey, Variable>,
         EntireLookupService<Variable>, PresetLookupService<Variable> {

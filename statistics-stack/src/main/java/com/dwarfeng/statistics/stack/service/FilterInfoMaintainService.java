@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.service.PresetLookupService;
  * 过滤器信息维护服务。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface FilterInfoMaintainService extends BatchCrudService<LongIdKey, FilterInfo>,
         EntireLookupService<FilterInfo>, PresetLookupService<FilterInfo> {

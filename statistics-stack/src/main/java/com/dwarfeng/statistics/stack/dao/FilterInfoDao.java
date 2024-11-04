@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
  * 过滤器信息数据访问层。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface FilterInfoDao extends BatchBaseDao<LongIdKey, FilterInfo>, EntireLookupDao<FilterInfo>,
         PresetLookupDao<FilterInfo> {

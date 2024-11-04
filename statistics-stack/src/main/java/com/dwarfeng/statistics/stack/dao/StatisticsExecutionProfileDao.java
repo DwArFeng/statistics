@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
  * 统计执行简报数据访问层。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface StatisticsExecutionProfileDao extends BatchBaseDao<LongIdKey, StatisticsExecutionProfile>, EntireLookupDao<StatisticsExecutionProfile>,
         PresetLookupDao<StatisticsExecutionProfile> {

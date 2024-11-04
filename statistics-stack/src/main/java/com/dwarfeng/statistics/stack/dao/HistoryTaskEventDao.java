@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
  * 历史任务事件数据访问层。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface HistoryTaskEventDao extends BatchBaseDao<LongIdKey, HistoryTaskEvent>, EntireLookupDao<HistoryTaskEvent>,
         PresetLookupDao<HistoryTaskEvent> {

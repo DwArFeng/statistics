@@ -10,7 +10,7 @@ import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
  * 驱动器信息数据访问层。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface DriverInfoDao extends BatchBaseDao<LongIdKey, DriverInfo>, EntireLookupDao<DriverInfo>,
         PresetLookupDao<DriverInfo> {

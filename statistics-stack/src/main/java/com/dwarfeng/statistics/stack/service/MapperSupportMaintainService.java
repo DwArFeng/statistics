@@ -11,7 +11,7 @@ import com.dwarfeng.subgrade.stack.service.PresetLookupService;
  * 映射器支持维护服务。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface MapperSupportMaintainService extends BatchCrudService<StringIdKey, MapperSupport>,
         EntireLookupService<MapperSupport>, PresetLookupService<MapperSupport> {

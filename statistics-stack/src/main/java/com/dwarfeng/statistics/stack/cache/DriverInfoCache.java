@@ -8,7 +8,7 @@ import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
  * 驱动器信息缓存。
  *
  * @author DwArFeng
- * @since beta-1.0.0
+ * @since 1.0.0
  */
 public interface DriverInfoCache extends BatchBaseCache<LongIdKey, DriverInfo> {
 }
