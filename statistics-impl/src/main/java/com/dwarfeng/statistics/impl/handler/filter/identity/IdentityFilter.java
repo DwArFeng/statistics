@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * 模拟提供器。
+ * 本征过滤器。
  *
  * @author DwArFeng
  * @since 1.1.0

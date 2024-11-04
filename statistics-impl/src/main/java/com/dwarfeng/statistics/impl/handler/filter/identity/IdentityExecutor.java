@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 模拟执行器。
+ * 本征过滤器执行器。
  *
  * @author DwArFeng
- * @since 1.0.0
+ * @since 1.1.0
  */
 @Component("identityFilterRegistry.identityExecutor")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
