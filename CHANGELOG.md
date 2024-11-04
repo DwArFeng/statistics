@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 实现预设提供器。
+  - com.dwarfeng.statistics.impl.handler.provider.groovy.GroovyProviderRegistry。
+
 - 实现预设过滤器。
   - com.dwarfeng.statistics.impl.handler.filter.groovy.GroovyFilterRegistry。
 

@@ -14,4 +14,9 @@
     <!--
     <context:component-scan base-package="com.dwarfeng.statistics.impl.handler.provider.mock"/>
     -->
+
+    <!-- 加载 GroovyProvider -->
+    <!--
+    <context:component-scan base-package="com.dwarfeng.statistics.impl.handler.provider.groovy"/>
+    -->
 </beans>
