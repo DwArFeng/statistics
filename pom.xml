@@ -9,7 +9,7 @@
 
     <groupId>com.dwarfeng</groupId>
     <artifactId>statistics</artifactId>
-    <version>1.1.1.a-SNAPSHOT</version>
+    <version>1.1.1.a</version>
 
     <packaging>pom</packaging>
 
@@ -514,22 +514,22 @@
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>statistics-stack</artifactId>
-                <version>1.1.1.a-SNAPSHOT</version>
+                <version>1.1.1.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>statistics-sdk</artifactId>
-                <version>1.1.1.a-SNAPSHOT</version>
+                <version>1.1.1.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>statistics-impl</artifactId>
-                <version>1.1.1.a-SNAPSHOT</version>
+                <version>1.1.1.a</version>
             </dependency>
             <dependency>
                 <groupId>com.dwarfeng</groupId>
                 <artifactId>statistics-node</artifactId>
-                <version>1.1.1.a-SNAPSHOT</version>
+                <version>1.1.1.a</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
