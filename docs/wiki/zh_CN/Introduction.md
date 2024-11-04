@@ -13,12 +13,12 @@ Statistics 基于统计服务的需求与特性，设计了针对性的功能方
 
 ## 国际化（I18N）
 
-您正在阅读的文档是中文文档，您可以在 [wiki](./docs/wiki) 目录下找到其他语言的文档。
+您正在阅读的文档是中文文档，您可以在 [wiki](../../wiki) 目录下找到其他语言的文档。
 
-You are reading the Chinese document, you can find documents in other languages in the [wiki](./docs/wiki) directory.
+You are reading the Chinese document, you can find documents in other languages in the [wiki](../../wiki) directory.
 
-- [简体中文](./docs/wiki/zh_CN/Introduction.md)
-- [English](./docs/wiki/en_US/Introduction.md)
+- [简体中文](./Introduction.md)
+- [English](../en_US/Introduction.md)
 
 ## 特性
 
@@ -37,29 +37,29 @@ You are reading the Chinese document, you can find documents in other languages 
 
 Statistics 的系统架构如下图所示：
 
-![系统架构](./docs/wiki/zh_CN/images/SystemArchitecture.png "系统架构")
+![系统架构](./images/SystemArchitecture.png "系统架构")
 
 ## 文档
 
-该项目的文档位于 [docs](./docs) 目录下，包括：
+该项目的文档位于 [docs](../../../docs) 目录下，包括：
 
 ### wiki
 
 wiki 为项目的开发人员为本项目编写的详细文档，包含不同语言的版本，主要入口为：
 
-1. [简介](./docs/wiki/zh_CN/Introduction.md) - 镜像的 `README.md`，与本文件内容基本相同。
-2. [目录](./docs/wiki/zh_CN/Contents.md) - 文档目录。
+1. [简介](./Introduction.md) - 镜像的 `README.md`，与本文件内容基本相同。
+2. [目录](./Contents.md) - 文档目录。
 
 ## 运行截图
 
 Telnet 运维平台指令合集：
 
-![Telnet 运维平台指令合集](./docs/wiki/zh_CN/images/TelqosCommands.png "Telnet 运维平台指令合集")
+![Telnet 运维平台指令合集](./images/TelqosCommands.png "Telnet 运维平台指令合集")
 
 在 Telnet 运维平台中查询主管状态：
 
-![Telnet 运维平台查询主管状态](./docs/wiki/zh_CN/images/TelqosSuperviseStatus.png "Telnet 运维平台查询主管状态")
+![Telnet 运维平台查询主管状态](./images/TelqosSuperviseStatus.png "Telnet 运维平台查询主管状态")
 
 在 Telnet 运维平台中对数据进行开窗查询：
 
-![Telnet 运维平台开窗查询](./docs/wiki/zh_CN/images/TelqosQuery.png "Telnet 运维平台开窗查询")
+![Telnet 运维平台开窗查询](./images/TelqosQuery.png "Telnet 运维平台开窗查询")
