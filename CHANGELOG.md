@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 实现预设过滤器。
+  - com.dwarfeng.statistics.impl.handler.filter.groovy.GroovyFilterRegistry。
+
 - Wiki 编写。
   - docs/wiki/zh_CN/Contents.md。
   - docs/wiki/zh_CN/Introduction.md。
