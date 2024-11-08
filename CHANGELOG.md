@@ -4,7 +4,11 @@
 
 #### 功能构建
 
-- (无)
+- 优化部分类中的日志文案。
+  - com.dwarfeng.statistics.impl.handler.driver.CronDriverProvider。
+  - com.dwarfeng.statistics.impl.handler.driver.DctiKafkaDriverProvider。
+  - com.dwarfeng.statistics.impl.handler.driver.FixedDelayDriverProvider。
+  - com.dwarfeng.statistics.impl.handler.driver.FixedRateDriverProvider。
 
 #### Bug修复
 

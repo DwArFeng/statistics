@@ -123,10 +123,10 @@ public class CronDriverProvider implements DriverProvider {
                     return;
                 }
 
-                LOGGER.debug("计划时间已到达, cron 驱动器驱动 {} 记录设置执行动作...", statisticsSettingKey);
+                LOGGER.debug("计划时间已到达, cron 驱动器驱动统计设置 {} 执行统计动作...", statisticsSettingKey);
                 context.execute(statisticsSettingKey);
             } catch (Exception e) {
-                LOGGER.warn("记录 {} 时出现异常, 放弃本次记录", statisticsSettingKey, e);
+                LOGGER.warn("统计设置 {} 执行统计动作时出现异常, 放弃本次统计", statisticsSettingKey, e);
             } finally {
                 lock.unlock();
             }

@@ -164,7 +164,7 @@ public class DctiKafkaDriverProvider implements DriverProvider {
                     context.execute(statisticsSettingKey);
                 }
             } catch (Exception e) {
-                LOGGER.warn("处理 dcti dataInfo 时出现异常，将忽略驱动判断 1 次，异常信息如下", e);
+                LOGGER.warn("处理 dcti dataInfo 时出现异常，将忽略驱动动作 1 次，异常信息如下", e);
             } finally {
                 lock.unlock();
             }
