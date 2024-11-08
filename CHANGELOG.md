@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 实现运维指令。
+  - com.dwarfeng.statistics.impl.service.telqos.ConsumeCommand。
+
 - 实现核心机制。
   - 消费机制。
 
