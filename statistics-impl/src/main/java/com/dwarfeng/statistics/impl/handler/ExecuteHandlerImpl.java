@@ -77,21 +77,44 @@ public class ExecuteHandlerImpl implements ExecuteHandler {
         this.scheduler = scheduler;
     }
 
+    @Deprecated
     @Override
     public TaskCreateResult create(TaskCreateInfo info) throws HandlerException {
         try {
-            return taskOperateHandler.create(info);
+            return createTask0(info);
         } catch (HandlerException e) {
             throw e;
+        } catch (Exception e) {
+            throw new HandlerException(e);
+        }
+    }
+
+    @Deprecated
+    @Override
+    public void execute(TaskExecuteInfo info) throws HandlerException {
+        try {
+            executeTask0(info);
+        } catch (HandlerException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new HandlerException(e);
+        }
+    }
+
+    @Deprecated
+    @Override
+    public CompletableFuture<Void> executeAsync(TaskExecuteInfo info) throws HandlerException {
+        try {
+            return executeTaskAsync0(info);
         } catch (Exception e) {
             throw new HandlerException(e);
         }
     }
 
     @Override
-    public void execute(TaskExecuteInfo info) throws HandlerException {
+    public TaskCreateResult createTask(TaskCreateInfo info) throws HandlerException {
         try {
-            doExecuteTask(info);
+            return createTask0(info);
         } catch (HandlerException e) {
             throw e;
         } catch (Exception e) {
@@ -99,7 +122,22 @@ public class ExecuteHandlerImpl implements ExecuteHandler {
         }
     }
 
-    private void doExecuteTask(TaskExecuteInfo info) throws Exception {
+    private TaskCreateResult createTask0(TaskCreateInfo info) throws Exception {
+        return taskOperateHandler.create(info);
+    }
+
+    @Override
+    public void executeTask(TaskExecuteInfo info) throws HandlerException {
+        try {
+            executeTask0(info);
+        } catch (HandlerException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new HandlerException(e);
+        }
+    }
+
+    private void executeTask0(TaskExecuteInfo info) throws Exception {
         // 预定义参数。
         Future<?> beatTaskFuture = null;
 
@@ -267,8 +305,25 @@ public class ExecuteHandlerImpl implements ExecuteHandler {
         }
     }
 
+    private Future<?> startBeatTask(LongIdKey taskKey) {
+        BeatSchedulerTask beatSchedulerTask = ctx.getBean(BeatSchedulerTask.class, taskOperateHandler, taskKey);
+        return scheduler.scheduleAtFixedRate(
+                beatSchedulerTask,
+                new Date(System.currentTimeMillis() + beatInterval),
+                beatInterval
+        );
+    }
+
     @Override
-    public CompletableFuture<Void> executeAsync(TaskExecuteInfo info) {
+    public CompletableFuture<Void> executeTaskAsync(TaskExecuteInfo info) throws HandlerException {
+        try {
+            return executeTaskAsync0(info);
+        } catch (Exception e) {
+            throw new HandlerException(e);
+        }
+    }
+
+    public CompletableFuture<Void> executeTaskAsync0(TaskExecuteInfo info) {
         return CompletableFuture.supplyAsync(
                 () -> {
                     wrappedDoExecuteTask(info);
@@ -280,19 +335,10 @@ public class ExecuteHandlerImpl implements ExecuteHandler {
 
     private void wrappedDoExecuteTask(TaskExecuteInfo info) throws CompletionException {
         try {
-            doExecuteTask(info);
+            executeTask0(info);
         } catch (Exception e) {
             throw new CompletionException(e);
         }
-    }
-
-    private Future<?> startBeatTask(LongIdKey taskKey) {
-        BeatSchedulerTask beatSchedulerTask = ctx.getBean(BeatSchedulerTask.class, taskOperateHandler, taskKey);
-        return scheduler.scheduleAtFixedRate(
-                beatSchedulerTask,
-                new Date(System.currentTimeMillis() + beatInterval),
-                beatInterval
-        );
     }
 
     private Map<LongIdKey, Provider.Executor> makeProviderExecutorMap(

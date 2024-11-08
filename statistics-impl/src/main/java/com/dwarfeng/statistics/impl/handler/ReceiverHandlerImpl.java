@@ -63,10 +63,10 @@ public class ReceiverHandlerImpl implements ReceiverHandler {
         public void execute(LongIdKey statisticsSettingKey) throws ReceiverException {
             try {
                 TaskCreateInfo taskCreateInfo = new TaskCreateInfo(statisticsSettingKey);
-                TaskCreateResult taskCreateResult = executeHandler.create(taskCreateInfo);
+                TaskCreateResult taskCreateResult = executeHandler.createTask(taskCreateInfo);
                 LongIdKey taskKey = taskCreateResult.getTaskKey();
                 TaskExecuteInfo taskExecuteInfo = new TaskExecuteInfo(taskKey);
-                executeHandler.execute(taskExecuteInfo);
+                executeHandler.executeTask(taskExecuteInfo);
             } catch (ReceiverException e) {
                 throw e;
             } catch (Exception e) {

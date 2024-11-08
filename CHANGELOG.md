@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 优化部分类中的方法签名。
+  - com.dwarfeng.statistics.stack.handler.ExecuteHandler。
+
 - 优化部分类中的日志文案。
   - com.dwarfeng.statistics.impl.handler.driver.CronDriverProvider。
   - com.dwarfeng.statistics.impl.handler.driver.DctiKafkaDriverProvider。
