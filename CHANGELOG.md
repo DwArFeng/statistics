@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh_CN/images/SystemArchitecture.png。
+
 - 实现运维指令。
   - com.dwarfeng.statistics.impl.service.telqos.ConsumeCommand。
 
