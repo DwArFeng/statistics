@@ -22,7 +22,8 @@
 
 #### Bug修复
 
-- (无)
+- 修复部分配置文件中的错误。
+  - statistics/bridge.properties。
 
 #### 功能移除
 
