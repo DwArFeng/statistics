@@ -4,6 +4,10 @@
 
 #### 功能构建
 
+- Wiki 编写。
+  - docs/wiki/zh_CN/ShellScripts.md。
+  - docs/wiki/zh_CN/BatchScripts.md。
+
 - 增加部分提供器的功能。
   - com.dwarfeng.statistics.impl.handler.provider.mock.MockProviderRegistry。
 
