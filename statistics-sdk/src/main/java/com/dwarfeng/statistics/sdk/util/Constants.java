@@ -65,6 +65,11 @@ public final class Constants {
      */
     public static final int WATCH_DEFAULT_ROWS = Integer.MAX_VALUE;
 
+    /**
+     * 消费者处理器的检查间隔。
+     */
+    public static final long CONSUMER_HANDLER_CHECK_INTERVAL = 5000L;
+
     private static final Lock LOCK = new ReentrantLock();
 
     private static List<Integer> taskStatusSpace = null;

@@ -1,6 +1,7 @@
 package com.dwarfeng.statistics.stack.service;
 
 import com.dwarfeng.statistics.stack.handler.Receiver;
+import com.dwarfeng.statistics.stack.struct.ConsumerStatus;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
 import com.dwarfeng.subgrade.stack.service.Service;
 
@@ -51,4 +52,21 @@ public interface ReceiveQosService extends Service {
      * @throws ServiceException 服务异常。
      */
     List<Receiver> allReceivers() throws ServiceException;
+
+    /**
+     * 获取消费者的消费者状态。
+     *
+     * @return 消费者状态。
+     * @throws ServiceException 服务异常。
+     */
+    ConsumerStatus getConsumerStatus() throws ServiceException;
+
+    /**
+     * 设置消费者的参数。
+     *
+     * @param bufferSize 缓冲器的大小。
+     * @param thread     消费者的线程数量。
+     * @throws ServiceException 服务异常。
+     */
+    void setConsumerParameters(Integer bufferSize, Integer thread) throws ServiceException;
 }

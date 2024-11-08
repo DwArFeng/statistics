@@ -1,12 +1,10 @@
 package com.dwarfeng.statistics.impl.handler;
 
-import com.dwarfeng.statistics.stack.bean.dto.TaskCreateInfo;
-import com.dwarfeng.statistics.stack.bean.dto.TaskCreateResult;
-import com.dwarfeng.statistics.stack.bean.dto.TaskExecuteInfo;
 import com.dwarfeng.statistics.stack.exception.ReceiverException;
-import com.dwarfeng.statistics.stack.handler.ExecuteHandler;
+import com.dwarfeng.statistics.stack.handler.ConsumeHandler;
 import com.dwarfeng.statistics.stack.handler.Receiver;
 import com.dwarfeng.statistics.stack.handler.ReceiverHandler;
+import com.dwarfeng.statistics.stack.struct.ConsumeInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +18,7 @@ import java.util.Optional;
 @Component
 public class ReceiverHandlerImpl implements ReceiverHandler {
 
-    private final ExecuteHandler executeHandler;
+    private final ConsumeHandler consumeHandler;
 
     private final List<Receiver> receivers;
 
@@ -32,10 +30,10 @@ public class ReceiverHandlerImpl implements ReceiverHandler {
     private final InternalReceiverContext receiverContext = new InternalReceiverContext();
 
     public ReceiverHandlerImpl(
-            ExecuteHandler executeHandler,
+            ConsumeHandler consumeHandler,
             List<Receiver> receivers
     ) {
-        this.executeHandler = executeHandler;
+        this.consumeHandler = consumeHandler;
         this.receivers = Optional.ofNullable(receivers).orElse(Collections.emptyList());
     }
 
@@ -62,11 +60,7 @@ public class ReceiverHandlerImpl implements ReceiverHandler {
         @Override
         public void execute(LongIdKey statisticsSettingKey) throws ReceiverException {
             try {
-                TaskCreateInfo taskCreateInfo = new TaskCreateInfo(statisticsSettingKey);
-                TaskCreateResult taskCreateResult = executeHandler.createTask(taskCreateInfo);
-                LongIdKey taskKey = taskCreateResult.getTaskKey();
-                TaskExecuteInfo taskExecuteInfo = new TaskExecuteInfo(taskKey);
-                executeHandler.executeTask(taskExecuteInfo);
+                consumeHandler.accept(new ConsumeInfo(statisticsSettingKey));
             } catch (ReceiverException e) {
                 throw e;
             } catch (Exception e) {
