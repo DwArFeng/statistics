@@ -4,6 +4,10 @@
 
 #### 功能构建
 
+- 优化项目的启停脚本，以规避潜在的路径问题。
+  - binres/statistics-stop.sh。
+  - binres/statistics-start.sh。
+
 - Wiki 编写。
   - docs/wiki/zh_CN/Contents.md。
 
