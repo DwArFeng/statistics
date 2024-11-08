@@ -37,7 +37,7 @@ public class MockProviderRegistry extends AbstractProviderRegistry {
 
     @Override
     public String provideExampleParam() {
-        Config config = new Config(12450L, 10, "int_string", "last_provided_date", "tag");
+        Config config = new Config(12450L, 10, "int_string", "last_provided_date", "tag", 12450L);
         return JSON.toJSONString(config, true);
     }
 

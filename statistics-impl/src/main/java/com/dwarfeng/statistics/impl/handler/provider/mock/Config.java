@@ -11,7 +11,7 @@ import com.dwarfeng.subgrade.stack.bean.Bean;
  */
 public class Config implements Bean {
 
-    private static final long serialVersionUID = 4130192225040252970L;
+    private static final long serialVersionUID = -3325095051825831539L;
 
     @JSONField(name = "#random_seed", ordinal = 1, deserialize = false)
     private String randomSeedRem = "随机种子, 用于生成随机数据, 可以为 null。";
@@ -47,15 +47,26 @@ public class Config implements Bean {
     @JSONField(name = "tag", ordinal = 10)
     private String tag;
 
+    @JSONField(name = "#delay", ordinal = 11, deserialize = false)
+    private String delayRem = "延迟时间，用于指定生成数据的延迟时间。" +
+            "单位为毫秒，可以为 null。" +
+            "如果值为 null 或小于等于 0，则立即生成数据。";
+
+    @JSONField(name = "delay", ordinal = 12)
+    private Long delay;
+
     public Config() {
     }
 
-    public Config(Long randomSeed, int dataSize, String dataType, String lastProvidedDateVariableId, String tag) {
+    public Config(
+            Long randomSeed, int dataSize, String dataType, String lastProvidedDateVariableId, String tag, Long delay
+    ) {
         this.randomSeed = randomSeed;
         this.dataSize = dataSize;
         this.dataType = dataType;
         this.lastProvidedDateVariableId = lastProvidedDateVariableId;
         this.tag = tag;
+        this.delay = delay;
     }
 
     public String getRandomSeedRem() {
@@ -138,6 +149,22 @@ public class Config implements Bean {
         this.tag = tag;
     }
 
+    public String getDelayRem() {
+        return delayRem;
+    }
+
+    public void setDelayRem(String delayRem) {
+        this.delayRem = delayRem;
+    }
+
+    public Long getDelay() {
+        return delay;
+    }
+
+    public void setDelay(Long delay) {
+        this.delay = delay;
+    }
+
     @Override
     public String toString() {
         return "Config{" +
@@ -151,6 +178,8 @@ public class Config implements Bean {
                 ", lastProvidedDateVariableId='" + lastProvidedDateVariableId + '\'' +
                 ", tagRem='" + tagRem + '\'' +
                 ", tag='" + tag + '\'' +
+                ", delayRem='" + delayRem + '\'' +
+                ", delay=" + delay +
                 '}';
     }
 }

@@ -4,6 +4,9 @@
 
 #### 功能构建
 
+- 增加部分提供器的功能。
+  - com.dwarfeng.statistics.impl.handler.provider.mock.MockProviderRegistry。
+
 - Wiki 更新。
   - docs/wiki/zh_CN/images/SystemArchitecture.png。
 

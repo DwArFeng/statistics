@@ -84,6 +84,7 @@ public class MockExecutor extends AbstractExecutor {
         int dataSize = config.getDataSize();
         String dataType = config.getDataType();
         String tag = config.getTag();
+        Long delay = config.getDelay();
         // 查看最后提供数据的日期变量。
         LongIdKey statisticsSettingKey = context.getStatisticsSettingKey();
         VariableInspectInfo variableInspectInfo = new VariableInspectInfo(
@@ -120,6 +121,10 @@ public class MockExecutor extends AbstractExecutor {
             ProviderData data = new ProviderData(tag, value, new Date(timestamp));
             // 添加数据。
             datas.add(data);
+        }
+        // 如果延迟不为 null 且大于 0，则延迟一段时间。
+        if (Objects.nonNull(delay) && delay > 0) {
+            Thread.sleep(delay);
         }
         // 返回数据。
         return datas;
