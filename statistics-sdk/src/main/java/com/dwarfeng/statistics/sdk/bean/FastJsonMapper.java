@@ -18,6 +18,7 @@ import org.mapstruct.Mapper;
  * @since 1.0.0
  */
 @Mapper
+@Deprecated
 public interface FastJsonMapper {
 
     FastJsonLongIdKey longIdKeyToFastJson(LongIdKey longIdKey);

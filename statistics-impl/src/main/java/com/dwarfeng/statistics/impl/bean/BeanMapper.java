@@ -19,8 +19,9 @@ import org.mapstruct.Mapping;
  * @since 1.0.0
  */
 @Mapper
-public interface HibernateMapper {
+public interface BeanMapper {
 
+    // -----------------------------------------------------------Subgrade Key-----------------------------------------------------------
     HibernateLongIdKey longIdKeyToHibernate(LongIdKey longIdKey);
 
     @InheritInverseConfiguration
@@ -31,11 +32,13 @@ public interface HibernateMapper {
     @InheritInverseConfiguration
     StringIdKey stringIdKeyFromHibernate(HibernateStringIdKey hibernateStringIdKey);
 
+    // -----------------------------------------------------------Statistics Key-----------------------------------------------------------
     HibernateVariableKey variableKeyToHibernate(VariableKey variableKey);
 
     @InheritInverseConfiguration
     VariableKey variableKeyFromHibernate(HibernateVariableKey hibernateVariableKey);
 
+    // -----------------------------------------------------------Statistics Entity-----------------------------------------------------------
     @Mapping(target = "variables", ignore = true)
     @Mapping(target = "tasks", ignore = true)
     @Mapping(target = "statisticsExecutionProfile", ignore = true)
