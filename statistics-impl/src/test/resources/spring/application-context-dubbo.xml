@@ -8,7 +8,7 @@
         http://dubbo.apache.org/schema/dubbo
         http://dubbo.apache.org/schema/dubbo/dubbo.xsd"
 >
-    <dubbo:application name="statistics-test">
+    <dubbo:application name="statistics-impl-test">
         <dubbo:parameter key="qos.enable" value="false"/>
     </dubbo:application>
 
