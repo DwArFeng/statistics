@@ -23,6 +23,27 @@
 
     <fileSets>
         <fileSet>
+            <outputDirectory>docs</outputDirectory>
+            <directory>../docs</directory>
+            <!-- 仅应用于文本文件 -->
+            <includes>
+                <include>**/*.md</include>
+            </includes>
+            <filtered>false</filtered>
+            <fileMode>644</fileMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>docs</outputDirectory>
+            <directory>../docs</directory>
+            <!-- 仅应用于二进制文件 -->
+            <includes>
+                <include>**/*.png</include>
+            </includes>
+            <filtered>false</filtered>
+            <fileMode>644</fileMode>
+        </fileSet>
+        <fileSet>
             <outputDirectory>bin</outputDirectory>
             <directory>src/main/resources/binres</directory>
             <includes>
