@@ -24,7 +24,7 @@ public class Launcher {
     public static void main(String[] args) {
         ApplicationUtil.launch(new String[]{
                 "classpath:spring/application-context*.xml",
-                "file:opt/opt*.xml",
+                "classpath:opt/opt*.xml",
                 "file:optext/opt*.xml"
         }, ctx -> {
             // 根据启动器设置处理器的设置，选择性重置驱动器。
@@ -64,9 +64,9 @@ public class Launcher {
         // 判断是否重置驱动器支持，并按条件执行重置操作。
         if (launcherSettingHandler.isResetDriverSupport()) {
             LOGGER.info("重置驱动器支持...");
-            DriverSupportMaintainService maintainService = ctx.getBean(DriverSupportMaintainService.class);
+            SupportQosService maintainService = ctx.getBean(SupportQosService.class);
             try {
-                maintainService.reset();
+                maintainService.resetDriver();
             } catch (ServiceException e) {
                 LOGGER.warn("驱动器支持重置失败，异常信息如下", e);
             }
@@ -80,9 +80,9 @@ public class Launcher {
         // 判断是否重置提供器支持，并按条件执行重置操作。
         if (launcherSettingHandler.isResetProviderSupport()) {
             LOGGER.info("重置提供器支持...");
-            ProviderSupportMaintainService maintainService = ctx.getBean(ProviderSupportMaintainService.class);
+            SupportQosService maintainService = ctx.getBean(SupportQosService.class);
             try {
-                maintainService.reset();
+                maintainService.resetProvider();
             } catch (ServiceException e) {
                 LOGGER.warn("提供器支持重置失败，异常信息如下", e);
             }
@@ -96,9 +96,9 @@ public class Launcher {
         // 判断是否重置过滤器支持，并按条件执行重置操作。
         if (launcherSettingHandler.isResetFilterSupport()) {
             LOGGER.info("重置过滤器支持...");
-            FilterSupportMaintainService maintainService = ctx.getBean(FilterSupportMaintainService.class);
+            SupportQosService maintainService = ctx.getBean(SupportQosService.class);
             try {
-                maintainService.reset();
+                maintainService.resetFilter();
             } catch (ServiceException e) {
                 LOGGER.warn("过滤器支持重置失败，异常信息如下", e);
             }
@@ -112,9 +112,9 @@ public class Launcher {
         // 判断是否重置映射器支持，并按条件执行重置操作。
         if (launcherSettingHandler.isResetMapperSupport()) {
             LOGGER.info("重置映射器支持...");
-            MapperSupportMaintainService maintainService = ctx.getBean(MapperSupportMaintainService.class);
+            SupportQosService maintainService = ctx.getBean(SupportQosService.class);
             try {
-                maintainService.reset();
+                maintainService.resetMapper();
             } catch (ServiceException e) {
                 LOGGER.warn("映射器支持重置失败，异常信息如下", e);
             }
