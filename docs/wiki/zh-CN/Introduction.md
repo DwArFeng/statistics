@@ -18,7 +18,7 @@ Statistics 基于统计服务的需求与特性，设计了针对性的功能方
 You are reading the Chinese document, you can find documents in other languages in the [wiki](../../wiki) directory.
 
 - [简体中文](./Introduction.md)
-- [English](../en_US/Introduction.md)
+- [English](../en-US/Introduction.md)
 
 ## 特性
 
