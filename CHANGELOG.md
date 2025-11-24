@@ -1,40 +1,40 @@
 # ChangeLog
 
-### Release_1.3.0_20251121_build_A
+## Release_1.3.0_20251121_build_A
 
-#### 功能构建
-
-- (无)
-
-#### Bug修复
+### 功能构建
 
 - (无)
 
-#### 功能移除
+### Bug 修复
+
+- (无)
+
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.2.0_20251114_build_A
+## Release_1.2.0_20251114_build_A
 
-#### 功能构建
+### 功能构建
 
 - 新增 BeanMapper
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.2.0_20241109_build_A
+## Release_1.2.0_20241109_build_A
 
-#### 功能构建
+### 功能构建
 
 - Wiki 编写。
   - docs/wiki/zh_CN/ShellScripts.md。
@@ -52,19 +52,19 @@
 - 实现核心机制。
   - 消费机制。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.1.2_20241108_build_A
+## Release_1.1.2_20241108_build_A
 
-#### 功能构建
+### 功能构建
 
 - 优化项目的启停脚本，以规避潜在的路径问题。
   - binres/statistics-stop.sh。
@@ -82,20 +82,20 @@
   - com.dwarfeng.statistics.impl.handler.driver.FixedDelayDriverProvider。
   - com.dwarfeng.statistics.impl.handler.driver.FixedRateDriverProvider。
 
-#### Bug修复
+### Bug 修复
 
 - 修复部分配置文件中的错误。
   - statistics/bridge.properties。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.1.1_20241104_build_A
+## Release_1.1.1_20241104_build_A
 
-#### 功能构建
+### 功能构建
 
 - 实现预设提供器。
   - com.dwarfeng.statistics.impl.handler.provider.groovy.GroovyProviderRegistry。
@@ -113,21 +113,21 @@
 
 - `README.md` 更新。
 
-#### Bug修复
+### Bug 修复
 
 - 文档注释错误修复。
   - 修正部分类中的文档注释 `@since` 标签中的错误。
   - 修正本征过滤器中部分类的文档注释。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.1.0_20241103_build_A
+## Release_1.1.0_20241103_build_A
 
-#### 功能构建
+### 功能构建
 
 - 依赖升级。
   - 升级 `protobuf` 依赖版本为 `3.25.5` 以规避漏洞。
@@ -153,20 +153,20 @@
 - 优化统计功能。
   - 增加统计数据的标签功能。
 
-#### Bug修复
+### Bug 修复
 
 - 修复包扫描 bug。
   - 修复程序启动时，无视 `opt-filter.xml` 文件中的配置，而是扫描所有过滤器的 bug。
 
-#### 功能移除
+### 功能移除
 
 - (无)
 
 ---
 
-### Release_1.0.0_20241102_build_A
+## Release_1.0.0_20241102_build_A
 
-#### 功能构建
+### 功能构建
 
 - 实现预设提供器。
   - com.dwarfeng.statistics.impl.handler.provider.mock.MockProviderRegistry。
@@ -282,10 +282,10 @@
 
 - 项目结构建立，清理测试通过。
 
-#### Bug修复
+### Bug 修复
 
 - (无)
 
-#### 功能移除
+### 功能移除
 
 - (无)
