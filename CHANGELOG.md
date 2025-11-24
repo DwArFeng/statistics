@@ -39,7 +39,11 @@
 
 ### 功能移除
 
-- (无)
+- 去除支持实体维护服务的重置功能。
+  - com.dwarfeng.statistics.stack.service.DriverSupportMaintainService。
+  - com.dwarfeng.statistics.stack.service.FilterSupportMaintainService。
+  - com.dwarfeng.statistics.stack.service.MapperSupportMaintainService。
+  - com.dwarfeng.statistics.stack.service.ProviderSupportMaintainService。
 
 ---
 

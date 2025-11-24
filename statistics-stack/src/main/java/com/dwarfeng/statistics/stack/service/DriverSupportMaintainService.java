@@ -19,10 +19,4 @@ public interface DriverSupportMaintainService extends BatchCrudService<StringIdK
     String ID_LIKE = "id_like";
     String LABEL_LIKE = "label_like";
 
-    /**
-     * 重置驱动器支持。
-     *
-     * @throws ServiceException 服务异常。
-     */
-    void reset() throws ServiceException;
 }

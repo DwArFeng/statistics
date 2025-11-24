@@ -30,22 +30,15 @@ public class DriverSupportMaintainServiceImpl implements DriverSupportMaintainSe
     private final DaoOnlyEntireLookupService<DriverSupport> entireLookupService;
     private final DaoOnlyPresetLookupService<DriverSupport> presetLookupService;
 
-    private final List<DriverSupporter> driverSupporters;
-
-    private final ServiceExceptionMapper sem;
-
     public DriverSupportMaintainServiceImpl(
             GeneralBatchCrudService<StringIdKey, DriverSupport> crudService,
             DaoOnlyEntireLookupService<DriverSupport> entireLookupService,
-            DaoOnlyPresetLookupService<DriverSupport> presetLookupService,
-            List<DriverSupporter> driverSupporters,
-            ServiceExceptionMapper sem
+            DaoOnlyPresetLookupService<DriverSupport> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;
         this.presetLookupService = presetLookupService;
-        this.driverSupporters = Optional.ofNullable(driverSupporters).orElse(Collections.emptyList());
-        this.sem = sem;
+
     }
 
     @Override
@@ -303,24 +296,5 @@ public class DriverSupportMaintainServiceImpl implements DriverSupportMaintainSe
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
     public int lookupCount(String preset, Object[] objs) throws ServiceException {
         return presetLookupService.lookupCount(preset, objs);
-    }
-
-    @Override
-    @BehaviorAnalyse
-    public void reset() throws ServiceException {
-        try {
-            List<StringIdKey> driverKeys = entireLookupService.lookupAsList().stream()
-                    .map(DriverSupport::getKey).collect(Collectors.toList());
-            crudService.batchDelete(driverKeys);
-            List<DriverSupport> driverSupports = driverSupporters.stream().map(supporter -> new DriverSupport(
-                    new StringIdKey(supporter.provideType()),
-                    supporter.provideLabel(),
-                    supporter.provideDescription(),
-                    supporter.provideExampleParam()
-            )).collect(Collectors.toList());
-            crudService.batchInsert(driverSupports);
-        } catch (Exception e) {
-            throw ServiceExceptionHelper.logParse("重置映射器支持时发生异常", LogLevel.WARN, e, sem);
-        }
     }
 }

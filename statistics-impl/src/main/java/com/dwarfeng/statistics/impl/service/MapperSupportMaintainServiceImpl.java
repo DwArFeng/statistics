@@ -30,22 +30,14 @@ public class MapperSupportMaintainServiceImpl implements MapperSupportMaintainSe
     private final DaoOnlyEntireLookupService<MapperSupport> entireLookupService;
     private final DaoOnlyPresetLookupService<MapperSupport> presetLookupService;
 
-    private final List<MapperSupporter> mapperSupporters;
-
-    private final ServiceExceptionMapper sem;
-
     public MapperSupportMaintainServiceImpl(
             GeneralBatchCrudService<StringIdKey, MapperSupport> crudService,
             DaoOnlyEntireLookupService<MapperSupport> entireLookupService,
-            DaoOnlyPresetLookupService<MapperSupport> presetLookupService,
-            List<MapperSupporter> mapperSupporters,
-            ServiceExceptionMapper sem
+            DaoOnlyPresetLookupService<MapperSupport> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;
         this.presetLookupService = presetLookupService;
-        this.mapperSupporters = Optional.ofNullable(mapperSupporters).orElse(Collections.emptyList());
-        this.sem = sem;
     }
 
     @Override
@@ -303,24 +295,5 @@ public class MapperSupportMaintainServiceImpl implements MapperSupportMaintainSe
     @Transactional(transactionManager = "hibernateTransactionManager", readOnly = true, rollbackFor = Exception.class)
     public int lookupCount(String preset, Object[] objs) throws ServiceException {
         return presetLookupService.lookupCount(preset, objs);
-    }
-
-    @Override
-    @BehaviorAnalyse
-    public void reset() throws ServiceException {
-        try {
-            List<StringIdKey> mapperKeys = entireLookupService.lookupAsList().stream()
-                    .map(MapperSupport::getKey).collect(Collectors.toList());
-            crudService.batchDelete(mapperKeys);
-            List<MapperSupport> mapperSupports = mapperSupporters.stream().map(supporter -> new MapperSupport(
-                    new StringIdKey(supporter.provideType()),
-                    supporter.provideLabel(),
-                    supporter.provideDescription(),
-                    supporter.provideExampleParam()
-            )).collect(Collectors.toList());
-            crudService.batchInsert(mapperSupports);
-        } catch (Exception e) {
-            throw ServiceExceptionHelper.logParse("重置映射器支持时发生异常", LogLevel.WARN, e, sem);
-        }
     }
 }
