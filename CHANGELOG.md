@@ -72,6 +72,9 @@
 
 ### Bug 修复
 
+- 修复 `opt-*.xml` 文件中的错误配置。
+  - opt/opt-pusher.xml。
+
 - 修复任务检查处理器对于死亡任务处理中存在的 bug。
 
 - 修复程序启动时不能正确解析 `opt\opt-*.xml` 的 bug。
