@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -76,10 +77,17 @@ public class TaskEventMaintainServiceImplTest {
             }
         } finally {
             for (TaskEvent taskEvent : taskEvents) {
+                if (Objects.isNull(taskEvent.getKey())) {
+                    continue;
+                }
                 taskEventMaintainService.deleteIfExists(taskEvent.getKey());
             }
-            taskMaintainService.deleteIfExists(task.getKey());
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(task.getKey())) {
+                taskMaintainService.deleteIfExists(task.getKey());
+            }
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 
@@ -113,10 +121,17 @@ public class TaskEventMaintainServiceImplTest {
             }
         } finally {
             for (TaskEvent taskEvent : taskEvents) {
+                if (Objects.isNull(taskEvent.getKey())) {
+                    continue;
+                }
                 taskEventMaintainService.deleteIfExists(taskEvent.getKey());
             }
-            taskMaintainService.deleteIfExists(task.getKey());
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(task.getKey())) {
+                taskMaintainService.deleteIfExists(task.getKey());
+            }
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 
@@ -152,10 +167,17 @@ public class TaskEventMaintainServiceImplTest {
             }
         } finally {
             for (TaskEvent taskEvent : taskEvents) {
+                if (Objects.isNull(taskEvent.getKey())) {
+                    continue;
+                }
                 taskEventMaintainService.deleteIfExists(taskEvent.getKey());
             }
-            taskMaintainService.deleteIfExists(task.getKey());
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(task.getKey())) {
+                taskMaintainService.deleteIfExists(task.getKey());
+            }
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 }

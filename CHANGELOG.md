@@ -4,6 +4,22 @@
 
 ### 功能构建
 
+- 优化部分单元测试代码，以规避潜在的 bug。
+  - com.dwarfeng.statistics.impl.service.DriverInfoMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.DriverSupportMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.FilterInfoMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.FilterSupportMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.HistoryTaskEventMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.HistoryTaskMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.MapperSupportMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.ProviderInfoMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.ProviderSupportMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.StatisticsExecutionProfileMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.StatisticsSettingMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.TaskEventMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.TaskMaintainServiceImplTest。
+  - com.dwarfeng.statistics.impl.service.VariableMaintainServiceImplTest。
+
 - 为部分工具类中方法的入口参数增加 `@Nonnull` 注解。
   - com.dwarfeng.statistics.impl.service.telqos.CommandUtil。
 

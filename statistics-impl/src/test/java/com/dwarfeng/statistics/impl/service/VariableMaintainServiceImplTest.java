@@ -1,10 +1,10 @@
 package com.dwarfeng.statistics.impl.service;
 
-import com.dwarfeng.statistics.stack.bean.entity.Variable;
 import com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting;
+import com.dwarfeng.statistics.stack.bean.entity.Variable;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
-import com.dwarfeng.statistics.stack.service.VariableMaintainService;
 import com.dwarfeng.statistics.stack.service.StatisticsSettingMaintainService;
+import com.dwarfeng.statistics.stack.service.VariableMaintainService;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.After;
@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -66,9 +67,14 @@ public class VariableMaintainServiceImplTest {
             }
         } finally {
             for (Variable variable : variables) {
+                if (Objects.isNull(variable.getKey())) {
+                    continue;
+                }
                 variableMaintainService.deleteIfExists(variable.getKey());
             }
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 
@@ -103,9 +109,14 @@ public class VariableMaintainServiceImplTest {
             }
         } finally {
             for (Variable variable : variables) {
+                if (Objects.isNull(variable.getKey())) {
+                    continue;
+                }
                 variableMaintainService.deleteIfExists(variable.getKey());
             }
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 }

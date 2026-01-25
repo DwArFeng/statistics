@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -76,10 +77,17 @@ public class HistoryTaskEventMaintainServiceImplTest {
             }
         } finally {
             for (HistoryTaskEvent historyTaskEvent : historyTaskEvents) {
+                if (Objects.isNull(historyTaskEvent.getKey())) {
+                    continue;
+                }
                 historyTaskEventMaintainService.deleteIfExists(historyTaskEvent.getKey());
             }
-            historyTaskMaintainService.deleteIfExists(historyTask.getKey());
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(historyTask.getKey())) {
+                historyTaskMaintainService.deleteIfExists(historyTask.getKey());
+            }
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 
@@ -113,10 +121,17 @@ public class HistoryTaskEventMaintainServiceImplTest {
             }
         } finally {
             for (HistoryTaskEvent historyTaskEvent : historyTaskEvents) {
+                if (Objects.isNull(historyTaskEvent.getKey())) {
+                    continue;
+                }
                 historyTaskEventMaintainService.deleteIfExists(historyTaskEvent.getKey());
             }
-            historyTaskMaintainService.deleteIfExists(historyTask.getKey());
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(historyTask.getKey())) {
+                historyTaskMaintainService.deleteIfExists(historyTask.getKey());
+            }
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 
@@ -152,10 +167,17 @@ public class HistoryTaskEventMaintainServiceImplTest {
             }
         } finally {
             for (HistoryTaskEvent historyTaskEvent : historyTaskEvents) {
+                if (Objects.isNull(historyTaskEvent.getKey())) {
+                    continue;
+                }
                 historyTaskEventMaintainService.deleteIfExists(historyTaskEvent.getKey());
             }
-            historyTaskMaintainService.deleteIfExists(historyTask.getKey());
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(historyTask.getKey())) {
+                historyTaskMaintainService.deleteIfExists(historyTask.getKey());
+            }
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 }

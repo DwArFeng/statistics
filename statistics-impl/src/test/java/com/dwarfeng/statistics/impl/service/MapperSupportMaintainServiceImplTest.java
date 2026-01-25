@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 
@@ -52,6 +53,9 @@ public class MapperSupportMaintainServiceImplTest {
             }
         } finally {
             for (MapperSupport mapperSupport : mapperSupports) {
+                if (Objects.isNull(mapperSupport.getKey())) {
+                    continue;
+                }
                 service.deleteIfExists(mapperSupport.getKey());
             }
         }

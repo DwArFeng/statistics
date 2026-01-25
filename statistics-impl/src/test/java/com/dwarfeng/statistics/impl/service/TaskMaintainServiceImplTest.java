@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -62,9 +63,14 @@ public class TaskMaintainServiceImplTest {
             }
         } finally {
             for (Task task : tasks) {
+                if (Objects.isNull(task.getKey())) {
+                    continue;
+                }
                 taskMaintainService.deleteIfExists(task.getKey());
             }
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 
@@ -100,9 +106,14 @@ public class TaskMaintainServiceImplTest {
             }
         } finally {
             for (Task task : tasks) {
+                if (Objects.isNull(task.getKey())) {
+                    continue;
+                }
                 taskMaintainService.deleteIfExists(task.getKey());
             }
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 
@@ -50,6 +51,9 @@ public class StatisticsSettingMaintainServiceImplTest {
             }
         } finally {
             for (StatisticsSetting statisticsSetting : statisticsSettings) {
+                if (Objects.isNull(statisticsSetting.getKey())) {
+                    continue;
+                }
                 statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
             }
         }

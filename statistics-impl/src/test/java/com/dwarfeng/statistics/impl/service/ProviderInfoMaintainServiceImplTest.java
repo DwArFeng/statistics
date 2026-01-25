@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -59,9 +60,14 @@ public class ProviderInfoMaintainServiceImplTest {
             }
         } finally {
             for (ProviderInfo providerInfo : providerInfos) {
+                if (Objects.isNull(providerInfo.getKey())) {
+                    continue;
+                }
                 providerInfoMaintainService.deleteIfExists(providerInfo.getKey());
             }
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 
@@ -97,9 +103,14 @@ public class ProviderInfoMaintainServiceImplTest {
             }
         } finally {
             for (ProviderInfo providerInfo : providerInfos) {
+                if (Objects.isNull(providerInfo.getKey())) {
+                    continue;
+                }
                 providerInfoMaintainService.deleteIfExists(providerInfo.getKey());
             }
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 }

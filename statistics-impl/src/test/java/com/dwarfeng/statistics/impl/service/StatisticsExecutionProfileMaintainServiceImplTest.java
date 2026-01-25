@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
+import java.util.Objects;
 
 import static org.junit.Assert.*;
 
@@ -57,8 +58,12 @@ public class StatisticsExecutionProfileMaintainServiceImplTest {
                     BeanUtils.describe(statisticsExecutionProfile), BeanUtils.describe(testStatisticsExecutionProfile)
             );
         } finally {
-            statisticsExecutionProfileMaintainService.deleteIfExists(statisticsExecutionProfile.getKey());
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(statisticsExecutionProfile.getKey())) {
+                statisticsExecutionProfileMaintainService.deleteIfExists(statisticsExecutionProfile.getKey());
+            }
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 
@@ -74,8 +79,12 @@ public class StatisticsExecutionProfileMaintainServiceImplTest {
 
             assertFalse(statisticsExecutionProfileMaintainService.exists(statisticsExecutionProfile.getKey()));
         } finally {
-            statisticsExecutionProfileMaintainService.deleteIfExists(statisticsExecutionProfile.getKey());
-            statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            if (Objects.nonNull(statisticsExecutionProfile.getKey())) {
+                statisticsExecutionProfileMaintainService.deleteIfExists(statisticsExecutionProfile.getKey());
+            }
+            if (Objects.nonNull(statisticsSetting.getKey())) {
+                statisticsSettingMaintainService.deleteIfExists(statisticsSetting.getKey());
+            }
         }
     }
 }
