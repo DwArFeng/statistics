@@ -1,5 +1,6 @@
 package com.dwarfeng.statistics.impl.handler;
 
+import com.dwarfeng.statistics.stack.bean.dto.TaskDieInfo;
 import com.dwarfeng.statistics.stack.bean.dto.TaskExpireInfo;
 import com.dwarfeng.statistics.stack.bean.entity.Task;
 import com.dwarfeng.statistics.stack.handler.TaskCheckHandler;
@@ -161,8 +162,8 @@ public class TaskCheckHandlerImpl implements TaskCheckHandler {
                 );
                 // 调用操作处理器，将死亡的任务设置为死亡。
                 for (Task task : tasksToExpire) {
-                    // 调用操作处理器过期任务。
-                    taskOperateHandler.expire(new TaskExpireInfo(task.getKey()));
+                    // 调用操作处理器死亡任务。
+                    taskOperateHandler.die(new TaskDieInfo(task.getKey()));
                 }
             } catch (Exception e) {
                 LOGGER.warn("检查死亡任务时发生异常，异常信息如下", e);
