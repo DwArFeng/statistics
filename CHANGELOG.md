@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 优化部分类的日志输出内容。
+  - com.dwarfeng.statistics.impl.handler.SuperviseHandlerImpl。
+
 - 优化部分类构造器方法中的参数名。
   - com.dwarfeng.statistics.impl.handler.pusher.AbstractPusher。
 

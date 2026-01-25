@@ -96,7 +96,7 @@ public class SuperviseHandlerImpl implements SuperviseHandler {
 
         @Override
         public void rest() throws Exception {
-            LOGGER.info("驱动器停止工作...");
+            LOGGER.info("主管处理器停止工作...");
             driveHandler.stop();
             dispatchHandler.stop();
         }
