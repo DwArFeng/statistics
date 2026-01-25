@@ -17,8 +17,10 @@ import org.mapstruct.Mapper;
  * @author DwArFeng
  * @since 1.0.0
  */
-@Mapper
+// 基于 MapStruct Processor 生成的实现类还在使用该接口，故忽略相关警告。
+@SuppressWarnings("DeprecatedIsStillUsed")
 @Deprecated
+@Mapper
 public interface FastJsonMapper {
 
     FastJsonLongIdKey longIdKeyToFastJson(LongIdKey longIdKey);

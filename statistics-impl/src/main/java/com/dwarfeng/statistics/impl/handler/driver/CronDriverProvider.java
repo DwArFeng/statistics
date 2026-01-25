@@ -31,7 +31,7 @@ public class CronDriverProvider implements DriverProvider {
 
     private final CronDriver cronDriver;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "RedundantSuppression"})
     public CronDriverProvider(CronDriver cronDriver) {
         this.cronDriver = cronDriver;
     }

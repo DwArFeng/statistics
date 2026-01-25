@@ -38,7 +38,7 @@ public class DubboDispatcher extends AbstractDispatcher {
 
     private ReferenceConfig<DubboReceiver.DubboReceiveService> referenceConfig = null;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "RedundantSuppression"})
     public DubboDispatcher(RegistryConfig registry) {
         super(DISPATCHER_TYPE);
         this.registry = registry;

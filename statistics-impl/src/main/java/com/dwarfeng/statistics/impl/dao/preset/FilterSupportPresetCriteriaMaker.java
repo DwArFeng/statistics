@@ -47,4 +47,3 @@ public class FilterSupportPresetCriteriaMaker implements PresetCriteriaMaker {
         }
     }
 }
-

@@ -2,7 +2,6 @@ package com.dwarfeng.statistics.node.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -12,6 +11,7 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.Yaml;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,8 +24,7 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ValueScanHandler.class);
 
-    @Autowired
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
     private final Set<String> propertyNames = new HashSet<>();
 
@@ -35,18 +34,23 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
     // 要排除的属性前缀。
     private static final Set<String> EXCLUDED_PREFIXES = new HashSet<>(Collections.singletonList("example"));
 
+    public ValueScanHandler(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent(@Nonnull ContextRefreshedEvent event) {
         LOGGER.info("==== 上下文刷新完成，开始扫描 @Value 注解 ====");
 
         // 获取所有 bean 名称。
         String[] beanNames = applicationContext.getBeanDefinitionNames();
 
         for (String beanName : beanNames) {
-            try{
+            try {
                 Object bean = applicationContext.getBean(beanName);
                 scanBean(bean);
-            }catch(Exception e){
+            } catch (Exception e) {
+                LOGGER.debug("扫描 Bean {} 失败, 跳过该 Bean, 异常信息如下:", beanName, e);
             }
         }
 
@@ -70,7 +74,7 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
     }
 
     private void extractPropertyNames(String valueExpression) {
-        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\\$\\{(.*?)(:|})");
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\\$\\{(.*?)([:}])");
         java.util.regex.Matcher matcher = pattern.matcher(valueExpression);
         while (matcher.find()) {
             propertyNames.add(matcher.group(1));
@@ -78,7 +82,7 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
     }
 
     private void printResults() {
-        LOGGER.info("共找到 {} 个@Value 配置属性",propertyNames.size());
+        LOGGER.info("共找到 {} 个@Value 配置属性", propertyNames.size());
     }
 
     private Map<String, Object> scanConfigDirectory(String directoryPath) {
@@ -96,11 +100,9 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
                     Map<String, Object> fileProperties = loadConfigFile(file);
                     allProperties.putAll(fileProperties);
                 } catch (IOException e) {
-                    LOGGER.error("加载配置文件失败: " + file.getAbsolutePath());
-                    e.printStackTrace();
+                    LOGGER.error("加载配置文件 {} 失败, 异常信息如下:", file.getAbsolutePath(), e);
                 }
-            }
-            else if (file.isDirectory()) {
+            } else if (file.isDirectory()) {
                 allProperties.putAll(scanConfigDirectory(file.getAbsolutePath()));
             }
         }
@@ -126,8 +128,7 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
                             e -> e.getKey().toString(),
                             Map.Entry::getValue
                     ));
-        }
-        else if (fileName.endsWith(".yml") || fileName.endsWith(".yaml")) {
+        } else if (fileName.endsWith(".yml") || fileName.endsWith(".yaml")) {
             try (FileInputStream input = new FileInputStream(file)) {
                 Yaml yaml = new Yaml();
                 Map<String, Object> yamlMap = yaml.load(input);
@@ -166,21 +167,21 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
 
     private void logCustomProperties(Map<String, Object> properties) {
         if (properties.isEmpty()) {
-            LOGGER.warn("未在目录中找到自定义配置属性: {}" ,CONFIG_DIR);
+            LOGGER.warn("未在目录中找到自定义配置属性: {}", CONFIG_DIR);
             return;
         }
         LOGGER.info("共找到 {} 个自定义配置属性", properties.size());
 
-        for(String p:propertyNames){
+        for (String p : propertyNames) {
             boolean isExist = false;
-            for(Map.Entry<String,Object> entry:properties.entrySet()){
-                if(entry.getKey().equals(p)){
+            for (Map.Entry<String, Object> entry : properties.entrySet()) {
+                if (entry.getKey().equals(p)) {
                     isExist = true;
                     break;
                 }
             }
-            if(!isExist){
-                LOGGER.warn("{} 无配置",p);
+            if (!isExist) {
+                LOGGER.warn("{} 无配置", p);
             }
         }
     }

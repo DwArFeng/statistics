@@ -30,7 +30,7 @@ public class FixedDelayDriverProvider implements DriverProvider {
 
     private final FixedDelayDriver fixedDelayDriver;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "RedundantSuppression"})
     public FixedDelayDriverProvider(FixedDelayDriver fixedDelayDriver) {
         this.fixedDelayDriver = fixedDelayDriver;
     }

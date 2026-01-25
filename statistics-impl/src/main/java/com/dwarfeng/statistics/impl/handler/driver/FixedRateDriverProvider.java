@@ -30,7 +30,7 @@ public class FixedRateDriverProvider implements DriverProvider {
 
     private final FixedRateDriver fixedRateDriver;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "RedundantSuppression"})
     public FixedRateDriverProvider(FixedRateDriver fixedRateDriver) {
         this.fixedRateDriver = fixedRateDriver;
     }

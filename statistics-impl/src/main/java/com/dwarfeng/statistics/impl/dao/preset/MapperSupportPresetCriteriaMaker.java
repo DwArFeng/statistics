@@ -47,4 +47,3 @@ public class MapperSupportPresetCriteriaMaker implements PresetCriteriaMaker {
         }
     }
 }
-

@@ -5,7 +5,6 @@ import com.dwarfeng.springtelqos.sdk.command.CliCommand;
 import com.dwarfeng.springtelqos.stack.command.Context;
 import com.dwarfeng.springtelqos.stack.exception.TelqosException;
 import com.dwarfeng.statistics.stack.service.SupportQosService;
-import com.dwarfeng.statistics.stack.service.SupportQosService;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.lang3.tuple.Pair;
