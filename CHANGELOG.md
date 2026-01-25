@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- `statistics-impl` 子模块部分类优化字段、方法参数命名。
+  - com.dwarfeng.statistics.impl.handler.SuperviseHandlerImpl。
+  - com.dwarfeng.statistics.impl.handler.TaskCheckHandlerImpl。
+
 - 部分工具类应用私有构造器方法，防止被实例化。
   - com.dwarfeng.statistics.impl.handler.bridge.influxdb.util.Constants。
 

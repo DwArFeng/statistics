@@ -29,10 +29,10 @@ public class TaskCheckHandlerImpl implements TaskCheckHandler {
 
     public TaskCheckHandlerImpl(
             CuratorFramework curatorFramework,
-            @Value("${curator.latch_path.task_check.leader_latch}") String leaserLatchPath,
+            @Value("${curator.latch_path.task_check.leader_latch}") String leaderLatchPath,
             TaskCheckWorker taskCheckWorker
     ) {
-        handler = new CuratorDistributedLockHandler(curatorFramework, leaserLatchPath, taskCheckWorker);
+        handler = new CuratorDistributedLockHandler(curatorFramework, leaderLatchPath, taskCheckWorker);
     }
 
     @BehaviorAnalyse
