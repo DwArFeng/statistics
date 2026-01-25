@@ -24,7 +24,7 @@ public class Launcher {
     public static void main(String[] args) {
         ApplicationUtil.launch(new String[]{
                 "classpath:spring/application-context*.xml",
-                "classpath:opt/opt*.xml",
+                "file:opt/opt*.xml",
                 "file:optext/opt*.xml"
         }, ctx -> {
             // 根据启动器设置处理器的设置，选择性重置驱动器。

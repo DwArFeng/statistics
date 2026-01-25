@@ -69,6 +69,8 @@
 
 ### Bug 修复
 
+- 修复程序启动时不能正确解析 `opt\opt-*.xml` 的 bug。
+
 - 修复部分异常未配置服务异常映射的 bug。
   - com.dwarfeng.statistics.stack.exception.UnsupportedFilterTypeException。。
   - com.dwarfeng.statistics.stack.exception.MapperException。
