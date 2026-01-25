@@ -69,7 +69,12 @@
 
 ### Bug 修复
 
-- (无)
+- 修复部分异常未配置服务异常映射的 bug。
+  - com.dwarfeng.statistics.stack.exception.UnsupportedFilterTypeException。。
+  - com.dwarfeng.statistics.stack.exception.MapperException。
+  - com.dwarfeng.statistics.stack.exception.MapperExecutionException。
+  - com.dwarfeng.statistics.stack.exception.MapperMakeException。
+  - com.dwarfeng.statistics.stack.exception.UnsupportedMapperTypeException。
 
 ### 功能移除
 

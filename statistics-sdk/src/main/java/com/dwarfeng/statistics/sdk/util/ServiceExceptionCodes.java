@@ -90,6 +90,14 @@ public final class ServiceExceptionCodes {
             new ServiceException.Code(offset(170), "provider data exceeded");
     public static final ServiceException.Code QUERY_FAILED =
             new ServiceException.Code(offset(180), "query failed");
+    public static final ServiceException.Code MAPPER_FAILED =
+            new ServiceException.Code(offset(190), "mapper failed");
+    public static final ServiceException.Code MAPPER_MAKE_FAILED =
+            new ServiceException.Code(offset(191), "mapper make failed");
+    public static final ServiceException.Code MAPPER_EXECUTION_FAILED =
+            new ServiceException.Code(offset(192), "mapper execution failed");
+    public static final ServiceException.Code MAPPER_TYPE_UNSUPPORTED =
+            new ServiceException.Code(offset(193), "mapper type unsupported");
 
     private static int offset(int i) {
         return EXCEPTION_CODE_OFFSET + i;
@@ -153,6 +161,10 @@ public final class ServiceExceptionCodes {
         VARIABLE_VALUE_TYPE_MISMATCH.setCode(offset(160));
         PROVIDER_DATA_EXCEEDED.setCode(offset(170));
         QUERY_FAILED.setCode(offset(180));
+        MAPPER_FAILED.setCode(offset(190));
+        MAPPER_MAKE_FAILED.setCode(offset(191));
+        MAPPER_EXECUTION_FAILED.setCode(offset(192));
+        MAPPER_TYPE_UNSUPPORTED.setCode(offset(193));
     }
 
     private ServiceExceptionCodes() {
