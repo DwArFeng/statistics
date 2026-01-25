@@ -29,17 +29,17 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
 
     private final Set<String> propertyNames = new HashSet<>();
 
-    // 要扫描的配置文件目录
+    // 要扫描的配置文件目录。
     private static final String CONFIG_DIR = "conf";
 
-    // 要排除的属性前缀
-    private static final Set<String> EXCLUDED_PREFIXES = new HashSet<>(Arrays.asList("example"));
+    // 要排除的属性前缀。
+    private static final Set<String> EXCLUDED_PREFIXES = new HashSet<>(Collections.singletonList("example"));
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         LOGGER.info("==== 上下文刷新完成，开始扫描 @Value 注解 ====");
 
-        // 获取所有 bean 名称
+        // 获取所有 bean 名称。
         String[] beanNames = applicationContext.getBeanDefinitionNames();
 
         for (String beanName : beanNames) {
@@ -89,7 +89,7 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
             throw new IllegalArgumentException("配置目录不存在: " + directoryPath);
         }
 
-        // 递归遍历目录下的所有配置文件
+        // 递归遍历目录下的所有配置文件。
         for (File file : Objects.requireNonNull(configDir.listFiles())) {
             if (file.isFile() && isConfigFile(file)) {
                 try {
@@ -138,7 +138,7 @@ public class ValueScanHandler implements ApplicationListener<ContextRefreshedEve
         return Collections.emptyMap();
     }
 
-    // 将嵌套的 YAML 结构展平为单层 Map
+    // 将嵌套的 YAML 结构展平为单层 Map。
     private Map<String, Object> flattenMap(String prefix, Map<String, Object> map) {
         Map<String, Object> result = new HashMap<>();
 

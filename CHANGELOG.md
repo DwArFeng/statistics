@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- `statistics-node` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.statistics.node.handler.ValueScanHandler。
+
 - `statistics-impl` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.statistics.impl.handler.bridge.hibernate.configuration.HibernateBridgeBaseConfiguration。
   - com.dwarfeng.statistics.impl.handler.bridge.hibernate.dao.nativelookup.HibernateBridgeMysql8BridgeDataNativeLookup。
