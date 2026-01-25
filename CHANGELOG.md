@@ -4,6 +4,13 @@
 
 ### 功能构建
 
+- `statistics-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonLookupInfo。
+  - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonLookupResult。
+  - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonNativeQueryInfo。
+  - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonQueryInfo。
+  - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonQueryResult。
+
 - 优化文件格式。
   - 优化 `opt-*.xml` 文件的格式。
   - 优化 `*.properties` 文件的格式。

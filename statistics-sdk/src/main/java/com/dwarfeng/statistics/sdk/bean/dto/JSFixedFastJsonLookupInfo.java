@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * JSFixed FastJson查看信息。
+ * JSFixed FastJson 查看信息。
  *
  * @author DwArFeng
  * @since 1.0.0

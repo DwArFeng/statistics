@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * JSFixed FastJson查看结果。
+ * JSFixed FastJson 查看结果。
  *
  * @author DwArFeng
  * @since 1.0.0

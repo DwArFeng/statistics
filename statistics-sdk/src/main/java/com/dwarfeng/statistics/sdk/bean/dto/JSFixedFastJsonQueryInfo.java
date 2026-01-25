@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * JSFixed FastJson查询信息。
+ * JSFixed FastJson 查询信息。
  *
  * @author DwArFeng
  * @since 1.0.0
@@ -140,7 +140,7 @@ public class JSFixedFastJsonQueryInfo implements Dto {
     }
 
     /**
-     * JSFixed FastJson查询映射信息。
+     * JSFixed FastJson 查询映射信息。
      *
      * <p>
      * 该实体表示映射信息，包含了映射的类型和映射的参数。

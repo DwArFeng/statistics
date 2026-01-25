@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * JSFixed FastJson原生查询信息。
+ * JSFixed FastJson 原生查询信息。
  *
  * @author DwArFeng
  * @since 1.0.0
