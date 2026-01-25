@@ -92,7 +92,7 @@ public class HibernateBridgeBaseConfiguration {
         dataSource.setTimeBetweenEvictionRunsMillis(60000);
         // 配置一个连接在池中最小生存的时间，单位是毫秒。
         dataSource.setMinEvictableIdleTimeMillis(25200000);
-        // 打开removeAbandoned功能。
+        // 打开 removeAbandoned 功能。
         dataSource.setRemoveAbandoned(true);
         dataSource.setRemoveAbandonedTimeout(1800);
         // 关闭 abandoned 连接时输出错误日志。
@@ -117,12 +117,12 @@ public class HibernateBridgeBaseConfiguration {
         // 创建 Hibernate 配置属性。
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect", hibernateDialect());
-        // 格式化SQL语句。
+        // 格式化 SQL 语句。
         hibernateProperties.setProperty("hibernate.format_sql", "true");
         // 自动建表。
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.connection.autocommit", "false");
-        // 打印生成的SQL语句。
+        // 打印生成的 SQL 语句。
         hibernateProperties.setProperty("hibernate.show_sql", "false");
         // 禁用二级缓存。
         hibernateProperties.setProperty("hibernate.cache.use_second_level_cache", "false");

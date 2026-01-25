@@ -242,7 +242,7 @@ public class KafkaDispatcher extends AbstractDispatcher {
         @SuppressWarnings("DuplicatedCode")
         @Bean("kafkaDispatcher.producerProperties")
         public Map<String, Object> producerProperties() {
-            LOGGER.info("配置Kafka生产者属性...");
+            LOGGER.info("配置 Kafka 生产者属性...");
             Map<String, Object> props = new HashMap<>();
             props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, producerBootstrapServers);
             props.put(ProducerConfig.RETRIES_CONFIG, retries);
@@ -250,37 +250,37 @@ public class KafkaDispatcher extends AbstractDispatcher {
             props.put(ProducerConfig.LINGER_MS_CONFIG, linger);
             props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
             props.put(ProducerConfig.ACKS_CONFIG, acks);
-            LOGGER.debug("Kafka生产者属性配置完成...");
+            LOGGER.debug("Kafka 生产者属性配置完成...");
             return props;
         }
 
         @SuppressWarnings("DuplicatedCode")
         @Bean("kafkaDispatcher.producerFactory")
         public ProducerFactory<String, String> producerFactory() {
-            LOGGER.info("配置Kafka生产者工厂...");
+            LOGGER.info("配置 Kafka 生产者工厂...");
             Map<String, Object> properties = producerProperties();
             DefaultKafkaProducerFactory<String, String> factory = new DefaultKafkaProducerFactory<>(properties);
             factory.setTransactionIdPrefix(transactionPrefix);
             factory.setKeySerializer(new StringSerializer());
             factory.setValueSerializer(new StringSerializer());
-            LOGGER.debug("Kafka生产者工厂配置完成");
+            LOGGER.debug("Kafka 生产者工厂配置完成");
             return factory;
         }
 
         @Bean("kafkaDispatcher.kafkaTemplate")
         public KafkaTemplate<String, String> kafkaTemplate() {
-            LOGGER.info("生成KafkaTemplate...");
+            LOGGER.info("生成 KafkaTemplate...");
             ProducerFactory<String, String> producerFactory = producerFactory();
             KafkaTemplate<String, String> kafkaTemplate = new KafkaTemplate<>(producerFactory, true);
-            LOGGER.debug("KafkaTemplate生成完成...");
+            LOGGER.debug("KafkaTemplate 生成完成...");
             return kafkaTemplate;
         }
 
         @Bean("kafkaDispatcher.kafkaTransactionManager")
         public KafkaTransactionManager<String, String> kafkaTransactionManager() {
-            LOGGER.info("生成KafkaTransactionManager...");
+            LOGGER.info("生成 KafkaTransactionManager...");
             ProducerFactory<String, String> producerFactory = producerFactory();
-            LOGGER.debug("KafkaTransactionManager生成完成...");
+            LOGGER.debug("KafkaTransactionManager 生成完成...");
             return new KafkaTransactionManager<>(producerFactory);
         }
 

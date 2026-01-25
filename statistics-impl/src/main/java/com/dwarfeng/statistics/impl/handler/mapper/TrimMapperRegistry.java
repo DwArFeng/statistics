@@ -77,7 +77,7 @@ public class TrimMapperRegistry extends AbstractMapperRegistry {
             return trimSequence(sequence, config.isOnlyTrimStart());
         }
 
-        // 排序并截取序列
+        // 排序并截取序列。
         private Sequence trimSequence(Sequence sequence, boolean only_trim_start) {
             // 获取序列的起始时间与结束时间。
             List<BridgeData> datas = new ArrayList<>(sequence.getDatas());
@@ -86,12 +86,12 @@ public class TrimMapperRegistry extends AbstractMapperRegistry {
             Date startDate = datas.get(0).getHappenedDate();
             Date endDate = datas.get(datas.size() - 1).getHappenedDate();
 
-            // 如果起始时间等于结束时间只取一个值即可
+            // 如果起始时间等于结束时间只取一个值即可。
             if (only_trim_start) {
                 endDate = sequence.getEndDate();
             }
 
-            // 返回新的序列
+            // 返回新的序列。
             return new Sequence(sequence.getBridgeDataKey(), datas, startDate, endDate);
         }
 

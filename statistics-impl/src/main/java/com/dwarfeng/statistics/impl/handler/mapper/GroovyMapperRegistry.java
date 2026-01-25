@@ -44,12 +44,12 @@ public class GroovyMapperRegistry extends AbstractMapperRegistry {
 
     @Override
     public String provideLabel() {
-        return "Groovy映射器";
+        return "Groovy 映射器";
     }
 
     @Override
     public String provideDescription() {
-        return "通过自定义的groovy脚本，实现对带有时间数据的映射";
+        return "通过自定义的 groovy 脚本，实现对带有时间数据的映射";
     }
 
     @Override
@@ -100,7 +100,7 @@ public class GroovyMapperRegistry extends AbstractMapperRegistry {
             // 将配置中的 groovyScript 解析为 Processor。
             Processor processor;
             try (GroovyClassLoader classLoader = new GroovyClassLoader()) {
-                // 通过Groovy脚本生成处理器。
+                // 通过 Groovy 脚本生成处理器。
                 Class<?> aClass = classLoader.parseClass(config.getGroovyScript());
                 processor = (Processor) aClass.newInstance();
             }
@@ -111,7 +111,7 @@ public class GroovyMapperRegistry extends AbstractMapperRegistry {
     }
 
     /**
-     * Groovy处理器。
+     * Groovy 处理器。
      *
      * @author DwArFeng
      * @since 1.0.0

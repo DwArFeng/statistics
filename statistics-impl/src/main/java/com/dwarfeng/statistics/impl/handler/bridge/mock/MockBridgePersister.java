@@ -281,7 +281,7 @@ public class MockBridgePersister extends FullPersister {
         }
 
         // 模拟延迟，延迟时间为(查询的时间范围 / 1000 + 1) * nativeQueryDelayPerSecond。
-        // 如果时间区间小于等于0，则不延迟。
+        // 如果时间区间小于等于 0，则不延迟。
         if (nativeQueryDelayPerSecond > 0) {
             long timeRange = actualQueryEndTimestamp - actualQueryStartTimestamp;
             long delay = timeRange <= 0 ? 0 : (timeRange / 1000 + 1) * nativeQueryDelayPerSecond;

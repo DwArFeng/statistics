@@ -65,6 +65,7 @@ public interface InfluxdbBridgeDataHandler extends Handler {
      *   |> filter(fn: (r) => r["_measurement"] == "1")
      *   |> filter(fn: (r) => r["_field"] == "value")
      * }</pre>
+     *
      * <p>
      * 用户指定的 Flux 语句拼接在默认的 Flux 语句之后，可以为任意合法的 Flux 语句，但是应该保证 Flux 语句应保证返回的
      * {@link com.influxdb.query.FluxTable} 中的 {@link com.influxdb.query.FluxRecord} 中包含 _time 和 _value 字段。

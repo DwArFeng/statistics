@@ -95,13 +95,13 @@ public class ToBooleanMapperRegistry extends AbstractMapperRegistry {
             );
         }
 
-        // 处理具体的每条数据
+        // 处理具体的每条数据。
         private BridgeData mapItem(Config config, BridgeData data) {
 
-            // 是否忽略大小写
+            // 是否忽略大小写。
             boolean stringIgnoreCase = config.isStringIgnoreCase();
             boolean itemValue = false;
-            // 是否启用严格模式
+            // 是否启用严格模式。
             if (config.isStrict()) {
                 if (
                         !(data.getValue() instanceof String) && !(data.getValue() instanceof Number) &&
@@ -117,7 +117,7 @@ public class ToBooleanMapperRegistry extends AbstractMapperRegistry {
                         itemValue = true;
                     } else if ((stringIgnoreCase && !"false".equalsIgnoreCase((String) data.getValue()))
                             || (!stringIgnoreCase && !"false".equals(data.getValue()))) {
-                        throw new IllegalStateException("严格模式：字符串格式不正确，请输入true或者false");
+                        throw new IllegalStateException("严格模式：字符串格式不正确，请输入 true 或者 false");
                     }
                 }
 
@@ -125,7 +125,7 @@ public class ToBooleanMapperRegistry extends AbstractMapperRegistry {
                     if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(((Number) data.getValue()).doubleValue())) == 0) {
                         itemValue = true;
                     } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(((Number) data.getValue()).doubleValue())) != 0) {
-                        throw new IllegalStateException("严格模式：数值格式不正确，请输入1.0或者0.0");
+                        throw new IllegalStateException("严格模式：数值格式不正确，请输入 1.0 或者 0.0");
                     }
                 }
 
@@ -160,7 +160,7 @@ public class ToBooleanMapperRegistry extends AbstractMapperRegistry {
         private static final long serialVersionUID = -8607265012591783515L;
 
         @JSONField(name = "#strict", ordinal = 1, deserialize = false)
-        private String strictRem = "true：启用严格模式，不符合直接抛出异常; false：不启用严格模式，不符合转为false";
+        private String strictRem = "true：启用严格模式，不符合直接抛出异常; false：不启用严格模式，不符合转为 false";
 
         @JSONField(name = "strict", ordinal = 2)
         private boolean strict;

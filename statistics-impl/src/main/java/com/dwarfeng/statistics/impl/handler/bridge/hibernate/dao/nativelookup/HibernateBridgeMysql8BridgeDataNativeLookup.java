@@ -24,7 +24,7 @@ public class HibernateBridgeMysql8BridgeDataNativeLookup extends HibernateBridge
             Connection connection, long statisticsSettingLongId, String tag,
             Date startDate, Date endDate, int offset, int limit
     ) throws SQLException {
-        // 构建SQL。
+        // 构建 SQL。
         StringBuilder sqlBuilder = new StringBuilder();
         Mysql8NativeLookupUtil.selectColumnsFromTable(
                 sqlBuilder, "tbl_bridge_data", "tbl",
@@ -72,7 +72,7 @@ public class HibernateBridgeMysql8BridgeDataNativeLookup extends HibernateBridge
             Connection connection, long statisticsSettingLongId, String tag,
             Date startDate, Date endDate, int offset, int limit
     ) throws SQLException {
-        // 构建SQL。
+        // 构建 SQL。
         StringBuilder sqlBuilder = new StringBuilder();
         Mysql8NativeLookupUtil.selectColumnsFromTable(
                 sqlBuilder, "tbl_bridge_data", "tbl",
@@ -120,7 +120,7 @@ public class HibernateBridgeMysql8BridgeDataNativeLookup extends HibernateBridge
             Connection connection, long statisticsSettingLongId, String tag,
             Date startDate, Date endDate, int offset, int limit
     ) throws SQLException {
-        // 构建SQL。
+        // 构建 SQL。
         StringBuilder sqlBuilder = new StringBuilder();
         Mysql8NativeLookupUtil.selectColumnsFromTable(
                 sqlBuilder, "tbl_bridge_data", "tbl",
@@ -168,7 +168,7 @@ public class HibernateBridgeMysql8BridgeDataNativeLookup extends HibernateBridge
             Connection connection, long statisticsSettingLongId, String tag,
             Date startDate, Date endDate, int offset, int limit
     ) throws SQLException {
-        // 构建SQL。
+        // 构建 SQL。
         StringBuilder sqlBuilder = new StringBuilder();
         Mysql8NativeLookupUtil.selectColumnsFromTable(
                 sqlBuilder, "tbl_bridge_data", "tbl",
@@ -215,7 +215,7 @@ public class HibernateBridgeMysql8BridgeDataNativeLookup extends HibernateBridge
     protected int lookupLookupDefaultCloseCloseCount(
             Connection connection, long statisticsSettingLongId, String tag, Date startDate, Date endDate
     ) throws SQLException {
-        // 构建SQL。
+        // 构建 SQL。
         StringBuilder sqlBuilder = new StringBuilder();
         Mysql8NativeLookupUtil.selectCountFromTable(
                 sqlBuilder, "tbl_bridge_data", "tbl", "id"
@@ -248,7 +248,7 @@ public class HibernateBridgeMysql8BridgeDataNativeLookup extends HibernateBridge
     protected int lookupLookupDefaultCloseOpenCount(
             Connection connection, long statisticsSettingLongId, String tag, Date startDate, Date endDate
     ) throws SQLException {
-        // 构建SQL。
+        // 构建 SQL。
         StringBuilder sqlBuilder = new StringBuilder();
         Mysql8NativeLookupUtil.selectCountFromTable(
                 sqlBuilder, "tbl_bridge_data", "tbl", "id"
@@ -281,7 +281,7 @@ public class HibernateBridgeMysql8BridgeDataNativeLookup extends HibernateBridge
     protected int lookupLookupDefaultOpenCloseCount(
             Connection connection, long statisticsSettingLongId, String tag, Date startDate, Date endDate
     ) throws SQLException {
-        // 构建SQL。
+        // 构建 SQL。
         StringBuilder sqlBuilder = new StringBuilder();
         Mysql8NativeLookupUtil.selectCountFromTable(
                 sqlBuilder, "tbl_bridge_data", "tbl", "id"
@@ -314,7 +314,7 @@ public class HibernateBridgeMysql8BridgeDataNativeLookup extends HibernateBridge
     protected int lookupLookupDefaultOpenOpenCount(
             Connection connection, long statisticsSettingLongId, String tag, Date startDate, Date endDate
     ) throws SQLException {
-        // 构建SQL。
+        // 构建 SQL。
         StringBuilder sqlBuilder = new StringBuilder();
         Mysql8NativeLookupUtil.selectCountFromTable(
                 sqlBuilder, "tbl_bridge_data", "tbl", "id"

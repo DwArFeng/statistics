@@ -108,7 +108,7 @@ public class DctiKafkaDriverProvider implements DriverProvider {
             if (Objects.isNull(listenerContainer)) {
                 throw new IllegalStateException("找不到 kafka listener container " + listenerId);
             }
-            //判断监听容器是否启动，未启动则将其启动。
+            // 判断监听容器是否启动，未启动则将其启动。
             if (!listenerContainer.isRunning()) {
                 listenerContainer.start();
             }
@@ -213,7 +213,7 @@ public class DctiKafkaDriverProvider implements DriverProvider {
             props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, maxPollIntervalMs);
 
             // 默认值。
-            // 本实例使用ack手动提交，因此禁止自动提交的功能。
+            // 本实例使用 ack 手动提交，因此禁止自动提交的功能。
             props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 
             LOGGER.debug("Kafka 消费者属性配置完成...");
@@ -243,11 +243,11 @@ public class DctiKafkaDriverProvider implements DriverProvider {
             factory.setConsumerFactory(consumerFactory);
             factory.setConcurrency(concurrency);
             factory.getContainerProperties().setPollTimeout(pollTimeout);
-            // Kafka侦听容器通过框架对开启和关闭进行托管，因此在启动时不自动开启。
+            // Kafka 侦听容器通过框架对开启和关闭进行托管，因此在启动时不自动开启。
             factory.setAutoStartup(false);
             // 监听器启用批量监听模式。
             factory.setBatchListener(true);
-            // 配置ACK模式为手动立即提交。
+            // 配置 ACK 模式为手动立即提交。
             factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
             LOGGER.info("配置 Kafka 侦听容器工厂...");
             return factory;

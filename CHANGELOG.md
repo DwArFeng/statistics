@@ -4,6 +4,29 @@
 
 ### 功能构建
 
+- `statistics-impl` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.statistics.impl.handler.bridge.hibernate.configuration.HibernateBridgeBaseConfiguration。
+  - com.dwarfeng.statistics.impl.handler.bridge.hibernate.dao.nativelookup.HibernateBridgeMysql8BridgeDataNativeLookup。
+  - com.dwarfeng.statistics.impl.handler.bridge.influxdb.handler.InfluxdbBridgeDataHandler。
+  - com.dwarfeng.statistics.impl.handler.bridge.mock.MockBridgePersister。
+  - com.dwarfeng.statistics.impl.handler.dispatcher.KafkaDispatcher。
+  - com.dwarfeng.statistics.impl.handler.driver.DctiKafkaDriverProvider。
+  - com.dwarfeng.statistics.impl.handler.filter.groovy.GroovyFilterRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.EnableRatioMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.GroovyMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.HighPassCounterMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.HighPassExistenceMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.HighPassMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.LowPassCounterMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.LowPassExistenceMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.LowPassMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.ToBooleanMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.mapper.TrimMapperRegistry。
+  - com.dwarfeng.statistics.impl.handler.provider.groovy.GroovyProviderRegistry。
+  - com.dwarfeng.statistics.impl.handler.pusher.NativeKafkaPusher。
+  - com.dwarfeng.statistics.impl.handler.receiver.KafkaReceiver。
+  - com.dwarfeng.statistics.impl.service.telqos.ViewCommand。
+
 - `statistics-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonLookupInfo。
   - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonLookupResult。
