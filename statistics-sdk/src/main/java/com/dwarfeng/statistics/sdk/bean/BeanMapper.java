@@ -1,7 +1,9 @@
 package com.dwarfeng.statistics.sdk.bean;
 
+import com.dwarfeng.statistics.sdk.bean.dto.*;
 import com.dwarfeng.statistics.sdk.bean.entity.*;
 import com.dwarfeng.statistics.sdk.bean.key.*;
+import com.dwarfeng.statistics.stack.bean.dto.*;
 import com.dwarfeng.statistics.stack.bean.entity.*;
 import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
@@ -63,7 +65,7 @@ public interface BeanMapper {
     JSFixedFastJsonBridgeDataKey bridgeDataKeyToJSFixedFastJson(BridgeDataKey bridgeDataKey);
 
     @InheritInverseConfiguration
-    BridgeDataKey bridgeDataKeyFromJSFixedFastJson(JSFixedFastJsonBridgeDataKey jsFixedFastJsonBridgeDataKey);
+    BridgeDataKey bridgeDataKeyFromJSFixedFastJson(JSFixedFastJsonBridgeDataKey jSFixedFastJsonBridgeDataKey);
 
     JSFixedFastJsonVariableKey variableKeyToJSFixedFastJson(VariableKey variableKey);
 
@@ -81,16 +83,6 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     DriverInfo driverInfoFromFastJson(FastJsonDriverInfo fastJsonDriverInfo);
 
-    JSFixedFastJsonDriverInfo driverInfoToJSFixedFastJson(DriverInfo driverInfo);
-
-    @InheritInverseConfiguration
-    DriverInfo driverInfoFromJSFixedFastJson(JSFixedFastJsonDriverInfo jsFixedFastJsonDriverInfo);
-
-    WebInputDriverInfo driverInfoToWebInput(DriverInfo driverInfo);
-
-    @InheritInverseConfiguration
-    DriverInfo driverInfoFromWebInput(WebInputDriverInfo webInputDriverInfo);
-
     FastJsonDriverSupport driverSupportToFastJson(DriverSupport driverSupport);
 
     @InheritInverseConfiguration
@@ -100,16 +92,6 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     FilterInfo filterInfoFromFastJson(FastJsonFilterInfo fastJsonFilterInfo);
-
-    JSFixedFastJsonFilterInfo filterInfoToJSFixedFastJson(FilterInfo filterInfo);
-
-    @InheritInverseConfiguration
-    FilterInfo filterInfoFromJSFixedFastJson(JSFixedFastJsonFilterInfo jsFixedFastJsonFilterInfo);
-
-    WebInputFilterInfo filterInfoToWebInput(FilterInfo filterInfo);
-
-    @InheritInverseConfiguration
-    FilterInfo filterInfoFromWebInput(WebInputFilterInfo webInputFilterInfo);
 
     FastJsonFilterSupport filterSupportToFastJson(FilterSupport filterSupport);
 
@@ -121,20 +103,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     HistoryTask historyTaskFromFastJson(FastJsonHistoryTask fastJsonHistoryTask);
 
-    JSFixedFastJsonHistoryTask historyTaskToJSFixedFastJson(HistoryTask historyTask);
-
-    @InheritInverseConfiguration
-    HistoryTask historyTaskFromJSFixedFastJson(JSFixedFastJsonHistoryTask jsFixedFastJsonHistoryTask);
-
     FastJsonHistoryTaskEvent historyTaskEventToFastJson(HistoryTaskEvent historyTaskEvent);
 
     @InheritInverseConfiguration
     HistoryTaskEvent historyTaskEventFromFastJson(FastJsonHistoryTaskEvent fastJsonHistoryTaskEvent);
-
-    JSFixedFastJsonHistoryTaskEvent historyTaskEventToJSFixedFastJson(HistoryTaskEvent historyTaskEvent);
-
-    @InheritInverseConfiguration
-    HistoryTaskEvent historyTaskEventFromJSFixedFastJson(JSFixedFastJsonHistoryTaskEvent jsFixedFastJsonHistoryTaskEvent);
 
     FastJsonMapperSupport mapperSupportToFastJson(MapperSupport mapperSupport);
 
@@ -146,74 +118,191 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     ProviderInfo providerInfoFromFastJson(FastJsonProviderInfo fastJsonProviderInfo);
 
-    JSFixedFastJsonProviderInfo providerInfoToJSFixedFastJson(ProviderInfo providerInfo);
-
-    @InheritInverseConfiguration
-    ProviderInfo providerInfoFromJSFixedFastJson(JSFixedFastJsonProviderInfo jsFixedFastJsonProviderInfo);
-
-    WebInputProviderInfo providerInfoToWebInput(ProviderInfo providerInfo);
-
-    @InheritInverseConfiguration
-    ProviderInfo providerInfoFromWebInput(WebInputProviderInfo webInputProviderInfo);
-
     FastJsonProviderSupport providerSupportToFastJson(ProviderSupport providerSupport);
 
     @InheritInverseConfiguration
     ProviderSupport providerSupportFromFastJson(FastJsonProviderSupport fastJsonProviderSupport);
 
-    FastJsonStatisticsExecutionProfile statisticsExecutionProfileToFastJson(StatisticsExecutionProfile statisticsExecutionProfile);
+    FastJsonStatisticsExecutionProfile statisticsExecutionProfileToFastJson(
+            StatisticsExecutionProfile statisticsExecutionProfile
+    );
 
     @InheritInverseConfiguration
-    StatisticsExecutionProfile statisticsExecutionProfileFromFastJson(FastJsonStatisticsExecutionProfile fastJsonStatisticsExecutionProfile);
-
-    JSFixedFastJsonStatisticsExecutionProfile statisticsExecutionProfileToJSFixedFastJson(StatisticsExecutionProfile statisticsExecutionProfile);
-
-    @InheritInverseConfiguration
-    StatisticsExecutionProfile statisticsExecutionProfileFromJSFixedFastJson(JSFixedFastJsonStatisticsExecutionProfile jsFixedFastJsonStatisticsExecutionProfile);
+    StatisticsExecutionProfile statisticsExecutionProfileFromFastJson(
+            FastJsonStatisticsExecutionProfile fastJsonStatisticsExecutionProfile
+    );
 
     FastJsonStatisticsSetting statisticsSettingToFastJson(StatisticsSetting statisticsSetting);
 
     @InheritInverseConfiguration
     StatisticsSetting statisticsSettingFromFastJson(FastJsonStatisticsSetting fastJsonStatisticsSetting);
 
-    JSFixedFastJsonStatisticsSetting statisticsSettingToJSFixedFastJson(StatisticsSetting statisticsSetting);
-
-    @InheritInverseConfiguration
-    StatisticsSetting statisticsSettingFromJSFixedFastJson(JSFixedFastJsonStatisticsSetting jsFixedFastJsonStatisticsSetting);
-
-    WebInputStatisticsSetting statisticsSettingToWebInput(StatisticsSetting statisticsSetting);
-
-    @InheritInverseConfiguration
-    StatisticsSetting statisticsSettingFromWebInput(WebInputStatisticsSetting webInputStatisticsSetting);
-
     FastJsonTask taskToFastJson(Task task);
 
     @InheritInverseConfiguration
     Task taskFromFastJson(FastJsonTask fastJsonTask);
-
-    JSFixedFastJsonTask taskToJSFixedFastJson(Task task);
-
-    @InheritInverseConfiguration
-    Task taskFromJSFixedFastJson(JSFixedFastJsonTask jsFixedFastJsonTask);
 
     FastJsonTaskEvent taskEventToFastJson(TaskEvent taskEvent);
 
     @InheritInverseConfiguration
     TaskEvent taskEventFromFastJson(FastJsonTaskEvent fastJsonTaskEvent);
 
-    JSFixedFastJsonTaskEvent taskEventToJSFixedFastJson(TaskEvent taskEvent);
-
-    @InheritInverseConfiguration
-    TaskEvent taskEventFromJSFixedFastJson(JSFixedFastJsonTaskEvent jsFixedFastJsonTaskEvent);
-
     FastJsonVariable variableToFastJson(Variable variable);
 
     @InheritInverseConfiguration
     Variable variableFromFastJson(FastJsonVariable fastJsonVariable);
 
+    JSFixedFastJsonDriverInfo driverInfoToJSFixedFastJson(DriverInfo driverInfo);
+
+    @InheritInverseConfiguration
+    DriverInfo driverInfoFromJSFixedFastJson(JSFixedFastJsonDriverInfo jSFixedFastJsonDriverInfo);
+
+    JSFixedFastJsonFilterInfo filterInfoToJSFixedFastJson(FilterInfo filterInfo);
+
+    @InheritInverseConfiguration
+    FilterInfo filterInfoFromJSFixedFastJson(JSFixedFastJsonFilterInfo jSFixedFastJsonFilterInfo);
+
+    JSFixedFastJsonHistoryTask historyTaskToJSFixedFastJson(HistoryTask historyTask);
+
+    @InheritInverseConfiguration
+    HistoryTask historyTaskFromJSFixedFastJson(JSFixedFastJsonHistoryTask jSFixedFastJsonHistoryTask);
+
+    JSFixedFastJsonHistoryTaskEvent historyTaskEventToJSFixedFastJson(HistoryTaskEvent historyTaskEvent);
+
+    @InheritInverseConfiguration
+    HistoryTaskEvent historyTaskEventFromJSFixedFastJson(
+            JSFixedFastJsonHistoryTaskEvent jSFixedFastJsonHistoryTaskEvent
+    );
+
+    JSFixedFastJsonProviderInfo providerInfoToJSFixedFastJson(ProviderInfo providerInfo);
+
+    @InheritInverseConfiguration
+    ProviderInfo providerInfoFromJSFixedFastJson(JSFixedFastJsonProviderInfo jSFixedFastJsonProviderInfo);
+
+    JSFixedFastJsonStatisticsExecutionProfile statisticsExecutionProfileToJSFixedFastJson(
+            StatisticsExecutionProfile statisticsExecutionProfile
+    );
+
+    @InheritInverseConfiguration
+    StatisticsExecutionProfile statisticsExecutionProfileFromJSFixedFastJson(
+            JSFixedFastJsonStatisticsExecutionProfile jSFixedFastJsonStatisticsExecutionProfile
+    );
+
+    JSFixedFastJsonStatisticsSetting statisticsSettingToJSFixedFastJson(StatisticsSetting statisticsSetting);
+
+    @InheritInverseConfiguration
+    StatisticsSetting statisticsSettingFromJSFixedFastJson(
+            JSFixedFastJsonStatisticsSetting jSFixedFastJsonStatisticsSetting
+    );
+
+    JSFixedFastJsonTask taskToJSFixedFastJson(Task task);
+
+    @InheritInverseConfiguration
+    Task taskFromJSFixedFastJson(JSFixedFastJsonTask jSFixedFastJsonTask);
+
+    JSFixedFastJsonTaskEvent taskEventToJSFixedFastJson(TaskEvent taskEvent);
+
+    @InheritInverseConfiguration
+    TaskEvent taskEventFromJSFixedFastJson(JSFixedFastJsonTaskEvent jSFixedFastJsonTaskEvent);
+
     JSFixedFastJsonVariable variableToJSFixedFastJson(Variable variable);
 
     @InheritInverseConfiguration
-    Variable variableFromJSFixedFastJson(JSFixedFastJsonVariable jsFixedFastJsonVariable);
+    Variable variableFromJSFixedFastJson(JSFixedFastJsonVariable jSFixedFastJsonVariable);
 
+    WebInputDriverInfo driverInfoToWebInput(DriverInfo driverInfo);
+
+    @InheritInverseConfiguration
+    DriverInfo driverInfoFromWebInput(WebInputDriverInfo webInputDriverInfo);
+
+    WebInputFilterInfo filterInfoToWebInput(FilterInfo filterInfo);
+
+    @InheritInverseConfiguration
+    FilterInfo filterInfoFromWebInput(WebInputFilterInfo webInputFilterInfo);
+
+    WebInputProviderInfo providerInfoToWebInput(ProviderInfo providerInfo);
+
+    @InheritInverseConfiguration
+    ProviderInfo providerInfoFromWebInput(WebInputProviderInfo webInputProviderInfo);
+
+    WebInputStatisticsSetting statisticsSettingToWebInput(StatisticsSetting statisticsSetting);
+
+    @InheritInverseConfiguration
+    StatisticsSetting statisticsSettingFromWebInput(WebInputStatisticsSetting webInputStatisticsSetting);
+
+    // -----------------------------------------------------------Statistics DTO-----------------------------------------------------------
+    FastJsonBridgeData bridgeDataToFastJson(BridgeData bridgeData);
+
+    @InheritInverseConfiguration
+    BridgeData bridgeDataFromFastJson(FastJsonBridgeData fastJsonBridgeData);
+
+    FastJsonLookupInfo lookupInfoToFastJson(LookupInfo lookupInfo);
+
+    @InheritInverseConfiguration
+    LookupInfo lookupInfoFromFastJson(FastJsonLookupInfo fastJsonLookupInfo);
+
+    FastJsonLookupResult lookupResultToFastJson(LookupResult lookupResult);
+
+    @InheritInverseConfiguration
+    LookupResult lookupResultFromFastJson(FastJsonLookupResult fastJsonLookupResult);
+
+    FastJsonNativeQueryInfo nativeQueryInfoToFastJson(NativeQueryInfo nativeQueryInfo);
+
+    @InheritInverseConfiguration
+    NativeQueryInfo nativeQueryInfoFromFastJson(FastJsonNativeQueryInfo fastJsonNativeQueryInfo);
+
+    FastJsonQueryInfo queryInfoToFastJson(QueryInfo queryInfo);
+
+    @InheritInverseConfiguration
+    QueryInfo queryInfoFromFastJson(FastJsonQueryInfo fastJsonQueryInfo);
+
+    FastJsonQueryResult queryResultToFastJson(QueryResult queryResult);
+
+    @InheritInverseConfiguration
+    QueryResult queryResultFromFastJson(FastJsonQueryResult fastJsonQueryResult);
+
+    JSFixedFastJsonBridgeData bridgeDataToJSFixedFastJson(BridgeData bridgeData);
+
+    @InheritInverseConfiguration
+    BridgeData bridgeDataFromJSFixedFastJson(JSFixedFastJsonBridgeData jSFixedFastJsonBridgeData);
+
+    JSFixedFastJsonLookupInfo lookupInfoToJSFixedFastJson(LookupInfo lookupInfo);
+
+    @InheritInverseConfiguration
+    LookupInfo lookupInfoFromJSFixedFastJson(JSFixedFastJsonLookupInfo jSFixedFastJsonLookupInfo);
+
+    JSFixedFastJsonLookupResult lookupResultToJSFixedFastJson(LookupResult lookupResult);
+
+    @InheritInverseConfiguration
+    LookupResult lookupResultFromJSFixedFastJson(JSFixedFastJsonLookupResult jSFixedFastJsonLookupResult);
+
+    JSFixedFastJsonNativeQueryInfo nativeQueryInfoToJSFixedFastJson(NativeQueryInfo nativeQueryInfo);
+
+    @InheritInverseConfiguration
+    NativeQueryInfo nativeQueryInfoFromJSFixedFastJson(JSFixedFastJsonNativeQueryInfo jSFixedFastJsonNativeQueryInfo);
+
+    JSFixedFastJsonQueryInfo queryInfoToJSFixedFastJson(QueryInfo queryInfo);
+
+    @InheritInverseConfiguration
+    QueryInfo queryInfoFromJSFixedFastJson(JSFixedFastJsonQueryInfo jSFixedFastJsonQueryInfo);
+
+    JSFixedFastJsonQueryResult queryResultToJSFixedFastJson(QueryResult queryResult);
+
+    @InheritInverseConfiguration
+    QueryResult queryResultFromJSFixedFastJson(JSFixedFastJsonQueryResult jSFixedFastJsonQueryResult);
+
+    WebInputLookupInfo lookupInfoToWebInput(LookupInfo lookupInfo);
+
+    @InheritInverseConfiguration
+    LookupInfo lookupInfoFromWebInput(WebInputLookupInfo webInputLookupInfo);
+
+    WebInputNativeQueryInfo nativeQueryInfoToWebInput(NativeQueryInfo nativeQueryInfo);
+
+    @InheritInverseConfiguration
+    NativeQueryInfo nativeQueryInfoFromWebInput(WebInputNativeQueryInfo webInputNativeQueryInfo);
+
+    WebInputQueryInfo queryInfoToWebInput(QueryInfo queryInfo);
+
+    @InheritInverseConfiguration
+    QueryInfo queryInfoFromWebInput(WebInputQueryInfo webInputQueryInfo);
 }

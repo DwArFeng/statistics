@@ -86,6 +86,8 @@
 
 ### Bug 修复
 
+- 补全 `statistics-sdk` 模块 BeanMapper 中缺失的接口方法。
+
 - `statistics-impl` 子模块部分 DTO 错误字段修复。
   - com.dwarfeng.statistics.sdk.bean.dto.FastJsonQueryInfo。
   - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonQueryInfo。
