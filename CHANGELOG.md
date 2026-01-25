@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 部分工具类应用私有构造器方法，防止被实例化。
+  - com.dwarfeng.statistics.impl.handler.bridge.influxdb.util.Constants。
+
 - 优化部分类的日志输出内容。
   - com.dwarfeng.statistics.impl.handler.SuperviseHandlerImpl。
 

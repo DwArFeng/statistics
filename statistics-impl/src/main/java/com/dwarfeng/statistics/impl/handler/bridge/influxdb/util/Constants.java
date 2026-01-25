@@ -35,4 +35,8 @@ public final class Constants {
      * @since 1.1.0
      */
     public static final String DATA_READ_VALUE_KEY_VALUE = "_value";
+
+    private Constants() {
+        throw new IllegalStateException("禁止实例化");
+    }
 }
