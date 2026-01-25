@@ -1,14 +1,13 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.JSFixedFastJsonBridgeDataKey;
+import com.dwarfeng.statistics.stack.bean.dto.QueryInfo;
 import com.dwarfeng.statistics.stack.bean.dto.QueryInfo.MapInfo;
-import com.dwarfeng.subgrade.sdk.bean.key.JSFixedFastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * JSFixed FastJson 查询信息。
@@ -18,7 +17,28 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonQueryInfo implements Dto {
 
-    private static final long serialVersionUID = -3671257908402787620L;
+    private static final long serialVersionUID = -2312007439792965609L;
+
+    public static JSFixedFastJsonQueryInfo of(QueryInfo queryInfo) {
+        if (Objects.isNull(queryInfo)) {
+            return null;
+        } else {
+            return new JSFixedFastJsonQueryInfo(
+                    queryInfo.getPreset(),
+                    queryInfo.getParams(),
+                    Optional.ofNullable(queryInfo.getBridgeDataKeys()).map(
+                            f -> f.stream().map(JSFixedFastJsonBridgeDataKey::of).collect(Collectors.toList())
+                    ).orElse(null),
+                    queryInfo.getStartDate(),
+                    queryInfo.getEndDate(),
+                    queryInfo.isIncludeStartDate(),
+                    queryInfo.isIncludeEndDate(),
+                    Optional.ofNullable(queryInfo.getMapInfos()).map(
+                            f -> f.stream().map(JSFixedFastJsonMapInfo::of).collect(Collectors.toList())
+                    ).orElse(null)
+            );
+        }
+    }
 
     @JSONField(name = "preset", ordinal = 1)
     private String preset;
@@ -26,8 +46,8 @@ public class JSFixedFastJsonQueryInfo implements Dto {
     @JSONField(name = "params", ordinal = 2)
     private String[] params;
 
-    @JSONField(name = "statistics_setting_keys", ordinal = 3)
-    private List<JSFixedFastJsonLongIdKey> statisticsSettingKeys;
+    @JSONField(name = "bridge_data_keys", ordinal = 3)
+    private List<JSFixedFastJsonBridgeDataKey> bridgeDataKeys;
 
     @JSONField(name = "start_date", ordinal = 4)
     private Date startDate;
@@ -48,12 +68,12 @@ public class JSFixedFastJsonQueryInfo implements Dto {
     }
 
     public JSFixedFastJsonQueryInfo(
-            String preset, String[] params, List<JSFixedFastJsonLongIdKey> statisticsSettingKeys, Date startDate,
+            String preset, String[] params, List<JSFixedFastJsonBridgeDataKey> bridgeDataKeys, Date startDate,
             Date endDate, boolean includeStartDate, boolean includeEndDate, List<JSFixedFastJsonMapInfo> mapInfos
     ) {
         this.preset = preset;
         this.params = params;
-        this.statisticsSettingKeys = statisticsSettingKeys;
+        this.bridgeDataKeys = bridgeDataKeys;
         this.startDate = startDate;
         this.endDate = endDate;
         this.includeStartDate = includeStartDate;
@@ -77,12 +97,12 @@ public class JSFixedFastJsonQueryInfo implements Dto {
         this.params = params;
     }
 
-    public List<JSFixedFastJsonLongIdKey> getStatisticsSettingKeys() {
-        return statisticsSettingKeys;
+    public List<JSFixedFastJsonBridgeDataKey> getBridgeDataKeys() {
+        return bridgeDataKeys;
     }
 
-    public void setStatisticsSettingKeys(List<JSFixedFastJsonLongIdKey> statisticsSettingKeys) {
-        this.statisticsSettingKeys = statisticsSettingKeys;
+    public void setBridgeDataKeys(List<JSFixedFastJsonBridgeDataKey> bridgeDataKeys) {
+        this.bridgeDataKeys = bridgeDataKeys;
     }
 
     public Date getStartDate() {
@@ -130,7 +150,7 @@ public class JSFixedFastJsonQueryInfo implements Dto {
         return "JSFixedFastJsonQueryInfo{" +
                 "preset='" + preset + '\'' +
                 ", params=" + Arrays.toString(params) +
-                ", statisticsSettingKeys=" + statisticsSettingKeys +
+                ", bridgeDataKeys=" + bridgeDataKeys +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", includeStartDate=" + includeStartDate +

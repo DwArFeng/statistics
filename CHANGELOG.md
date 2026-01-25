@@ -86,6 +86,10 @@
 
 ### Bug 修复
 
+- `statistics-impl` 子模块部分 DTO 错误字段修复。
+  - com.dwarfeng.statistics.sdk.bean.dto.FastJsonQueryInfo。
+  - com.dwarfeng.statistics.sdk.bean.dto.JSFixedFastJsonQueryInfo。
+
 - 修复 `opt-*.xml` 文件中的错误配置。
   - opt/opt-pusher.xml。
 

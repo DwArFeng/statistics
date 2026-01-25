@@ -1,14 +1,13 @@
 package com.dwarfeng.statistics.sdk.bean.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.bean.key.FastJsonBridgeDataKey;
+import com.dwarfeng.statistics.stack.bean.dto.QueryInfo;
 import com.dwarfeng.statistics.stack.bean.dto.QueryInfo.MapInfo;
-import com.dwarfeng.subgrade.sdk.bean.key.FastJsonLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.dto.Dto;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * FastJson 查询信息。
@@ -18,7 +17,28 @@ import java.util.Objects;
  */
 public class FastJsonQueryInfo implements Dto {
 
-    private static final long serialVersionUID = 2840714310555822569L;
+    private static final long serialVersionUID = 106106543561242422L;
+
+    public static FastJsonQueryInfo of(QueryInfo queryInfo) {
+        if (Objects.isNull(queryInfo)) {
+            return null;
+        } else {
+            return new FastJsonQueryInfo(
+                    queryInfo.getPreset(),
+                    queryInfo.getParams(),
+                    Optional.ofNullable(queryInfo.getBridgeDataKeys()).map(
+                            f -> f.stream().map(FastJsonBridgeDataKey::of).collect(Collectors.toList())
+                    ).orElse(null),
+                    queryInfo.getStartDate(),
+                    queryInfo.getEndDate(),
+                    queryInfo.isIncludeStartDate(),
+                    queryInfo.isIncludeEndDate(),
+                    Optional.ofNullable(queryInfo.getMapInfos()).map(
+                            f -> f.stream().map(FastJsonMapInfo::of).collect(Collectors.toList())
+                    ).orElse(null)
+            );
+        }
+    }
 
     @JSONField(name = "preset", ordinal = 1)
     private String preset;
@@ -26,8 +46,8 @@ public class FastJsonQueryInfo implements Dto {
     @JSONField(name = "params", ordinal = 2)
     private String[] params;
 
-    @JSONField(name = "statistics_setting_keys", ordinal = 3)
-    private List<FastJsonLongIdKey> statisticsSettingKeys;
+    @JSONField(name = "bridge_data_keys", ordinal = 3)
+    private List<FastJsonBridgeDataKey> bridgeDataKeys;
 
     @JSONField(name = "start_date", ordinal = 4)
     private Date startDate;
@@ -48,12 +68,12 @@ public class FastJsonQueryInfo implements Dto {
     }
 
     public FastJsonQueryInfo(
-            String preset, String[] params, List<FastJsonLongIdKey> statisticsSettingKeys, Date startDate, Date endDate,
+            String preset, String[] params, List<FastJsonBridgeDataKey> bridgeDataKeys, Date startDate, Date endDate,
             boolean includeStartDate, boolean includeEndDate, List<FastJsonMapInfo> mapInfos
     ) {
         this.preset = preset;
         this.params = params;
-        this.statisticsSettingKeys = statisticsSettingKeys;
+        this.bridgeDataKeys = bridgeDataKeys;
         this.startDate = startDate;
         this.endDate = endDate;
         this.includeStartDate = includeStartDate;
@@ -77,12 +97,12 @@ public class FastJsonQueryInfo implements Dto {
         this.params = params;
     }
 
-    public List<FastJsonLongIdKey> getStatisticsSettingKeys() {
-        return statisticsSettingKeys;
+    public List<FastJsonBridgeDataKey> getBridgeDataKeys() {
+        return bridgeDataKeys;
     }
 
-    public void setStatisticsSettingKeys(List<FastJsonLongIdKey> statisticsSettingKeys) {
-        this.statisticsSettingKeys = statisticsSettingKeys;
+    public void setBridgeDataKeys(List<FastJsonBridgeDataKey> bridgeDataKeys) {
+        this.bridgeDataKeys = bridgeDataKeys;
     }
 
     public Date getStartDate() {
@@ -130,7 +150,7 @@ public class FastJsonQueryInfo implements Dto {
         return "FastJsonQueryInfo{" +
                 "preset='" + preset + '\'' +
                 ", params=" + Arrays.toString(params) +
-                ", statisticsSettingKeys=" + statisticsSettingKeys +
+                ", bridgeDataKeys=" + bridgeDataKeys +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", includeStartDate=" + includeStartDate +
