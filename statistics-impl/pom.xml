@@ -191,7 +191,7 @@
             <groupId>com.dwarfeng</groupId>
             <artifactId>dwarfeng-dct</artifactId>
         </dependency>
-        <!-- Spring-terminator组件 -->
+        <!-- Spring-terminator 组件 -->
         <dependency>
             <groupId>com.dwarfeng</groupId>
             <artifactId>spring-terminator</artifactId>
