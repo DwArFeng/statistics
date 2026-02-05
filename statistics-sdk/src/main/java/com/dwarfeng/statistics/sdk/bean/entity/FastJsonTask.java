@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class FastJsonTask implements Bean {
 
-    private static final long serialVersionUID = 23333708885805451L;
+    private static final long serialVersionUID = -3048730124737064709L;
 
     public static FastJsonTask of(Task task) {
         if (Objects.isNull(task)) {
@@ -31,7 +31,7 @@ public class FastJsonTask implements Bean {
                     task.getShouldExpireDate(),
                     task.getShouldDieDate(),
                     task.getExecutionNodeId(),
-                    task.getFrontMessage(),
+                    task.getMessage(),
                     task.getRemark()
             );
         }
@@ -61,8 +61,8 @@ public class FastJsonTask implements Bean {
     @JSONField(name = "execution_node_id", ordinal = 8)
     private int executionNodeId;
 
-    @JSONField(name = "front_message", ordinal = 9)
-    private String frontMessage;
+    @JSONField(name = "message", ordinal = 9)
+    private String message;
 
     @JSONField(name = "remark", ordinal = 10)
     private String remark;
@@ -72,7 +72,7 @@ public class FastJsonTask implements Bean {
 
     public FastJsonTask(
             FastJsonLongIdKey key, FastJsonLongIdKey statisticsSettingKey, int status, Date createDate, Date startDate,
-            Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String frontMessage, String remark
+            Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String message, String remark
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -82,7 +82,7 @@ public class FastJsonTask implements Bean {
         this.shouldExpireDate = shouldExpireDate;
         this.shouldDieDate = shouldDieDate;
         this.executionNodeId = executionNodeId;
-        this.frontMessage = frontMessage;
+        this.message = message;
         this.remark = remark;
     }
 
@@ -150,12 +150,12 @@ public class FastJsonTask implements Bean {
         this.executionNodeId = executionNodeId;
     }
 
-    public String getFrontMessage() {
-        return frontMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setFrontMessage(String frontMessage) {
-        this.frontMessage = frontMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getRemark() {
@@ -177,7 +177,7 @@ public class FastJsonTask implements Bean {
                 ", shouldExpireDate=" + shouldExpireDate +
                 ", shouldDieDate=" + shouldDieDate +
                 ", executionNodeId=" + executionNodeId +
-                ", frontMessage='" + frontMessage + '\'' +
+                ", message='" + message + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }

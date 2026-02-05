@@ -40,7 +40,7 @@ public class HistoryTaskMaintainServiceImplTest {
         for (int i = 0; i < 5; i++) {
             HistoryTask historyTask = new HistoryTask(
                     null, null, 12450, new Date(), new Date(), new Date(), 12450L, new Date(), new Date(), 12450,
-                    "frontMessage", "remark"
+                    "message", "remark"
             );
             historyTasks.add(historyTask);
         }

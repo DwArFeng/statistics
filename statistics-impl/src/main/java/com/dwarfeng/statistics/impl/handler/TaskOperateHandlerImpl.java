@@ -195,7 +195,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     null,
                     null,
                     task.getExecutionNodeId(),
-                    task.getFrontMessage(),
+                    task.getMessage(),
                     task.getRemark()
             );
 
@@ -251,7 +251,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     null,
                     null,
                     task.getExecutionNodeId(),
-                    task.getFrontMessage(),
+                    task.getMessage(),
                     task.getRemark()
             );
 
@@ -307,7 +307,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     currentDate,
                     null,
                     task.getExecutionNodeId(),
-                    task.getFrontMessage(),
+                    task.getMessage(),
                     task.getRemark()
             );
 
@@ -363,7 +363,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     null,
                     currentDate,
                     task.getExecutionNodeId(),
-                    task.getFrontMessage(),
+                    task.getMessage(),
                     task.getRemark()
             );
 
@@ -427,7 +427,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
             Task task = taskMaintainService.get(taskKey);
 
             // 更新任务字段。
-            task.setFrontMessage(frontMessage);
+            task.setMessage(frontMessage);
 
             // 调用维护服务更新任务实体。
             taskMaintainService.update(task);

@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class FastJsonHistoryTask implements Bean {
 
-    private static final long serialVersionUID = -3577422582550245152L;
+    private static final long serialVersionUID = -8150280803096438558L;
 
     public static FastJsonHistoryTask of(HistoryTask historyTask) {
         if (Objects.isNull(historyTask)) {
@@ -33,7 +33,7 @@ public class FastJsonHistoryTask implements Bean {
                     historyTask.getExpiredDate(),
                     historyTask.getDiedDate(),
                     historyTask.getExecutionNodeId(),
-                    historyTask.getFrontMessage(),
+                    historyTask.getMessage(),
                     historyTask.getRemark()
             );
         }
@@ -69,8 +69,8 @@ public class FastJsonHistoryTask implements Bean {
     @JSONField(name = "execution_node_id", ordinal = 10)
     private int executionNodeId;
 
-    @JSONField(name = "front_message", ordinal = 11)
-    private String frontMessage;
+    @JSONField(name = "message", ordinal = 11)
+    private String message;
 
     @JSONField(name = "remark", ordinal = 12)
     private String remark;
@@ -80,7 +80,7 @@ public class FastJsonHistoryTask implements Bean {
 
     public FastJsonHistoryTask(
             FastJsonLongIdKey key, FastJsonLongIdKey statisticsSettingKey, int status, Date createDate, Date startDate,
-            Date endDate, Long duration, Date expiredDate, Date diedDate, int executionNodeId, String frontMessage,
+            Date endDate, Long duration, Date expiredDate, Date diedDate, int executionNodeId, String message,
             String remark
     ) {
         this.key = key;
@@ -93,7 +93,7 @@ public class FastJsonHistoryTask implements Bean {
         this.expiredDate = expiredDate;
         this.diedDate = diedDate;
         this.executionNodeId = executionNodeId;
-        this.frontMessage = frontMessage;
+        this.message = message;
         this.remark = remark;
     }
 
@@ -177,12 +177,12 @@ public class FastJsonHistoryTask implements Bean {
         this.executionNodeId = executionNodeId;
     }
 
-    public String getFrontMessage() {
-        return frontMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setFrontMessage(String frontMessage) {
-        this.frontMessage = frontMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getRemark() {
@@ -206,7 +206,7 @@ public class FastJsonHistoryTask implements Bean {
                 ", expiredDate=" + expiredDate +
                 ", diedDate=" + diedDate +
                 ", executionNodeId=" + executionNodeId +
-                ", frontMessage='" + frontMessage + '\'' +
+                ", message='" + message + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }

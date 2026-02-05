@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- 更改实体字段。
+  - com.dwarfeng.statistics.stack.bean.entity.Task.message。
+  - com.dwarfeng.statistics.stack.bean.entity.HistoryTask.message。
+
 - 添加实体字段。
   - com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting.description。
 

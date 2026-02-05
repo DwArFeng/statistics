@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class HistoryTask implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = 4826168898030703454L;
+    private static final long serialVersionUID = -8293811968625659406L;
 
     private LongIdKey key;
     private LongIdKey statisticsSettingKey;
@@ -48,7 +48,7 @@ public class HistoryTask implements Entity<LongIdKey> {
     /**
      * 任务执行是在最前方显示的信息。
      */
-    private String frontMessage;
+    private String message;
 
     private String remark;
 
@@ -57,7 +57,7 @@ public class HistoryTask implements Entity<LongIdKey> {
 
     public HistoryTask(
             LongIdKey key, LongIdKey statisticsSettingKey, int status, Date createDate, Date startDate, Date endDate,
-            Long duration, Date expiredDate, Date diedDate, int executionNodeId, String frontMessage, String remark
+            Long duration, Date expiredDate, Date diedDate, int executionNodeId, String message, String remark
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -69,7 +69,7 @@ public class HistoryTask implements Entity<LongIdKey> {
         this.expiredDate = expiredDate;
         this.diedDate = diedDate;
         this.executionNodeId = executionNodeId;
-        this.frontMessage = frontMessage;
+        this.message = message;
         this.remark = remark;
     }
 
@@ -155,12 +155,12 @@ public class HistoryTask implements Entity<LongIdKey> {
         this.executionNodeId = executionNodeId;
     }
 
-    public String getFrontMessage() {
-        return frontMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setFrontMessage(String frontMessage) {
-        this.frontMessage = frontMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getRemark() {
@@ -184,7 +184,7 @@ public class HistoryTask implements Entity<LongIdKey> {
                 ", expiredDate=" + expiredDate +
                 ", diedDate=" + diedDate +
                 ", executionNodeId=" + executionNodeId +
-                ", frontMessage='" + frontMessage + '\'' +
+                ", message='" + message + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }

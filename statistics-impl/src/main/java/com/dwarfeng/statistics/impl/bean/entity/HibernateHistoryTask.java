@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "tbl_history_task")
 public class HibernateHistoryTask implements Bean {
 
-    private static final long serialVersionUID = 6839402855178195863L;
+    private static final long serialVersionUID = 2678256075690719088L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -56,8 +56,8 @@ public class HibernateHistoryTask implements Bean {
     @Column(name = "execution_node_id", nullable = false)
     private int executionNodeId;
 
-    @Column(name = "front_message", length = Constraints.LENGTH_MESSAGE)
-    private String frontMessage;
+    @Column(name = "message", length = Constraints.LENGTH_MESSAGE)
+    private String message;
 
     @Column(name = "back_message", length = Constraints.LENGTH_REMARK)
     private String remark;
@@ -174,12 +174,12 @@ public class HibernateHistoryTask implements Bean {
         this.executionNodeId = executionNodeId;
     }
 
-    public String getFrontMessage() {
-        return frontMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setFrontMessage(String frontMessage) {
-        this.frontMessage = frontMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getRemark() {
@@ -219,7 +219,7 @@ public class HibernateHistoryTask implements Bean {
                 "expiredDate = " + expiredDate + ", " +
                 "diedDate = " + diedDate + ", " +
                 "executionNodeId = " + executionNodeId + ", " +
-                "frontMessage = " + frontMessage + ", " +
+                "message = " + message + ", " +
                 "remark = " + remark + ", " +
                 "statisticsSetting = " + statisticsSetting + ")";
     }
