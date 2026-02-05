@@ -1,5 +1,6 @@
 package com.dwarfeng.statistics.impl.handler;
 
+import com.dwarfeng.statistics.sdk.handler.ProviderMaker;
 import com.dwarfeng.statistics.stack.exception.ProviderException;
 import com.dwarfeng.statistics.stack.exception.UnsupportedProviderTypeException;
 import com.dwarfeng.statistics.stack.handler.Provider;

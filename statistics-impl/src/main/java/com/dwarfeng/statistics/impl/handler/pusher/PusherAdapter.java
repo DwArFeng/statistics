@@ -1,8 +1,5 @@
 package com.dwarfeng.statistics.impl.handler.pusher;
 
-import com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting;
-import com.dwarfeng.subgrade.stack.exception.HandlerException;
-
 /**
  * 推送器适配器。
  *
@@ -17,9 +14,12 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
  * </ul>
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.pusher.AbstractPusher
  * @since 1.1.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
-public abstract class PusherAdapter extends AbstractPusher {
+@Deprecated
+public abstract class PusherAdapter extends com.dwarfeng.statistics.sdk.handler.pusher.PusherAdapter {
 
     public PusherAdapter() {
         super();
@@ -27,42 +27,5 @@ public abstract class PusherAdapter extends AbstractPusher {
 
     public PusherAdapter(String pusherType) {
         super(pusherType);
-    }
-
-    @SuppressWarnings("RedundantThrows")
-    @Override
-    public void superviseReset() throws HandlerException {
-    }
-
-    @SuppressWarnings("RedundantThrows")
-    @Override
-    public void executeReset() throws HandlerException {
-    }
-
-    @SuppressWarnings("RedundantThrows")
-    @Override
-    public void taskFinished(StatisticsSetting statisticsSetting) throws HandlerException {
-    }
-
-    @SuppressWarnings("RedundantThrows")
-    @Override
-    public void taskFailed(StatisticsSetting statisticsSetting) throws HandlerException {
-    }
-
-    @SuppressWarnings("RedundantThrows")
-    @Override
-    public void taskExpired(StatisticsSetting statisticsSetting) throws HandlerException {
-    }
-
-    @SuppressWarnings("RedundantThrows")
-    @Override
-    public void taskDied(StatisticsSetting statisticsSetting) throws HandlerException {
-    }
-
-    @Override
-    public String toString() {
-        return "PusherAdapter{" +
-                "pusherType='" + pusherType + '\'' +
-                '}';
     }
 }

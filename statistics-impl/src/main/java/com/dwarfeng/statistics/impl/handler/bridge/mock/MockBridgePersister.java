@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.bridge.mock;
 
-import com.dwarfeng.statistics.impl.handler.bridge.FullPersister;
+import com.dwarfeng.statistics.sdk.handler.bridge.FullPersister;
 import com.dwarfeng.statistics.sdk.util.ViewUtil;
 import com.dwarfeng.statistics.stack.bean.dto.*;
 import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;

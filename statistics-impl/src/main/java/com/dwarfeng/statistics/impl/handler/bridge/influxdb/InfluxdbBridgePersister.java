@@ -1,10 +1,10 @@
 package com.dwarfeng.statistics.impl.handler.bridge.influxdb;
 
-import com.dwarfeng.statistics.impl.handler.bridge.FullPersister;
 import com.dwarfeng.statistics.impl.handler.bridge.influxdb.bean.dto.*;
 import com.dwarfeng.statistics.impl.handler.bridge.influxdb.handler.InfluxdbBridgeDataHandler;
 import com.dwarfeng.statistics.impl.handler.bridge.influxdb.util.Constants;
 import com.dwarfeng.statistics.impl.handler.bridge.influxdb.util.DateUtil;
+import com.dwarfeng.statistics.sdk.handler.bridge.FullPersister;
 import com.dwarfeng.statistics.sdk.util.ViewUtil;
 import com.dwarfeng.statistics.stack.bean.dto.*;
 import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;

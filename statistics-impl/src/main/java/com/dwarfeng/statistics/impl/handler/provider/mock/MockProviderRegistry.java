@@ -1,7 +1,7 @@
 package com.dwarfeng.statistics.impl.handler.provider.mock;
 
 import com.alibaba.fastjson.JSON;
-import com.dwarfeng.statistics.impl.handler.provider.AbstractProviderRegistry;
+import com.dwarfeng.statistics.sdk.handler.provider.AbstractProviderRegistry;
 import com.dwarfeng.statistics.stack.exception.ProviderException;
 import com.dwarfeng.statistics.stack.handler.Provider;
 import org.springframework.context.ApplicationContext;

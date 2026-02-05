@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.bridge.influxdb;
 
-import com.dwarfeng.statistics.impl.handler.bridge.PersisterOnlyBridge;
+import com.dwarfeng.statistics.sdk.handler.bridge.PersisterOnlyBridge;
 import org.springframework.stereotype.Component;
 
 /**

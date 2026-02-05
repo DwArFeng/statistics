@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.filter.identity;
 
-import com.dwarfeng.statistics.impl.handler.filter.AbstractExecutor;
+import com.dwarfeng.statistics.sdk.handler.filter.AbstractExecutor;
 import com.dwarfeng.statistics.stack.bean.dto.ProviderData;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

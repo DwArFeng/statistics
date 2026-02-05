@@ -1,10 +1,10 @@
 package com.dwarfeng.statistics.impl.handler.bridge.redis;
 
 import com.dwarfeng.dct.handler.ValueCodingHandler;
-import com.dwarfeng.statistics.impl.handler.bridge.FullKeeper;
 import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeData;
 import com.dwarfeng.statistics.impl.handler.bridge.redis.bean.RedisBridgeBridgeDataKey;
 import com.dwarfeng.statistics.impl.handler.bridge.redis.service.RedisBridgeBridgeDataMaintainService;
+import com.dwarfeng.statistics.sdk.handler.bridge.FullKeeper;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
 import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.subgrade.stack.bean.entity.Entity;

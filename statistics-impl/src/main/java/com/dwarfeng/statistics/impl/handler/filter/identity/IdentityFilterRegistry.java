@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.filter.identity;
 
-import com.dwarfeng.statistics.impl.handler.filter.AbstractFilterRegistry;
+import com.dwarfeng.statistics.sdk.handler.filter.AbstractFilterRegistry;
 import com.dwarfeng.statistics.stack.exception.FilterException;
 import com.dwarfeng.statistics.stack.exception.FilterMakeException;
 import com.dwarfeng.statistics.stack.handler.Filter;

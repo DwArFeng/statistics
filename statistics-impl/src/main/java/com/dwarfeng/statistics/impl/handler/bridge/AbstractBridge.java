@@ -1,44 +1,20 @@
 package com.dwarfeng.statistics.impl.handler.bridge;
 
-import com.dwarfeng.statistics.impl.handler.Bridge;
-
-import java.util.Objects;
-
 /**
  * 桥接器的抽象实现。
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.bridge.AbstractBridge
  * @since 1.0.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
-public abstract class AbstractBridge implements Bridge {
-
-    protected String bridgeType;
+@Deprecated
+public abstract class AbstractBridge extends com.dwarfeng.statistics.sdk.handler.bridge.AbstractBridge {
 
     public AbstractBridge() {
-        this(null);
     }
 
     public AbstractBridge(String bridgeType) {
-        this.bridgeType = bridgeType;
-    }
-
-    @Override
-    public boolean supportType(String type) {
-        return Objects.equals(bridgeType, type);
-    }
-
-    public String getBridgeType() {
-        return bridgeType;
-    }
-
-    public void setBridgeType(String bridgeType) {
-        this.bridgeType = bridgeType;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractBridge{" +
-                "bridgeType='" + bridgeType + '\'' +
-                '}';
+        super(bridgeType);
     }
 }

@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.bridge.mock;
 
-import com.dwarfeng.statistics.impl.handler.bridge.FullKeeper;
+import com.dwarfeng.statistics.sdk.handler.bridge.FullKeeper;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
 import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import org.slf4j.Logger;

@@ -2,7 +2,7 @@ package com.dwarfeng.statistics.impl.handler.filter.groovy;
 
 import com.dwarfeng.dutil.basic.io.IOUtil;
 import com.dwarfeng.dutil.basic.io.StringOutputStream;
-import com.dwarfeng.statistics.impl.handler.filter.AbstractFilterRegistry;
+import com.dwarfeng.statistics.sdk.handler.filter.AbstractFilterRegistry;
 import com.dwarfeng.statistics.stack.exception.FilterException;
 import com.dwarfeng.statistics.stack.exception.FilterMakeException;
 import com.dwarfeng.statistics.stack.handler.Filter;

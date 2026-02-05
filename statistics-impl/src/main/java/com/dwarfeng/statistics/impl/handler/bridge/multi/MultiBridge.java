@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.bridge.multi;
 
-import com.dwarfeng.statistics.impl.handler.bridge.FullBridge;
+import com.dwarfeng.statistics.sdk.handler.bridge.FullBridge;
 import org.springframework.stereotype.Component;
 
 /**

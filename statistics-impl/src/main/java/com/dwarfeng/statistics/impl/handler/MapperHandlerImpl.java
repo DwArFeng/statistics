@@ -1,5 +1,6 @@
 package com.dwarfeng.statistics.impl.handler;
 
+import com.dwarfeng.statistics.sdk.handler.MapperMaker;
 import com.dwarfeng.statistics.stack.exception.MapperException;
 import com.dwarfeng.statistics.stack.exception.UnsupportedMapperTypeException;
 import com.dwarfeng.statistics.stack.handler.Mapper;

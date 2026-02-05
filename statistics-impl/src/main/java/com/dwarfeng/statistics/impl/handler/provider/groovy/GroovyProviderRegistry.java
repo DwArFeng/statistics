@@ -2,7 +2,7 @@ package com.dwarfeng.statistics.impl.handler.provider.groovy;
 
 import com.dwarfeng.dutil.basic.io.IOUtil;
 import com.dwarfeng.dutil.basic.io.StringOutputStream;
-import com.dwarfeng.statistics.impl.handler.provider.AbstractProviderRegistry;
+import com.dwarfeng.statistics.sdk.handler.provider.AbstractProviderRegistry;
 import com.dwarfeng.statistics.stack.exception.ProviderException;
 import com.dwarfeng.statistics.stack.exception.ProviderMakeException;
 import com.dwarfeng.statistics.stack.handler.Provider;

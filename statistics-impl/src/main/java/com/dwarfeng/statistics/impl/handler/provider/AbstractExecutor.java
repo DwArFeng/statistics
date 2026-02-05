@@ -1,27 +1,16 @@
 package com.dwarfeng.statistics.impl.handler.provider;
 
-import com.dwarfeng.statistics.stack.handler.Provider.Context;
-import com.dwarfeng.statistics.stack.handler.Provider.Executor;
-
 /**
  * 提供器执行器的抽象实现。
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.provider.AbstractExecutor
  * @since 1.0.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
-public abstract class AbstractExecutor implements Executor {
+@Deprecated
+public abstract class AbstractExecutor extends com.dwarfeng.statistics.sdk.handler.provider.AbstractExecutor {
 
-    protected Context context;
-
-    @Override
-    public void init(Context context) {
-        this.context = context;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractExecutor{" +
-                "context=" + context +
-                '}';
+    public AbstractExecutor() {
     }
 }

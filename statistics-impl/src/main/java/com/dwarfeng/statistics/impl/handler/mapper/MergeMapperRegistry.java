@@ -1,5 +1,7 @@
 package com.dwarfeng.statistics.impl.handler.mapper;
 
+import com.dwarfeng.statistics.sdk.handler.mapper.AbstractMapper;
+import com.dwarfeng.statistics.sdk.handler.mapper.AbstractMapperRegistry;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
 import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
 import com.dwarfeng.statistics.stack.exception.MapperException;

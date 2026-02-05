@@ -1,49 +1,20 @@
 package com.dwarfeng.statistics.impl.handler.mapper;
 
-import com.dwarfeng.statistics.impl.handler.MapperMaker;
-import com.dwarfeng.statistics.impl.handler.MapperSupporter;
-
-import java.util.Objects;
-
 /**
  * 抽象映射器注册。
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.mapper.AbstractMapperRegistry
  * @since 1.0.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
-public abstract class AbstractMapperRegistry implements MapperMaker, MapperSupporter {
-
-    protected String mapperType;
+@Deprecated
+public abstract class AbstractMapperRegistry extends com.dwarfeng.statistics.sdk.handler.mapper.AbstractMapperRegistry {
 
     public AbstractMapperRegistry() {
     }
 
     public AbstractMapperRegistry(String mapperType) {
-        this.mapperType = mapperType;
-    }
-
-    @Override
-    public boolean supportType(String type) {
-        return Objects.equals(mapperType, type);
-    }
-
-    @Override
-    public String provideType() {
-        return mapperType;
-    }
-
-    public String getMapperType() {
-        return mapperType;
-    }
-
-    public void setMapperType(String mapperType) {
-        this.mapperType = mapperType;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractMapperRegistry{" +
-                "mapperType='" + mapperType + '\'' +
-                '}';
+        super(mapperType);
     }
 }

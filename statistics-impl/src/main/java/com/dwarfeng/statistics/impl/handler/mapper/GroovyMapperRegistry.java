@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.dwarfeng.dutil.basic.io.IOUtil;
 import com.dwarfeng.dutil.basic.io.StringOutputStream;
+import com.dwarfeng.statistics.sdk.handler.mapper.AbstractMapper;
+import com.dwarfeng.statistics.sdk.handler.mapper.AbstractMapperRegistry;
 import com.dwarfeng.statistics.stack.exception.MapperException;
 import com.dwarfeng.statistics.stack.exception.MapperMakeException;
 import com.dwarfeng.statistics.stack.handler.Mapper;

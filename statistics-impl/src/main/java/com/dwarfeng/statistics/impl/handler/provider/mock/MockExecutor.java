@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.provider.mock;
 
-import com.dwarfeng.statistics.impl.handler.provider.AbstractExecutor;
+import com.dwarfeng.statistics.sdk.handler.provider.AbstractExecutor;
 import com.dwarfeng.statistics.sdk.util.Constants;
 import com.dwarfeng.statistics.stack.bean.dto.*;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;

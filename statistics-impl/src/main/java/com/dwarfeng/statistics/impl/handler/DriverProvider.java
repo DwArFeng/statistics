@@ -1,27 +1,13 @@
 package com.dwarfeng.statistics.impl.handler;
 
-import com.dwarfeng.statistics.stack.handler.Driver;
-
 /**
  * 驱动器提供器。
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.DriverProvider
  * @since 1.0.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
-public interface DriverProvider {
-
-    /**
-     * 返回提供器是否支持指定的类型。
-     *
-     * @param type 指定的类型。
-     * @return 提供器是否支持指定的类型。
-     */
-    boolean supportType(String type);
-
-    /**
-     * 提供驱动器。
-     *
-     * @return 提供的驱动器。
-     */
-    Driver provide();
+@Deprecated
+public interface DriverProvider extends com.dwarfeng.statistics.sdk.handler.DriverProvider {
 }

@@ -4,35 +4,10 @@ package com.dwarfeng.statistics.impl.handler;
  * 映射器支持器。
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.MapperSupporter
  * @since 1.0.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
+@Deprecated
 public interface MapperSupporter {
-
-    /**
-     * 提供类型。
-     *
-     * @return 类型。
-     */
-    String provideType();
-
-    /**
-     * 提供标签。
-     *
-     * @return 标签。
-     */
-    String provideLabel();
-
-    /**
-     * 提供描述。
-     *
-     * @return 描述。
-     */
-    String provideDescription();
-
-    /**
-     * 提供示例参数。
-     *
-     * @return 示例参数。
-     */
-    String provideExampleParam();
 }

@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.filter.groovy;
 
-import com.dwarfeng.statistics.impl.handler.filter.AbstractFilter;
+import com.dwarfeng.statistics.sdk.handler.filter.AbstractFilter;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;

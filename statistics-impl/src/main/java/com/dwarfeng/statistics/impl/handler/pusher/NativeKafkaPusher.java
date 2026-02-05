@@ -2,6 +2,7 @@ package com.dwarfeng.statistics.impl.handler.pusher;
 
 import com.alibaba.fastjson.JSON;
 import com.dwarfeng.statistics.sdk.bean.entity.FastJsonStatisticsSetting;
+import com.dwarfeng.statistics.sdk.handler.pusher.AbstractPusher;
 import com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.producer.ProducerConfig;

@@ -2,6 +2,7 @@ package com.dwarfeng.statistics.impl.handler.pusher;
 
 import com.alibaba.fastjson.JSON;
 import com.dwarfeng.statistics.sdk.bean.entity.FastJsonStatisticsSetting;
+import com.dwarfeng.statistics.sdk.handler.pusher.AbstractPusher;
 import com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.apache.commons.lang3.StringUtils;

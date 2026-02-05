@@ -1,5 +1,6 @@
 package com.dwarfeng.statistics.impl.handler;
 
+import com.dwarfeng.statistics.sdk.handler.Bridge;
 import com.dwarfeng.statistics.stack.bean.dto.*;
 import com.dwarfeng.statistics.stack.exception.LookupException;
 import com.dwarfeng.statistics.stack.exception.NativeQueryException;

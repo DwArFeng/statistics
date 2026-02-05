@@ -2,6 +2,8 @@ package com.dwarfeng.statistics.impl.handler.mapper;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.dwarfeng.statistics.sdk.handler.mapper.AbstractMapperRegistry;
+import com.dwarfeng.statistics.sdk.handler.mapper.AggregateMapper;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
 import com.dwarfeng.statistics.stack.exception.MapperException;
 import com.dwarfeng.statistics.stack.handler.Mapper;

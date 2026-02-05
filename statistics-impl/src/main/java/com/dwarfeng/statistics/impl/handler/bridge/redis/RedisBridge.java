@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.bridge.redis;
 
-import com.dwarfeng.statistics.impl.handler.bridge.KeeperOnlyBridge;
+import com.dwarfeng.statistics.sdk.handler.bridge.KeeperOnlyBridge;
 import org.springframework.stereotype.Component;
 
 /**

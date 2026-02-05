@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.provider.mock;
 
-import com.dwarfeng.statistics.impl.handler.provider.AbstractProvider;
+import com.dwarfeng.statistics.sdk.handler.provider.AbstractProvider;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;

@@ -1,26 +1,16 @@
 package com.dwarfeng.statistics.impl.handler.driver;
 
-import com.dwarfeng.statistics.stack.handler.Driver;
-
 /**
  * 驱动器的抽象实现。
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.driver.AbstractDriver
  * @since 1.0.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
-public abstract class AbstractDriver implements Driver {
+@Deprecated
+public abstract class AbstractDriver extends com.dwarfeng.statistics.sdk.handler.driver.AbstractDriver {
 
-    protected Context context;
-
-    @Override
-    public void init(Context context) {
-        this.context = context;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractDriver{" +
-                "context=" + context +
-                '}';
+    public AbstractDriver() {
     }
 }

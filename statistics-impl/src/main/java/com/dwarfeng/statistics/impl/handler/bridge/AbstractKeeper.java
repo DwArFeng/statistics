@@ -1,17 +1,16 @@
 package com.dwarfeng.statistics.impl.handler.bridge;
 
-import com.dwarfeng.statistics.impl.handler.Bridge.Keeper;
-
 /**
  * 保持器的抽象实现。
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.bridge.AbstractKeeper
  * @since 1.0.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
-public abstract class AbstractKeeper implements Keeper {
+@Deprecated
+public abstract class AbstractKeeper extends com.dwarfeng.statistics.sdk.handler.bridge.AbstractKeeper {
 
-    @Override
-    public String toString() {
-        return "AbstractKeeper{}";
+    public AbstractKeeper() {
     }
 }

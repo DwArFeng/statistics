@@ -1,5 +1,6 @@
 package com.dwarfeng.statistics.impl.handler;
 
+import com.dwarfeng.statistics.sdk.handler.FilterMaker;
 import com.dwarfeng.statistics.stack.exception.FilterException;
 import com.dwarfeng.statistics.stack.exception.UnsupportedFilterTypeException;
 import com.dwarfeng.statistics.stack.handler.Filter;

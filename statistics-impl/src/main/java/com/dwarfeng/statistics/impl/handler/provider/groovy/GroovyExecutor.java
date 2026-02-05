@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.provider.groovy;
 
-import com.dwarfeng.statistics.impl.handler.provider.AbstractExecutor;
+import com.dwarfeng.statistics.sdk.handler.provider.AbstractExecutor;
 import com.dwarfeng.statistics.stack.bean.dto.ProviderData;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

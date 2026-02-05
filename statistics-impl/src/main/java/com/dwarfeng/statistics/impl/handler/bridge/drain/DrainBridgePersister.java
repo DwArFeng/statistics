@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.bridge.drain;
 
-import com.dwarfeng.statistics.impl.handler.bridge.WriteOnlyPersister;
+import com.dwarfeng.statistics.sdk.handler.bridge.WriteOnlyPersister;
 import com.dwarfeng.statistics.stack.bean.dto.BridgeData;
 import org.springframework.stereotype.Component;
 

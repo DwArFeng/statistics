@@ -1,31 +1,16 @@
 package com.dwarfeng.statistics.impl.handler.filter;
 
-import com.dwarfeng.statistics.stack.exception.FilterException;
-import com.dwarfeng.statistics.stack.handler.Filter;
-
 /**
  * 过滤器的抽象实现。
  *
  * @author DwArFeng
+ * @see com.dwarfeng.statistics.sdk.handler.filter.AbstractFilter
  * @since 1.0.0
+ * @deprecated 该对象已经被废弃，请使用 sdk 模块下的对应对象代替。
  */
-public abstract class AbstractFilter implements Filter {
+@Deprecated
+public abstract class AbstractFilter extends com.dwarfeng.statistics.sdk.handler.filter.AbstractFilter {
 
-    @Override
-    public Executor newExecutor() throws FilterException {
-        try {
-            return doNewExecutor();
-        } catch (FilterException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new FilterException(e);
-        }
-    }
-
-    protected abstract Executor doNewExecutor() throws Exception;
-
-    @Override
-    public String toString() {
-        return "AbstractFilter{}";
+    public AbstractFilter() {
     }
 }

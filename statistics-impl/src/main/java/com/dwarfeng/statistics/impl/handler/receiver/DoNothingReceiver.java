@@ -1,5 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.receiver;
 
+import com.dwarfeng.statistics.sdk.handler.receiver.AbstractReceiver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
