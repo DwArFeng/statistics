@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonTaskEvent implements Bean {
 
-    private static final long serialVersionUID = 398677106457587294L;
+    private static final long serialVersionUID = -5006620055288974030L;
 
     public static JSFixedFastJsonTaskEvent of(TaskEvent taskEvent) {
         if (Objects.isNull(taskEvent)) {
@@ -26,8 +26,7 @@ public class JSFixedFastJsonTaskEvent implements Bean {
                     JSFixedFastJsonLongIdKey.of(taskEvent.getKey()),
                     JSFixedFastJsonLongIdKey.of(taskEvent.getTaskKey()),
                     taskEvent.getHappenedDate(),
-                    taskEvent.getMessage(),
-                    taskEvent.getRemark()
+                    taskEvent.getMessage()
             );
         }
     }
@@ -44,21 +43,16 @@ public class JSFixedFastJsonTaskEvent implements Bean {
     @JSONField(name = "message", ordinal = 4)
     private String message;
 
-    @JSONField(name = "remark", ordinal = 5)
-    private String remark;
-
     public JSFixedFastJsonTaskEvent() {
     }
 
     public JSFixedFastJsonTaskEvent(
-            JSFixedFastJsonLongIdKey key, JSFixedFastJsonLongIdKey taskKey, Date happenedDate, String message,
-            String remark
+            JSFixedFastJsonLongIdKey key, JSFixedFastJsonLongIdKey taskKey, Date happenedDate, String message
     ) {
         this.key = key;
         this.taskKey = taskKey;
         this.happenedDate = happenedDate;
         this.message = message;
-        this.remark = remark;
     }
 
     public JSFixedFastJsonLongIdKey getKey() {
@@ -93,14 +87,6 @@ public class JSFixedFastJsonTaskEvent implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "JSFixedFastJsonTaskEvent{" +
@@ -108,7 +94,6 @@ public class JSFixedFastJsonTaskEvent implements Bean {
                 ", taskKey=" + taskKey +
                 ", happenedDate=" + happenedDate +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

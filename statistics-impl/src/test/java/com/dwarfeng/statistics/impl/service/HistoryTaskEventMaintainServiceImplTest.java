@@ -47,12 +47,12 @@ public class HistoryTaskEventMaintainServiceImplTest {
         statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name","description", "remark");
         historyTask = new HistoryTask(
                 new LongIdKey(HISTORY_TASK_ID), new LongIdKey(STATISTICS_SETTING_ID), 12450, new Date(), new Date(),
-                new Date(), 12450L, new Date(), new Date(), 12450, "frontMessage", "remark"
+                new Date(), 12450L, new Date(), new Date(), 12450, "message"
         );
         historyTaskEvents = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             HistoryTaskEvent historyTaskEvent = new HistoryTaskEvent(
-                    null, new LongIdKey(HISTORY_TASK_ID), new Date(), "message", "remark"
+                    null, new LongIdKey(HISTORY_TASK_ID), new Date(), "message"
             );
             historyTaskEvents.add(historyTaskEvent);
         }

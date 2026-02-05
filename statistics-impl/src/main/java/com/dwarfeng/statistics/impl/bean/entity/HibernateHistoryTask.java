@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "tbl_history_task")
 public class HibernateHistoryTask implements Bean {
 
-    private static final long serialVersionUID = 2678256075690719088L;
+    private static final long serialVersionUID = -3648866875005682722L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -58,9 +58,6 @@ public class HibernateHistoryTask implements Bean {
 
     @Column(name = "message", length = Constraints.LENGTH_MESSAGE)
     private String message;
-
-    @Column(name = "back_message", length = Constraints.LENGTH_REMARK)
-    private String remark;
 
     // -----------------------------------------------------------多对一-----------------------------------------------------------
     @ManyToOne(targetEntity = HibernateStatisticsSetting.class)
@@ -182,14 +179,6 @@ public class HibernateHistoryTask implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public HibernateStatisticsSetting getStatisticsSetting() {
         return statisticsSetting;
     }
@@ -220,7 +209,6 @@ public class HibernateHistoryTask implements Bean {
                 "diedDate = " + diedDate + ", " +
                 "executionNodeId = " + executionNodeId + ", " +
                 "message = " + message + ", " +
-                "remark = " + remark + ", " +
                 "statisticsSetting = " + statisticsSetting + ")";
     }
 }

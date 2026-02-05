@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonTask implements Bean {
 
-    private static final long serialVersionUID = -2934355014722425144L;
+    private static final long serialVersionUID = -9003323652978993742L;
 
     public static JSFixedFastJsonTask of(Task task) {
         if (Objects.isNull(task)) {
@@ -31,8 +31,7 @@ public class JSFixedFastJsonTask implements Bean {
                     task.getShouldExpireDate(),
                     task.getShouldDieDate(),
                     task.getExecutionNodeId(),
-                    task.getMessage(),
-                    task.getRemark()
+                    task.getMessage()
             );
         }
     }
@@ -64,16 +63,12 @@ public class JSFixedFastJsonTask implements Bean {
     @JSONField(name = "message", ordinal = 9)
     private String message;
 
-    @JSONField(name = "remark", ordinal = 10)
-    private String remark;
-
     public JSFixedFastJsonTask() {
     }
 
     public JSFixedFastJsonTask(
             JSFixedFastJsonLongIdKey key, JSFixedFastJsonLongIdKey statisticsSettingKey, int status, Date createDate,
-            Date startDate, Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String message,
-            String remark
+            Date startDate, Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -84,7 +79,6 @@ public class JSFixedFastJsonTask implements Bean {
         this.shouldDieDate = shouldDieDate;
         this.executionNodeId = executionNodeId;
         this.message = message;
-        this.remark = remark;
     }
 
     public JSFixedFastJsonLongIdKey getKey() {
@@ -159,14 +153,6 @@ public class JSFixedFastJsonTask implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "JSFixedFastJsonTask{" +
@@ -179,7 +165,6 @@ public class JSFixedFastJsonTask implements Bean {
                 ", shouldDieDate=" + shouldDieDate +
                 ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

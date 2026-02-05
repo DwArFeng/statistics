@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class FastJsonTaskEvent implements Bean {
 
-    private static final long serialVersionUID = 9048400508115034924L;
+    private static final long serialVersionUID = 4566093547678590942L;
 
     public static FastJsonTaskEvent of(TaskEvent taskEvent) {
         if (Objects.isNull(taskEvent)) {
@@ -26,8 +26,7 @@ public class FastJsonTaskEvent implements Bean {
                     FastJsonLongIdKey.of(taskEvent.getKey()),
                     FastJsonLongIdKey.of(taskEvent.getTaskKey()),
                     taskEvent.getHappenedDate(),
-                    taskEvent.getMessage(),
-                    taskEvent.getRemark()
+                    taskEvent.getMessage()
             );
         }
     }
@@ -44,20 +43,16 @@ public class FastJsonTaskEvent implements Bean {
     @JSONField(name = "message", ordinal = 4)
     private String message;
 
-    @JSONField(name = "remark", ordinal = 5)
-    private String remark;
-
     public FastJsonTaskEvent() {
     }
 
     public FastJsonTaskEvent(
-            FastJsonLongIdKey key, FastJsonLongIdKey taskKey, Date happenedDate, String message, String remark
+            FastJsonLongIdKey key, FastJsonLongIdKey taskKey, Date happenedDate, String message
     ) {
         this.key = key;
         this.taskKey = taskKey;
         this.happenedDate = happenedDate;
         this.message = message;
-        this.remark = remark;
     }
 
     public FastJsonLongIdKey getKey() {
@@ -92,14 +87,6 @@ public class FastJsonTaskEvent implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "FastJsonTaskEvent{" +
@@ -107,7 +94,6 @@ public class FastJsonTaskEvent implements Bean {
                 ", taskKey=" + taskKey +
                 ", happenedDate=" + happenedDate +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

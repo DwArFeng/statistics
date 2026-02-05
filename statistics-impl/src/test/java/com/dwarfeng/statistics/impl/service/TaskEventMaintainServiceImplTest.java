@@ -47,12 +47,12 @@ public class TaskEventMaintainServiceImplTest {
         statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name","description", "remark");
         task = new Task(
                 new LongIdKey(TASK_ID), new LongIdKey(STATISTICS_SETTING_ID), 12450, new Date(), new Date(), new Date(),
-                new Date(), 12450, "frontMessage", "remark"
+                new Date(), 12450, "message"
         );
         taskEvents = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             TaskEvent taskEvent = new TaskEvent(
-                    null, new LongIdKey(TASK_ID), new Date(), "message", "remark"
+                    null, new LongIdKey(TASK_ID), new Date(), "message"
             );
             taskEvents.add(taskEvent);
         }

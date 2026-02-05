@@ -39,7 +39,7 @@ public class TaskMaintainServiceImplTest {
         tasks = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Task task = new Task(
-                    null, null, 12450, new Date(), new Date(), new Date(), new Date(), 12450, "message", "remark"
+                    null, null, 12450, new Date(), new Date(), new Date(), new Date(), 12450, "message"
             );
             tasks.add(task);
         }

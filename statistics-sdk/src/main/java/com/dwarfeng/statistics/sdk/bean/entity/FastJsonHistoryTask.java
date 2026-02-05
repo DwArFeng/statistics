@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class FastJsonHistoryTask implements Bean {
 
-    private static final long serialVersionUID = -8150280803096438558L;
+    private static final long serialVersionUID = 4548927973295043570L;
 
     public static FastJsonHistoryTask of(HistoryTask historyTask) {
         if (Objects.isNull(historyTask)) {
@@ -33,8 +33,7 @@ public class FastJsonHistoryTask implements Bean {
                     historyTask.getExpiredDate(),
                     historyTask.getDiedDate(),
                     historyTask.getExecutionNodeId(),
-                    historyTask.getMessage(),
-                    historyTask.getRemark()
+                    historyTask.getMessage()
             );
         }
     }
@@ -72,16 +71,12 @@ public class FastJsonHistoryTask implements Bean {
     @JSONField(name = "message", ordinal = 11)
     private String message;
 
-    @JSONField(name = "remark", ordinal = 12)
-    private String remark;
-
     public FastJsonHistoryTask() {
     }
 
     public FastJsonHistoryTask(
             FastJsonLongIdKey key, FastJsonLongIdKey statisticsSettingKey, int status, Date createDate, Date startDate,
-            Date endDate, Long duration, Date expiredDate, Date diedDate, int executionNodeId, String message,
-            String remark
+            Date endDate, Long duration, Date expiredDate, Date diedDate, int executionNodeId, String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -94,7 +89,6 @@ public class FastJsonHistoryTask implements Bean {
         this.diedDate = diedDate;
         this.executionNodeId = executionNodeId;
         this.message = message;
-        this.remark = remark;
     }
 
     public FastJsonLongIdKey getKey() {
@@ -185,14 +179,6 @@ public class FastJsonHistoryTask implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "FastJsonHistoryTask{" +
@@ -207,7 +193,6 @@ public class FastJsonHistoryTask implements Bean {
                 ", diedDate=" + diedDate +
                 ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

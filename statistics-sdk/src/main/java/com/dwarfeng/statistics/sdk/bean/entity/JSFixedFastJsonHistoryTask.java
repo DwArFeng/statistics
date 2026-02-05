@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonHistoryTask implements Bean {
 
-    private static final long serialVersionUID = -6620117446335946098L;
+    private static final long serialVersionUID = -6129487410363904573L;
 
     public static JSFixedFastJsonHistoryTask of(HistoryTask historyTask) {
         if (Objects.isNull(historyTask)) {
@@ -34,8 +34,7 @@ public class JSFixedFastJsonHistoryTask implements Bean {
                     historyTask.getExpiredDate(),
                     historyTask.getDiedDate(),
                     historyTask.getExecutionNodeId(),
-                    historyTask.getMessage(),
-                    historyTask.getRemark()
+                    historyTask.getMessage()
             );
         }
     }
@@ -73,16 +72,13 @@ public class JSFixedFastJsonHistoryTask implements Bean {
     @JSONField(name = "message", ordinal = 11)
     private String message;
 
-    @JSONField(name = "remark", ordinal = 12)
-    private String remark;
-
     public JSFixedFastJsonHistoryTask() {
     }
 
     public JSFixedFastJsonHistoryTask(
             JSFixedFastJsonLongIdKey key, JSFixedFastJsonLongIdKey statisticsSettingKey, int status, Date createDate,
             Date startDate, Date endDate, Long duration, Date expiredDate, Date diedDate, int executionNodeId,
-            String message, String remark
+            String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -95,7 +91,6 @@ public class JSFixedFastJsonHistoryTask implements Bean {
         this.diedDate = diedDate;
         this.executionNodeId = executionNodeId;
         this.message = message;
-        this.remark = remark;
     }
 
     public JSFixedFastJsonLongIdKey getKey() {
@@ -186,14 +181,6 @@ public class JSFixedFastJsonHistoryTask implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "JSFixedFastJsonHistoryTask{" +
@@ -208,7 +195,6 @@ public class JSFixedFastJsonHistoryTask implements Bean {
                 ", diedDate=" + diedDate +
                 ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

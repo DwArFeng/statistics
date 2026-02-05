@@ -34,7 +34,11 @@
 
 ### 功能移除
 
-- (无)
+- 删除实体字段。
+  - com.dwarfeng.statistics.stack.bean.entity.Task.remark。
+  - com.dwarfeng.statistics.stack.bean.entity.TaskEvent.remark。
+  - com.dwarfeng.statistics.stack.bean.entity.HistoryTask.remark。
+  - com.dwarfeng.statistics.stack.bean.entity.HistoryTaskEvent.remark。
 
 ---
 

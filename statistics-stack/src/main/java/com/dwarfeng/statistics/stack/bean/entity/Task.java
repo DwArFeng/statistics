@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Task implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = 8716595217841154300L;
+    private static final long serialVersionUID = 9015919447538725856L;
 
     private LongIdKey key;
     private LongIdKey statisticsSettingKey;
@@ -46,14 +46,12 @@ public class Task implements Entity<LongIdKey> {
      */
     private String message;
 
-    private String remark;
-
     public Task() {
     }
 
     public Task(
             LongIdKey key, LongIdKey statisticsSettingKey, int status, Date createDate, Date startDate,
-            Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String message, String remark
+            Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -64,7 +62,6 @@ public class Task implements Entity<LongIdKey> {
         this.shouldDieDate = shouldDieDate;
         this.executionNodeId = executionNodeId;
         this.message = message;
-        this.remark = remark;
     }
 
     @Override
@@ -141,14 +138,6 @@ public class Task implements Entity<LongIdKey> {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "Task{" +
@@ -161,7 +150,6 @@ public class Task implements Entity<LongIdKey> {
                 ", shouldDieDate=" + shouldDieDate +
                 ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

@@ -125,8 +125,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     new Date(currentDate.getTime() + expireTimeout),
                     null,
                     nodeId,
-                    null,
-                    "通过 statistics 操作处理器创建"
+                    null
             );
 
             // 调用维护服务插入任务实体。
@@ -195,8 +194,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     null,
                     null,
                     task.getExecutionNodeId(),
-                    task.getMessage(),
-                    task.getRemark()
+                    task.getMessage()
             );
 
             // 调用维护服务插入历史任务实体。
@@ -251,8 +249,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     null,
                     null,
                     task.getExecutionNodeId(),
-                    task.getMessage(),
-                    task.getRemark()
+                    task.getMessage()
             );
 
             // 调用维护服务插入历史任务实体。
@@ -307,8 +304,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     currentDate,
                     null,
                     task.getExecutionNodeId(),
-                    task.getMessage(),
-                    task.getRemark()
+                    task.getMessage()
             );
 
             // 调用维护服务插入历史任务实体。
@@ -363,8 +359,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     null,
                     currentDate,
                     task.getExecutionNodeId(),
-                    task.getMessage(),
-                    task.getRemark()
+                    task.getMessage()
             );
 
             // 调用维护服务插入历史任务实体。
@@ -402,8 +397,8 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                         f.getKey(),
                         historyTaskKey,
                         f.getHappenedDate(),
-                        f.getMessage(),
-                        f.getRemark()
+                        f.getMessage()
+
                 )
         ).collect(Collectors.toList());
 

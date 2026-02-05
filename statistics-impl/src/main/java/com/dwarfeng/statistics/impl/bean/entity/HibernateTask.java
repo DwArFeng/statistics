@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "tbl_task")
 public class HibernateTask implements Bean {
 
-    private static final long serialVersionUID = -4976655624486007607L;
+    private static final long serialVersionUID = -3509550338261903649L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -51,9 +51,6 @@ public class HibernateTask implements Bean {
 
     @Column(name = "message", length = Constraints.LENGTH_MESSAGE)
     private String message;
-
-    @Column(name = "back_message", length = Constraints.LENGTH_REMARK)
-    private String remark;
 
     // -----------------------------------------------------------多对一-----------------------------------------------------------
     @ManyToOne(targetEntity = HibernateStatisticsSetting.class)
@@ -159,14 +156,6 @@ public class HibernateTask implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public HibernateStatisticsSetting getStatisticsSetting() {
         return statisticsSetting;
     }
@@ -195,7 +184,6 @@ public class HibernateTask implements Bean {
                 "shouldDieDate = " + shouldDieDate + ", " +
                 "executionNodeId = " + executionNodeId + ", " +
                 "message = " + message + ", " +
-                "remark = " + remark + ", " +
                 "statisticsSetting = " + statisticsSetting + ")";
     }
 }

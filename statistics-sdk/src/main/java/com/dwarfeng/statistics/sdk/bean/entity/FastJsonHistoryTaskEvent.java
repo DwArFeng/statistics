@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class FastJsonHistoryTaskEvent implements Bean {
 
-    private static final long serialVersionUID = -2458561598168609116L;
+    private static final long serialVersionUID = 8362474805895030181L;
 
     public static FastJsonHistoryTaskEvent of(HistoryTaskEvent historyTaskEvent) {
         if (Objects.isNull(historyTaskEvent)) {
@@ -26,8 +26,7 @@ public class FastJsonHistoryTaskEvent implements Bean {
                     FastJsonLongIdKey.of(historyTaskEvent.getKey()),
                     FastJsonLongIdKey.of(historyTaskEvent.getHistoryTaskKey()),
                     historyTaskEvent.getHappenedDate(),
-                    historyTaskEvent.getMessage(),
-                    historyTaskEvent.getRemark()
+                    historyTaskEvent.getMessage()
             );
         }
     }
@@ -44,20 +43,16 @@ public class FastJsonHistoryTaskEvent implements Bean {
     @JSONField(name = "message", ordinal = 4)
     private String message;
 
-    @JSONField(name = "remark", ordinal = 5)
-    private String remark;
-
     public FastJsonHistoryTaskEvent() {
     }
 
     public FastJsonHistoryTaskEvent(
-            FastJsonLongIdKey key, FastJsonLongIdKey historyTaskKey, Date happenedDate, String message, String remark
+            FastJsonLongIdKey key, FastJsonLongIdKey historyTaskKey, Date happenedDate, String message
     ) {
         this.key = key;
         this.historyTaskKey = historyTaskKey;
         this.happenedDate = happenedDate;
         this.message = message;
-        this.remark = remark;
     }
 
     public FastJsonLongIdKey getKey() {
@@ -92,14 +87,6 @@ public class FastJsonHistoryTaskEvent implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "FastJsonHistoryTaskEvent{" +
@@ -107,7 +94,6 @@ public class FastJsonHistoryTaskEvent implements Bean {
                 ", historyTaskKey=" + historyTaskKey +
                 ", happenedDate=" + happenedDate +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

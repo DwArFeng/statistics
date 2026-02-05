@@ -60,7 +60,7 @@ public class TaskEventOperateHandlerImpl implements TaskEventOperateHandler {
             // 创建任务事件。
             LongIdKey taskEventKey = keyGenerator.generate();
             TaskEvent taskEvent = new TaskEvent(
-                    taskEventKey, taskKey, new Date(), message, "通过 statistics 操作处理器创建"
+                    taskEventKey, taskKey, new Date(), message
             );
 
             // 调用维护服务创建任务事件。

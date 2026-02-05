@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class HistoryTask implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = -8293811968625659406L;
+    private static final long serialVersionUID = 5306449367306730520L;
 
     private LongIdKey key;
     private LongIdKey statisticsSettingKey;
@@ -50,14 +50,12 @@ public class HistoryTask implements Entity<LongIdKey> {
      */
     private String message;
 
-    private String remark;
-
     public HistoryTask() {
     }
 
     public HistoryTask(
             LongIdKey key, LongIdKey statisticsSettingKey, int status, Date createDate, Date startDate, Date endDate,
-            Long duration, Date expiredDate, Date diedDate, int executionNodeId, String message, String remark
+            Long duration, Date expiredDate, Date diedDate, int executionNodeId, String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -70,7 +68,6 @@ public class HistoryTask implements Entity<LongIdKey> {
         this.diedDate = diedDate;
         this.executionNodeId = executionNodeId;
         this.message = message;
-        this.remark = remark;
     }
 
     @Override
@@ -163,14 +160,6 @@ public class HistoryTask implements Entity<LongIdKey> {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "HistoryTask{" +
@@ -185,7 +174,6 @@ public class HistoryTask implements Entity<LongIdKey> {
                 ", diedDate=" + diedDate +
                 ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

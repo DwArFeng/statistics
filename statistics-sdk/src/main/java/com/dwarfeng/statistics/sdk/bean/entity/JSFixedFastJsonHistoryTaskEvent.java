@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonHistoryTaskEvent implements Bean {
 
-    private static final long serialVersionUID = -2521636096123886257L;
+    private static final long serialVersionUID = -3381064028803925216L;
 
     public static JSFixedFastJsonHistoryTaskEvent of(HistoryTaskEvent historyTaskEvent) {
         if (Objects.isNull(historyTaskEvent)) {
@@ -26,8 +26,7 @@ public class JSFixedFastJsonHistoryTaskEvent implements Bean {
                     JSFixedFastJsonLongIdKey.of(historyTaskEvent.getKey()),
                     JSFixedFastJsonLongIdKey.of(historyTaskEvent.getHistoryTaskKey()),
                     historyTaskEvent.getHappenedDate(),
-                    historyTaskEvent.getMessage(),
-                    historyTaskEvent.getRemark()
+                    historyTaskEvent.getMessage()
             );
         }
     }
@@ -44,21 +43,17 @@ public class JSFixedFastJsonHistoryTaskEvent implements Bean {
     @JSONField(name = "message", ordinal = 4)
     private String message;
 
-    @JSONField(name = "remark", ordinal = 5)
-    private String remark;
-
     public JSFixedFastJsonHistoryTaskEvent() {
     }
 
     public JSFixedFastJsonHistoryTaskEvent(
-            JSFixedFastJsonLongIdKey key, JSFixedFastJsonLongIdKey historyTaskKey, Date happenedDate, String message,
-            String remark
+            JSFixedFastJsonLongIdKey key, JSFixedFastJsonLongIdKey historyTaskKey, Date happenedDate, String message
+
     ) {
         this.key = key;
         this.historyTaskKey = historyTaskKey;
         this.happenedDate = happenedDate;
         this.message = message;
-        this.remark = remark;
     }
 
     public JSFixedFastJsonLongIdKey getKey() {
@@ -93,14 +88,6 @@ public class JSFixedFastJsonHistoryTaskEvent implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "JSFixedFastJsonHistoryTaskEvent{" +
@@ -108,7 +95,6 @@ public class JSFixedFastJsonHistoryTaskEvent implements Bean {
                 ", historyTaskKey=" + historyTaskKey +
                 ", happenedDate=" + happenedDate +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }

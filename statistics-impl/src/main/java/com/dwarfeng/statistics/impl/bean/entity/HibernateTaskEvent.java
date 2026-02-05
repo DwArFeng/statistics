@@ -13,7 +13,7 @@ import java.util.Optional;
 @Table(name = "tbl_task_event")
 public class HibernateTaskEvent implements Bean {
 
-    private static final long serialVersionUID = -8740497676858011224L;
+    private static final long serialVersionUID = -5531070779975756827L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -31,9 +31,6 @@ public class HibernateTaskEvent implements Bean {
 
     @Column(name = "message", length = Constraints.LENGTH_MESSAGE)
     private String message;
-
-    @Column(name = "remark", length = Constraints.LENGTH_REMARK)
-    private String remark;
 
     // -----------------------------------------------------------多对一-----------------------------------------------------------
     @ManyToOne(targetEntity = HibernateTask.class)
@@ -95,14 +92,6 @@ public class HibernateTaskEvent implements Bean {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public HibernateTask getTask() {
         return task;
     }
@@ -118,7 +107,6 @@ public class HibernateTaskEvent implements Bean {
                 "taskLongId = " + taskLongId + ", " +
                 "happenedDate = " + happenedDate + ", " +
                 "message = " + message + ", " +
-                "remark = " + remark + ", " +
                 "task = " + task + ")";
     }
 }

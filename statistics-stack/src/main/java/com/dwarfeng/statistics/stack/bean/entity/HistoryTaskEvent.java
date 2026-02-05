@@ -13,23 +13,21 @@ import java.util.Date;
  */
 public class HistoryTaskEvent implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = -1054772010315352459L;
+    private static final long serialVersionUID = 2994959499556509562L;
 
     private LongIdKey key;
     private LongIdKey historyTaskKey;
     private Date happenedDate;
     private String message;
-    private String remark;
 
     public HistoryTaskEvent() {
     }
 
-    public HistoryTaskEvent(LongIdKey key, LongIdKey historyTaskKey, Date happenedDate, String message, String remark) {
+    public HistoryTaskEvent(LongIdKey key, LongIdKey historyTaskKey, Date happenedDate, String message) {
         this.key = key;
         this.historyTaskKey = historyTaskKey;
         this.happenedDate = happenedDate;
         this.message = message;
-        this.remark = remark;
     }
 
     @Override
@@ -66,14 +64,6 @@ public class HistoryTaskEvent implements Entity<LongIdKey> {
         this.message = message;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     @Override
     public String toString() {
         return "HistoryTaskEvent{" +
@@ -81,7 +71,6 @@ public class HistoryTaskEvent implements Entity<LongIdKey> {
                 ", historyTaskKey=" + historyTaskKey +
                 ", happenedDate=" + happenedDate +
                 ", message='" + message + '\'' +
-                ", remark='" + remark + '\'' +
                 '}';
     }
 }
