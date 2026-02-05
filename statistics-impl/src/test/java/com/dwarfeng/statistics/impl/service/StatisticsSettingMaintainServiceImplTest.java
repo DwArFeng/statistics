@@ -2,7 +2,6 @@ package com.dwarfeng.statistics.impl.service;
 
 import com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting;
 import com.dwarfeng.statistics.stack.service.StatisticsSettingMaintainService;
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/application-context*.xml")
@@ -30,7 +30,7 @@ public class StatisticsSettingMaintainServiceImplTest {
     public void setUp() {
         statisticsSettings = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            StatisticsSetting statisticsSetting = new StatisticsSetting(null, true, "name", "remark");
+            StatisticsSetting statisticsSetting = new StatisticsSetting(null, true, "name","description", "remark");
             statisticsSettings.add(statisticsSetting);
         }
     }
@@ -47,7 +47,13 @@ public class StatisticsSettingMaintainServiceImplTest {
                 statisticsSetting.setKey(statisticsSettingMaintainService.insertOrUpdate(statisticsSetting));
                 StatisticsSetting testStatisticsSetting =
                         statisticsSettingMaintainService.get(statisticsSetting.getKey());
-                assertEquals(BeanUtils.describe(statisticsSetting), BeanUtils.describe(testStatisticsSetting));
+                assertNotNull(testStatisticsSetting);
+                assertNotNull(testStatisticsSetting.getKey());
+                assertEquals(statisticsSetting.getKey().getLongId(), testStatisticsSetting.getKey().getLongId());
+                assertEquals(statisticsSetting.isEnabled(), testStatisticsSetting.isEnabled());
+                assertEquals(statisticsSetting.getName(), testStatisticsSetting.getName());
+                assertEquals(statisticsSetting.getDescription(), testStatisticsSetting.getDescription());
+                assertEquals(statisticsSetting.getRemark(), testStatisticsSetting.getRemark());
             }
         } finally {
             for (StatisticsSetting statisticsSetting : statisticsSettings) {

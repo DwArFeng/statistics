@@ -39,7 +39,7 @@ public class VariableMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name", "remark");
+        statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name","description", "remark");
         variables = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Variable variable = new Variable(

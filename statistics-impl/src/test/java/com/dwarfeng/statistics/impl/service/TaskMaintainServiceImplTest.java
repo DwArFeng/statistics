@@ -35,7 +35,7 @@ public class TaskMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        statisticsSetting = new StatisticsSetting(null, true, "name", "remark");
+        statisticsSetting = new StatisticsSetting(null, true, "name", "description","remark");
         tasks = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Task task = new Task(

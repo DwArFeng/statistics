@@ -44,7 +44,7 @@ public class TaskEventMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name", "remark");
+        statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name","description", "remark");
         task = new Task(
                 new LongIdKey(TASK_ID), new LongIdKey(STATISTICS_SETTING_ID), 12450, new Date(), new Date(), new Date(),
                 new Date(), 12450, "frontMessage", "remark"

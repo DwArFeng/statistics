@@ -34,7 +34,7 @@ public class DriverInfoMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        statisticsSetting = new StatisticsSetting(null, true, "name", "remark");
+        statisticsSetting = new StatisticsSetting(null, true, "name","description", "remark");
         driverInfos = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             DriverInfo driverInfo = new DriverInfo(null, null, true, "type", "param", "remark");

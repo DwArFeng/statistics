@@ -28,6 +28,9 @@ public class HibernateStatisticsSetting implements Bean {
     @Column(name = "name", length = Constraints.LENGTH_NAME, nullable = false)
     private String name;
 
+    @Column(name = "description", length = Constraints.LENGTH_REMARK)
+    private String description;
+
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
 
@@ -89,6 +92,14 @@ public class HibernateStatisticsSetting implements Bean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getRemark() {
@@ -161,6 +172,7 @@ public class HibernateStatisticsSetting implements Bean {
                 "longId = " + longId + ", " +
                 "enabled = " + enabled + ", " +
                 "name = " + name + ", " +
+                "description = " + description + ", " +
                 "remark = " + remark + ", " +
                 "statisticsExecutionProfile = " + statisticsExecutionProfile + ")";
     }

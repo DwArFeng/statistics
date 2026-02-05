@@ -35,7 +35,7 @@ public class StatisticsExecutionProfileMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name", "remark");
+        statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name", "description","remark");
         statisticsExecutionProfile = new StatisticsExecutionProfile(
                 new LongIdKey(STATISTICS_SETTING_ID), 12450, 12450, 12450, 12450, new Date(), new Date(), new Date()
         );

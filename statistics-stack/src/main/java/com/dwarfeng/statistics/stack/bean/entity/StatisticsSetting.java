@@ -11,20 +11,22 @@ import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
  */
 public class StatisticsSetting implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = -3957035357324718871L;
+    private static final long serialVersionUID = 4570130463402998013L;
 
     private LongIdKey key;
     private boolean enabled;
     private String name;
+    private String description;
     private String remark;
 
     public StatisticsSetting() {
     }
 
-    public StatisticsSetting(LongIdKey key, boolean enabled, String name, String remark) {
+    public StatisticsSetting(LongIdKey key, boolean enabled, String name, String description, String remark) {
         this.key = key;
         this.enabled = enabled;
         this.name = name;
+        this.description = description;
         this.remark = remark;
     }
 
@@ -54,6 +56,14 @@ public class StatisticsSetting implements Entity<LongIdKey> {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -68,6 +78,7 @@ public class StatisticsSetting implements Entity<LongIdKey> {
                 "key=" + key +
                 ", enabled=" + enabled +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }

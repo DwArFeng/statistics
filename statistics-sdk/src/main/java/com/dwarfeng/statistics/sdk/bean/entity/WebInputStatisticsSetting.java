@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 public class WebInputStatisticsSetting implements Bean {
 
-    private static final long serialVersionUID = 7701447167410932935L;
+    private static final long serialVersionUID = -8310703766780264733L;
 
     public static StatisticsSetting toStackBean(WebInputStatisticsSetting webInput) {
         if (Objects.isNull(webInput)) {
@@ -30,6 +30,7 @@ public class WebInputStatisticsSetting implements Bean {
                     WebInputLongIdKey.toStackBean(webInput.getKey()),
                     webInput.isEnabled(),
                     webInput.getName(),
+                    webInput.getDescription(),
                     webInput.getRemark()
             );
         }
@@ -47,6 +48,9 @@ public class WebInputStatisticsSetting implements Bean {
     @NotEmpty
     @Length(max = Constraints.LENGTH_NAME)
     private String name;
+
+    @JSONField(name = "description")
+    private String description;
 
     @JSONField(name = "remark")
     @Length(max = Constraints.LENGTH_REMARK)
@@ -79,6 +83,14 @@ public class WebInputStatisticsSetting implements Bean {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -93,6 +105,7 @@ public class WebInputStatisticsSetting implements Bean {
                 "key=" + key +
                 ", enabled=" + enabled +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }

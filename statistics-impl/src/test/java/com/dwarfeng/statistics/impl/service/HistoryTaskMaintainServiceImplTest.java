@@ -35,7 +35,7 @@ public class HistoryTaskMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        statisticsSetting = new StatisticsSetting(null, true, "name", "remark");
+        statisticsSetting = new StatisticsSetting(null, true, "name","description", "remark");
         historyTasks = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             HistoryTask historyTask = new HistoryTask(

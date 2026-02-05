@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 添加实体字段。
+  - com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting.description。
+
 - SPI 目录结构优化。
   - 将桥接机制的 SPI 接口与抽象类提相关代码文件提升至 `sdk` 模块中。
   - 将调度机制的 SPI 抽象类提相关代码文件提升至 `sdk` 模块中。

@@ -34,7 +34,7 @@ public class ProviderInfoMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        statisticsSetting = new StatisticsSetting(null, true, "name", "remark");
+        statisticsSetting = new StatisticsSetting(null, true, "name", "description","remark");
         providerInfos = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             ProviderInfo providerInfo = new ProviderInfo(null, null, true, "type", "param", "remark");

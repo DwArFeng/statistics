@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonStatisticsSetting implements Bean {
 
-    private static final long serialVersionUID = 7750851857627378995L;
+    private static final long serialVersionUID = -5035050681590500719L;
 
     public static JSFixedFastJsonStatisticsSetting of(StatisticsSetting statisticsSetting) {
         if (Objects.isNull(statisticsSetting)) {
@@ -25,6 +25,7 @@ public class JSFixedFastJsonStatisticsSetting implements Bean {
                     JSFixedFastJsonLongIdKey.of(statisticsSetting.getKey()),
                     statisticsSetting.isEnabled(),
                     statisticsSetting.getName(),
+                    statisticsSetting.getDescription(),
                     statisticsSetting.getRemark()
             );
         }
@@ -39,16 +40,20 @@ public class JSFixedFastJsonStatisticsSetting implements Bean {
     @JSONField(name = "name", ordinal = 3)
     private String name;
 
-    @JSONField(name = "remark", ordinal = 4)
+    @JSONField(name = "description", ordinal = 4)
+    private String description;
+
+    @JSONField(name = "remark", ordinal = 5)
     private String remark;
 
     public JSFixedFastJsonStatisticsSetting() {
     }
 
-    public JSFixedFastJsonStatisticsSetting(JSFixedFastJsonLongIdKey key, boolean enabled, String name, String remark) {
+    public JSFixedFastJsonStatisticsSetting(JSFixedFastJsonLongIdKey key, boolean enabled, String name, String description,String remark) {
         this.key = key;
         this.enabled = enabled;
         this.name = name;
+        this.description = description;
         this.remark = remark;
     }
 
@@ -76,6 +81,14 @@ public class JSFixedFastJsonStatisticsSetting implements Bean {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -90,6 +103,7 @@ public class JSFixedFastJsonStatisticsSetting implements Bean {
                 "key=" + key +
                 ", enabled=" + enabled +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", remark='" + remark + '\'' +
                 '}';
     }

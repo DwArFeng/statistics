@@ -34,7 +34,7 @@ public class FilterInfoMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        statisticsSetting = new StatisticsSetting(null, true, "name", "remark");
+        statisticsSetting = new StatisticsSetting(null, true, "name", "description","remark");
         filterInfos = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             FilterInfo filterInfo = new FilterInfo(null, null, true, "type", "param", "remark", 12450);
