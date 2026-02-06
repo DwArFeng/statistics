@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 建立实体以及维护服务，并通过单元测试。
+  - com.dwarfeng.statistics.stack.bean.entity.TagDefinition。
+
 - 更改实体字段。
   - com.dwarfeng.statistics.stack.bean.entity.Task.message。
   - com.dwarfeng.statistics.stack.bean.entity.HistoryTask.message。

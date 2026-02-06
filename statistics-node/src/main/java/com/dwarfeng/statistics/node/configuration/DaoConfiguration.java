@@ -2,9 +2,11 @@ package com.dwarfeng.statistics.node.configuration;
 
 import com.dwarfeng.statistics.impl.bean.BeanMapper;
 import com.dwarfeng.statistics.impl.bean.entity.*;
+import com.dwarfeng.statistics.impl.bean.key.HibernateTagDefinitionKey;
 import com.dwarfeng.statistics.impl.bean.key.HibernateVariableKey;
 import com.dwarfeng.statistics.impl.dao.preset.*;
 import com.dwarfeng.statistics.stack.bean.entity.*;
+import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
@@ -39,6 +41,7 @@ public class DaoConfiguration {
     private final TaskEventPresetCriteriaMaker taskEventPresetCriteriaMaker;
     private final HistoryTaskPresetCriteriaMaker historyTaskPresetCriteriaMaker;
     private final HistoryTaskEventPresetCriteriaMaker historyTaskEventPresetCriteriaMaker;
+    private final TagDefinitionPresetCriteriaMaker tagDefinitionPresetCriteriaMaker;
 
     @Value("${hibernate.jdbc.batch_size}")
     private int batchSize;
@@ -58,7 +61,8 @@ public class DaoConfiguration {
             TaskPresetCriteriaMaker taskPresetCriteriaMaker,
             TaskEventPresetCriteriaMaker taskEventPresetCriteriaMaker,
             HistoryTaskPresetCriteriaMaker historyTaskPresetCriteriaMaker,
-            HistoryTaskEventPresetCriteriaMaker historyTaskEventPresetCriteriaMaker
+            HistoryTaskEventPresetCriteriaMaker historyTaskEventPresetCriteriaMaker,
+            TagDefinitionPresetCriteriaMaker tagDefinitionPresetCriteriaMaker
     ) {
         this.hibernateTemplate = hibernateTemplate;
         this.statisticsSettingPresetCriteriaMaker = statisticsSettingPresetCriteriaMaker;
@@ -75,6 +79,7 @@ public class DaoConfiguration {
         this.taskEventPresetCriteriaMaker = taskEventPresetCriteriaMaker;
         this.historyTaskPresetCriteriaMaker = historyTaskPresetCriteriaMaker;
         this.historyTaskEventPresetCriteriaMaker = historyTaskEventPresetCriteriaMaker;
+        this.tagDefinitionPresetCriteriaMaker = tagDefinitionPresetCriteriaMaker;
     }
 
     @Bean
@@ -577,6 +582,40 @@ public class DaoConfiguration {
                 ),
                 HibernateHistoryTaskEvent.class,
                 historyTaskEventPresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<TagDefinitionKey, HibernateTagDefinitionKey, TagDefinition, HibernateTagDefinition>
+    tagDefinitionHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                hibernateTemplate,
+                new MapStructBeanTransformer<>(
+                        TagDefinitionKey.class, HibernateTagDefinitionKey.class, BeanMapper.class
+                ),
+                new MapStructBeanTransformer<>(TagDefinition.class, HibernateTagDefinition.class, BeanMapper.class),
+                HibernateTagDefinition.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<TagDefinition, HibernateTagDefinition> tagDefinitionHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                hibernateTemplate,
+                new MapStructBeanTransformer<>(TagDefinition.class, HibernateTagDefinition.class, BeanMapper.class),
+                HibernateTagDefinition.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<TagDefinition, HibernateTagDefinition> tagDefinitionHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                hibernateTemplate,
+                new MapStructBeanTransformer<>(TagDefinition.class, HibernateTagDefinition.class, BeanMapper.class),
+                HibernateTagDefinition.class,
+                tagDefinitionPresetCriteriaMaker
         );
     }
 }

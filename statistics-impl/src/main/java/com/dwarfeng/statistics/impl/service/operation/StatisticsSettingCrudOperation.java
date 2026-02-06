@@ -1,6 +1,7 @@
 package com.dwarfeng.statistics.impl.service.operation;
 
 import com.dwarfeng.statistics.stack.bean.entity.*;
+import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.statistics.stack.cache.*;
 import com.dwarfeng.statistics.stack.dao.*;
@@ -48,6 +49,9 @@ public class StatisticsSettingCrudOperation implements BatchCrudOperation<LongId
     private final HistoryTaskEventDao historyTaskEventDao;
     private final HistoryTaskEventCache historyTaskEventCache;
 
+    private final TagDefinitionDao tagDefinitionDao;
+    private final TagDefinitionCache tagDefinitionCache;
+
     @Value("${cache.timeout.entity.statistics_setting}")
     private long statisticsSettingTimeout;
 
@@ -71,7 +75,9 @@ public class StatisticsSettingCrudOperation implements BatchCrudOperation<LongId
             HistoryTaskDao historyTaskDao,
             HistoryTaskCache historyTaskCache,
             HistoryTaskEventDao historyTaskEventDao,
-            HistoryTaskEventCache historyTaskEventCache
+            HistoryTaskEventCache historyTaskEventCache,
+            TagDefinitionDao tagDefinitionDao,
+            TagDefinitionCache tagDefinitionCache
     ) {
         this.statisticsSettingDao = statisticsSettingDao;
         this.statisticsSettingCache = statisticsSettingCache;
@@ -93,6 +99,8 @@ public class StatisticsSettingCrudOperation implements BatchCrudOperation<LongId
         this.historyTaskCache = historyTaskCache;
         this.historyTaskEventDao = historyTaskEventDao;
         this.historyTaskEventCache = historyTaskEventCache;
+        this.tagDefinitionDao = tagDefinitionDao;
+        this.tagDefinitionCache = tagDefinitionCache;
     }
 
     @Override
@@ -189,6 +197,13 @@ public class StatisticsSettingCrudOperation implements BatchCrudOperation<LongId
         ).stream().map(HistoryTask::getKey).collect(Collectors.toList());
         historyTaskDao.batchDelete(historyTaskKeys);
         historyTaskCache.batchDelete(historyTaskKeys);
+
+        // 删除与 统计设置 相关的 标签定义。
+        List<TagDefinitionKey> tagDefinitionKeys = tagDefinitionDao.lookup(
+                TagDefinitionMaintainService.CHILD_FOR_STATISTICS_SETTING, new Object[]{key}
+        ).stream().map(TagDefinition::getKey).collect(Collectors.toList());
+        tagDefinitionDao.batchDelete(tagDefinitionKeys);
+        tagDefinitionCache.batchDelete(tagDefinitionKeys);
 
         // 删除 统计设置 自身。
         statisticsSettingDao.delete(key);

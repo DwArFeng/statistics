@@ -1,8 +1,10 @@
 package com.dwarfeng.statistics.impl.bean;
 
 import com.dwarfeng.statistics.impl.bean.entity.*;
+import com.dwarfeng.statistics.impl.bean.key.HibernateTagDefinitionKey;
 import com.dwarfeng.statistics.impl.bean.key.HibernateVariableKey;
 import com.dwarfeng.statistics.stack.bean.entity.*;
+import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateStringIdKey;
@@ -38,6 +40,11 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     VariableKey variableKeyFromHibernate(HibernateVariableKey hibernateVariableKey);
 
+    HibernateTagDefinitionKey tagDefinitionKeyToHibernate(TagDefinitionKey tagDefinitionKey);
+
+    @InheritInverseConfiguration
+    TagDefinitionKey tagDefinitionKeyFromHibernate(HibernateTagDefinitionKey hibernateTagDefinitionKey);
+
     // -----------------------------------------------------------Statistics Entity-----------------------------------------------------------
     @Mapping(target = "variables", ignore = true)
     @Mapping(target = "tasks", ignore = true)
@@ -47,6 +54,7 @@ public interface BeanMapper {
     @Mapping(target = "historyTasks", ignore = true)
     @Mapping(target = "filterInfos", ignore = true)
     @Mapping(target = "driverInfos", ignore = true)
+    @Mapping(target = "tagDefinition", ignore = true)
     HibernateStatisticsSetting statisticsSettingToHibernate(StatisticsSetting statisticsSetting);
 
     @InheritInverseConfiguration
@@ -152,4 +160,13 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     HistoryTaskEvent historyTaskEventFromHibernate(HibernateHistoryTaskEvent hibernateHistoryTaskEvent);
+
+    @Mapping(target = "tag", ignore = true)
+    @Mapping(target = "statisticsSettingLongId", ignore = true)
+    @Mapping(target = "statisticsSetting", ignore = true)
+    @Mapping(target = "definition", ignore = true)
+    HibernateTagDefinition tagDefinitionToHibernate(TagDefinition tagDefinition);
+
+    @InheritInverseConfiguration
+    TagDefinition tagDefinitionFromHibernate(HibernateTagDefinition hibernateTagDefinition);
 }

@@ -6,6 +6,7 @@ import com.dwarfeng.statistics.sdk.bean.key.*;
 import com.dwarfeng.statistics.stack.bean.dto.*;
 import com.dwarfeng.statistics.stack.bean.entity.*;
 import com.dwarfeng.statistics.stack.bean.key.BridgeDataKey;
+import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.subgrade.sdk.bean.key.*;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
@@ -61,6 +62,16 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     VariableKey variableKeyFromFastJson(FastJsonVariableKey fastJsonVariableKey);
+
+    FastJsonTagDefinitionKey tagDefinitionKeyToFastJson(TagDefinitionKey tagDefinitionKey);
+
+    @InheritInverseConfiguration
+    TagDefinitionKey tagDefinitionKeyFromFastJson(FastJsonTagDefinitionKey fastJsonTagDefinitionKey);
+
+    JSFixedFastJsonTagDefinitionKey tagDefinitionKeyToJSFixedFastJson(TagDefinitionKey tagDefinitionKey);
+
+    @InheritInverseConfiguration
+    TagDefinitionKey tagDefinitionKeyFromJSFixedFastJson(JSFixedFastJsonTagDefinitionKey jSFixedFastJsonTagDefinitionKey);
 
     JSFixedFastJsonBridgeDataKey bridgeDataKeyToJSFixedFastJson(BridgeDataKey bridgeDataKey);
 
@@ -151,6 +162,16 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     Variable variableFromFastJson(FastJsonVariable fastJsonVariable);
+
+    FastJsonTagDefinition tagDefinitionToFastJson(TagDefinition tagDefinition);
+
+    @InheritInverseConfiguration
+    TagDefinition tagDefinitionFromFastJson(FastJsonTagDefinition fastJsonTagDefinition);
+
+    JSFixedFastJsonTagDefinition tagDefinitionToJSFixedFastJson(TagDefinition tagDefinition);
+
+    @InheritInverseConfiguration
+    TagDefinition tagDefinitionFromJSFixedFastJson(JSFixedFastJsonTagDefinition jSFixedFastJsonTagDefinition);
 
     JSFixedFastJsonDriverInfo driverInfoToJSFixedFastJson(DriverInfo driverInfo);
 

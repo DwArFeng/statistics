@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "tbl_statistics_setting")
 public class HibernateStatisticsSetting implements Bean {
 
-    private static final long serialVersionUID = 3535711318921951817L;
+    private static final long serialVersionUID = -8045778988759214805L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -54,8 +54,11 @@ public class HibernateStatisticsSetting implements Bean {
     @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateHistoryTask.class, mappedBy = "statisticsSetting")
     private Set<HibernateHistoryTask> historyTasks = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateVariable.class, mappedBy = "statisticsSetting")
+    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = HibernateVariable.class, mappedBy = "statisticsSetting")
     private Set<HibernateVariable> variables = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateVariable.class, mappedBy = "statisticsSetting")
+    private Set<HibernateVariable> tagDefinition = new HashSet<>();
 
     public HibernateStatisticsSetting() {
     }
@@ -164,6 +167,14 @@ public class HibernateStatisticsSetting implements Bean {
 
     public void setVariables(Set<HibernateVariable> variables) {
         this.variables = variables;
+    }
+
+    public Set<HibernateVariable> getTagDefinition() {
+        return tagDefinition;
+    }
+
+    public void setTagDefinition(Set<HibernateVariable> tagDefinition) {
+        this.tagDefinition = tagDefinition;
     }
 
     @Override

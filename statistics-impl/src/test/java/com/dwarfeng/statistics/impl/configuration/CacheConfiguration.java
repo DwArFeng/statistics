@@ -2,8 +2,10 @@ package com.dwarfeng.statistics.impl.configuration;
 
 import com.dwarfeng.statistics.sdk.bean.BeanMapper;
 import com.dwarfeng.statistics.sdk.bean.entity.*;
+import com.dwarfeng.statistics.sdk.bean.key.formatter.TagDefinitionStringKeyFormatter;
 import com.dwarfeng.statistics.sdk.bean.key.formatter.VariableStringKeyFormatter;
 import com.dwarfeng.statistics.stack.bean.entity.*;
+import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.subgrade.impl.bean.MapStructBeanTransformer;
 import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
@@ -51,6 +53,8 @@ public class CacheConfiguration {
     private String historyTaskPrefix;
     @Value("${cache.prefix.entity.history_task_event}")
     private String historyTaskEventPrefix;
+    @Value("${cache.prefix.entity.tag_definition}")
+    private String tagDefinitionPrefix;
 
     @Value("${cache.prefix.list.enabled_driver_info}")
     private String enabledDriverInfoPrefix;
@@ -244,6 +248,17 @@ public class CacheConfiguration {
                 (RedisTemplate<String, FastJsonFilterInfo>) template,
                 new LongIdStringKeyFormatter(enabledFilterInfoPrefix),
                 new MapStructBeanTransformer<>(FilterInfo.class, FastJsonFilterInfo.class, BeanMapper.class)
+        );
+    }
+
+    @Bean
+    @SuppressWarnings("unchecked")
+    public RedisBatchBaseCache<TagDefinitionKey, TagDefinition, FastJsonTagDefinition>
+    tagDefinitionRedisBatchBaseCache() {
+        return new RedisBatchBaseCache<>(
+                (RedisTemplate<String, FastJsonTagDefinition>) template,
+                new TagDefinitionStringKeyFormatter(tagDefinitionPrefix),
+                new MapStructBeanTransformer<>(TagDefinition.class, FastJsonTagDefinition.class, BeanMapper.class)
         );
     }
 }

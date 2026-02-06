@@ -4,6 +4,7 @@ import com.dwarfeng.statistics.impl.service.operation.HistoryTaskCrudOperation;
 import com.dwarfeng.statistics.impl.service.operation.StatisticsSettingCrudOperation;
 import com.dwarfeng.statistics.impl.service.operation.TaskCrudOperation;
 import com.dwarfeng.statistics.stack.bean.entity.*;
+import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.statistics.stack.cache.*;
 import com.dwarfeng.statistics.stack.dao.*;
@@ -53,6 +54,8 @@ public class ServiceConfiguration {
     private final HistoryTaskDao historyTaskDao;
     private final HistoryTaskEventDao historyTaskEventDao;
     private final HistoryTaskEventCache historyTaskEventCache;
+    private final TagDefinitionDao tagDefinitionDao;
+    private final TagDefinitionCache tagDefinitionCache;
 
     @Value("${cache.timeout.entity.statistics_execution_profile}")
     private long statisticsExecutionProfileTimeout;
@@ -76,6 +79,8 @@ public class ServiceConfiguration {
     private long taskEventTimeout;
     @Value("${cache.timeout.entity.history_task_event}")
     private long historyTaskEventTimeout;
+    @Value("${cache.timeout.entity.tag_definition}")
+    private long tagDefinitionTimeout;
 
     public ServiceConfiguration(
             ServiceExceptionMapperConfiguration serviceExceptionMapperConfiguration,
@@ -107,7 +112,9 @@ public class ServiceConfiguration {
             HistoryTaskCrudOperation historyTaskCrudOperation,
             HistoryTaskDao historyTaskDao,
             HistoryTaskEventDao historyTaskEventDao,
-            HistoryTaskEventCache historyTaskEventCache
+            HistoryTaskEventCache historyTaskEventCache,
+            TagDefinitionDao tagDefinitionDao,
+            TagDefinitionCache tagDefinitionCache
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.generateConfiguration = generateConfiguration;
@@ -139,6 +146,8 @@ public class ServiceConfiguration {
         this.historyTaskDao = historyTaskDao;
         this.historyTaskEventDao = historyTaskEventDao;
         this.historyTaskEventCache = historyTaskEventCache;
+        this.tagDefinitionDao = tagDefinitionDao;
+        this.tagDefinitionCache = tagDefinitionCache;
     }
 
     @Bean
@@ -555,6 +564,36 @@ public class ServiceConfiguration {
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN,
                 historyTaskEventDao
+        );
+    }
+
+    @Bean
+    public GeneralBatchCrudService<TagDefinitionKey, TagDefinition> tagDefinitionGeneralBatchCrudService() {
+        return new GeneralBatchCrudService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                tagDefinitionDao,
+                tagDefinitionCache,
+                new ExceptionKeyGenerator<>(),
+                tagDefinitionTimeout
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<TagDefinition> tagDefinitionDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                tagDefinitionDao
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<TagDefinition> tagDefinitionDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN,
+                tagDefinitionDao
         );
     }
 }
