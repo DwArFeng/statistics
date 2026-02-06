@@ -7,6 +7,7 @@
 - 更改实体字段。
   - com.dwarfeng.statistics.stack.bean.entity.Task.message。
   - com.dwarfeng.statistics.stack.bean.entity.HistoryTask.message。
+  - com.dwarfeng.statistics.stack.bean.dto.TaskUpdateModalInfo.message。
 
 - 添加实体字段。
   - com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting.description。

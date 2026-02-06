@@ -411,7 +411,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
         try {
             // 展开参数。
             LongIdKey taskKey = updateModalInfo.getTaskKey();
-            String frontMessage = updateModalInfo.getFrontMessage();
+            String message = updateModalInfo.getMessage();
 
             // 确认任务存在。
             handlerValidator.makeSureTaskExists(taskKey);
@@ -422,7 +422,7 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
             Task task = taskMaintainService.get(taskKey);
 
             // 更新任务字段。
-            task.setMessage(frontMessage);
+            task.setMessage(message);
 
             // 调用维护服务更新任务实体。
             taskMaintainService.update(task);

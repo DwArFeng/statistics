@@ -11,17 +11,17 @@ import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
  */
 public class TaskUpdateModalInfo implements Dto {
 
-    private static final long serialVersionUID = -7185221852258251752L;
+    private static final long serialVersionUID = -6237715690450435383L;
 
     private LongIdKey taskKey;
-    private String frontMessage;
+    private String message;
 
     public TaskUpdateModalInfo() {
     }
 
-    public TaskUpdateModalInfo(LongIdKey taskKey, String frontMessage) {
+    public TaskUpdateModalInfo(LongIdKey taskKey, String message) {
         this.taskKey = taskKey;
-        this.frontMessage = frontMessage;
+        this.message = message;
     }
 
     public LongIdKey getTaskKey() {
@@ -32,19 +32,19 @@ public class TaskUpdateModalInfo implements Dto {
         this.taskKey = taskKey;
     }
 
-    public String getFrontMessage() {
-        return frontMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setFrontMessage(String frontMessage) {
-        this.frontMessage = frontMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
     public String toString() {
         return "TaskUpdateModalInfo{" +
                 "taskKey=" + taskKey +
-                ", frontMessage='" + frontMessage + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }
