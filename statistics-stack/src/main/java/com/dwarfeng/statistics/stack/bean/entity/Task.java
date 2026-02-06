@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Task implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = 9015919447538725856L;
+    private static final long serialVersionUID = 5584602722975644796L;
 
     private LongIdKey key;
     private LongIdKey statisticsSettingKey;
@@ -37,11 +37,6 @@ public class Task implements Entity<LongIdKey> {
     private Date shouldDieDate;
 
     /**
-     * 执行节点的 ID。
-     */
-    private int executionNodeId;
-
-    /**
      * 任务执行是在最前方显示的信息。
      */
     private String message;
@@ -51,7 +46,7 @@ public class Task implements Entity<LongIdKey> {
 
     public Task(
             LongIdKey key, LongIdKey statisticsSettingKey, int status, Date createDate, Date startDate,
-            Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String message
+            Date shouldExpireDate, Date shouldDieDate, String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -60,7 +55,6 @@ public class Task implements Entity<LongIdKey> {
         this.startDate = startDate;
         this.shouldExpireDate = shouldExpireDate;
         this.shouldDieDate = shouldDieDate;
-        this.executionNodeId = executionNodeId;
         this.message = message;
     }
 
@@ -122,14 +116,6 @@ public class Task implements Entity<LongIdKey> {
         this.shouldDieDate = shouldDieDate;
     }
 
-    public int getExecutionNodeId() {
-        return executionNodeId;
-    }
-
-    public void setExecutionNodeId(int executionNodeId) {
-        this.executionNodeId = executionNodeId;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -148,7 +134,6 @@ public class Task implements Entity<LongIdKey> {
                 ", startDate=" + startDate +
                 ", shouldExpireDate=" + shouldExpireDate +
                 ", shouldDieDate=" + shouldDieDate +
-                ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
                 '}';
     }

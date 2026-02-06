@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "tbl_task")
 public class HibernateTask implements Bean {
 
-    private static final long serialVersionUID = -3509550338261903649L;
+    private static final long serialVersionUID = -7007461118178556000L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -45,9 +45,6 @@ public class HibernateTask implements Bean {
     @Column(name = "should_die_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date shouldDieDate;
-
-    @Column(name = "execution_node_id", nullable = false)
-    private int executionNodeId;
 
     @Column(name = "message", length = Constraints.LENGTH_MESSAGE)
     private String message;
@@ -140,14 +137,6 @@ public class HibernateTask implements Bean {
         this.shouldDieDate = shouldDieDate;
     }
 
-    public int getExecutionNodeId() {
-        return executionNodeId;
-    }
-
-    public void setExecutionNodeId(int executionNodeId) {
-        this.executionNodeId = executionNodeId;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -182,7 +171,6 @@ public class HibernateTask implements Bean {
                 "startDate = " + startDate + ", " +
                 "shouldExpireDate = " + shouldExpireDate + ", " +
                 "shouldDieDate = " + shouldDieDate + ", " +
-                "executionNodeId = " + executionNodeId + ", " +
                 "message = " + message + ", " +
                 "statisticsSetting = " + statisticsSetting + ")";
     }

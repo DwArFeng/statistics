@@ -47,7 +47,7 @@ public class TaskEventMaintainServiceImplTest {
         statisticsSetting = new StatisticsSetting(new LongIdKey(STATISTICS_SETTING_ID), true, "name","description", "remark");
         task = new Task(
                 new LongIdKey(TASK_ID), new LongIdKey(STATISTICS_SETTING_ID), 12450, new Date(), new Date(), new Date(),
-                new Date(), 12450, "message"
+                new Date(), "message"
         );
         taskEvents = new ArrayList<>();
         for (int i = 0; i < 5; i++) {

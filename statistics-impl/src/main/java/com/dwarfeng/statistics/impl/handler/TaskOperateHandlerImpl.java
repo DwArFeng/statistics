@@ -77,8 +77,6 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
 
     private final HandlerValidator handlerValidator;
 
-    @Value("${task.node_id}")
-    private int nodeId;
     @Value("${task.expire_timeout}")
     private long expireTimeout;
     @Value("${task.die_timeout}")
@@ -124,7 +122,6 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     null,
                     new Date(currentDate.getTime() + expireTimeout),
                     null,
-                    nodeId,
                     null
             );
 
@@ -193,7 +190,6 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     currentDate.getTime() - task.getStartDate().getTime(),
                     null,
                     null,
-                    task.getExecutionNodeId(),
                     task.getMessage()
             );
 
@@ -248,7 +244,6 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     currentDate.getTime() - task.getStartDate().getTime(),
                     null,
                     null,
-                    task.getExecutionNodeId(),
                     task.getMessage()
             );
 
@@ -303,7 +298,6 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     currentDate.getTime() - task.getStartDate().getTime(),
                     currentDate,
                     null,
-                    task.getExecutionNodeId(),
                     task.getMessage()
             );
 
@@ -358,7 +352,6 @@ public class TaskOperateHandlerImpl implements TaskOperateHandler {
                     currentDate.getTime() - task.getStartDate().getTime(),
                     null,
                     currentDate,
-                    task.getExecutionNodeId(),
                     task.getMessage()
             );
 

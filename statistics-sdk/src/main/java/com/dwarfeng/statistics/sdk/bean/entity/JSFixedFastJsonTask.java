@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonTask implements Bean {
 
-    private static final long serialVersionUID = -9003323652978993742L;
+    private static final long serialVersionUID = -3865716310330105973L;
 
     public static JSFixedFastJsonTask of(Task task) {
         if (Objects.isNull(task)) {
@@ -30,7 +30,6 @@ public class JSFixedFastJsonTask implements Bean {
                     task.getStartDate(),
                     task.getShouldExpireDate(),
                     task.getShouldDieDate(),
-                    task.getExecutionNodeId(),
                     task.getMessage()
             );
         }
@@ -57,10 +56,7 @@ public class JSFixedFastJsonTask implements Bean {
     @JSONField(name = "should_die_date", ordinal = 7)
     private Date shouldDieDate;
 
-    @JSONField(name = "execution_node_id", ordinal = 8)
-    private int executionNodeId;
-
-    @JSONField(name = "message", ordinal = 9)
+    @JSONField(name = "message", ordinal = 8)
     private String message;
 
     public JSFixedFastJsonTask() {
@@ -68,7 +64,7 @@ public class JSFixedFastJsonTask implements Bean {
 
     public JSFixedFastJsonTask(
             JSFixedFastJsonLongIdKey key, JSFixedFastJsonLongIdKey statisticsSettingKey, int status, Date createDate,
-            Date startDate, Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String message
+            Date startDate, Date shouldExpireDate, Date shouldDieDate, String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -77,7 +73,6 @@ public class JSFixedFastJsonTask implements Bean {
         this.startDate = startDate;
         this.shouldExpireDate = shouldExpireDate;
         this.shouldDieDate = shouldDieDate;
-        this.executionNodeId = executionNodeId;
         this.message = message;
     }
 
@@ -137,14 +132,6 @@ public class JSFixedFastJsonTask implements Bean {
         this.shouldDieDate = shouldDieDate;
     }
 
-    public int getExecutionNodeId() {
-        return executionNodeId;
-    }
-
-    public void setExecutionNodeId(int executionNodeId) {
-        this.executionNodeId = executionNodeId;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -163,7 +150,6 @@ public class JSFixedFastJsonTask implements Bean {
                 ", startDate=" + startDate +
                 ", shouldExpireDate=" + shouldExpireDate +
                 ", shouldDieDate=" + shouldDieDate +
-                ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
                 '}';
     }

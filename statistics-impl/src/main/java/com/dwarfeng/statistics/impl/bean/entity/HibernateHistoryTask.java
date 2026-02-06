@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "tbl_history_task")
 public class HibernateHistoryTask implements Bean {
 
-    private static final long serialVersionUID = -3648866875005682722L;
+    private static final long serialVersionUID = 2986849067529768422L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -52,9 +52,6 @@ public class HibernateHistoryTask implements Bean {
     @Column(name = "died_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date diedDate;
-
-    @Column(name = "execution_node_id", nullable = false)
-    private int executionNodeId;
 
     @Column(name = "message", length = Constraints.LENGTH_MESSAGE)
     private String message;
@@ -163,14 +160,6 @@ public class HibernateHistoryTask implements Bean {
         this.diedDate = diedDate;
     }
 
-    public int getExecutionNodeId() {
-        return executionNodeId;
-    }
-
-    public void setExecutionNodeId(int executionNodeId) {
-        this.executionNodeId = executionNodeId;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -207,7 +196,6 @@ public class HibernateHistoryTask implements Bean {
                 "duration = " + duration + ", " +
                 "expiredDate = " + expiredDate + ", " +
                 "diedDate = " + diedDate + ", " +
-                "executionNodeId = " + executionNodeId + ", " +
                 "message = " + message + ", " +
                 "statisticsSetting = " + statisticsSetting + ")";
     }

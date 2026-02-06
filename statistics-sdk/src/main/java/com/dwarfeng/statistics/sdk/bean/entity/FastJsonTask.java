@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class FastJsonTask implements Bean {
 
-    private static final long serialVersionUID = -7589362386673546983L;
+    private static final long serialVersionUID = 8402481336379311872L;
 
     public static FastJsonTask of(Task task) {
         if (Objects.isNull(task)) {
@@ -30,7 +30,6 @@ public class FastJsonTask implements Bean {
                     task.getStartDate(),
                     task.getShouldExpireDate(),
                     task.getShouldDieDate(),
-                    task.getExecutionNodeId(),
                     task.getMessage()
             );
         }
@@ -57,10 +56,7 @@ public class FastJsonTask implements Bean {
     @JSONField(name = "should_die_date", ordinal = 7)
     private Date shouldDieDate;
 
-    @JSONField(name = "execution_node_id", ordinal = 8)
-    private int executionNodeId;
-
-    @JSONField(name = "message", ordinal = 9)
+    @JSONField(name = "message", ordinal = 8)
     private String message;
 
     public FastJsonTask() {
@@ -68,7 +64,7 @@ public class FastJsonTask implements Bean {
 
     public FastJsonTask(
             FastJsonLongIdKey key, FastJsonLongIdKey statisticsSettingKey, int status, Date createDate, Date startDate,
-            Date shouldExpireDate, Date shouldDieDate, int executionNodeId, String message
+            Date shouldExpireDate, Date shouldDieDate, String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -77,7 +73,6 @@ public class FastJsonTask implements Bean {
         this.startDate = startDate;
         this.shouldExpireDate = shouldExpireDate;
         this.shouldDieDate = shouldDieDate;
-        this.executionNodeId = executionNodeId;
         this.message = message;
     }
 
@@ -137,14 +132,6 @@ public class FastJsonTask implements Bean {
         this.shouldDieDate = shouldDieDate;
     }
 
-    public int getExecutionNodeId() {
-        return executionNodeId;
-    }
-
-    public void setExecutionNodeId(int executionNodeId) {
-        this.executionNodeId = executionNodeId;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -163,7 +150,6 @@ public class FastJsonTask implements Bean {
                 ", startDate=" + startDate +
                 ", shouldExpireDate=" + shouldExpireDate +
                 ", shouldDieDate=" + shouldDieDate +
-                ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
                 '}';
     }

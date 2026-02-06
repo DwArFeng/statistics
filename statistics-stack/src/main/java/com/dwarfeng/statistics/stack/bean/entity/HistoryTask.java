@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class HistoryTask implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = 5306449367306730520L;
+    private static final long serialVersionUID = 495934926251477945L;
 
     private LongIdKey key;
     private LongIdKey statisticsSettingKey;
@@ -41,11 +41,6 @@ public class HistoryTask implements Entity<LongIdKey> {
     private Date diedDate;
 
     /**
-     * 执行节点的 ID。
-     */
-    private int executionNodeId;
-
-    /**
      * 任务执行是在最前方显示的信息。
      */
     private String message;
@@ -55,7 +50,7 @@ public class HistoryTask implements Entity<LongIdKey> {
 
     public HistoryTask(
             LongIdKey key, LongIdKey statisticsSettingKey, int status, Date createDate, Date startDate, Date endDate,
-            Long duration, Date expiredDate, Date diedDate, int executionNodeId, String message
+            Long duration, Date expiredDate, Date diedDate, String message
     ) {
         this.key = key;
         this.statisticsSettingKey = statisticsSettingKey;
@@ -66,7 +61,6 @@ public class HistoryTask implements Entity<LongIdKey> {
         this.duration = duration;
         this.expiredDate = expiredDate;
         this.diedDate = diedDate;
-        this.executionNodeId = executionNodeId;
         this.message = message;
     }
 
@@ -144,14 +138,6 @@ public class HistoryTask implements Entity<LongIdKey> {
         this.diedDate = diedDate;
     }
 
-    public int getExecutionNodeId() {
-        return executionNodeId;
-    }
-
-    public void setExecutionNodeId(int executionNodeId) {
-        this.executionNodeId = executionNodeId;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -172,7 +158,6 @@ public class HistoryTask implements Entity<LongIdKey> {
                 ", duration=" + duration +
                 ", expiredDate=" + expiredDate +
                 ", diedDate=" + diedDate +
-                ", executionNodeId=" + executionNodeId +
                 ", message='" + message + '\'' +
                 '}';
     }

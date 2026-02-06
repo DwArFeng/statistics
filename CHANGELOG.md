@@ -36,6 +36,10 @@
 
 ### 功能移除
 
+- 去除 `executionNodeld` 机制。
+  - com.dwarfeng.statistics.stack.bean.entity.Task.executionNodeld。
+  - com.dwarfeng.statistics.stack.bean.entity.TaskHistory.executionNodeld。
+
 - 删除实体字段。
   - com.dwarfeng.statistics.stack.bean.entity.Task.remark。
   - com.dwarfeng.statistics.stack.bean.entity.TaskEvent.remark。
