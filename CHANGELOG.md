@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- 优化部分类的代码结构。
+  - com.dwarfeng.statistics.node.launcher.Launcher。
+
 - 建立实体以及维护服务，并通过单元测试。
   - com.dwarfeng.statistics.stack.bean.entity.TagDefinition。
 

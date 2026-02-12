@@ -61,15 +61,18 @@ public class Launcher {
         // 获取启动器设置处理器，用于获取启动器设置，并按照设置选择性执行功能。
         LauncherSettingHandler launcherSettingHandler = ctx.getBean(LauncherSettingHandler.class);
 
-        // 判断是否重置驱动器支持，并按条件执行重置操作。
-        if (launcherSettingHandler.isResetDriverSupport()) {
-            LOGGER.info("重置驱动器支持...");
-            SupportQosService maintainService = ctx.getBean(SupportQosService.class);
-            try {
-                maintainService.resetDriver();
-            } catch (ServiceException e) {
-                LOGGER.warn("驱动器支持重置失败，异常信息如下", e);
-            }
+        // 如果不重置驱动器，则返回。
+        if (!launcherSettingHandler.isResetDriverSupport()) {
+            return;
+        }
+
+        // 重置驱动器支持。
+        LOGGER.info("重置驱动器支持...");
+        SupportQosService supportQosService = ctx.getBean(SupportQosService.class);
+        try {
+            supportQosService.resetDriver();
+        } catch (ServiceException e) {
+            LOGGER.warn("驱动器支持重置失败，异常信息如下", e);
         }
     }
 
@@ -77,15 +80,18 @@ public class Launcher {
         // 获取启动器设置处理器，用于获取启动器设置，并按照设置选择性执行功能。
         LauncherSettingHandler launcherSettingHandler = ctx.getBean(LauncherSettingHandler.class);
 
-        // 判断是否重置提供器支持，并按条件执行重置操作。
+        // 如果不重置提供器，则返回。
         if (launcherSettingHandler.isResetProviderSupport()) {
-            LOGGER.info("重置提供器支持...");
-            SupportQosService maintainService = ctx.getBean(SupportQosService.class);
-            try {
-                maintainService.resetProvider();
-            } catch (ServiceException e) {
-                LOGGER.warn("提供器支持重置失败，异常信息如下", e);
-            }
+            return;
+        }
+
+        // 重置提供器支持。
+        LOGGER.info("重置提供器支持...");
+        SupportQosService supportQosService = ctx.getBean(SupportQosService.class);
+        try {
+            supportQosService.resetProvider();
+        } catch (ServiceException e) {
+            LOGGER.warn("提供器支持重置失败，异常信息如下", e);
         }
     }
 
@@ -93,15 +99,18 @@ public class Launcher {
         // 获取启动器设置处理器，用于获取启动器设置，并按照设置选择性执行功能。
         LauncherSettingHandler launcherSettingHandler = ctx.getBean(LauncherSettingHandler.class);
 
-        // 判断是否重置过滤器支持，并按条件执行重置操作。
+        // 如果不重置过滤器，则返回。
         if (launcherSettingHandler.isResetFilterSupport()) {
-            LOGGER.info("重置过滤器支持...");
-            SupportQosService maintainService = ctx.getBean(SupportQosService.class);
-            try {
-                maintainService.resetFilter();
-            } catch (ServiceException e) {
-                LOGGER.warn("过滤器支持重置失败，异常信息如下", e);
-            }
+            return;
+        }
+
+        // 重置过滤器支持。
+        LOGGER.info("重置过滤器支持...");
+        SupportQosService supportQosService = ctx.getBean(SupportQosService.class);
+        try {
+            supportQosService.resetFilter();
+        } catch (ServiceException e) {
+            LOGGER.warn("过滤器支持重置失败，异常信息如下", e);
         }
     }
 
@@ -109,15 +118,18 @@ public class Launcher {
         // 获取启动器设置处理器，用于获取启动器设置，并按照设置选择性执行功能。
         LauncherSettingHandler launcherSettingHandler = ctx.getBean(LauncherSettingHandler.class);
 
-        // 判断是否重置映射器支持，并按条件执行重置操作。
+        // 如果不重置映射器，则返回。
         if (launcherSettingHandler.isResetMapperSupport()) {
-            LOGGER.info("重置映射器支持...");
-            SupportQosService maintainService = ctx.getBean(SupportQosService.class);
-            try {
-                maintainService.resetMapper();
-            } catch (ServiceException e) {
-                LOGGER.warn("映射器支持重置失败，异常信息如下", e);
-            }
+            return;
+        }
+
+        // 重置映射器支持。
+        LOGGER.info("重置映射器支持...");
+        SupportQosService supportQosService = ctx.getBean(SupportQosService.class);
+        try {
+            supportQosService.resetMapper();
+        } catch (ServiceException e) {
+            LOGGER.warn("映射器支持重置失败，异常信息如下", e);
         }
     }
 
