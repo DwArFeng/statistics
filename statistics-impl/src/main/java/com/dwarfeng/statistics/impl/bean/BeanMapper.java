@@ -46,6 +46,8 @@ public interface BeanMapper {
     TagDefinitionKey tagDefinitionKeyFromHibernate(HibernateTagDefinitionKey hibernateTagDefinitionKey);
 
     // -----------------------------------------------------------Statistics Entity-----------------------------------------------------------
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
     @Mapping(target = "variables", ignore = true)
     @Mapping(target = "tasks", ignore = true)
     @Mapping(target = "statisticsExecutionProfile", ignore = true)
@@ -79,6 +81,8 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     Variable variableFromHibernate(HibernateVariable hibernateVariable);
 
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
     @Mapping(target = "statisticsSettingLongId", ignore = true)
     @Mapping(target = "statisticsSetting", ignore = true)
     @Mapping(target = "longId", ignore = true)
@@ -87,6 +91,8 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     DriverInfo driverInfoFromHibernate(HibernateDriverInfo hibernateDriverInfo);
 
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
     @Mapping(target = "statisticsSettingLongId", ignore = true)
     @Mapping(target = "statisticsSetting", ignore = true)
     @Mapping(target = "longId", ignore = true)
@@ -95,6 +101,8 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     FilterInfo filterInfoFromHibernate(HibernateFilterInfo hibernateFilterInfo);
 
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
     @Mapping(target = "statisticsSettingLongId", ignore = true)
     @Mapping(target = "statisticsSetting", ignore = true)
     @Mapping(target = "longId", ignore = true)
@@ -161,6 +169,8 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     HistoryTaskEvent historyTaskEventFromHibernate(HibernateHistoryTaskEvent hibernateHistoryTaskEvent);
 
+    @Mapping(target = "modifiedDatamark", ignore = true)
+    @Mapping(target = "createdDatamark", ignore = true)
     @Mapping(target = "tag", ignore = true)
     @Mapping(target = "statisticsSettingLongId", ignore = true)
     @Mapping(target = "statisticsSetting", ignore = true)

@@ -1,5 +1,7 @@
 package com.dwarfeng.statistics.impl.bean.entity;
 
+import com.dwarfeng.datamark.bean.jpa.DatamarkEntityListener;
+import com.dwarfeng.datamark.bean.jpa.DatamarkField;
 import com.dwarfeng.statistics.sdk.util.Constraints;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
@@ -10,9 +12,10 @@ import java.util.Optional;
 @Entity
 @IdClass(HibernateLongIdKey.class)
 @Table(name = "tbl_driver_info")
+@EntityListeners(DatamarkEntityListener.class)
 public class HibernateDriverInfo implements Bean {
 
-    private static final long serialVersionUID = -4388603228024509900L;
+    private static final long serialVersionUID = 907487491769833735L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -42,6 +45,22 @@ public class HibernateDriverInfo implements Bean {
             @JoinColumn(name = "statistics_setting_id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateStatisticsSetting statisticsSetting;
+
+    // -----------------------------------------------------------审计-----------------------------------------------------------
+    @DatamarkField(handlerName = "statisticsSettingDatamarkHandler")
+    @Column(
+            name = "created_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE,
+            updatable = false
+    )
+    private String createdDatamark;
+
+    @DatamarkField(handlerName = "statisticsSettingDatamarkHandler")
+    @Column(
+            name = "modified_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE
+    )
+    private String modifiedDatamark;
 
     public HibernateDriverInfo() {
     }
@@ -120,6 +139,22 @@ public class HibernateDriverInfo implements Bean {
         this.statisticsSetting = statisticsSetting;
     }
 
+    public String getCreatedDatamark() {
+        return createdDatamark;
+    }
+
+    public void setCreatedDatamark(String createdDatamark) {
+        this.createdDatamark = createdDatamark;
+    }
+
+    public String getModifiedDatamark() {
+        return modifiedDatamark;
+    }
+
+    public void setModifiedDatamark(String modifiedDatamark) {
+        this.modifiedDatamark = modifiedDatamark;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
@@ -129,6 +164,8 @@ public class HibernateDriverInfo implements Bean {
                 "type = " + type + ", " +
                 "param = " + param + ", " +
                 "remark = " + remark + ", " +
-                "statisticsSetting = " + statisticsSetting + ")";
+                "statisticsSetting = " + statisticsSetting + ", " +
+                "createdDatamark = " + createdDatamark + ", " +
+                "modifiedDatamark = " + modifiedDatamark + ")";
     }
 }

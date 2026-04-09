@@ -16,6 +16,7 @@ public class ServiceExceptionMapperConfiguration {
     @Bean
     public MapServiceExceptionMapper mapServiceExceptionMapper() {
         Map<Class<? extends Exception>, ServiceException.Code> destination = ServiceExceptionHelper.putDefaultDestination(null);
+        destination = com.dwarfeng.datamark.util.ServiceExceptionHelper.putDefaultDestination(destination);
         destination.put(DriverException.class, ServiceExceptionCodes.DRIVER_FAILED);
         destination.put(UnsupportedDriverTypeException.class, ServiceExceptionCodes.DRIVER_TYPE_UNSUPPORTED);
         destination.put(DispatcherException.class, ServiceExceptionCodes.DISPATCHER_FAILED);

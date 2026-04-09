@@ -1,5 +1,7 @@
 package com.dwarfeng.statistics.impl.bean.entity;
 
+import com.dwarfeng.datamark.bean.jpa.DatamarkEntityListener;
+import com.dwarfeng.datamark.bean.jpa.DatamarkField;
 import com.dwarfeng.statistics.sdk.util.Constraints;
 import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
@@ -10,9 +12,10 @@ import java.util.Optional;
 @Entity
 @IdClass(HibernateLongIdKey.class)
 @Table(name = "tbl_filter_info")
+@EntityListeners(DatamarkEntityListener.class)
 public class HibernateFilterInfo implements Bean {
 
-    private static final long serialVersionUID = -8343843073505770553L;
+    private static final long serialVersionUID = -6797047503241026943L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -45,6 +48,22 @@ public class HibernateFilterInfo implements Bean {
             @JoinColumn(name = "statistics_setting_id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateStatisticsSetting statisticsSetting;
+
+    // -----------------------------------------------------------审计-----------------------------------------------------------
+    @DatamarkField(handlerName = "statisticsSettingDatamarkHandler")
+    @Column(
+            name = "created_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE,
+            updatable = false
+    )
+    private String createdDatamark;
+
+    @DatamarkField(handlerName = "statisticsSettingDatamarkHandler")
+    @Column(
+            name = "modified_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE
+    )
+    private String modifiedDatamark;
 
     public HibernateFilterInfo() {
     }
@@ -131,6 +150,22 @@ public class HibernateFilterInfo implements Bean {
         this.statisticsSetting = statisticsSetting;
     }
 
+    public String getCreatedDatamark() {
+        return createdDatamark;
+    }
+
+    public void setCreatedDatamark(String createdDatamark) {
+        this.createdDatamark = createdDatamark;
+    }
+
+    public String getModifiedDatamark() {
+        return modifiedDatamark;
+    }
+
+    public void setModifiedDatamark(String modifiedDatamark) {
+        this.modifiedDatamark = modifiedDatamark;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
@@ -141,6 +176,8 @@ public class HibernateFilterInfo implements Bean {
                 "param = " + param + ", " +
                 "remark = " + remark + ", " +
                 "index = " + index + ", " +
-                "statisticsSetting = " + statisticsSetting + ")";
+                "statisticsSetting = " + statisticsSetting + ", " +
+                "createdDatamark = " + createdDatamark + ", " +
+                "modifiedDatamark = " + modifiedDatamark + ")";
     }
 }

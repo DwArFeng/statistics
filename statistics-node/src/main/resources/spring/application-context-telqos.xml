@@ -22,6 +22,7 @@
             <telqos:command-impl ref="uptimeCommand"/>
             <telqos:command-impl ref="jmxRemoteCommand"/>
             <telqos:command-impl package-scan="com.dwarfeng.statistics.impl.service.telqos"/>
+            <telqos:command-impl package-scan="com.dwarfeng.datamark.service.telqos"/>
         </telqos:command>
     </telqos:config>
 

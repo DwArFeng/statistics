@@ -1,5 +1,7 @@
 package com.dwarfeng.statistics.impl.bean.entity;
 
+import com.dwarfeng.datamark.bean.jpa.DatamarkEntityListener;
+import com.dwarfeng.datamark.bean.jpa.DatamarkField;
 import com.dwarfeng.statistics.impl.bean.key.HibernateTagDefinitionKey;
 import com.dwarfeng.statistics.sdk.util.Constraints;
 import com.dwarfeng.subgrade.stack.bean.Bean;
@@ -10,9 +12,10 @@ import java.util.Objects;
 @Entity
 @IdClass(HibernateTagDefinitionKey.class)
 @Table(name = "tbl_tag_definition")
+@EntityListeners(DatamarkEntityListener.class)
 public class HibernateTagDefinition implements Bean {
 
-    private static final long serialVersionUID = 5645956151954236505L;
+    private static final long serialVersionUID = -3734426331400550357L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -37,6 +40,22 @@ public class HibernateTagDefinition implements Bean {
             @JoinColumn(name = "statistics_setting_id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateStatisticsSetting statisticsSetting;
+
+    // -----------------------------------------------------------审计-----------------------------------------------------------
+    @DatamarkField(handlerName = "statisticsSettingDatamarkHandler")
+    @Column(
+            name = "created_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE,
+            updatable = false
+    )
+    private String createdDatamark;
+
+    @DatamarkField(handlerName = "statisticsSettingDatamarkHandler")
+    @Column(
+            name = "modified_datamark",
+            length = com.dwarfeng.datamark.util.Constraints.LENGTH_DATAMARK_VALUE
+    )
+    private String modifiedDatamark;
 
     public HibernateTagDefinition() {
     }
@@ -97,6 +116,22 @@ public class HibernateTagDefinition implements Bean {
         this.statisticsSetting = statisticsSetting;
     }
 
+    public String getCreatedDatamark() {
+        return createdDatamark;
+    }
+
+    public void setCreatedDatamark(String createdDatamark) {
+        this.createdDatamark = createdDatamark;
+    }
+
+    public String getModifiedDatamark() {
+        return modifiedDatamark;
+    }
+
+    public void setModifiedDatamark(String modifiedDatamark) {
+        this.modifiedDatamark = modifiedDatamark;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
@@ -104,6 +139,8 @@ public class HibernateTagDefinition implements Bean {
                 "statisticsSettingLongId = " + statisticsSettingLongId + ", " +
                 "definition = " + definition + ", " +
                 "remark = " + remark + ", " +
-                "statisticsSetting = " + statisticsSetting + ")";
+                "statisticsSetting = " + statisticsSetting + ", " +
+                "createdDatamark = " + createdDatamark + ", " +
+                "modifiedDatamark = " + modifiedDatamark + ")";
     }
 }
