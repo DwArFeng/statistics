@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- Wiki 更新。
+  - docs/wiki/zh-CN/BatchScripts.md。
+
 - 启停脚本优化。
   - binres/statistics-start.bat。
   - binres/statistics-start.sh。

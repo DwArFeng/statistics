@@ -1,10 +1,10 @@
 # Batch Scripts - 批处理脚本
 
-## start-start.bat
+## statistics-start.bat
 
 ### 简介
 
-start-start.bat 是本项目的启动脚本，用于启动本项目。 您可以调整脚本中的参数，以适应您的需求。
+statistics-start.bat 是本项目的启动脚本，用于启动本项目。 您可以调整脚本中的参数，以适应您的需求。
 
 可调整的脚步参数包括：
 
