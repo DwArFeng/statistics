@@ -63,7 +63,7 @@ public class KafkaReceiver extends AbstractReceiver {
         if (Objects.isNull(listenerContainer)) {
             throw new IllegalStateException("找不到 kafka listener container " + listenerId);
         }
-        // 判断监听容器是否启动，未启动则将其启动
+        // 判断监听容器是否启动，未启动则将其启动。
         if (!listenerContainer.isRunning()) {
             listenerContainer.start();
         }
