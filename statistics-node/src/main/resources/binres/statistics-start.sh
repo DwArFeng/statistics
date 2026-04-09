@@ -16,7 +16,7 @@ jvm_memory_opts="\
 # JAVA JMXREMOTE configuration.
 # If you want to enable JMX remote management, please comment out the content below...
 java_jmxremote_opts=""
-# And uncomment the content below.
+# and uncomment the content below.
 # java_jmxremote_opts="\
 # -Dcom.sun.management.jmxremote.port=23000 \
 # -Dcom.sun.management.jmxremote.authenticate=false \

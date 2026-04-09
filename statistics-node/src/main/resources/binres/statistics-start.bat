@@ -11,13 +11,13 @@ SET jvm_memory_opts=^
 -XX:MaxMetaspaceSize=130m ^
 -XX:ReservedCodeCacheSize=15m ^
 -XX:CompressedClassSpaceSize=15m
-rem And uncomment the content below.
+rem and uncomment the content below.
 rem SET jvm_memory_opts=
 
 rem JAVA JMXREMOTE configuration.
 rem If you want to enable JMX remote management, please comment out the content below...
 SET java_jmxremote_opts=
-rem And uncomment the content below.
+rem and uncomment the content below.
 rem SET java_jmxremote_opts=^
 rem -Dcom.sun.management.jmxremote.port=23000 ^
 rem -Dcom.sun.management.jmxremote.authenticate=false ^

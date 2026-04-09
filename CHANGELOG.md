@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- 启停脚本优化。
+  - binres/statistics-start.bat。
+  - binres/statistics-start.sh。
+
 - 导入运维指令。
   - com.dwarfeng.datamark.service.telqos.*。
 
