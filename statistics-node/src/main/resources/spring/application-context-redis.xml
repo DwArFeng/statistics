@@ -77,7 +77,7 @@
         <property name="timeout" value="${redis.timeout}"/>
     </bean>
 
-    <!-- Redis 操作模版，使用该对象可以操作 redis。 -->
+    <!-- Redis 操作模版,使用该对象可以操作 redis。 -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="jedisConnectionFactory"/>
         <property name="keySerializer">
