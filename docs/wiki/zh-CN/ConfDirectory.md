@@ -15,6 +15,9 @@ conf
 │      connection.properties
 │      performance.properties
 │
+├─datamark
+│      settings.properties
+│
 ├─dubbo
 │      connection.properties
 │
@@ -123,6 +126,36 @@ hibernate.jdbc.fetch_size=50
 data_source.max_active=20
 # 连接池最小空闲连接数量
 data_source.min_idle=0
+```
+
+## datamark 目录
+
+| 文件名                 | 说明        |
+|---------------------|-----------|
+| settings.properties | 数据标记的配置文件 |
+
+### settings.properties
+
+数据标记的配置文件。
+
+数据标记是本项目的一个运维与安全机制，它使用 `dwarfeng-datamark` 实现，其主要的功能是在重要数据插入/更改时，
+向数据库特定的数据标记字段写入特定值，
+这个特定值被记录在 `dwarfeng-datamark` 中的 `resource` 中 - 可以是 spring 框架支持的任何资源类型，
+支持运行时修改，并对前端完全不可见。
+
+运维人员可以用这个机制降低运维的工作量 - 尤其是从测试环境向正式环境迁移数据时，也可以用这个机制进行数据非法篡改的检测与取证。
+
+```properties
+#---------------------------------配置说明----------------------------------------
+# 数据标记资源的 URL，格式参考 Spring 资源路径。
+# datamark.xxx.resource_url=classpath:datamark/default.storage
+# 数据标记资源的字符集。
+# datamark.xxx.resource_charset=UTF-8
+# 数据标记服务是否允许更新。
+# datamark.xxx.update_allowed=true
+#
+#---------------------------------StatisticsSetting-------------------------------------
+# etc...
 ```
 
 ## dubbo 目录
@@ -616,6 +649,8 @@ statistics.exception_code_offset=5000
 statistics.exception_code_offset.subgrade=0
 # statistics 工程中 snowflake 的异常代号偏移量。
 statistics.exception_code_offset.snowflake=1500
+# statistics 工程中 dwarfeng_datamark 的异常代号偏移量。
+statistics.exception_code_offset.dwarfeng_datamark=2500
 ```
 
 Subgrade 框架中，会将微服务抛出的异常映射为 `ServiceException`，每个 `ServiceException` 都有一个异常代码，
@@ -893,8 +928,6 @@ resetter.cron.cron=0 0 1 * * *
 任务配置文件。
 
 ```properties
-# 该服务的任务处理节点 ID，用于区分不同的任务处理节点。
-task.node_id=0
 # 任务的超时时间。
 task.expire_timeout=3600000
 # 任务死亡的超时时间。

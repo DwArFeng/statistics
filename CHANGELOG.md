@@ -5,6 +5,7 @@
 ### 功能构建
 
 - Wiki 更新。
+  - docs/wiki/zh-CN/ConfDirectory.md。
   - docs/wiki/zh-CN/BatchScripts.md。
 
 - 启停脚本优化。
