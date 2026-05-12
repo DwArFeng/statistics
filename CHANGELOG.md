@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- Wiki 编写。
+  - docs/wiki/zh-CN/CompileBySource.md。
+
 - `statistics-impl` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.statistics.impl.bean.BeanMapper。
   - com.dwarfeng.statistics.impl.bean.entity.HibernateDriverInfo。
