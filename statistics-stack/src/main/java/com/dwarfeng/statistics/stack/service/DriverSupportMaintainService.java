@@ -17,5 +17,4 @@ public interface DriverSupportMaintainService extends BatchCrudService<StringIdK
 
     String ID_LIKE = "id_like";
     String LABEL_LIKE = "label_like";
-
 }
