@@ -26,7 +26,8 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface BeanMapper {
 
-    // -----------------------------------------------------------Subgrade Key-----------------------------------------------------------
+    // region Subgrade Key
+
     FastJsonLongIdKey longIdKeyToFastJson(LongIdKey longIdKey);
 
     @InheritInverseConfiguration
@@ -52,7 +53,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     StringIdKey stringIdKeyFromWebInput(WebInputStringIdKey webInputStringIdKey);
 
-    // -----------------------------------------------------------Statistics Key-----------------------------------------------------------
+    // endregion
+
+    // region Statistics Key
+
     FastJsonBridgeDataKey bridgeDataKeyToFastJson(BridgeDataKey bridgeDataKey);
 
     @InheritInverseConfiguration
@@ -88,7 +92,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     BridgeDataKey bridgeDataKeyFromWebInput(WebInputBridgeDataKey webInputBridgeDataKey);
 
-    // -----------------------------------------------------------Statistics Entity-----------------------------------------------------------
+    // endregion
+
+    // region Statistics Entity
+
     FastJsonDriverInfo driverInfoToFastJson(DriverInfo driverInfo);
 
     @InheritInverseConfiguration
@@ -251,7 +258,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     StatisticsSetting statisticsSettingFromWebInput(WebInputStatisticsSetting webInputStatisticsSetting);
 
-    // -----------------------------------------------------------Statistics DTO-----------------------------------------------------------
+    // endregion
+
+    // region Statistics DTO
+
     FastJsonBridgeData bridgeDataToFastJson(BridgeData bridgeData);
 
     @InheritInverseConfiguration
@@ -326,4 +336,6 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     QueryInfo queryInfoFromWebInput(WebInputQueryInfo webInputQueryInfo);
+
+    // endregion
 }

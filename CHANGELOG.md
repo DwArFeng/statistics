@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- `statistics-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.statistics.sdk.bean.BeanMapper。
+
 - `statistics-stack` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.statistics.stack.service.DriverSupportMaintainService。
   - com.dwarfeng.statistics.stack.service.FilterSupportMaintainService。
