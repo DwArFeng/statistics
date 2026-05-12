@@ -15,7 +15,8 @@ public class HibernateVariable implements Bean {
 
     private static final long serialVersionUID = -3496996314855050409L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "statistics_setting_id", nullable = false)
     private Long statisticsSettingLongId;
@@ -24,7 +25,10 @@ public class HibernateVariable implements Bean {
     @Column(name = "variable_id", length = Constraints.LENGTH_STRING_ID, nullable = false)
     private String variableStringId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "value_type", nullable = false)
     private int valueType;
 
@@ -44,17 +48,23 @@ public class HibernateVariable implements Bean {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateValue;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
+    // region 多对一
+
     @ManyToOne(targetEntity = HibernateStatisticsSetting.class)
     @JoinColumns({ //
             @JoinColumn(name = "statistics_setting_id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateStatisticsSetting statisticsSetting;
 
+    // endregion
+
     public HibernateVariable() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateVariableKey getKey() {
         if (Objects.isNull(statisticsSettingLongId) || Objects.isNull(variableStringId)) {
             return null;
@@ -72,7 +82,10 @@ public class HibernateVariable implements Bean {
         }
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public Long getStatisticsSettingLongId() {
         return statisticsSettingLongId;
     }
@@ -144,6 +157,8 @@ public class HibernateVariable implements Bean {
     public void setStatisticsSetting(HibernateStatisticsSetting statisticsSetting) {
         this.statisticsSetting = statisticsSetting;
     }
+
+    // endregion
 
     @Override
     public String toString() {

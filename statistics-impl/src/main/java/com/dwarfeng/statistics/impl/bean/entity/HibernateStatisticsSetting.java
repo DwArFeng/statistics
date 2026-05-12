@@ -19,12 +19,16 @@ public class HibernateStatisticsSetting implements Bean {
 
     private static final long serialVersionUID = 4902126413172792680L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private Long longId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
@@ -37,11 +41,17 @@ public class HibernateStatisticsSetting implements Bean {
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
 
-    // -----------------------------------------------------------一对一-----------------------------------------------------------
+    // endregion
+
+    // region 一对一
+
     @OneToOne(cascade = CascadeType.MERGE, targetEntity = HibernateStatisticsExecutionProfile.class, mappedBy = "statisticsSetting")
     private HibernateStatisticsExecutionProfile statisticsExecutionProfile;
 
-    // -----------------------------------------------------------一对多-----------------------------------------------------------
+    // endregion
+
+    // region 一对多
+
     @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateDriverInfo.class, mappedBy = "statisticsSetting")
     private Set<HibernateDriverInfo> driverInfos = new HashSet<>();
 
@@ -63,7 +73,10 @@ public class HibernateStatisticsSetting implements Bean {
     @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateVariable.class, mappedBy = "statisticsSetting")
     private Set<HibernateVariable> tagDefinition = new HashSet<>();
 
-    // -----------------------------------------------------------审计-----------------------------------------------------------
+    // endregion
+
+    // region 审计
+
     @DatamarkField(handlerName = "statisticsSettingDatamarkHandler")
     @Column(
             name = "created_datamark",
@@ -79,10 +92,13 @@ public class HibernateStatisticsSetting implements Bean {
     )
     private String modifiedDatamark;
 
+    // endregion
+
     public HibernateStatisticsSetting() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateLongIdKey getKey() {
         return Optional.ofNullable(longId).map(HibernateLongIdKey::new).orElse(null);
     }
@@ -91,7 +107,10 @@ public class HibernateStatisticsSetting implements Bean {
         this.longId = Optional.ofNullable(key).map(HibernateLongIdKey::getLongId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public Long getLongId() {
         return longId;
     }
@@ -211,6 +230,8 @@ public class HibernateStatisticsSetting implements Bean {
     public void setModifiedDatamark(String modifiedDatamark) {
         this.modifiedDatamark = modifiedDatamark;
     }
+
+    // endregion
 
     @Override
     public String toString() {

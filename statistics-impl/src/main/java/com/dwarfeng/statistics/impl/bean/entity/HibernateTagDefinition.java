@@ -17,31 +17,44 @@ public class HibernateTagDefinition implements Bean {
 
     private static final long serialVersionUID = -3734426331400550357L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "tag_definition_id", length = Constraints.LENGTH_STRING_ID, nullable = false)
     private String tag;
 
-    // -----------------------------------------------------------外键-----------------------------------------------------------
+    // endregion
+
+    // region 外键
+
     @Id
     @Column(name = "statistics_setting_id", nullable = false)
     private Long statisticsSettingLongId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "definition", length = Constraints.LENGTH_REMARK)
     private int definition;
 
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
+    // region 多对一
+
     @ManyToOne(targetEntity = HibernateStatisticsSetting.class)
     @JoinColumns({ //
             @JoinColumn(name = "statistics_setting_id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateStatisticsSetting statisticsSetting;
 
-    // -----------------------------------------------------------审计-----------------------------------------------------------
+    // endregion
+
+    // region 审计
+
     @DatamarkField(handlerName = "statisticsSettingDatamarkHandler")
     @Column(
             name = "created_datamark",
@@ -57,10 +70,13 @@ public class HibernateTagDefinition implements Bean {
     )
     private String modifiedDatamark;
 
+    // endregion
+
     public HibernateTagDefinition() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateTagDefinitionKey getKey() {
         return new HibernateTagDefinitionKey(statisticsSettingLongId, tag);
     }
@@ -75,7 +91,10 @@ public class HibernateTagDefinition implements Bean {
         }
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public String getTag() {
         return tag;
     }
@@ -131,6 +150,8 @@ public class HibernateTagDefinition implements Bean {
     public void setModifiedDatamark(String modifiedDatamark) {
         this.modifiedDatamark = modifiedDatamark;
     }
+
+    // endregion
 
     @Override
     public String toString() {

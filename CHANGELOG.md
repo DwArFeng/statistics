@@ -4,6 +4,24 @@
 
 ### 功能构建
 
+- `statistics-impl` 子模块类优化注释、文档注释格式、代码换行格式。
+  - com.dwarfeng.statistics.impl.bean.BeanMapper。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateDriverInfo。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateDriverSupport。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateFilterInfo。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateFilterSupport。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateHistoryTask。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateHistoryTaskEvent。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateMapperSupport。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateProviderInfo。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateProviderSupport。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateStatisticsExecutionProfile。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateStatisticsSetting。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateTagDefinition。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateTask。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateTaskEvent。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateVariable。
+
 - `statistics-sdk` 子模块类优化注释、文档注释格式、代码换行格式。
   - com.dwarfeng.statistics.sdk.bean.BeanMapper。
 

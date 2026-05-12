@@ -15,16 +15,23 @@ public class HibernateTaskEvent implements Bean {
 
     private static final long serialVersionUID = -5531070779975756827L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private Long longId;
 
-    // -----------------------------------------------------------外键-----------------------------------------------------------
+    // endregion
+
+    // region 外键
+
     @Column(name = "task_id")
     private Long taskLongId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "happened_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date happenedDate;
@@ -32,17 +39,23 @@ public class HibernateTaskEvent implements Bean {
     @Column(name = "message", length = Constraints.LENGTH_MESSAGE)
     private String message;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
+    // region 多对一
+
     @ManyToOne(targetEntity = HibernateTask.class)
     @JoinColumns({ //
             @JoinColumn(name = "task_id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateTask task;
 
+    // endregion
+
     public HibernateTaskEvent() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateLongIdKey getKey() {
         return Optional.ofNullable(longId).map(HibernateLongIdKey::new).orElse(null);
     }
@@ -59,7 +72,10 @@ public class HibernateTaskEvent implements Bean {
         this.taskLongId = Optional.ofNullable(key).map(HibernateLongIdKey::getLongId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public Long getLongId() {
         return longId;
     }
@@ -99,6 +115,8 @@ public class HibernateTaskEvent implements Bean {
     public void setTask(HibernateTask task) {
         this.task = task;
     }
+
+    // endregion
 
     @Override
     public String toString() {

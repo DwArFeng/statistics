@@ -14,12 +14,16 @@ public class HibernateStatisticsExecutionProfile implements Bean {
 
     private static final long serialVersionUID = 980215893193232634L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private Long longId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "executing_count", nullable = false)
     private int executingCount;
 
@@ -44,17 +48,23 @@ public class HibernateStatisticsExecutionProfile implements Bean {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastFailedDate;
 
-    // -----------------------------------------------------------一对一-----------------------------------------------------------
+    // endregion
+
+    // region 一对一
+
     @OneToOne(targetEntity = HibernateStatisticsSetting.class)
     @JoinColumns({ //
             @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateStatisticsSetting statisticsSetting;
 
+    // endregion
+
     public HibernateStatisticsExecutionProfile() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateLongIdKey getKey() {
         return Optional.ofNullable(longId).map(HibernateLongIdKey::new).orElse(null);
     }
@@ -63,7 +73,10 @@ public class HibernateStatisticsExecutionProfile implements Bean {
         this.longId = Optional.ofNullable(key).map(HibernateLongIdKey::getLongId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public Long getLongId() {
         return longId;
     }
@@ -135,6 +148,8 @@ public class HibernateStatisticsExecutionProfile implements Bean {
     public void setStatisticsSetting(HibernateStatisticsSetting statisticsSetting) {
         this.statisticsSetting = statisticsSetting;
     }
+
+    // endregion
 
     @Override
     public String toString() {

@@ -17,16 +17,23 @@ public class HibernateHistoryTask implements Bean {
 
     private static final long serialVersionUID = 2986849067529768422L;
 
-    // -----------------------------------------------------------主键-----------------------------------------------------------
+    // region 主键
+
     @Id
     @Column(name = "id", nullable = false, unique = true)
     private Long longId;
 
-    // -----------------------------------------------------------外键-----------------------------------------------------------
+    // endregion
+
+    // region 外键
+
     @Column(name = "statistics_setting_id")
     private Long statisticsSettingLongId;
 
-    // -----------------------------------------------------------主属性字段-----------------------------------------------------------
+    // endregion
+
+    // region 主属性字段
+
     @Column(name = "status", nullable = false)
     private int status;
 
@@ -56,21 +63,30 @@ public class HibernateHistoryTask implements Bean {
     @Column(name = "message", length = Constraints.LENGTH_MESSAGE)
     private String message;
 
-    // -----------------------------------------------------------多对一-----------------------------------------------------------
+    // endregion
+
+    // region 多对一
+
     @ManyToOne(targetEntity = HibernateStatisticsSetting.class)
     @JoinColumns({ //
             @JoinColumn(name = "statistics_setting_id", referencedColumnName = "id", insertable = false, updatable = false), //
     })
     private HibernateStatisticsSetting statisticsSetting;
 
-    // -----------------------------------------------------------一对多-----------------------------------------------------------
+    // endregion
+
+    // region 一对多
+
     @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateHistoryTaskEvent.class, mappedBy = "historyTask")
     private Set<HibernateHistoryTaskEvent> taskEventHistories = new HashSet<>();
+
+    // endregion
 
     public HibernateHistoryTask() {
     }
 
-    // -----------------------------------------------------------映射用属性区-----------------------------------------------------------
+    // region 映射用属性区
+
     public HibernateLongIdKey getKey() {
         return Optional.ofNullable(longId).map(HibernateLongIdKey::new).orElse(null);
     }
@@ -87,7 +103,10 @@ public class HibernateHistoryTask implements Bean {
         this.statisticsSettingLongId = Optional.ofNullable(key).map(HibernateLongIdKey::getLongId).orElse(null);
     }
 
-    // -----------------------------------------------------------常规属性区-----------------------------------------------------------
+    // endregion
+
+    // region 常规属性区
+
     public Long getLongId() {
         return longId;
     }
@@ -183,6 +202,8 @@ public class HibernateHistoryTask implements Bean {
     public void setTaskEventHistories(Set<HibernateHistoryTaskEvent> taskEventHistories) {
         this.taskEventHistories = taskEventHistories;
     }
+
+    // endregion
 
     @Override
     public String toString() {

@@ -23,7 +23,8 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface BeanMapper {
 
-    // -----------------------------------------------------------Subgrade Key-----------------------------------------------------------
+    // region Subgrade Key
+
     HibernateLongIdKey longIdKeyToHibernate(LongIdKey longIdKey);
 
     @InheritInverseConfiguration
@@ -34,7 +35,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     StringIdKey stringIdKeyFromHibernate(HibernateStringIdKey hibernateStringIdKey);
 
-    // -----------------------------------------------------------Statistics Key-----------------------------------------------------------
+    // endregion
+
+    // region Statistics Key
+
     HibernateVariableKey variableKeyToHibernate(VariableKey variableKey);
 
     @InheritInverseConfiguration
@@ -45,7 +49,10 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     TagDefinitionKey tagDefinitionKeyFromHibernate(HibernateTagDefinitionKey hibernateTagDefinitionKey);
 
-    // -----------------------------------------------------------Statistics Entity-----------------------------------------------------------
+    // endregion
+
+    // region Statistics Entity
+
     @Mapping(target = "modifiedDatamark", ignore = true)
     @Mapping(target = "createdDatamark", ignore = true)
     @Mapping(target = "variables", ignore = true)
@@ -179,4 +186,6 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     TagDefinition tagDefinitionFromHibernate(HibernateTagDefinition hibernateTagDefinition);
+
+    // endregion
 }
