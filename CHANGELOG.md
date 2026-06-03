@@ -4,6 +4,10 @@
 
 ### 功能构建
 
+- 新增 WebInput Bean。
+  - com.dwarfeng.statistics.sdk.bean.key.WebInputTagDefinitionKey。
+  - com.dwarfeng.statistics.sdk.bean.entity.WebInputTagDefinition。
+
 - 依赖升级。
   - 升级 `subgrade` 依赖版本为 `1.8.3.a` 以规避漏洞。
 
@@ -329,7 +333,7 @@
 
 - 依赖升级。
   - 升级 `spring` 依赖版本为 `5.3.39` 以规避漏洞。
-  - 升级 `kafka` 依赖版本为 `3.9.0` 以规避漏洞。 
+  - 升级 `kafka` 依赖版本为 `3.9.0` 以规避漏洞。
   - 升级 `netty` 依赖版本为 `4.1.119.Final` 以规避漏洞。
   - 升级 `zookeeper` 依赖版本为 `3.9.4` 以规避漏洞。
   - 升级 `subgrade` 依赖版本为 `1.6.0.a` 以规避漏洞。
@@ -340,7 +344,7 @@
   - 升级 `groovy` 依赖版本为 `4.0.26` 以规避漏洞。
   - 升级 `dcti` 依赖版本为 `1.1.13.a` 以规避漏洞。
   - 升级 `dwarfeng-dct` 依赖版本为 `1.0.4.a` 以规避漏洞。
-  
+
 - 启停脚本优化。
   - 优化 Windows 系统的启动脚本。
   - 优化 Linux 系统的启停脚本。

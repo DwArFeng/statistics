@@ -92,6 +92,11 @@ public interface BeanMapper {
     @InheritInverseConfiguration
     BridgeDataKey bridgeDataKeyFromWebInput(WebInputBridgeDataKey webInputBridgeDataKey);
 
+    WebInputTagDefinitionKey tagDefinitionKeyToWebInput(TagDefinitionKey tagDefinitionKey);
+
+    @InheritInverseConfiguration
+    TagDefinitionKey tagDefinitionKeyFromWebInput(WebInputTagDefinitionKey webInputTagDefinitionKey);
+
     // endregion
 
     // region Statistics Entity
@@ -257,6 +262,11 @@ public interface BeanMapper {
 
     @InheritInverseConfiguration
     StatisticsSetting statisticsSettingFromWebInput(WebInputStatisticsSetting webInputStatisticsSetting);
+
+    WebInputTagDefinition tagDefinitionToWebInput(TagDefinition tagDefinition);
+
+    @InheritInverseConfiguration
+    TagDefinition tagDefinitionFromWebInput(WebInputTagDefinition webInputTagDefinition);
 
     // endregion
 
