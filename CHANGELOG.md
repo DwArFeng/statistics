@@ -4,6 +4,9 @@
 
 ### 功能构建
 
+- Wiki 编写。
+  - docs/wiki/zh-CN/OptDirectory.md。
+
 - 新增 WebInput Bean。
   - com.dwarfeng.statistics.sdk.bean.key.WebInputTagDefinitionKey。
   - com.dwarfeng.statistics.sdk.bean.entity.WebInputTagDefinition。
