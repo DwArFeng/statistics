@@ -13,7 +13,8 @@
 
 ### Bug 修复
 
-- (无)
+- 修复部分 Hibernate 实体中的字段问题。
+  - com.dwarfeng.statistics.impl.bean.entity.HibernateTagDefinition。
 
 ### 功能移除
 

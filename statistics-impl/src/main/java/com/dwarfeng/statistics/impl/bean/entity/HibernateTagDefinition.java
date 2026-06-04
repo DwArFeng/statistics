@@ -15,7 +15,7 @@ import java.util.Objects;
 @EntityListeners(DatamarkEntityListener.class)
 public class HibernateTagDefinition implements Bean {
 
-    private static final long serialVersionUID = -3734426331400550357L;
+    private static final long serialVersionUID = -7791357589443882055L;
 
     // region 主键
 
@@ -35,8 +35,8 @@ public class HibernateTagDefinition implements Bean {
 
     // region 主属性字段
 
-    @Column(name = "definition", length = Constraints.LENGTH_REMARK)
-    private int definition;
+    @Column(name = "description", length = Constraints.LENGTH_REMARK)
+    private String description;
 
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
@@ -111,12 +111,12 @@ public class HibernateTagDefinition implements Bean {
         this.statisticsSettingLongId = statisticsSettingLongId;
     }
 
-    public int getDefinition() {
-        return definition;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDefinition(int definition) {
-        this.definition = definition;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getRemark() {
@@ -158,7 +158,7 @@ public class HibernateTagDefinition implements Bean {
         return getClass().getSimpleName() + "(" +
                 "tag = " + tag + ", " +
                 "statisticsSettingLongId = " + statisticsSettingLongId + ", " +
-                "definition = " + definition + ", " +
+                "description = " + description + ", " +
                 "remark = " + remark + ", " +
                 "statisticsSetting = " + statisticsSetting + ", " +
                 "createdDatamark = " + createdDatamark + ", " +

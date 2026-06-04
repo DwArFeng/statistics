@@ -181,7 +181,6 @@ public interface BeanMapper {
     @Mapping(target = "tag", ignore = true)
     @Mapping(target = "statisticsSettingLongId", ignore = true)
     @Mapping(target = "statisticsSetting", ignore = true)
-    @Mapping(target = "definition", ignore = true)
     HibernateTagDefinition tagDefinitionToHibernate(TagDefinition tagDefinition);
 
     @InheritInverseConfiguration
