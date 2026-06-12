@@ -1,6 +1,6 @@
 package com.dwarfeng.statistics.impl.handler.bridge.hibernate;
 
-import com.dwarfeng.dct.handler.ValueCodingHandler;
+import com.dwarfeng.dct.stack.handler.ValueCodingHandler;
 import com.dwarfeng.statistics.impl.handler.bridge.hibernate.bean.HibernateBridgeBridgeData;
 import com.dwarfeng.statistics.impl.handler.bridge.hibernate.service.HibernateBridgeBridgeDataMaintainService;
 import com.dwarfeng.statistics.sdk.handler.bridge.FullPersister;

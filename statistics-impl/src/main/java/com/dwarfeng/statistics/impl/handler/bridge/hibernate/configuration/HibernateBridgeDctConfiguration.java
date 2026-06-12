@@ -1,10 +1,15 @@
 package com.dwarfeng.statistics.impl.handler.bridge.hibernate.configuration;
 
-import com.dwarfeng.dct.handler.*;
-import com.dwarfeng.dct.handler.fdc.FastJsonFlatDataCodec;
-import com.dwarfeng.dct.handler.vc.*;
-import com.dwarfeng.dct.struct.DataCodingConfig;
-import com.dwarfeng.dct.struct.ValueCodingConfig;
+import com.dwarfeng.dct.impl.handler.DataCodingHandlerImpl;
+import com.dwarfeng.dct.impl.handler.ValueCodingHandlerImpl;
+import com.dwarfeng.dct.impl.handler.fdc.FastJsonFlatDataCodec;
+import com.dwarfeng.dct.impl.handler.vc.*;
+import com.dwarfeng.dct.stack.handler.DataCodingHandler;
+import com.dwarfeng.dct.stack.handler.FlatDataCodec;
+import com.dwarfeng.dct.stack.handler.ValueCodec;
+import com.dwarfeng.dct.stack.handler.ValueCodingHandler;
+import com.dwarfeng.dct.stack.struct.DataCodingConfig;
+import com.dwarfeng.dct.stack.struct.ValueCodingConfig;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

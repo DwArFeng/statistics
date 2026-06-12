@@ -1,9 +1,10 @@
 package com.dwarfeng.statistics.impl.service.telqos;
 
-import com.dwarfeng.springtelqos.node.config.TelqosCommand;
 import com.dwarfeng.springtelqos.sdk.command.CliCommand;
-import com.dwarfeng.springtelqos.stack.command.Context;
-import com.dwarfeng.springtelqos.stack.exception.TelqosException;
+import com.dwarfeng.springtelqos.sdk.configuration.TelqosCommand;
+import com.dwarfeng.springtelqos.sdk.util.CliCommandUtil;
+import com.dwarfeng.springtelqos.stack.command.CommandDescriptor;
+import com.dwarfeng.springtelqos.stack.command.CommandExecutor;
 import com.dwarfeng.statistics.stack.handler.Dispatcher;
 import com.dwarfeng.statistics.stack.service.DispatchQosService;
 import org.apache.commons.cli.CommandLine;
@@ -16,6 +17,11 @@ import java.util.List;
 @TelqosCommand
 public class DispatcherCommand extends CliCommand {
 
+    @SuppressWarnings({"SpellCheckingInspection", "GrazieInspectionRunner", "RedundantSuppression"})
+    private static final String IDENTITY = "dispatcher";
+
+    // region 指令选项
+
     private static final String COMMAND_OPTION_CURRENT = "current";
     private static final String COMMAND_OPTION_ALL = "all";
 
@@ -24,66 +30,70 @@ public class DispatcherCommand extends CliCommand {
             COMMAND_OPTION_ALL
     };
 
-    private static final String IDENTITY = "dispatcher";
-    private static final String DESCRIPTION = "调度器处理器操作/查看";
-
-    private static final String CMD_LINE_SYNTAX_STATUS = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_CURRENT);
-    private static final String CMD_LINE_SYNTAX_ALL = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_ALL);
-
-    private static final String[] CMD_LINE_ARRAY = new String[]{
-            CMD_LINE_SYNTAX_STATUS,
-            CMD_LINE_SYNTAX_ALL
-    };
-
-    private static final String CMD_LINE_SYNTAX = CommandUtil.syntax(CMD_LINE_ARRAY);
+    // endregion
 
     private final DispatchQosService dispatchQosService;
 
     public DispatcherCommand(DispatchQosService dispatchQosService) {
-        super(IDENTITY, DESCRIPTION, CMD_LINE_SYNTAX);
+        super(IDENTITY);
         this.dispatchQosService = dispatchQosService;
     }
 
     @Override
-    protected List<Option> buildOptions() {
+    protected DescriptionProvider provideDescriptionProvider() {
+        return context -> "调度器处理器操作/查看";
+    }
+
+    @Override
+    protected CliSyntaxProvider provideCliSyntaxProvider() {
+        return this::cliSyntaxProvider;
+    }
+
+    private String cliSyntaxProvider(CommandDescriptor.Context context) throws Exception {
+        String identity = context.getRuntimeIdentity();
+        String[] patterns = new String[]{
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_CURRENT),
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_ALL)
+        };
+        return CliCommandUtil.cliSyntax(patterns);
+    }
+
+    @Override
+    protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
-        list.add(Option.builder(COMMAND_OPTION_CURRENT).desc("查看当前调度器").build());
-        list.add(Option.builder(COMMAND_OPTION_ALL).desc("查看全部调度器").build());
+        list.add(Option.builder(COMMAND_OPTION_CURRENT).optionalArg(true).hasArg(false).desc("查看当前调度器").build());
+        list.add(Option.builder(COMMAND_OPTION_ALL).optionalArg(true).hasArg(false).desc("查看全部调度器").build());
         return list;
     }
 
     @SuppressWarnings("DuplicatedCode")
     @Override
-    protected void executeWithCmd(Context context, CommandLine cmd) throws TelqosException {
-        try {
-            Pair<String, Integer> pair = CommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
-            if (pair.getRight() != 1) {
-                context.sendMessage(CommandUtil.optionMismatchMessage(COMMAND_OPTION_ARRAY));
-                context.sendMessage(CMD_LINE_SYNTAX);
-                return;
-            }
-            switch (pair.getLeft()) {
-                case COMMAND_OPTION_CURRENT:
-                    printCurrent(context);
-                    break;
-                case COMMAND_OPTION_ALL:
-                    printAll(context);
-                    break;
-            }
-        } catch (Exception e) {
-            throw new TelqosException(e);
+    protected void executeWithCmd(CommandExecutor.Context context, CommandLine cmd) throws Exception {
+        Pair<String, Integer> pair = CliCommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
+        if (pair.getRight() != 1) {
+            context.sendMessage(CliCommandUtil.optionMismatchMessage(COMMAND_OPTION_ARRAY));
+            context.sendMessage(context.getCommandManual(context.getRuntimeIdentity()));
+            return;
+        }
+        switch (pair.getLeft()) {
+            case COMMAND_OPTION_CURRENT:
+                printCurrent(context);
+                break;
+            case COMMAND_OPTION_ALL:
+                printAll(context);
+                break;
+            default:
+                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
         }
     }
 
-    private void printCurrent(Context context) throws Exception {
+    private void printCurrent(CommandExecutor.Context context) throws Exception {
         Dispatcher currentDispatcher = dispatchQosService.currentDispatcher();
         context.sendMessage("current dispatcher:");
         context.sendMessage(String.format("  %s", currentDispatcher));
     }
 
-    private void printAll(Context context) throws Exception {
+    private void printAll(CommandExecutor.Context context) throws Exception {
         List<Dispatcher> dispatchers = dispatchQosService.allDispatchers();
         context.sendMessage("all dispatchers:");
         int index = 0;

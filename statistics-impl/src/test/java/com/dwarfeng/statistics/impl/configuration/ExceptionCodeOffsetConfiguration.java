@@ -17,12 +17,18 @@ public class ExceptionCodeOffsetConfiguration {
     private int snowflakeExceptionCodeOffset;
     @Value("${statistics.exception_code_offset.dwarfeng_datamark}")
     private int dwarfengDatamarkExceptionCodeOffset;
+    @Value("${statistics.exception_code_offset.dcti}")
+    private int dctiExceptionCodeOffset;
+    @Value("${statistics.exception_code_offset.dwarfeng_dct}")
+    private int dwarfengDctExceptionCodeOffset;
 
     @PostConstruct
     public void init() {
         ServiceExceptionCodes.setExceptionCodeOffset(exceptionCodeOffset);
         com.dwarfeng.subgrade.sdk.exception.ServiceExceptionCodes.setExceptionCodeOffset(subgradeExceptionCodeOffset);
         com.dwarfeng.sfds.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(snowflakeExceptionCodeOffset);
-        com.dwarfeng.datamark.util.ServiceExceptionCodes.setExceptionCodeOffset(dwarfengDatamarkExceptionCodeOffset);
+        com.dwarfeng.datamark.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(dwarfengDatamarkExceptionCodeOffset);
+        com.dwarfeng.dcti.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(dctiExceptionCodeOffset);
+        com.dwarfeng.dct.sdk.util.ServiceExceptionCodes.setExceptionCodeOffset(dwarfengDctExceptionCodeOffset);
     }
 }

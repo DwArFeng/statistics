@@ -4,10 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.dwarfeng.dutil.basic.io.IOUtil;
 import com.dwarfeng.dutil.basic.io.StringOutputStream;
 import com.dwarfeng.dutil.basic.mea.TimeMeasurer;
-import com.dwarfeng.springtelqos.node.config.TelqosCommand;
 import com.dwarfeng.springtelqos.sdk.command.CliCommand;
-import com.dwarfeng.springtelqos.stack.command.Context;
-import com.dwarfeng.springtelqos.stack.exception.TelqosException;
+import com.dwarfeng.springtelqos.sdk.configuration.TelqosCommand;
+import com.dwarfeng.springtelqos.sdk.util.CliCommandUtil;
+import com.dwarfeng.springtelqos.stack.command.CommandDescriptor;
+import com.dwarfeng.springtelqos.stack.command.CommandExecutor;
 import com.dwarfeng.statistics.sdk.bean.dto.WebInputLookupInfo;
 import com.dwarfeng.statistics.sdk.bean.dto.WebInputNativeQueryInfo;
 import com.dwarfeng.statistics.sdk.bean.dto.WebInputQueryInfo;
@@ -29,6 +30,11 @@ import java.util.stream.Collectors;
 @TelqosCommand
 public class ViewCommand extends CliCommand {
 
+    @SuppressWarnings({"SpellCheckingInspection", "GrazieInspectionRunner", "RedundantSuppression"})
+    private static final String IDENTITY = "view";
+
+    // region 指令选项
+
     private static final String COMMAND_OPTION_LATEST = "latest";
     private static final String COMMAND_OPTION_LOOKUP = "lookup";
     private static final String COMMAND_OPTION_NATIVE_QUERY = "nquery";
@@ -42,107 +48,98 @@ public class ViewCommand extends CliCommand {
             COMMAND_OPTION_QUERY,
     };
 
-    private static final String COMMAND_OPTION_JSON = "json";
-    private static final String COMMAND_OPTION_JSON_FILE = "jf";
-    private static final String COMMAND_OPTION_JSON_FILE_LONG_OPT = "json-file";
+    private static final String COMMAND_SUB_OPTION_JSON = "json";
+    private static final String COMMAND_SUB_OPTION_JSON_FILE = "jf";
+    private static final String COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT = "json-file";
 
-    private static final String IDENTITY = "view";
-    private static final String DESCRIPTION = "观察指令";
+    // endregion
 
-    private static final String CMD_LINE_SYNTAX_LATEST = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_LATEST) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_LOOKUP = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_LOOKUP) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_NATIVE_QUERY = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_NATIVE_QUERY) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-    private static final String CMD_LINE_SYNTAX_QUERY = IDENTITY + " " +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_QUERY) + " [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON) + " json-string] [" +
-            CommandUtil.concatOptionPrefix(COMMAND_OPTION_JSON_FILE) + " json-file]";
-
-    private static final String[] CMD_LINE_ARRAY = new String[]{
-            CMD_LINE_SYNTAX_LATEST,
-            CMD_LINE_SYNTAX_LOOKUP,
-            CMD_LINE_SYNTAX_NATIVE_QUERY,
-            CMD_LINE_SYNTAX_QUERY
-    };
-
-    private static final String CMD_LINE_SYNTAX = CommandUtil.syntax(CMD_LINE_ARRAY);
-
-    protected final ViewQosService viewQosService;
+    private final ViewQosService viewQosService;
 
     public ViewCommand(ViewQosService viewQosService) {
-        super(IDENTITY, DESCRIPTION, CMD_LINE_SYNTAX);
+        super(IDENTITY);
         this.viewQosService = viewQosService;
     }
 
     @Override
-    protected List<Option> buildOptions() {
+    protected DescriptionProvider provideDescriptionProvider() {
+        return context -> "观察指令";
+    }
+
+    @Override
+    protected CliSyntaxProvider provideCliSyntaxProvider() {
+        return this::cliSyntaxProvider;
+    }
+
+    private String cliSyntaxProvider(CommandDescriptor.Context context) throws Exception {
+        String identity = context.getRuntimeIdentity();
+        String jsonSegment = " [" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON) + " json-string] " +
+                "[" + CliCommandUtil.concatOptionPrefix(COMMAND_SUB_OPTION_JSON_FILE) + " json-file]";
+        String[] patterns = new String[]{
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_LATEST) + jsonSegment,
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_LOOKUP) + jsonSegment,
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_NATIVE_QUERY) + jsonSegment,
+                identity + " " + CliCommandUtil.concatOptionPrefix(COMMAND_OPTION_QUERY) + jsonSegment
+        };
+        return CliCommandUtil.cliSyntax(patterns);
+    }
+
+    @Override
+    protected List<Option> provideOptions() {
         List<Option> list = new ArrayList<>();
-        list.add(Option.builder(COMMAND_OPTION_LATEST).desc("最新数据指令").build());
-        list.add(Option.builder(COMMAND_OPTION_LOOKUP).desc("查看指令").build());
+        list.add(Option.builder(COMMAND_OPTION_LATEST).optionalArg(true).hasArg(false).desc("最新数据指令").build());
+        list.add(Option.builder(COMMAND_OPTION_LOOKUP).optionalArg(true).hasArg(false).desc("查看指令").build());
         list.add(
                 Option.builder(COMMAND_OPTION_NATIVE_QUERY).longOpt(COMMAND_OPTION_NATIVE_QUERY_LONG_OPT)
-                        .desc("原生查询指令").build()
+                        .optionalArg(true).hasArg(false).desc("原生查询指令").build()
         );
-        list.add(Option.builder(COMMAND_OPTION_QUERY).desc("查询指令").build());
+        list.add(Option.builder(COMMAND_OPTION_QUERY).optionalArg(true).hasArg(false).desc("查询指令").build());
         list.add(
-                Option.builder(COMMAND_OPTION_JSON).desc("JSON 字符串").hasArg().type(String.class).build()
+                Option.builder(COMMAND_SUB_OPTION_JSON).hasArg(true).type(String.class).desc("JSON 字符串").build()
         );
         list.add(
-                Option.builder(COMMAND_OPTION_JSON_FILE).longOpt(COMMAND_OPTION_JSON_FILE_LONG_OPT).desc("JSON 文件")
-                        .hasArg().type(File.class).build()
+                Option.builder(COMMAND_SUB_OPTION_JSON_FILE).longOpt(COMMAND_SUB_OPTION_JSON_FILE_LONG_OPT)
+                        .hasArg(true).type(File.class).desc("JSON 文件").build()
         );
         return list;
     }
 
     @Override
-    protected void executeWithCmd(Context context, CommandLine cmd) throws TelqosException {
-        try {
-            Pair<String, Integer> pair = CommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
-            if (pair.getRight() != 1) {
-                context.sendMessage(CommandUtil.optionMismatchMessage(COMMAND_OPTION_ARRAY));
-                context.sendMessage(super.cmdLineSyntax);
-                return;
-            }
-            switch (pair.getLeft()) {
-                case COMMAND_OPTION_LATEST:
-                    handleLatest(context, cmd);
-                    break;
-                case COMMAND_OPTION_LOOKUP:
-                    handleLookup(context, cmd);
-                    break;
-                case COMMAND_OPTION_NATIVE_QUERY:
-                    handleNativeQuery(context, cmd);
-                    break;
-                case COMMAND_OPTION_QUERY:
-                    handleQuery(context, cmd);
-                    break;
-            }
-        } catch (Exception e) {
-            throw new TelqosException(e);
+    protected void executeWithCmd(CommandExecutor.Context context, CommandLine cmd) throws Exception {
+        Pair<String, Integer> pair = CliCommandUtil.analyseCommand(cmd, COMMAND_OPTION_ARRAY);
+        if (pair.getRight() != 1) {
+            context.sendMessage(CliCommandUtil.optionMismatchMessage(COMMAND_OPTION_ARRAY));
+            context.sendMessage(context.getCommandManual(context.getRuntimeIdentity()));
+            return;
+        }
+        switch (pair.getLeft()) {
+            case COMMAND_OPTION_LATEST:
+                handleLatest(context, cmd);
+                break;
+            case COMMAND_OPTION_LOOKUP:
+                handleLookup(context, cmd);
+                break;
+            case COMMAND_OPTION_NATIVE_QUERY:
+                handleNativeQuery(context, cmd);
+                break;
+            case COMMAND_OPTION_QUERY:
+                handleQuery(context, cmd);
+                break;
+            default:
+                throw new IllegalStateException("不应该执行到此处, 请联系开发人员");
         }
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private void handleLatest(Context context, CommandLine cmd) throws Exception {
+    private void handleLatest(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         List<BridgeDataKey> bridgeDataKeys;
 
-        // 如果有 -json 选项，则从选项中获取 JSON，转化为 bridgeDataKeys。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             bridgeDataKeys = JSON.parseArray(json, WebInputBridgeDataKey.class).stream()
                     .map(WebInputBridgeDataKey::toStackBean).collect(Collectors.toList());
-        }
-        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 bridgeDataKeys。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (
                     FileInputStream in = new FileInputStream(jsonFile);
                     StringOutputStream out = new StringOutputStream()
@@ -154,56 +151,47 @@ public class ViewCommand extends CliCommand {
                         .map(WebInputBridgeDataKey::toStackBean).collect(Collectors.toList());
             }
         } else {
-            // 暂时未实现。
             throw new UnsupportedOperationException("not supported yet");
         }
 
-        // 查询数据，并计时。
         TimeMeasurer tm = new TimeMeasurer();
         tm.start();
         List<BridgeData> bridgeDatas = viewQosService.latest(bridgeDataKeys);
         tm.stop();
 
-        // 输出执行时间。
         context.sendMessage("");
         context.sendMessage("执行时间：" + tm.getTimeMs() + "ms");
         context.sendMessage("");
 
-        // 输出数据。
         while (true) {
-            CropResult cropResult = cropLatestData(bridgeDatas, context, "输入 q 退出查询");
-            if (cropResult.exitFlag) {
+            CliCommandUtil.CropResult cropResult = cropLatestData(bridgeDatas, context);
+            if (cropResult.isExitFlag()) {
                 break;
             }
             context.sendMessage("");
-            for (int i = cropResult.beginIndex; i < cropResult.endIndex; i++) {
+            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
                 BridgeData bridgeData = bridgeDatas.get(i);
-                printBridgeData(i, cropResult.endIndex, bridgeData, context);
+                printBridgeData(i, cropResult.getEndIndex(), bridgeData, context);
             }
         }
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private void handleLookup(Context context, CommandLine cmd) throws Exception {
+    private void handleLookup(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         LookupInfo lookupInfo;
 
-        // 如果有 -json 选项，则从选项中获取 JSON，转化为 lookupInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             lookupInfo = WebInputLookupInfo.toStackBean(JSON.parseObject(json, WebInputLookupInfo.class));
-        }
-        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 lookupInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 lookupInfo = WebInputLookupInfo.toStackBean(JSON.parseObject(in, WebInputLookupInfo.class));
             }
         } else {
-            // 暂时未实现。
             throw new UnsupportedOperationException("not supported yet");
         }
 
-        // 查询数据，并计时。
         TimeMeasurer tm = new TimeMeasurer();
         tm.start();
         LookupResult lookupResult = viewQosService.query(lookupInfo);
@@ -212,52 +200,44 @@ public class ViewCommand extends CliCommand {
         int currentPage = lookupResult.getCurrentPage();
         int totalPages = lookupResult.getTotalPages();
 
-        // 输出执行时间。
         context.sendMessage("");
         context.sendMessage("执行时间：" + tm.getTimeMs() + "ms");
         context.sendMessage("");
 
-        // 输出数据。
         while (true) {
-            CropResult cropResult = cropLookupData(bridgeDatas, currentPage, totalPages, context, "输入 q 退出查询");
-            if (cropResult.exitFlag) {
+            CliCommandUtil.CropResult cropResult = cropLookupData(bridgeDatas, currentPage, totalPages, context);
+            if (cropResult.isExitFlag()) {
                 break;
             }
             context.sendMessage("");
-            for (int i = cropResult.beginIndex; i < cropResult.endIndex; i++) {
+            for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
                 BridgeData bridgeData = bridgeDatas.get(i);
-                printBridgeData(i, cropResult.endIndex, bridgeData, context);
+                printBridgeData(i, cropResult.getEndIndex(), bridgeData, context);
             }
         }
     }
 
-    private void handleQuery(Context context, CommandLine cmd) throws Exception {
+    private void handleQuery(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         QueryInfo queryInfo;
 
-        // 如果有 -json 选项，则从选项中获取 JSON，转化为 queryInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             queryInfo = WebInputQueryInfo.toStackBean(JSON.parseObject(json, WebInputQueryInfo.class));
-        }
-        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 queryInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 queryInfo = WebInputQueryInfo.toStackBean(JSON.parseObject(in, WebInputQueryInfo.class));
             }
         } else {
-            // 暂时未实现。
             throw new UnsupportedOperationException("not supported yet");
         }
 
-        // 查询数据，并计时。
         TimeMeasurer tm = new TimeMeasurer();
         tm.start();
         QueryResult queryResult = viewQosService.lookup(queryInfo);
         tm.stop();
         List<QueryResult.Sequence> sequences = queryResult.getSequences();
 
-        // 输出执行时间。
         context.sendMessage("");
         context.sendMessage("执行时间：" + tm.getTimeMs() + "ms");
         context.sendMessage("");
@@ -265,46 +245,41 @@ public class ViewCommand extends CliCommand {
         processQueryResultSequence(context, sequences);
     }
 
-    private void handleNativeQuery(Context context, CommandLine cmd) throws Exception {
+    private void handleNativeQuery(CommandExecutor.Context context, CommandLine cmd) throws Exception {
         NativeQueryInfo nativeQueryInfo;
 
-        // 如果有 -json 选项，则从选项中获取 JSON，转化为 queryInfo。
-        if (cmd.hasOption(COMMAND_OPTION_JSON)) {
-            String json = (String) cmd.getParsedOptionValue(COMMAND_OPTION_JSON);
+        if (cmd.hasOption(COMMAND_SUB_OPTION_JSON)) {
+            String json = (String) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON);
             nativeQueryInfo = WebInputNativeQueryInfo.toStackBean(
                     JSON.parseObject(json, WebInputNativeQueryInfo.class)
             );
-        }
-        // 如果有 --json-file 选项，则从选项中获取 JSON 文件，转化为 queryInfo。
-        else if (cmd.hasOption(COMMAND_OPTION_JSON_FILE)) {
-            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_OPTION_JSON_FILE);
+        } else if (cmd.hasOption(COMMAND_SUB_OPTION_JSON_FILE)) {
+            File jsonFile = (File) cmd.getParsedOptionValue(COMMAND_SUB_OPTION_JSON_FILE);
             try (FileInputStream in = new FileInputStream(jsonFile)) {
                 nativeQueryInfo = WebInputNativeQueryInfo.toStackBean(
                         JSON.parseObject(in, WebInputNativeQueryInfo.class)
                 );
             }
         } else {
-            // 暂时未实现。
             throw new UnsupportedOperationException("not supported yet");
         }
 
-        // 查询数据，并计时。
         TimeMeasurer tm = new TimeMeasurer();
         tm.start();
         QueryResult queryResult = viewQosService.nativeQuery(nativeQueryInfo);
         tm.stop();
         List<QueryResult.Sequence> sequences = queryResult.getSequences();
 
-        // 输出执行时间。
         context.sendMessage("");
         context.sendMessage("执行时间：" + tm.getTimeMs() + "ms");
         context.sendMessage("");
 
-        // 输出数据。
         processQueryResultSequence(context, sequences);
     }
 
-    private void printBridgeData(int i, int endIndex, BridgeData bridgeData, Context context) throws TelqosException {
+    private void printBridgeData(
+            int i, int endIndex, BridgeData bridgeData, CommandExecutor.Context context
+    ) throws Exception {
         context.sendMessage(String.format(
                 "索引: %d/%d",
                 i, endIndex
@@ -337,8 +312,8 @@ public class ViewCommand extends CliCommand {
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private void processQueryResultSequence(Context context, List<QueryResult.Sequence> sequences) throws Exception {
-        // 输出数据。
+    private void processQueryResultSequence(CommandExecutor.Context context, List<QueryResult.Sequence> sequences)
+            throws Exception {
         int sequenceIndex;
         while (true) {
             context.sendMessage("序列总数: " + sequences.size());
@@ -385,124 +360,40 @@ public class ViewCommand extends CliCommand {
             List<BridgeData> bridgeDatas = sequence.getBridgeDatas();
 
             while (true) {
-                CropResult cropResult = cropQueryData(bridgeDatas, context, "输入 q 返回至序列选择");
-                if (cropResult.exitFlag) {
+                CliCommandUtil.CropResult cropResult = cropQueryData(bridgeDatas, context);
+                if (cropResult.isExitFlag()) {
                     break;
                 }
                 context.sendMessage("");
-                for (int i = cropResult.beginIndex; i < cropResult.endIndex; i++) {
+                for (int i = cropResult.getBeginIndex(); i < cropResult.getEndIndex(); i++) {
                     BridgeData bridgeData = bridgeDatas.get(i);
-                    printBridgeData(i, cropResult.endIndex, bridgeData, context);
+                    printBridgeData(i, cropResult.getEndIndex(), bridgeData, context);
                 }
             }
         }
     }
 
-    // 为了程序的扩展性，忽略 quitPrompt 字段的 SameParameterValue 警告。
-    @SuppressWarnings("SameParameterValue")
-    private CropResult cropLatestData(List<BridgeData> bridgeDatas, Context context, String quitPrompt)
+    private CliCommandUtil.CropResult cropLatestData(List<BridgeData> bridgeDatas, CommandExecutor.Context context)
             throws Exception {
-        String bannerMessage = "数据总数: " + bridgeDatas.size();
-        return cropData(bridgeDatas, bannerMessage, context, quitPrompt);
+        return CliCommandUtil.cropData(
+                context, bridgeDatas, "数据总数: " + bridgeDatas.size(),
+                command -> "输入 q 退出查询"
+        );
     }
 
-    // 为了程序的扩展性，忽略 quitPrompt 字段的 SameParameterValue 警告。
-    @SuppressWarnings("SameParameterValue")
-    private <T> CropResult cropLookupData(
-            List<T> originData, int currentPage, int totalPages, Context context, String quitPrompt
+    private <T> CliCommandUtil.CropResult cropLookupData(
+            List<T> originData, int currentPage, int totalPages, CommandExecutor.Context context
     ) throws Exception {
         String bannerMessage = "当前页数据总数: " + originData.size() + "    当前页数: " + currentPage + "    " +
                 "总页数: " + totalPages;
-        return cropData(originData, bannerMessage, context, quitPrompt);
+        return CliCommandUtil.cropData(context, originData, bannerMessage, command -> "输入 q 退出查询");
     }
 
-    // 为了程序的扩展性，忽略 quitPrompt 字段的 SameParameterValue 警告。
-    @SuppressWarnings("SameParameterValue")
-    private <T> CropResult cropQueryData(List<T> originData, Context context, String quitPrompt) throws Exception {
-        String bannerMessage = "数据总数: " + originData.size();
-        return cropData(originData, bannerMessage, context, quitPrompt);
-    }
-
-    private <T> CropResult cropData(List<T> originData, String bannerMessage, Context context, String quitPrompt)
+    private <T> CliCommandUtil.CropResult cropQueryData(List<T> originData, CommandExecutor.Context context)
             throws Exception {
-        int beginIndex;
-        int endIndex;
-
-        while (true) {
-            context.sendMessage(bannerMessage);
-            context.sendMessage("");
-            context.sendMessage("输入 all 查看所有数据");
-            context.sendMessage("输入 begin-end 查看指定范围的数据(开始于 0)");
-            context.sendMessage(quitPrompt);
-            context.sendMessage("");
-
-            String message = context.receiveMessage();
-
-            if (message.equalsIgnoreCase("q")) {
-                return new CropResult(-1, -1, true);
-            } else if (message.equalsIgnoreCase("all")) {
-                beginIndex = 0;
-                endIndex = originData.size();
-            } else {
-                String[] split = message.split("-");
-                if (split.length != 2) {
-                    context.sendMessage("输入格式错误");
-                    context.sendMessage("");
-                    continue;
-                }
-                try {
-                    beginIndex = Integer.parseInt(split[0]);
-                    endIndex = Integer.parseInt(split[1]);
-                } catch (NumberFormatException e) {
-                    context.sendMessage("输入格式错误");
-                    context.sendMessage("");
-                    continue;
-                }
-                if (beginIndex < 0 || endIndex > originData.size() || beginIndex >= endIndex) {
-                    String errorMessage = "输入范围错误，begin 和 end 均应介于 [0, " + originData.size() + "] 之间，" +
-                            "且 begin 应小于 end";
-                    context.sendMessage(errorMessage);
-                    context.sendMessage("");
-                    continue;
-                }
-            }
-            break;
-        }
-
-        return new CropResult(beginIndex, endIndex, false);
-    }
-
-    private static final class CropResult {
-
-        private final int beginIndex;
-        private final int endIndex;
-        private final boolean exitFlag;
-
-        public CropResult(int beginIndex, int endIndex, boolean exitFlag) {
-            this.beginIndex = beginIndex;
-            this.endIndex = endIndex;
-            this.exitFlag = exitFlag;
-        }
-
-        public int getBeginIndex() {
-            return beginIndex;
-        }
-
-        public int getEndIndex() {
-            return endIndex;
-        }
-
-        public boolean isExitFlag() {
-            return exitFlag;
-        }
-
-        @Override
-        public String toString() {
-            return "CropResult{" +
-                    "beginIndex=" + beginIndex +
-                    ", endIndex=" + endIndex +
-                    ", exitFlag=" + exitFlag +
-                    '}';
-        }
+        return CliCommandUtil.cropData(
+                context, originData, "数据总数: " + originData.size(),
+                command -> "输入 q 返回至序列选择"
+        );
     }
 }
