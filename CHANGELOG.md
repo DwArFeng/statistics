@@ -77,7 +77,8 @@
 
 ### 功能移除
 
-- (无)
+- 移除部分配置文件中未使用的配置项。
+  - statistics/launcher.properties。
 
 ---
 
