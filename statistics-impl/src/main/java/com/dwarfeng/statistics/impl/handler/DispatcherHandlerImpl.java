@@ -16,7 +16,7 @@ public class DispatcherHandlerImpl implements DispatcherHandler {
 
     private final List<Dispatcher> dispatchers;
 
-    @Value("${dispatcher.type}")
+    @Value("${com.dwarfeng.statistics.dispatcher.type}")
     private String dispatcherType;
 
     private Dispatcher dispatcher;

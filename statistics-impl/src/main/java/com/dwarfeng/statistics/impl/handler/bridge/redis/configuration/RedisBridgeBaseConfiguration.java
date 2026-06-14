@@ -18,57 +18,57 @@ import java.time.Duration;
 @Configuration
 public class RedisBridgeBaseConfiguration {
 
-    @Value("${bridge.redis.use_project_config}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.use_project_config}")
     private boolean useProjectConfig;
 
-    @Value("${redis.hostName}")
+    @Value("${com.dwarfeng.statistics.redis.hostName}")
     private String projectHostName;
-    @Value("${redis.port}")
+    @Value("${com.dwarfeng.statistics.redis.port}")
     private int projectPort;
-    @Value("${redis.password}")
+    @Value("${com.dwarfeng.statistics.redis.password}")
     private String projectPassword;
-    @Value("${redis.timeout}")
+    @Value("${com.dwarfeng.statistics.redis.timeout}")
     private int projectTimeout;
-    @Value("${redis.maxIdle}")
+    @Value("${com.dwarfeng.statistics.redis.maxIdle}")
     private int projectMaxIdle;
-    @Value("${redis.maxTotal}")
+    @Value("${com.dwarfeng.statistics.redis.maxTotal}")
     private int projectMaxTotal;
-    @Value("${redis.maxWaitMillis}")
+    @Value("${com.dwarfeng.statistics.redis.maxWaitMillis}")
     private int projectMaxWaitMillis;
-    @Value("${redis.minEvictableIdleTimeMillis}")
+    @Value("${com.dwarfeng.statistics.redis.minEvictableIdleTimeMillis}")
     private int projectMinEvictableIdleTimeMillis;
-    @Value("${redis.numTestsPerEvictionRun}")
+    @Value("${com.dwarfeng.statistics.redis.numTestsPerEvictionRun}")
     private int projectNumTestsPerEvictionRun;
-    @Value("${redis.timeBetweenEvictionRunsMillis}")
+    @Value("${com.dwarfeng.statistics.redis.timeBetweenEvictionRunsMillis}")
     private int projectTimeBetweenEvictionRunsMillis;
-    @Value("${redis.testOnBorrow}")
+    @Value("${com.dwarfeng.statistics.redis.testOnBorrow}")
     private boolean projectTestOnBorrow;
-    @Value("${redis.testWhileIdle}")
+    @Value("${com.dwarfeng.statistics.redis.testWhileIdle}")
     private boolean projectTestWhileIdle;
 
-    @Value("${bridge.redis.host_name}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.host_name}")
     private String bridgeHostName;
-    @Value("${bridge.redis.port}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.port}")
     private int bridgePort;
-    @Value("${bridge.redis.password}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.password}")
     private String bridgePassword;
-    @Value("${bridge.redis.timeout}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.timeout}")
     private int bridgeTimeout;
-    @Value("${bridge.redis.max_idle}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.max_idle}")
     private int bridgeMaxIdle;
-    @Value("${bridge.redis.max_total}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.max_total}")
     private int bridgeMaxTotal;
-    @Value("${bridge.redis.max_wait_millis}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.max_wait_millis}")
     private int bridgeMaxWaitMillis;
-    @Value("${bridge.redis.min_evictable_idle_time_millis}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.min_evictable_idle_time_millis}")
     private int bridgeMinEvictableIdleTimeMillis;
-    @Value("${bridge.redis.num_tests_per_eviction_run}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.num_tests_per_eviction_run}")
     private int bridgeNumTestsPerEvictionRun;
-    @Value("${bridge.redis.time_between_eviction_runs_millis}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.time_between_eviction_runs_millis}")
     private int bridgeTimeBetweenEvictionRunsMillis;
-    @Value("${bridge.redis.test_on_borrow}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.test_on_borrow}")
     private boolean bridgeTestOnBorrow;
-    @Value("${bridge.redis.test_while_idle}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.test_while_idle}")
     private boolean bridgeTestWhileIdle;
 
     @Bean("redisBridge.fastJsonRedisSerializer")

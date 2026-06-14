@@ -22,7 +22,7 @@ public class ReceiverHandlerImpl implements ReceiverHandler {
 
     private final List<Receiver> receivers;
 
-    @Value("${receiver.type}")
+    @Value("${com.dwarfeng.statistics.receiver.type}")
     private String receiverType;
 
     private Receiver receiver;

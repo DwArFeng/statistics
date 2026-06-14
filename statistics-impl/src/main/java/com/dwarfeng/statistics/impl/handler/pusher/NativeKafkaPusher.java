@@ -36,17 +36,17 @@ public class NativeKafkaPusher extends AbstractPusher {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${pusher.kafka.native.topic.supervise_reset}")
+    @Value("${com.dwarfeng.statistics.pusher.kafka.native.topic.supervise_reset}")
     private String superviseResetTopic;
-    @Value("${pusher.kafka.native.topic.execute_reset}")
+    @Value("${com.dwarfeng.statistics.pusher.kafka.native.topic.execute_reset}")
     private String executeResetTopic;
-    @Value("${pusher.kafka.native.topic.task_finished}")
+    @Value("${com.dwarfeng.statistics.pusher.kafka.native.topic.task_finished}")
     private String taskFinishedTopic;
-    @Value("${pusher.kafka.native.topic.task_failed}")
+    @Value("${com.dwarfeng.statistics.pusher.kafka.native.topic.task_failed}")
     private String taskFailedTopic;
-    @Value("${pusher.kafka.native.topic.task_expired}")
+    @Value("${com.dwarfeng.statistics.pusher.kafka.native.topic.task_expired}")
     private String taskExpiredTopic;
-    @Value("${pusher.kafka.native.topic.task_died}")
+    @Value("${com.dwarfeng.statistics.pusher.kafka.native.topic.task_died}")
     private String taskDiedTopic;
 
     public NativeKafkaPusher(
@@ -111,19 +111,19 @@ public class NativeKafkaPusher extends AbstractPusher {
 
         private static final Logger LOGGER = LoggerFactory.getLogger(KafkaPusherConfiguration.class);
 
-        @Value("${pusher.kafka.native.bootstrap_servers}")
+        @Value("${com.dwarfeng.statistics.pusher.kafka.native.bootstrap_servers}")
         private String producerBootstrapServers;
-        @Value("${pusher.kafka.native.retries}")
+        @Value("${com.dwarfeng.statistics.pusher.kafka.native.retries}")
         private int retries;
-        @Value("${pusher.kafka.native.linger}")
+        @Value("${com.dwarfeng.statistics.pusher.kafka.native.linger}")
         private long linger;
-        @Value("${pusher.kafka.native.buffer_memory}")
+        @Value("${com.dwarfeng.statistics.pusher.kafka.native.buffer_memory}")
         private long bufferMemory;
-        @Value("${pusher.kafka.native.batch_size}")
+        @Value("${com.dwarfeng.statistics.pusher.kafka.native.batch_size}")
         private int batchSize;
-        @Value("${pusher.kafka.native.acks}")
+        @Value("${com.dwarfeng.statistics.pusher.kafka.native.acks}")
         private String acks;
-        @Value("${pusher.kafka.native.transaction_prefix}")
+        @Value("${com.dwarfeng.statistics.pusher.kafka.native.transaction_prefix}")
         private String transactionPrefix;
 
         @SuppressWarnings("DuplicatedCode")

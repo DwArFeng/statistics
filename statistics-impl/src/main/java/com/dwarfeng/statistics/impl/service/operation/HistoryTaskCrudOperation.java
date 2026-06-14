@@ -26,7 +26,7 @@ public class HistoryTaskCrudOperation implements BatchCrudOperation<LongIdKey, H
     private final HistoryTaskEventDao historyTaskEventDao;
     private final HistoryTaskEventCache historyTaskEventCache;
 
-    @Value("${cache.timeout.entity.history_task}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.history_task}")
     private long historyTaskTimeout;
 
     public HistoryTaskCrudOperation(

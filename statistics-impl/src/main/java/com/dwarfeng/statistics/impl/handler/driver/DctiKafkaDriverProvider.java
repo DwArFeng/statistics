@@ -69,7 +69,7 @@ public class DctiKafkaDriverProvider implements DriverProvider {
 
         private final KafkaListenerEndpointRegistry registry;
 
-        @Value("${driver.kafka.dcti.listener_id}")
+        @Value("${com.dwarfeng.statistics.driver.kafka.dcti.listener_id}")
         private String listenerId;
 
         private final Map<Long, LongIdKey> registerMap = new HashMap<>();
@@ -148,9 +148,9 @@ public class DctiKafkaDriverProvider implements DriverProvider {
         }
 
         @KafkaListener(
-                id = "${driver.kafka.dcti.listener_id}",
+                id = "${com.dwarfeng.statistics.driver.kafka.dcti.listener_id}",
                 containerFactory = "dctiKafkaDriver.kafkaListenerContainerFactory",
-                topics = "${driver.kafka.dcti.listener_topic}"
+                topics = "${com.dwarfeng.statistics.driver.kafka.dcti.listener_topic}"
         )
         public void handleDataInfo(String message, Acknowledgment ack) {
             lock.lock();
@@ -185,19 +185,19 @@ public class DctiKafkaDriverProvider implements DriverProvider {
 
         private static final Logger LOGGER = LoggerFactory.getLogger(KafkaDriverConfiguration.class);
 
-        @Value("${driver.kafka.dcti.bootstrap_servers}")
+        @Value("${com.dwarfeng.statistics.driver.kafka.dcti.bootstrap_servers}")
         private String consumerBootstrapServers;
-        @Value("${driver.kafka.dcti.session_timeout_ms}")
+        @Value("${com.dwarfeng.statistics.driver.kafka.dcti.session_timeout_ms}")
         private int sessionTimeoutMs;
-        @Value("${driver.kafka.dcti.auto_offset_reset}")
+        @Value("${com.dwarfeng.statistics.driver.kafka.dcti.auto_offset_reset}")
         private String autoOffsetReset;
-        @Value("${driver.kafka.dcti.concurrency}")
+        @Value("${com.dwarfeng.statistics.driver.kafka.dcti.concurrency}")
         private int concurrency;
-        @Value("${driver.kafka.dcti.poll_timeout}")
+        @Value("${com.dwarfeng.statistics.driver.kafka.dcti.poll_timeout}")
         private int pollTimeout;
-        @Value("${driver.kafka.dcti.max_poll_records}")
+        @Value("${com.dwarfeng.statistics.driver.kafka.dcti.max_poll_records}")
         private int maxPollRecords;
-        @Value("${driver.kafka.dcti.max_poll_interval_ms}")
+        @Value("${com.dwarfeng.statistics.driver.kafka.dcti.max_poll_interval_ms}")
         private int maxPollIntervalMs;
 
         @SuppressWarnings("DuplicatedCode")

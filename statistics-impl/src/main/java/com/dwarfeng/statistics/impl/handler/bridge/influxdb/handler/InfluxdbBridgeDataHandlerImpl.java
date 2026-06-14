@@ -27,10 +27,10 @@ public class InfluxdbBridgeDataHandlerImpl implements InfluxdbBridgeDataHandler 
     private final WriteApi writeApi;
     private final QueryApi queryApi;
 
-    @Value("${bridge.influxdb.bucket}")
+    @Value("${com.dwarfeng.statistics.bridge.influxdb.bucket}")
     private String bucket;
 
-    @Value("${bridge.influxdb.organization}")
+    @Value("${com.dwarfeng.statistics.bridge.influxdb.organization}")
     private String organization;
 
     public InfluxdbBridgeDataHandlerImpl(

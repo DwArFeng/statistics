@@ -57,29 +57,29 @@ public class ServiceConfiguration {
     private final TagDefinitionDao tagDefinitionDao;
     private final TagDefinitionCache tagDefinitionCache;
 
-    @Value("${cache.timeout.entity.statistics_execution_profile}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.statistics_execution_profile}")
     private long statisticsExecutionProfileTimeout;
-    @Value("${cache.timeout.entity.variable}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.variable}")
     private long variableTimeout;
-    @Value("${cache.timeout.entity.driver_info}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.driver_info}")
     private long driverInfoTimeout;
-    @Value("${cache.timeout.entity.filter_info}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.filter_info}")
     private long filterInfoTimeout;
-    @Value("${cache.timeout.entity.provider_info}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.provider_info}")
     private long providerInfoTimeout;
-    @Value("${cache.timeout.entity.driver_support}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.driver_support}")
     private long driverSupportTimeout;
-    @Value("${cache.timeout.entity.filter_support}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.filter_support}")
     private long filterSupportTimeout;
-    @Value("${cache.timeout.entity.provider_support}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.provider_support}")
     private long providerSupportTimeout;
-    @Value("${cache.timeout.entity.mapper_support}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.mapper_support}")
     private long mapperSupportTimeout;
-    @Value("${cache.timeout.entity.task_event}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.task_event}")
     private long taskEventTimeout;
-    @Value("${cache.timeout.entity.history_task_event}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.history_task_event}")
     private long historyTaskEventTimeout;
-    @Value("${cache.timeout.entity.tag_definition}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.tag_definition}")
     private long tagDefinitionTimeout;
 
     public ServiceConfiguration(

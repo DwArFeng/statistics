@@ -26,7 +26,7 @@ public class EnabledProviderInfoLookupServiceImpl implements EnabledProviderInfo
 
     private final ServiceExceptionMapper sem;
 
-    @Value("${cache.timeout.key_list.enabled_provider_info}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.key_list.enabled_provider_info}")
     private long timeout;
 
     public EnabledProviderInfoLookupServiceImpl(

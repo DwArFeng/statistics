@@ -13,9 +13,9 @@ public class InfluxdbBridgeBaseConfiguration {
 
     private final ThreadPoolTaskExecutor executor;
 
-    @Value("${bridge.influxdb.url}")
+    @Value("${com.dwarfeng.statistics.bridge.influxdb.url}")
     private String url;
-    @Value("${bridge.influxdb.token}")
+    @Value("${com.dwarfeng.statistics.bridge.influxdb.token}")
     private String token;
 
     public InfluxdbBridgeBaseConfiguration(ThreadPoolTaskExecutor executor) {

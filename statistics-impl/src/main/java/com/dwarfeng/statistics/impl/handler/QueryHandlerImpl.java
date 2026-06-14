@@ -33,12 +33,12 @@ public class QueryHandlerImpl implements QueryHandler {
 
     private Bridge.Persister persister;
 
-    @Value("${bridge.persister.type}")
+    @Value("${com.dwarfeng.statistics.bridge.persister.type}")
     private String persisterType;
 
-    @Value("${query.max_period_span}")
+    @Value("${com.dwarfeng.statistics.query.max_period_span}")
     private long maxPeriodSpan;
-    @Value("${query.max_page_size}")
+    @Value("${com.dwarfeng.statistics.query.max_page_size}")
     private int maxPageSize;
 
     public QueryHandlerImpl(

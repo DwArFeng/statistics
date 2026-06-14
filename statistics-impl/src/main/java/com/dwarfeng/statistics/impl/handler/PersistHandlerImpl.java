@@ -20,7 +20,7 @@ public class PersistHandlerImpl implements PersistHandler {
 
     private final List<Bridge> bridges;
 
-    @Value("${bridge.persister.type}")
+    @Value("${com.dwarfeng.statistics.bridge.persister.type}")
     private String persisterType;
 
     private Bridge.Persister persister;

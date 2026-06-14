@@ -43,7 +43,7 @@ public class DaoConfiguration {
     private final HistoryTaskEventPresetCriteriaMaker historyTaskEventPresetCriteriaMaker;
     private final TagDefinitionPresetCriteriaMaker tagDefinitionPresetCriteriaMaker;
 
-    @Value("${hibernate.jdbc.batch_size}")
+    @Value("${com.dwarfeng.statistics.hibernate.jdbc.batch_size}")
     private int batchSize;
 
     public DaoConfiguration(

@@ -48,7 +48,7 @@ public class KafkaReceiver extends AbstractReceiver {
 
     private final KafkaListenerEndpointRegistry registry;
 
-    @Value("${receiver.kafka.listener_id}")
+    @Value("${com.dwarfeng.statistics.receiver.kafka.listener_id}")
     private String listenerId;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -82,9 +82,9 @@ public class KafkaReceiver extends AbstractReceiver {
     }
 
     @KafkaListener(
-            id = "${receiver.kafka.listener_id}",
+            id = "${com.dwarfeng.statistics.receiver.kafka.listener_id}",
             containerFactory = "kafkaReceiver.kafkaListenerContainerFactory",
-            topics = "${receiver.kafka.listener_topic}"
+            topics = "${com.dwarfeng.statistics.receiver.kafka.listener_topic}"
     )
     public void handleConsumerRecordsPolled(
             List<ConsumerRecord<String, String>> consumerRecords, Consumer<String, String> consumer, Acknowledgment ack
@@ -133,19 +133,19 @@ public class KafkaReceiver extends AbstractReceiver {
 
         private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConfiguration.class);
 
-        @Value("${receiver.kafka.bootstrap_servers}")
+        @Value("${com.dwarfeng.statistics.receiver.kafka.bootstrap_servers}")
         private String consumerBootstrapServers;
-        @Value("${receiver.kafka.session_timeout_ms}")
+        @Value("${com.dwarfeng.statistics.receiver.kafka.session_timeout_ms}")
         private int sessionTimeoutMs;
-        @Value("${receiver.kafka.auto_offset_reset}")
+        @Value("${com.dwarfeng.statistics.receiver.kafka.auto_offset_reset}")
         private String autoOffsetReset;
-        @Value("${receiver.kafka.concurrency}")
+        @Value("${com.dwarfeng.statistics.receiver.kafka.concurrency}")
         private int concurrency;
-        @Value("${receiver.kafka.poll_timeout}")
+        @Value("${com.dwarfeng.statistics.receiver.kafka.poll_timeout}")
         private int pollTimeout;
-        @Value("${receiver.kafka.max_poll_records}")
+        @Value("${com.dwarfeng.statistics.receiver.kafka.max_poll_records}")
         private int maxPollRecords;
-        @Value("${receiver.kafka.max_poll_interval_ms}")
+        @Value("${com.dwarfeng.statistics.receiver.kafka.max_poll_interval_ms}")
         private int maxPollIntervalMs;
 
         @SuppressWarnings("DuplicatedCode")

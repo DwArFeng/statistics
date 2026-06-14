@@ -37,7 +37,7 @@ public class MultiBridgePersister extends AbstractPersister implements Initializ
     private Persister primaryPersister;
     private List<Persister> delegatePersisters;
 
-    @Value("${bridge.multi.delegates.persist}")
+    @Value("${com.dwarfeng.statistics.bridge.multi.delegates.persist}")
     private String delegateConfig;
 
     protected MultiBridgePersister(ApplicationContext ctx, ThreadPoolTaskExecutor executor) {

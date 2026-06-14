@@ -97,11 +97,11 @@ public class KafkaDispatcher extends AbstractDispatcher {
 
         private final ThreadPoolTaskScheduler scheduler;
 
-        @Value("${dispatcher.kafka.load_balance_mode}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.load_balance_mode}")
         private String loadBalanceMode;
-        @Value("${dispatcher.kafka.partition_check_interval}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.partition_check_interval}")
         private long partitionCheckInterval;
-        @Value("${dispatcher.kafka.topic.dispatch}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.topic.dispatch}")
         private String dispatchTopic;
 
         private final Lock lock = new ReentrantLock();
@@ -225,19 +225,19 @@ public class KafkaDispatcher extends AbstractDispatcher {
 
         private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConfiguration.class);
 
-        @Value("${dispatcher.kafka.bootstrap_servers}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.bootstrap_servers}")
         private String producerBootstrapServers;
-        @Value("${dispatcher.kafka.retries}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.retries}")
         private int retries;
-        @Value("${dispatcher.kafka.linger}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.linger}")
         private long linger;
-        @Value("${dispatcher.kafka.buffer_memory}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.buffer_memory}")
         private long bufferMemory;
-        @Value("${dispatcher.kafka.batch_size}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.batch_size}")
         private int batchSize;
-        @Value("${dispatcher.kafka.acks}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.acks}")
         private String acks;
-        @Value("${dispatcher.kafka.transaction_prefix}")
+        @Value("${com.dwarfeng.statistics.dispatcher.kafka.transaction_prefix}")
         private String transactionPrefix;
 
         @SuppressWarnings("DuplicatedCode")

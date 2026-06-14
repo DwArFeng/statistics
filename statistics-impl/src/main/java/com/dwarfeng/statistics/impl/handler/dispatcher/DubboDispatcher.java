@@ -32,7 +32,7 @@ public class DubboDispatcher extends AbstractDispatcher {
 
     private final RegistryConfig registry;
 
-    @Value("${dubbo.provider.group}")
+    @Value("${com.dwarfeng.statistics.dubbo.provider.group}")
     private String group;
 
     private final Lock lock = new ReentrantLock();

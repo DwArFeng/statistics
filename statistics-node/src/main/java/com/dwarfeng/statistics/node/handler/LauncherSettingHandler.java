@@ -7,29 +7,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class LauncherSettingHandler implements Handler {
 
-    @Value("${launcher.reset_driver_support}")
+    @Value("${com.dwarfeng.statistics.launcher.reset_driver_support}")
     private boolean resetDriverSupport;
-    @Value("${launcher.reset_provider_support}")
+    @Value("${com.dwarfeng.statistics.launcher.reset_provider_support}")
     private boolean resetProviderSupport;
-    @Value("${launcher.reset_filter_support}")
+    @Value("${com.dwarfeng.statistics.launcher.reset_filter_support}")
     private boolean resetFilterSupport;
-    @Value("${launcher.reset_mapper_support}")
+    @Value("${com.dwarfeng.statistics.launcher.reset_mapper_support}")
     private boolean resetMapperSupport;
 
-    @Value("${launcher.start_receive_delay}")
+    @Value("${com.dwarfeng.statistics.launcher.start_receive_delay}")
     private long startReceiveDelay;
 
-    @Value("${launcher.online_supervise_delay}")
+    @Value("${com.dwarfeng.statistics.launcher.online_supervise_delay}")
     private long onlineSuperviseDelay;
-    @Value("${launcher.enable_supervise_delay}")
+    @Value("${com.dwarfeng.statistics.launcher.enable_supervise_delay}")
     private long enableSuperviseDelay;
 
-    @Value("${launcher.start_reset_delay}")
+    @Value("${com.dwarfeng.statistics.launcher.start_reset_delay}")
     private long startResetDelay;
 
-    @Value("${launcher.online_task_check_delay}")
+    @Value("${com.dwarfeng.statistics.launcher.online_task_check_delay}")
     private long onlineTaskCheckDelay;
-    @Value("${launcher.enable_task_check_delay}")
+    @Value("${com.dwarfeng.statistics.launcher.enable_task_check_delay}")
     private long enableTaskCheckDelay;
 
     public boolean isResetDriverSupport() {

@@ -36,20 +36,20 @@ public class HibernateBridgeDaoConfiguration {
     private final HibernateBridgeBridgeDataPresetCriteriaMaker hibernateBridgeBridgeDataPresetCriteriaMaker;
     private final List<DialectNativeLookup<HibernateBridgeBridgeData>> hibernateBridgeBridgeDataDialectNativeLookups;
 
-    @Value("${bridge.hibernate.use_project_config}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.use_project_config}")
     private boolean useProjectConfig;
 
-    @Value("${hibernate.dialect}")
+    @Value("${com.dwarfeng.statistics.hibernate.dialect}")
     private String projectHibernateDialect;
-    @Value("${hibernate.jdbc.batch_size}")
+    @Value("${com.dwarfeng.statistics.hibernate.jdbc.batch_size}")
     private int projectHibernateJdbcBatchSize;
 
-    @Value("${bridge.hibernate.hibernate.dialect}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.hibernate.dialect}")
     private String bridgeHibernateDialect;
-    @Value("${bridge.hibernate.hibernate.jdbc.batch_size}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.hibernate.jdbc.batch_size}")
     private int bridgeHibernateJdbcBatchSize;
 
-    @Value("${bridge.hibernate.hibernate.accelerate_enabled}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.hibernate.accelerate_enabled}")
     private boolean hibernateAccelerateEnabled;
 
     public HibernateBridgeDaoConfiguration(

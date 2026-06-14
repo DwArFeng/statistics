@@ -26,7 +26,7 @@ public class EnabledDriverInfoLookupServiceImpl implements EnabledDriverInfoLook
 
     private final ServiceExceptionMapper sem;
 
-    @Value("${cache.timeout.key_list.enabled_driver_info}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.key_list.enabled_driver_info}")
     private long timeout;
 
     public EnabledDriverInfoLookupServiceImpl(

@@ -19,47 +19,47 @@ import java.util.Properties;
 @Configuration
 public class HibernateBridgeBaseConfiguration {
 
-    @Value("${bridge.hibernate.use_project_config}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.use_project_config}")
     private boolean useProjectConfig;
 
-    @Value("${jdbc.driver}")
+    @Value("${com.dwarfeng.statistics.jdbc.driver}")
     private String projectJdbcDriver;
-    @Value("${jdbc.url}")
+    @Value("${com.dwarfeng.statistics.jdbc.url}")
     private String projectJdbcUrl;
-    @Value("${jdbc.username}")
+    @Value("${com.dwarfeng.statistics.jdbc.username}")
     private String projectJdbcUsername;
-    @Value("${jdbc.password}")
+    @Value("${com.dwarfeng.statistics.jdbc.password}")
     private String projectJdbcPassword;
-    @Value("${hibernate.dialect}")
+    @Value("${com.dwarfeng.statistics.hibernate.dialect}")
     private String projectHibernateDialect;
 
-    @Value("${hibernate.jdbc.batch_size}")
+    @Value("${com.dwarfeng.statistics.hibernate.jdbc.batch_size}")
     private int projectHibernateJdbcBatchSize;
-    @Value("${hibernate.jdbc.fetch_size}")
+    @Value("${com.dwarfeng.statistics.hibernate.jdbc.fetch_size}")
     private int projectHibernateJdbcFetchSize;
-    @Value("${data_source.max_active}")
+    @Value("${com.dwarfeng.statistics.data_source.max_active}")
     private int projectDataSourceMaxActive;
-    @Value("${data_source.min_idle}")
+    @Value("${com.dwarfeng.statistics.data_source.min_idle}")
     private int projectDataSourceMinIdle;
 
-    @Value("${bridge.hibernate.jdbc.driver}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.jdbc.driver}")
     private String bridgeJdbcDriver;
-    @Value("${bridge.hibernate.jdbc.url}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.jdbc.url}")
     private String bridgeJdbcUrl;
-    @Value("${bridge.hibernate.jdbc.username}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.jdbc.username}")
     private String bridgeJdbcUsername;
-    @Value("${bridge.hibernate.jdbc.password}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.jdbc.password}")
     private String bridgeJdbcPassword;
-    @Value("${bridge.hibernate.hibernate.dialect}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.hibernate.dialect}")
     private String bridgeHibernateDialect;
 
-    @Value("${bridge.hibernate.hibernate.jdbc.batch_size}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.hibernate.jdbc.batch_size}")
     private int bridgeHibernateJdbcBatchSize;
-    @Value("${bridge.hibernate.hibernate.jdbc.fetch_size}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.hibernate.jdbc.fetch_size}")
     private int bridgeHibernateJdbcFetchSize;
-    @Value("${bridge.hibernate.data_source.max_active}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.data_source.max_active}")
     private int bridgeDataSourceMaxActive;
-    @Value("${bridge.hibernate.data_source.min_idle}")
+    @Value("${com.dwarfeng.statistics.bridge.hibernate.data_source.min_idle}")
     private int bridgeDataSourceMinIdle;
 
     @Bean(name = "hibernateBridge.dataSource", initMethod = "init", destroyMethod = "close")

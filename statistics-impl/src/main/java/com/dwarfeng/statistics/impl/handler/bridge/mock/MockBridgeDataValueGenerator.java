@@ -25,7 +25,7 @@ public class MockBridgeDataValueGenerator {
 
     private final MockBridgeRandomGenerator randomGenerator;
 
-    @Value("${bridge.mock.data_config}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.data_config}")
     private String dataConfig;
 
     private Map<BridgeDataKey, MockBridgeDataConfigItem> dataConfigItemMap = null;

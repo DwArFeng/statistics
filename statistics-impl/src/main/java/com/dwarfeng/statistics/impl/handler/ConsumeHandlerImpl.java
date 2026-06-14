@@ -47,11 +47,11 @@ public class ConsumeHandlerImpl implements ConsumeHandler {
     private final List<ConsumeTask> processingConsumeTasks = new ArrayList<>();
     private final List<ConsumeTask> endingConsumeTasks = new ArrayList<>();
 
-    @Value("${consume.consumer_thread}")
+    @Value("${com.dwarfeng.statistics.consume.consumer_thread}")
     private int consumerThread;
-    @Value("${consume.buffer_size}")
+    @Value("${com.dwarfeng.statistics.consume.buffer_size}")
     private int bufferSize;
-    @Value("${consume.threshold.warn}")
+    @Value("${com.dwarfeng.statistics.consume.threshold.warn}")
     private double warnThreshold;
 
     private final Lock lock = new ReentrantLock();

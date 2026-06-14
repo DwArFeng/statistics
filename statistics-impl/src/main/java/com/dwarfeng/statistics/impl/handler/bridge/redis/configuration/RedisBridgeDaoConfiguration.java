@@ -14,7 +14,7 @@ public class RedisBridgeDaoConfiguration {
 
     private final RedisTemplate<String, ?> redisTemplate;
 
-    @Value("${bridge.redis.dbkey}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.dbkey}")
     private String dbKey;
 
     public RedisBridgeDaoConfiguration(

@@ -52,7 +52,7 @@ public class StatisticsSettingCrudOperation implements BatchCrudOperation<LongId
     private final TagDefinitionDao tagDefinitionDao;
     private final TagDefinitionCache tagDefinitionCache;
 
-    @Value("${cache.timeout.entity.statistics_setting}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.statistics_setting}")
     private long statisticsSettingTimeout;
 
     public StatisticsSettingCrudOperation(

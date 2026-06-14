@@ -38,7 +38,7 @@ public class MultiBridgeKeeper extends AbstractKeeper implements InitializingBea
     private Keeper primaryKeeper;
     private List<Keeper> delegateKeepers;
 
-    @Value("${bridge.multi.delegates.keep}")
+    @Value("${com.dwarfeng.statistics.bridge.multi.delegates.keep}")
     private String delegateConfig;
 
     public MultiBridgeKeeper(ApplicationContext ctx, ThreadPoolTaskExecutor executor) {

@@ -16,12 +16,19 @@
     </dubbo:application>
 
     <!-- Zookeeper 注册中心。 -->
-    <dubbo:registry address="${dubbo.registry.zookeeper.address}" timeout="${dubbo.registry.zookeeper.timeout}"/>
+    <dubbo:registry
+            address="${com.dwarfeng.statistics.dubbo.registry.zookeeper.address}"
+            timeout="${com.dwarfeng.statistics.dubbo.registry.zookeeper.timeout}"
+    />
 
     <!-- Dubbo 协议。 -->
     <dubbo:protocol
-            name="dubbo" port="${dubbo.protocol.dubbo.port}" host="${dubbo.protocol.dubbo.host}"
-            dispatcher="message" threadpool="fixed" threads="100"
+            name="dubbo"
+            port="${com.dwarfeng.statistics.dubbo.protocol.dubbo.port}"
+            host="${com.dwarfeng.statistics.dubbo.protocol.dubbo.host}"
+            dispatcher="message"
+            threadpool="fixed"
+            threads="100"
     />
 
     <!-- 默认使用 dubbo 协议。 -->
@@ -36,97 +43,97 @@
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.StatisticsSettingMaintainService"
             ref="statisticsSettingMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.StatisticsExecutionProfileMaintainService"
             ref="statisticsExecutionProfileMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.VariableMaintainService"
             ref="variableMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.DriverInfoMaintainService"
             ref="driverInfoMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.FilterInfoMaintainService"
             ref="filterInfoMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.ProviderInfoMaintainService"
             ref="providerInfoMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.DriverSupportMaintainService"
             ref="driverSupportMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.FilterSupportMaintainService"
             ref="filterSupportMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.ProviderSupportMaintainService"
             ref="providerSupportMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.MapperSupportMaintainService"
             ref="mapperSupportMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.TaskMaintainService"
             ref="taskMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.TaskEventMaintainService"
             ref="taskEventMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.HistoryTaskMaintainService"
             ref="historyTaskMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.HistoryTaskEventMaintainService"
             ref="historyTaskEventMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.EnabledDriverInfoLookupService"
             ref="enabledDriverInfoLookupServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.EnabledFilterInfoLookupService"
             ref="enabledFilterInfoLookupServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.EnabledProviderInfoLookupService"
             ref="enabledProviderInfoLookupServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.ViewService"
             ref="viewServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
     <dubbo:service
             interface="com.dwarfeng.statistics.stack.service.TagDefinitionMaintainService"
             ref="tagDefinitionMaintainServiceImpl"
-            group="${dubbo.provider.group}"
+            group="${com.dwarfeng.statistics.dubbo.provider.group}"
     />
 
     <!-- endregion -->
@@ -141,7 +148,7 @@
             id="snowflakeGenerateService"
             interface="com.dwarfeng.sfds.stack.service.GenerateService"
             check="false"
-            group="${dubbo.consumer.snowflake.group}"
+            group="${com.dwarfeng.statistics.dubbo.consumer.snowflake.group}"
     />
 
     <!-- endregion -->

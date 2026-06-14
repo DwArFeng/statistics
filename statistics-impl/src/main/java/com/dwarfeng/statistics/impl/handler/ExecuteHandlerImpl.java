@@ -47,10 +47,10 @@ public class ExecuteHandlerImpl implements ExecuteHandler {
     private final ThreadPoolTaskExecutor executor;
     private final ThreadPoolTaskScheduler scheduler;
 
-    @Value("${task.beat_interval}")
+    @Value("${com.dwarfeng.statistics.task.beat_interval}")
     private long beatInterval;
 
-    @Value("${task.max_provider_data_size}")
+    @Value("${com.dwarfeng.statistics.task.max_provider_data_size}")
     private int maxProviderDataSize;
 
     public ExecuteHandlerImpl(

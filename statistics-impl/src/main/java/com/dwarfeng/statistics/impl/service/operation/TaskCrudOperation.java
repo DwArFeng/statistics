@@ -26,7 +26,7 @@ public class TaskCrudOperation implements BatchCrudOperation<LongIdKey, Task> {
     private final TaskEventDao taskEventDao;
     private final TaskEventCache taskEventCache;
 
-    @Value("${cache.timeout.entity.task}")
+    @Value("${com.dwarfeng.statistics.cache.timeout.entity.task}")
     private long taskTimeout;
 
     public TaskCrudOperation(

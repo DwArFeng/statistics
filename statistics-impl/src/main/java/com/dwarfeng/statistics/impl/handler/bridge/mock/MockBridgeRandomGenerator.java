@@ -18,7 +18,7 @@ public class MockBridgeRandomGenerator {
 
     private Random random;
 
-    @Value("${bridge.mock.random_seed}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.random_seed}")
     private Long randomSeed;
 
     @PostConstruct

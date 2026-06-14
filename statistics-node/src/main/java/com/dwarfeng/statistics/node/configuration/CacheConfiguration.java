@@ -25,42 +25,42 @@ public class CacheConfiguration {
 
     private final RedisTemplate<String, ?> template;
 
-    @Value("${cache.prefix.entity.statistics_setting}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.statistics_setting}")
     private String statisticsSettingPrefix;
-    @Value("${cache.prefix.entity.statistics_execution_profile}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.statistics_execution_profile}")
     private String statisticsExecutionProfilePrefix;
-    @Value("${cache.prefix.entity.variable}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.variable}")
     private String variablePrefix;
-    @Value("${cache.prefix.entity.driver_info}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.driver_info}")
     private String driverInfoPrefix;
-    @Value("${cache.prefix.entity.filter_info}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.filter_info}")
     private String filterInfoPrefix;
-    @Value("${cache.prefix.entity.provider_info}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.provider_info}")
     private String providerInfoPrefix;
-    @Value("${cache.prefix.entity.driver_support}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.driver_support}")
     private String driverSupportPrefix;
-    @Value("${cache.prefix.entity.filter_support}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.filter_support}")
     private String filterSupportPrefix;
-    @Value("${cache.prefix.entity.provider_support}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.provider_support}")
     private String providerSupportPrefix;
-    @Value("${cache.prefix.entity.mapper_support}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.mapper_support}")
     private String mapperSupportPrefix;
-    @Value("${cache.prefix.entity.task}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.task}")
     private String taskPrefix;
-    @Value("${cache.prefix.entity.task_event}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.task_event}")
     private String taskEventPrefix;
-    @Value("${cache.prefix.entity.history_task}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.history_task}")
     private String historyTaskPrefix;
-    @Value("${cache.prefix.entity.history_task_event}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.history_task_event}")
     private String historyTaskEventPrefix;
-    @Value("${cache.prefix.entity.tag_definition}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.entity.tag_definition}")
     private String tagDefinitionPrefix;
 
-    @Value("${cache.prefix.list.enabled_driver_info}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.list.enabled_driver_info}")
     private String enabledDriverInfoPrefix;
-    @Value("${cache.prefix.list.enabled_provider_info}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.list.enabled_provider_info}")
     private String enabledProviderInfoPrefix;
-    @Value("${cache.prefix.list.enabled_filter_info}")
+    @Value("${com.dwarfeng.statistics.cache.prefix.list.enabled_filter_info}")
     private String enabledFilterInfoPrefix;
 
     public CacheConfiguration(

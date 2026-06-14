@@ -20,7 +20,7 @@ public class KeepHandlerImpl implements KeepHandler {
 
     private final List<Bridge> bridges;
 
-    @Value("${bridge.keeper.type}")
+    @Value("${com.dwarfeng.statistics.bridge.keeper.type}")
     private String keeperType;
 
     private Bridge.Keeper keeper;

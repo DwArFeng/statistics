@@ -9,19 +9,19 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class ExceptionCodeOffsetConfiguration {
 
-    @Value("${statistics.exception_code_offset}")
+    @Value("${com.dwarfeng.statistics.statistics.exception_code_offset}")
     private int exceptionCodeOffset;
-    @Value("${statistics.exception_code_offset.subgrade}")
+    @Value("${com.dwarfeng.statistics.statistics.exception_code_offset.subgrade}")
     private int subgradeExceptionCodeOffset;
-    @Value("${statistics.exception_code_offset.spring_telqos}")
+    @Value("${com.dwarfeng.statistics.statistics.exception_code_offset.spring_telqos}")
     private int springTelqosExceptionCodeOffset;
-    @Value("${statistics.exception_code_offset.spring_terminator}")
+    @Value("${com.dwarfeng.statistics.statistics.exception_code_offset.spring_terminator}")
     private int springTerminatorExceptionCodeOffset;
-    @Value("${statistics.exception_code_offset.dwarfeng_datamark}")
+    @Value("${com.dwarfeng.statistics.statistics.exception_code_offset.dwarfeng_datamark}")
     private int dwarfengDatamarkExceptionCodeOffset;
-    @Value("${statistics.exception_code_offset.dcti}")
+    @Value("${com.dwarfeng.statistics.statistics.exception_code_offset.dcti}")
     private int dctiExceptionCodeOffset;
-    @Value("${statistics.exception_code_offset.dwarfeng_dct}")
+    @Value("${com.dwarfeng.statistics.statistics.exception_code_offset.dwarfeng_dct}")
     private int dwarfengDctExceptionCodeOffset;
 
     @PostConstruct

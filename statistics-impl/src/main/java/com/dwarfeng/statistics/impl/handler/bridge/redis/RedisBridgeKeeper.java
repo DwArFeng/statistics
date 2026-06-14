@@ -37,7 +37,7 @@ public class RedisBridgeKeeper extends FullKeeper {
 
     private final ValueCodingHandler valueCodingHandler;
 
-    @Value("${bridge.redis.earlier_override}")
+    @Value("${com.dwarfeng.statistics.bridge.redis.earlier_override}")
     private boolean allowEarlierDataOverride;
 
     public RedisBridgeKeeper(

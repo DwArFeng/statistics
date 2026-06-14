@@ -30,7 +30,7 @@ public class LogPusher extends AbstractPusher {
     private static final String LEVEL_WARN = "WARN";
     private static final String LEVEL_ERROR = "ERROR";
 
-    @Value("${pusher.log.log_level}")
+    @Value("${com.dwarfeng.statistics.pusher.log.log_level}")
     private String logLevel;
 
     public LogPusher() {

@@ -12,43 +12,43 @@ import org.springframework.stereotype.Component;
 @Component
 public class MockBridgeConfig {
 
-    @Value("${bridge.mock.update.delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.update.delay}")
     private long updateDelay;
-    @Value("${bridge.mock.update.before_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.update.before_delay}")
     private long updateBeforeDelay;
-    @Value("${bridge.mock.update.after_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.update.after_delay}")
     private long updateAfterDelay;
 
-    @Value("${bridge.mock.latest.delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.latest.delay}")
     private long latestDelay;
-    @Value("${bridge.mock.latest.before_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.latest.before_delay}")
     private long latestBeforeDelay;
-    @Value("${bridge.mock.latest.after_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.latest.after_delay}")
     private long latestAfterDelay;
 
-    @Value("${bridge.mock.record.delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.record.delay}")
     private long recordDelay;
-    @Value("${bridge.mock.record.before_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.record.before_delay}")
     private long recordBeforeDelay;
-    @Value("${bridge.mock.record.after_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.record.after_delay}")
     private long recordAfterDelay;
 
-    @Value("${bridge.mock.lookup.data_interval}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.lookup.data_interval}")
     private long lookupDataInterval;
-    @Value("${bridge.mock.lookup.delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.lookup.delay}")
     private long lookupDelay;
-    @Value("${bridge.mock.lookup.offset_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.lookup.offset_delay}")
     private long lookupOffsetDelay;
-    @Value("${bridge.mock.lookup.before_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.lookup.before_delay}")
     private long lookupBeforeDelay;
-    @Value("${bridge.mock.lookup.after_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.lookup.after_delay}")
     private long lookupAfterDelay;
 
-    @Value("${bridge.mock.native_query.delay_per_second}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.native_query.delay_per_second}")
     private long nativeQueryDelayPerSecond;
-    @Value("${bridge.mock.native_query.before_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.native_query.before_delay}")
     private long nativeQueryBeforeDelay;
-    @Value("${bridge.mock.native_query.after_delay}")
+    @Value("${com.dwarfeng.statistics.bridge.mock.native_query.after_delay}")
     private long nativeQueryAfterDelay;
 
     public long getUpdateDelay() {
