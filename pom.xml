@@ -563,6 +563,16 @@
                 <artifactId>statistics-node</artifactId>
                 <version>2.0.0.a-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>statistics-node-all-he</artifactId>
+                <version>2.0.0.a-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dwarfeng</groupId>
+                <artifactId>statistics-distribute</artifactId>
+                <version>2.0.0.a-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -608,5 +618,6 @@
         <module>statistics-sdk</module>
         <module>statistics-impl</module>
         <module>statistics-node</module>
+        <module>statistics-distribute</module>
     </modules>
 </project>

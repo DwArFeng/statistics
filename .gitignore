@@ -72,30 +72,30 @@ buildNumber.properties
 ## Logger Files
 #################
 /statistics-impl/logs/
-/statistics-node/logs/
+/statistics-node/statistics-node-all-he/logs/
 
 #################
 ## Configuration Files
 #################
 /statistics-impl/conf/
-/statistics-node/conf/
+/statistics-node/statistics-node-all-he/conf/
 
 #################
 ## Libext Files
 #################
-/statistics-node/libext/
+/statistics-node/statistics-node-all-he/libext/
 
 #################
 ## Opt Files
 #################
-/statistics-node/opt/
+/statistics-node/statistics-node-all-he/opt/
 
 #################
 ## Optext Files
 #################
-/statistics-node/optext/
+/statistics-node/statistics-node-all-he/optext/
 
 #################
 ## Confext Files
 #################
-/statistics-node/confext/
+/statistics-node/statistics-node-all-he/confext/
