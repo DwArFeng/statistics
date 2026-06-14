@@ -1,12 +1,11 @@
 package com.dwarfeng.statistics.impl.cache;
 
-import com.dwarfeng.statistics.sdk.bean.entity.FastJsonFilterInfo;
 import com.dwarfeng.statistics.stack.bean.entity.FilterInfo;
 import com.dwarfeng.statistics.stack.cache.FilterInfoCache;
-import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,11 @@ import java.util.List;
 @Repository
 public class FilterInfoCacheImpl implements FilterInfoCache {
 
-    private final RedisBatchBaseCache<LongIdKey, FilterInfo, FastJsonFilterInfo> batchBaseCache;
+    private final BatchBaseCache<LongIdKey, FilterInfo> batchBaseCache;
 
-    public FilterInfoCacheImpl(RedisBatchBaseCache<LongIdKey, FilterInfo, FastJsonFilterInfo> batchBaseCache) {
+    public FilterInfoCacheImpl(
+            BatchBaseCache<LongIdKey, FilterInfo> batchBaseCache
+    ) {
         this.batchBaseCache = batchBaseCache;
     }
 

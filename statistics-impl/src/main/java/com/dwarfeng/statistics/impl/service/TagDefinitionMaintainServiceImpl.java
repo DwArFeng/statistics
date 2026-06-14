@@ -3,14 +3,14 @@ package com.dwarfeng.statistics.impl.service;
 import com.dwarfeng.statistics.stack.bean.entity.TagDefinition;
 import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.service.TagDefinitionMaintainService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Component
 public class TagDefinitionMaintainServiceImpl implements TagDefinitionMaintainService {
 
-    private final GeneralBatchCrudService<TagDefinitionKey, TagDefinition> crudService;
-    private final DaoOnlyEntireLookupService<TagDefinition> entireLookupService;
-    private final DaoOnlyPresetLookupService<TagDefinition> presetLookupService;
+    private final BatchCrudService<TagDefinitionKey, TagDefinition> crudService;
+    private final EntireLookupService<TagDefinition> entireLookupService;
+    private final PresetLookupService<TagDefinition> presetLookupService;
 
     public TagDefinitionMaintainServiceImpl(
-            GeneralBatchCrudService<TagDefinitionKey, TagDefinition> crudService,
-            DaoOnlyEntireLookupService<TagDefinition> entireLookupService,
-            DaoOnlyPresetLookupService<TagDefinition> presetLookupService
+            BatchCrudService<TagDefinitionKey, TagDefinition> crudService,
+            EntireLookupService<TagDefinition> entireLookupService,
+            PresetLookupService<TagDefinition> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

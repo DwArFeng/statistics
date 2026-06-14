@@ -1,16 +1,14 @@
 package com.dwarfeng.statistics.impl.dao;
 
-import com.dwarfeng.statistics.impl.bean.entity.HibernateTask;
 import com.dwarfeng.statistics.stack.bean.entity.Task;
 import com.dwarfeng.statistics.stack.dao.TaskDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +18,14 @@ import java.util.List;
 @Repository
 public class TaskDaoImpl implements TaskDao {
 
-    private final HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, Task, HibernateTask> batchBaseDao;
-    private final HibernateEntireLookupDao<Task, HibernateTask> entireLookupDao;
-    private final HibernatePresetLookupDao<Task, HibernateTask> presetLookupDao;
+    private final BatchBaseDao<LongIdKey, Task> batchBaseDao;
+    private final EntireLookupDao<Task> entireLookupDao;
+    private final PresetLookupDao<Task> presetLookupDao;
 
     public TaskDaoImpl(
-            HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, Task, HibernateTask> batchBaseDao,
-            HibernateEntireLookupDao<Task, HibernateTask> entireLookupDao,
-            HibernatePresetLookupDao<Task, HibernateTask> presetLookupDao
+            BatchBaseDao<LongIdKey, Task> batchBaseDao,
+            EntireLookupDao<Task> entireLookupDao,
+            PresetLookupDao<Task> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

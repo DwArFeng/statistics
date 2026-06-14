@@ -1,16 +1,14 @@
 package com.dwarfeng.statistics.impl.dao;
 
-import com.dwarfeng.statistics.impl.bean.entity.HibernateVariable;
-import com.dwarfeng.statistics.impl.bean.key.HibernateVariableKey;
 import com.dwarfeng.statistics.stack.bean.entity.Variable;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.statistics.stack.dao.VariableDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +18,14 @@ import java.util.List;
 @Repository
 public class VariableDaoImpl implements VariableDao {
 
-    private final HibernateBatchBaseDao<VariableKey, HibernateVariableKey, Variable, HibernateVariable> batchBaseDao;
-    private final HibernateEntireLookupDao<Variable, HibernateVariable> entireLookupDao;
-    private final HibernatePresetLookupDao<Variable, HibernateVariable> presetLookupDao;
+    private final BatchBaseDao<VariableKey, Variable> batchBaseDao;
+    private final EntireLookupDao<Variable> entireLookupDao;
+    private final PresetLookupDao<Variable> presetLookupDao;
 
     public VariableDaoImpl(
-            HibernateBatchBaseDao<VariableKey, HibernateVariableKey, Variable, HibernateVariable> batchBaseDao,
-            HibernateEntireLookupDao<Variable, HibernateVariable> entireLookupDao,
-            HibernatePresetLookupDao<Variable, HibernateVariable> presetLookupDao
+            BatchBaseDao<VariableKey, Variable> batchBaseDao,
+            EntireLookupDao<Variable> entireLookupDao,
+            PresetLookupDao<Variable> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

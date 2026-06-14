@@ -1,12 +1,11 @@
 package com.dwarfeng.statistics.impl.cache;
 
-import com.dwarfeng.statistics.sdk.bean.entity.FastJsonProviderSupport;
 import com.dwarfeng.statistics.stack.bean.entity.ProviderSupport;
 import com.dwarfeng.statistics.stack.cache.ProviderSupportCache;
-import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,11 @@ import java.util.List;
 @Repository
 public class ProviderSupportCacheImpl implements ProviderSupportCache {
 
-    private final RedisBatchBaseCache<StringIdKey, ProviderSupport, FastJsonProviderSupport> batchBaseCache;
+    private final BatchBaseCache<StringIdKey, ProviderSupport> batchBaseCache;
 
-    public ProviderSupportCacheImpl(RedisBatchBaseCache<StringIdKey, ProviderSupport, FastJsonProviderSupport> batchBaseCache) {
+    public ProviderSupportCacheImpl(
+            BatchBaseCache<StringIdKey, ProviderSupport> batchBaseCache
+    ) {
         this.batchBaseCache = batchBaseCache;
     }
 

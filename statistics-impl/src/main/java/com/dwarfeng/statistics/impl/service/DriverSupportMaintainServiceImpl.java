@@ -2,15 +2,15 @@ package com.dwarfeng.statistics.impl.service;
 
 import com.dwarfeng.statistics.stack.bean.entity.DriverSupport;
 import com.dwarfeng.statistics.stack.service.DriverSupportMaintainService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Component
 public class DriverSupportMaintainServiceImpl implements DriverSupportMaintainService {
 
-    private final GeneralBatchCrudService<StringIdKey, DriverSupport> crudService;
-    private final DaoOnlyEntireLookupService<DriverSupport> entireLookupService;
-    private final DaoOnlyPresetLookupService<DriverSupport> presetLookupService;
+    private final BatchCrudService<StringIdKey, DriverSupport> crudService;
+    private final EntireLookupService<DriverSupport> entireLookupService;
+    private final PresetLookupService<DriverSupport> presetLookupService;
 
     public DriverSupportMaintainServiceImpl(
-            GeneralBatchCrudService<StringIdKey, DriverSupport> crudService,
-            DaoOnlyEntireLookupService<DriverSupport> entireLookupService,
-            DaoOnlyPresetLookupService<DriverSupport> presetLookupService
+            BatchCrudService<StringIdKey, DriverSupport> crudService,
+            EntireLookupService<DriverSupport> entireLookupService,
+            PresetLookupService<DriverSupport> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

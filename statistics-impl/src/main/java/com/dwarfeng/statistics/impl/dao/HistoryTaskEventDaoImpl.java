@@ -1,16 +1,14 @@
 package com.dwarfeng.statistics.impl.dao;
 
-import com.dwarfeng.statistics.impl.bean.entity.HibernateHistoryTaskEvent;
 import com.dwarfeng.statistics.stack.bean.entity.HistoryTaskEvent;
 import com.dwarfeng.statistics.stack.dao.HistoryTaskEventDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +18,14 @@ import java.util.List;
 @Repository
 public class HistoryTaskEventDaoImpl implements HistoryTaskEventDao {
 
-    private final HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, HistoryTaskEvent, HibernateHistoryTaskEvent> batchBaseDao;
-    private final HibernateEntireLookupDao<HistoryTaskEvent, HibernateHistoryTaskEvent> entireLookupDao;
-    private final HibernatePresetLookupDao<HistoryTaskEvent, HibernateHistoryTaskEvent> presetLookupDao;
+    private final BatchBaseDao<LongIdKey, HistoryTaskEvent> batchBaseDao;
+    private final EntireLookupDao<HistoryTaskEvent> entireLookupDao;
+    private final PresetLookupDao<HistoryTaskEvent> presetLookupDao;
 
     public HistoryTaskEventDaoImpl(
-            HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, HistoryTaskEvent, HibernateHistoryTaskEvent> batchBaseDao,
-            HibernateEntireLookupDao<HistoryTaskEvent, HibernateHistoryTaskEvent> entireLookupDao,
-            HibernatePresetLookupDao<HistoryTaskEvent, HibernateHistoryTaskEvent> presetLookupDao
+            BatchBaseDao<LongIdKey, HistoryTaskEvent> batchBaseDao,
+            EntireLookupDao<HistoryTaskEvent> entireLookupDao,
+            PresetLookupDao<HistoryTaskEvent> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

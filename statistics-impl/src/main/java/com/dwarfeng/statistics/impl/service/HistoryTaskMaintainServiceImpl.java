@@ -2,15 +2,15 @@ package com.dwarfeng.statistics.impl.service;
 
 import com.dwarfeng.statistics.stack.bean.entity.HistoryTask;
 import com.dwarfeng.statistics.stack.service.HistoryTaskMaintainService;
-import com.dwarfeng.subgrade.impl.service.CustomBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Component
 public class HistoryTaskMaintainServiceImpl implements HistoryTaskMaintainService {
 
-    private final CustomBatchCrudService<LongIdKey, HistoryTask> crudService;
-    private final DaoOnlyEntireLookupService<HistoryTask> entireLookupService;
-    private final DaoOnlyPresetLookupService<HistoryTask> presetLookupService;
+    private final BatchCrudService<LongIdKey, HistoryTask> crudService;
+    private final EntireLookupService<HistoryTask> entireLookupService;
+    private final PresetLookupService<HistoryTask> presetLookupService;
 
     public HistoryTaskMaintainServiceImpl(
-            CustomBatchCrudService<LongIdKey, HistoryTask> crudService,
-            DaoOnlyEntireLookupService<HistoryTask> entireLookupService,
-            DaoOnlyPresetLookupService<HistoryTask> presetLookupService
+            BatchCrudService<LongIdKey, HistoryTask> crudService,
+            EntireLookupService<HistoryTask> entireLookupService,
+            PresetLookupService<HistoryTask> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

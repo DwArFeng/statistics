@@ -1,12 +1,11 @@
 package com.dwarfeng.statistics.impl.cache;
 
-import com.dwarfeng.statistics.sdk.bean.entity.FastJsonHistoryTaskEvent;
 import com.dwarfeng.statistics.stack.bean.entity.HistoryTaskEvent;
 import com.dwarfeng.statistics.stack.cache.HistoryTaskEventCache;
-import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,11 @@ import java.util.List;
 @Repository
 public class HistoryTaskEventCacheImpl implements HistoryTaskEventCache {
 
-    private final RedisBatchBaseCache<LongIdKey, HistoryTaskEvent, FastJsonHistoryTaskEvent> batchBaseCache;
+    private final BatchBaseCache<LongIdKey, HistoryTaskEvent> batchBaseCache;
 
-    public HistoryTaskEventCacheImpl(RedisBatchBaseCache<LongIdKey, HistoryTaskEvent, FastJsonHistoryTaskEvent> batchBaseCache) {
+    public HistoryTaskEventCacheImpl(
+            BatchBaseCache<LongIdKey, HistoryTaskEvent> batchBaseCache
+    ) {
         this.batchBaseCache = batchBaseCache;
     }
 

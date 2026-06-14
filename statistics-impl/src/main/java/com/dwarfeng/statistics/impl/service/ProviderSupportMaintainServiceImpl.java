@@ -2,15 +2,15 @@ package com.dwarfeng.statistics.impl.service;
 
 import com.dwarfeng.statistics.stack.bean.entity.ProviderSupport;
 import com.dwarfeng.statistics.stack.service.ProviderSupportMaintainService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Component
 public class ProviderSupportMaintainServiceImpl implements ProviderSupportMaintainService {
 
-    private final GeneralBatchCrudService<StringIdKey, ProviderSupport> crudService;
-    private final DaoOnlyEntireLookupService<ProviderSupport> entireLookupService;
-    private final DaoOnlyPresetLookupService<ProviderSupport> presetLookupService;
+    private final BatchCrudService<StringIdKey, ProviderSupport> crudService;
+    private final EntireLookupService<ProviderSupport> entireLookupService;
+    private final PresetLookupService<ProviderSupport> presetLookupService;
 
     public ProviderSupportMaintainServiceImpl(
-            GeneralBatchCrudService<StringIdKey, ProviderSupport> crudService,
-            DaoOnlyEntireLookupService<ProviderSupport> entireLookupService,
-            DaoOnlyPresetLookupService<ProviderSupport> presetLookupService
+            BatchCrudService<StringIdKey, ProviderSupport> crudService,
+            EntireLookupService<ProviderSupport> entireLookupService,
+            PresetLookupService<ProviderSupport> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

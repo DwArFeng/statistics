@@ -1,12 +1,11 @@
 package com.dwarfeng.statistics.impl.cache;
 
-import com.dwarfeng.statistics.sdk.bean.entity.FastJsonStatisticsExecutionProfile;
 import com.dwarfeng.statistics.stack.bean.entity.StatisticsExecutionProfile;
 import com.dwarfeng.statistics.stack.cache.StatisticsExecutionProfileCache;
-import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,11 @@ import java.util.List;
 @Repository
 public class StatisticsExecutionProfileCacheImpl implements StatisticsExecutionProfileCache {
 
-    private final RedisBatchBaseCache<LongIdKey, StatisticsExecutionProfile, FastJsonStatisticsExecutionProfile> batchBaseCache;
+    private final BatchBaseCache<LongIdKey, StatisticsExecutionProfile> batchBaseCache;
 
-    public StatisticsExecutionProfileCacheImpl(RedisBatchBaseCache<LongIdKey, StatisticsExecutionProfile, FastJsonStatisticsExecutionProfile> batchBaseCache) {
+    public StatisticsExecutionProfileCacheImpl(
+            BatchBaseCache<LongIdKey, StatisticsExecutionProfile> batchBaseCache
+    ) {
         this.batchBaseCache = batchBaseCache;
     }
 

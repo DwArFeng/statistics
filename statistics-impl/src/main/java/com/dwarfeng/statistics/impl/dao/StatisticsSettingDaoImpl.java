@@ -1,16 +1,14 @@
 package com.dwarfeng.statistics.impl.dao;
 
-import com.dwarfeng.statistics.impl.bean.entity.HibernateStatisticsSetting;
 import com.dwarfeng.statistics.stack.bean.entity.StatisticsSetting;
 import com.dwarfeng.statistics.stack.dao.StatisticsSettingDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +18,14 @@ import java.util.List;
 @Repository
 public class StatisticsSettingDaoImpl implements StatisticsSettingDao {
 
-    private final HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, StatisticsSetting, HibernateStatisticsSetting> batchBaseDao;
-    private final HibernateEntireLookupDao<StatisticsSetting, HibernateStatisticsSetting> entireLookupDao;
-    private final HibernatePresetLookupDao<StatisticsSetting, HibernateStatisticsSetting> presetLookupDao;
+    private final BatchBaseDao<LongIdKey, StatisticsSetting> batchBaseDao;
+    private final EntireLookupDao<StatisticsSetting> entireLookupDao;
+    private final PresetLookupDao<StatisticsSetting> presetLookupDao;
 
     public StatisticsSettingDaoImpl(
-            HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, StatisticsSetting, HibernateStatisticsSetting> batchBaseDao,
-            HibernateEntireLookupDao<StatisticsSetting, HibernateStatisticsSetting> entireLookupDao,
-            HibernatePresetLookupDao<StatisticsSetting, HibernateStatisticsSetting> presetLookupDao
+            BatchBaseDao<LongIdKey, StatisticsSetting> batchBaseDao,
+            EntireLookupDao<StatisticsSetting> entireLookupDao,
+            PresetLookupDao<StatisticsSetting> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

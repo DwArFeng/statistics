@@ -1,12 +1,11 @@
 package com.dwarfeng.statistics.impl.cache;
 
-import com.dwarfeng.statistics.sdk.bean.entity.FastJsonMapperSupport;
 import com.dwarfeng.statistics.stack.bean.entity.MapperSupport;
 import com.dwarfeng.statistics.stack.cache.MapperSupportCache;
-import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
+import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,11 @@ import java.util.List;
 @Repository
 public class MapperSupportCacheImpl implements MapperSupportCache {
 
-    private final RedisBatchBaseCache<StringIdKey, MapperSupport, FastJsonMapperSupport> batchBaseCache;
+    private final BatchBaseCache<StringIdKey, MapperSupport> batchBaseCache;
 
-    public MapperSupportCacheImpl(RedisBatchBaseCache<StringIdKey, MapperSupport, FastJsonMapperSupport> batchBaseCache) {
+    public MapperSupportCacheImpl(
+            BatchBaseCache<StringIdKey, MapperSupport> batchBaseCache
+    ) {
         this.batchBaseCache = batchBaseCache;
     }
 

@@ -2,15 +2,15 @@ package com.dwarfeng.statistics.impl.service;
 
 import com.dwarfeng.statistics.stack.bean.entity.MapperSupport;
 import com.dwarfeng.statistics.stack.service.MapperSupportMaintainService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.StringIdKey;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,14 +19,14 @@ import java.util.List;
 @Component
 public class MapperSupportMaintainServiceImpl implements MapperSupportMaintainService {
 
-    private final GeneralBatchCrudService<StringIdKey, MapperSupport> crudService;
-    private final DaoOnlyEntireLookupService<MapperSupport> entireLookupService;
-    private final DaoOnlyPresetLookupService<MapperSupport> presetLookupService;
+    private final BatchCrudService<StringIdKey, MapperSupport> crudService;
+    private final EntireLookupService<MapperSupport> entireLookupService;
+    private final PresetLookupService<MapperSupport> presetLookupService;
 
     public MapperSupportMaintainServiceImpl(
-            GeneralBatchCrudService<StringIdKey, MapperSupport> crudService,
-            DaoOnlyEntireLookupService<MapperSupport> entireLookupService,
-            DaoOnlyPresetLookupService<MapperSupport> presetLookupService
+            BatchCrudService<StringIdKey, MapperSupport> crudService,
+            EntireLookupService<MapperSupport> entireLookupService,
+            PresetLookupService<MapperSupport> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

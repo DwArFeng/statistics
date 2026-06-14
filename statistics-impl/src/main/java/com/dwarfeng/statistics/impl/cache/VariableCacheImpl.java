@@ -1,12 +1,11 @@
 package com.dwarfeng.statistics.impl.cache;
 
-import com.dwarfeng.statistics.sdk.bean.entity.FastJsonVariable;
 import com.dwarfeng.statistics.stack.bean.entity.Variable;
 import com.dwarfeng.statistics.stack.bean.key.VariableKey;
 import com.dwarfeng.statistics.stack.cache.VariableCache;
-import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
+import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,11 @@ import java.util.List;
 @Repository
 public class VariableCacheImpl implements VariableCache {
 
-    private final RedisBatchBaseCache<VariableKey, Variable, FastJsonVariable> batchBaseCache;
+    private final BatchBaseCache<VariableKey, Variable> batchBaseCache;
 
-    public VariableCacheImpl(RedisBatchBaseCache<VariableKey, Variable, FastJsonVariable> batchBaseCache) {
+    public VariableCacheImpl(
+            BatchBaseCache<VariableKey, Variable> batchBaseCache
+    ) {
         this.batchBaseCache = batchBaseCache;
     }
 

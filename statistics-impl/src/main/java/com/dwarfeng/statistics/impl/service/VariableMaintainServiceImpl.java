@@ -1,32 +1,32 @@
 package com.dwarfeng.statistics.impl.service;
 
-import com.dwarfeng.subgrade.impl.service.GeneralBatchCrudService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyEntireLookupService;
-import com.dwarfeng.subgrade.impl.service.DaoOnlyPresetLookupService;
+import com.dwarfeng.statistics.stack.bean.entity.Variable;
+import com.dwarfeng.statistics.stack.bean.key.VariableKey;
+import com.dwarfeng.statistics.stack.service.VariableMaintainService;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagedData;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.exception.ServiceException;
-import com.dwarfeng.statistics.stack.service.VariableMaintainService;
+import com.dwarfeng.subgrade.stack.service.BatchCrudService;
+import com.dwarfeng.subgrade.stack.service.EntireLookupService;
+import com.dwarfeng.subgrade.stack.service.PresetLookupService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import com.dwarfeng.statistics.stack.bean.entity.*;
-import com.dwarfeng.statistics.stack.bean.key.*;
 
 import java.util.List;
 
 @Component
 public class VariableMaintainServiceImpl implements VariableMaintainService {
 
-    private final GeneralBatchCrudService<VariableKey, Variable> crudService;
-    private final DaoOnlyEntireLookupService<Variable> entireLookupService;
-    private final DaoOnlyPresetLookupService<Variable> presetLookupService;
+    private final BatchCrudService<VariableKey, Variable> crudService;
+    private final EntireLookupService<Variable> entireLookupService;
+    private final PresetLookupService<Variable> presetLookupService;
 
     public VariableMaintainServiceImpl(
-            GeneralBatchCrudService<VariableKey, Variable> crudService,
-            DaoOnlyEntireLookupService<Variable> entireLookupService,
-            DaoOnlyPresetLookupService<Variable> presetLookupService
+            BatchCrudService<VariableKey, Variable> crudService,
+            EntireLookupService<Variable> entireLookupService,
+            PresetLookupService<Variable> presetLookupService
     ) {
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;

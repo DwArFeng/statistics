@@ -1,16 +1,14 @@
 package com.dwarfeng.statistics.impl.dao;
 
-import com.dwarfeng.statistics.impl.bean.entity.HibernateStatisticsExecutionProfile;
 import com.dwarfeng.statistics.stack.bean.entity.StatisticsExecutionProfile;
 import com.dwarfeng.statistics.stack.dao.StatisticsExecutionProfileDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
-import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
 import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +18,14 @@ import java.util.List;
 @Repository
 public class StatisticsExecutionProfileDaoImpl implements StatisticsExecutionProfileDao {
 
-    private final HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, StatisticsExecutionProfile, HibernateStatisticsExecutionProfile> batchBaseDao;
-    private final HibernateEntireLookupDao<StatisticsExecutionProfile, HibernateStatisticsExecutionProfile> entireLookupDao;
-    private final HibernatePresetLookupDao<StatisticsExecutionProfile, HibernateStatisticsExecutionProfile> presetLookupDao;
+    private final BatchBaseDao<LongIdKey, StatisticsExecutionProfile> batchBaseDao;
+    private final EntireLookupDao<StatisticsExecutionProfile> entireLookupDao;
+    private final PresetLookupDao<StatisticsExecutionProfile> presetLookupDao;
 
     public StatisticsExecutionProfileDaoImpl(
-            HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, StatisticsExecutionProfile, HibernateStatisticsExecutionProfile> batchBaseDao,
-            HibernateEntireLookupDao<StatisticsExecutionProfile, HibernateStatisticsExecutionProfile> entireLookupDao,
-            HibernatePresetLookupDao<StatisticsExecutionProfile, HibernateStatisticsExecutionProfile> presetLookupDao
+            BatchBaseDao<LongIdKey, StatisticsExecutionProfile> batchBaseDao,
+            EntireLookupDao<StatisticsExecutionProfile> entireLookupDao,
+            PresetLookupDao<StatisticsExecutionProfile> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;

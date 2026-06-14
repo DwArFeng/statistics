@@ -1,12 +1,11 @@
 package com.dwarfeng.statistics.impl.cache;
 
-import com.dwarfeng.statistics.sdk.bean.entity.FastJsonTagDefinition;
 import com.dwarfeng.statistics.stack.bean.entity.TagDefinition;
 import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.cache.TagDefinitionCache;
-import com.dwarfeng.subgrade.impl.cache.RedisBatchBaseCache;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
+import com.dwarfeng.subgrade.stack.cache.BatchBaseCache;
 import com.dwarfeng.subgrade.stack.exception.CacheException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +15,11 @@ import java.util.List;
 @Repository
 public class TagDefinitionCacheImpl implements TagDefinitionCache {
 
-    private final RedisBatchBaseCache<TagDefinitionKey, TagDefinition, FastJsonTagDefinition> batchBaseCache;
+    private final BatchBaseCache<TagDefinitionKey, TagDefinition> batchBaseCache;
 
-    public TagDefinitionCacheImpl(RedisBatchBaseCache<TagDefinitionKey, TagDefinition, FastJsonTagDefinition> batchBaseCache) {
+    public TagDefinitionCacheImpl(
+            BatchBaseCache<TagDefinitionKey, TagDefinition> batchBaseCache
+    ) {
         this.batchBaseCache = batchBaseCache;
     }
 

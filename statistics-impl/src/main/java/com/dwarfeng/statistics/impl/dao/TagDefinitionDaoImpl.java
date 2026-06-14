@@ -1,16 +1,14 @@
 package com.dwarfeng.statistics.impl.dao;
 
-import com.dwarfeng.statistics.impl.bean.entity.HibernateTagDefinition;
-import com.dwarfeng.statistics.impl.bean.key.HibernateTagDefinitionKey;
 import com.dwarfeng.statistics.stack.bean.entity.TagDefinition;
 import com.dwarfeng.statistics.stack.bean.key.TagDefinitionKey;
 import com.dwarfeng.statistics.stack.dao.TagDefinitionDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateBatchBaseDao;
-import com.dwarfeng.subgrade.impl.dao.HibernateEntireLookupDao;
-import com.dwarfeng.subgrade.impl.dao.HibernatePresetLookupDao;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.BehaviorAnalyse;
 import com.dwarfeng.subgrade.sdk.interceptor.analyse.SkipRecord;
 import com.dwarfeng.subgrade.stack.bean.dto.PagingInfo;
+import com.dwarfeng.subgrade.stack.dao.BatchBaseDao;
+import com.dwarfeng.subgrade.stack.dao.EntireLookupDao;
+import com.dwarfeng.subgrade.stack.dao.PresetLookupDao;
 import com.dwarfeng.subgrade.stack.exception.DaoException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +18,14 @@ import java.util.List;
 @Repository
 public class TagDefinitionDaoImpl implements TagDefinitionDao {
 
-    private final HibernateBatchBaseDao<TagDefinitionKey, HibernateTagDefinitionKey, TagDefinition, HibernateTagDefinition> batchBaseDao;
-    private final HibernateEntireLookupDao<TagDefinition, HibernateTagDefinition> entireLookupDao;
-    private final HibernatePresetLookupDao<TagDefinition, HibernateTagDefinition> presetLookupDao;
+    private final BatchBaseDao<TagDefinitionKey, TagDefinition> batchBaseDao;
+    private final EntireLookupDao<TagDefinition> entireLookupDao;
+    private final PresetLookupDao<TagDefinition> presetLookupDao;
 
     public TagDefinitionDaoImpl(
-            HibernateBatchBaseDao<TagDefinitionKey, HibernateTagDefinitionKey, TagDefinition, HibernateTagDefinition> batchBaseDao,
-            HibernateEntireLookupDao<TagDefinition, HibernateTagDefinition> entireLookupDao,
-            HibernatePresetLookupDao<TagDefinition, HibernateTagDefinition> presetLookupDao
+            BatchBaseDao<TagDefinitionKey, TagDefinition> batchBaseDao,
+            EntireLookupDao<TagDefinition> entireLookupDao,
+            PresetLookupDao<TagDefinition> presetLookupDao
     ) {
         this.batchBaseDao = batchBaseDao;
         this.entireLookupDao = entireLookupDao;
