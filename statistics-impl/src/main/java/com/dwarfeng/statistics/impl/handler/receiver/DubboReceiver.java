@@ -49,7 +49,7 @@ public class DubboReceiver extends AbstractReceiver {
 
     private ServiceConfig<DubboReceiveService> serviceConfig = null;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @SuppressWarnings({"SpringJavaInjectionPointsAutowiringInspection", "RedundantSuppression"})
     public DubboReceiver(
             ApplicationContext ctx,
             RegistryConfig registry,
